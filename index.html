@@ -159,7 +159,6 @@ ekranKartlari: [
 { ad: "RX 6500 XT", p: 55 }
 ],
 islemciler: [
-// Intel i3-i9 ve AMD Ryzen (X ve X'siz)
 { ad: "i3-6100H (Laptop)", p: 11 },
 { ad: "i3-6100K (Masaüstü)", p: 21 },
 { ad: "i3-6100F (Masaüstü)", p: 10 },
@@ -414,16 +413,16 @@ c.innerHTML = "";
 r.innerHTML = "";
 o.innerHTML = "";
 veri.ekranKartlari.forEach(x =>
-g.innerHTML += <option value="${x.p}">${x.ad}</option>
+g.innerHTML += `<option value="${x.p}">${x.ad}</option>`
 );
 veri.islemciler.forEach(x =>
-c.innerHTML += <option value="${x.p}">${x.ad}</option>
+c.innerHTML += `<option value="${x.p}">${x.ad}</option>`
 );
 veri.ramler.forEach(x =>
-r.innerHTML += <option value="${x.c}">${x.ad}</option>
+r.innerHTML += `<option value="${x.c}">${x.ad}</option>`
 );
 veri.oyunlar.forEach((x, index) =>
-o.innerHTML += <option value="${index}">${x.ad}</option>
+o.innerHTML += `<option value="${index}">${x.ad}</option>`
 );
 }
 function hesapla() {
