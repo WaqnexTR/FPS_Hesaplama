@@ -44,195 +44,45 @@
 <script>
 const veri = {
     ekranKartlari: [
-        { ad: "NVIDIA RTX 5090", p: 125 }, { ad: "NVIDIA RTX 5080", p: 119 }, { ad: "NVIDIA RTX 5070 Tİ", p: 111 }, { ad: "NVIDIA RTX 5070", p: 105 }, { ad: "NVIDIA RTX 5060", p: 90 }, { ad: "NVIDIA RTX 5050", p: 76 }, 
-        { ad: "NVIDIA RTX 4090", p: 120 }, { ad: "NVIDIA RTX 4080", p: 115 }, { ad: "NVIDIA RTX 4070 Tİ SUPER", p: 116 }, { ad: "NVIDIA RTX 4070 Tİ", p: 110 }, { ad: "NVIDIA RTX 4070", p: 105 }, { ad: "NVIDIA RTX 4060 Tİ", p: 100 }, { ad: "NVIDIA RTX 4060", p: 95 }, { ad: "NVIDIA RTX 4050", p: 92 }, { ad: "NVIDIA RTX 3090 Tİ", p: 111 },
-        { ad: "NVIDIA RTX 3090", p: 108 }, { ad: "NVIDIA RTX 3080 Tİ", p: 105 }, { ad: "NVIDIA RTX 3080", p: 100 }, { ad: "NVIDIA RTX 3070 Tİ", p: 98 }, { ad: "NVIDIA RTX 3070", p: 95 }, { ad: "NVIDIA RTX 3060 Tİ", p: 90 }, { ad: "NVIDIA RTX 3060", p: 85 }, { ad: "NVIDIA RTX 3050", p: 65 }, { ad: "RTX 2080 Tİ", p: 90 }, { ad: "RTX 2080 SUPER", p: 88 },
-        { ad: "RTX 2080", p: 85 }, { ad: "RTX 2070 SUPER", p: 82 }, { ad: "RTX 2070", p: 78 }, { ad: "RTX 2060 SUPER", p: 75 }, { ad: "RTX 2060", p: 70 }, { ad: "RTX 2050", p: 70 }, { ad: "GTX 1660 Tİ", p: 68 }, { ad: "GTX 1660 SUPER", p: 65 }, { ad: "GTX 1660", p: 60 }, { ad: "GTX 1650 SUPER", p: 50 }, { ad: "GTX 1650", p: 45 }, { ad: "GTX 1080 Tİ", p: 78 }, { ad: "GTX 1080", p: 75 }, { ad: "GTX 1070 Tİ", p: 70 }, { ad: "GTX 1070", p: 65 }, { ad: "GTX 1060", p: 55 }, { ad: "GTX 1050 Tİ", p: 45 }, { ad: "GTX 1050", p: 40 }, { ad: "GTX 730", p: 15 }, { ad: "GTX 580", p: 25 },
-        { ad: "Radeon RX 9070 XT", p: 320 }, { ad: "RX 7900 XT", p: 280 }, { ad: "RX 7900 XT", p: 240 }, { ad: "RX 7800 XT", p: 190 }, { ad: "RX 7700 XT", p: 165 }, { ad: "RX 7600 XT", p: 115 }, { ad: "RX 6800 XT", p: 160 }, { ad: "RX 6800", p: 145 }, { ad: "RX 6700 XT", p: 120 }, { ad: "RX 6600 XT", p: 95 }, { ad: "RX 6500 XT", p: 55 }
+        // --- 50 SERİSİ ---
+        { ad: "NVIDIA RTX 5090", p: 500 }, { ad: "NVIDIA RTX 5080 TI", p: 460 }, { ad: "NVIDIA RTX 5080", p: 420 }, { ad: "NVIDIA RTX 5070 TI", p: 350 }, { ad: "NVIDIA RTX 5070", p: 310 }, { ad: "NVIDIA RTX 5060 TI", p: 220 }, { ad: "NVIDIA RTX 5060", p: 180 },
+        
+        // --- 40 SERİSİ ---
+        { ad: "NVIDIA RTX 4090", p: 300 }, { ad: "NVIDIA RTX 4080 SUPER", p: 260 }, { ad: "NVIDIA RTX 4080", p: 250 }, { ad: "NVIDIA RTX 4070 TI SUPER", p: 210 }, { ad: "NVIDIA RTX 4070 TI", p: 190 }, { ad: "NVIDIA RTX 4070 SUPER", p: 175 }, { ad: "NVIDIA RTX 4070", p: 160 }, { ad: "NVIDIA RTX 4060 TI", p: 130 }, { ad: "NVIDIA RTX 4060", p: 110 },
+        
+        // --- 30 SERİSİ ---
+        { ad: "NVIDIA RTX 3090 TI", p: 245 }, { ad: "NVIDIA RTX 3090", p: 230 }, { ad: "NVIDIA RTX 3080 TI", p: 215 }, { ad: "NVIDIA RTX 3080", p: 200 }, { ad: "NVIDIA RTX 3070 TI", p: 160 }, { ad: "NVIDIA RTX 3060 TI", p: 135 }, { ad: "NVIDIA RTX 3060", p: 95 }, { ad: "NVIDIA RTX 3050 TI", p: 80 }, { ad: "NVIDIA RTX 3050", p: 65 },
+        
+        // --- 20 SERİSİ ---
+        { ad: "NVIDIA RTX 2080 TI", p: 145 }, { ad: "NVIDIA RTX 2080 SUPER", p: 135 }, { ad: "NVIDIA RTX 2080", p: 130 }, { ad: "NVIDIA RTX 2070 SUPER", p: 120 }, { ad: "NVIDIA RTX 2070", p: 110 }, { ad: "NVIDIA RTX 2060 SUPER", p: 100 }, { ad: "NVIDIA RTX 2060", p: 90 }, { ad: "NVIDIA RTX 2050", p: 75 },
+        
+        // --- 16 VE 10 SERİSİ ---
+        { ad: "GTX 1660 TI", p: 85 }, { ad: "GTX 1660 SUPER", p: 82 }, { ad: "GTX 1650 SUPER", p: 65 }, { ad: "GTX 1650 TI", p: 62 }, { ad: "GTX 1650", p: 55 },
+        { ad: "GTX 1080 TI", p: 140 }, { ad: "GTX 1080", p: 115 }, { ad: "GTX 1070 TI", p: 105 }, { ad: "GTX 1060 (6GB)", p: 60 }, { ad: "GTX 1050 TI", p: 45 }, { ad: "GTX 1050", p: 40 }, { ad: "GTX 580", p: 25 }, { ad: "GTX 730", p: 15 },
+        
+        // --- AMD ---
+        { ad: "RX 7900 XTX", p: 280 }, { ad: "RX 6700 XT", p: 120 }, { ad: "RX 6500 XT", p: 55 }
     ],
     islemciler: [
-        // Intel i3-i9 ve AMD Ryzen (X ve X'siz)
-       { ad: "i3-6100H (Laptop)", p: 8 }, { ad: "i3-6100K (Masaüstü)", p: 13 }, { ad: "i3-6100F (Masaüstü)", p: 9 },
-        { ad: "i3-7100H (Laptop)", p: 9 }, { ad: "i3-7100K (Masaüstü)", p: 15 }, { ad: "i3-7100F (Masaüstü)", p: 11 },
-        { ad: "i3-8100H (Laptop)", p: 11 }, { ad: "i3-8100K (Masaüstü)", p: 18 }, { ad: "i3-8100F (Masaüstü)", p: 13 },
-        { ad: "i3-9100H (Laptop)", p: 13 }, { ad: "i3-9100K (Masaüstü)", p: 20 }, { ad: "i3-9100F (Masaüstü)", p: 15 },
-        { ad: "i3-10100H (Laptop)", p: 15 }, { ad: "i3-10100K (Masaüstü)", p: 22 }, { ad: "i3-10100F (Masaüstü)", p: 17 },
-        { ad: "i3-11100H (Laptop)", p: 17 }, { ad: "i3-11100K (Masaüstü)", p: 24 }, { ad: "i3-11100F (Masaüstü)", p: 19 },
-        { ad: "i3-12100H (Laptop)", p: 19 }, { ad: "i3-12100K (Masaüstü)", p: 27 }, { ad: "i3-12100F (Masaüstü)", p: 21 },
-        { ad: "i3-13100H (Laptop)", p: 21 }, { ad: "i3-13100K (Masaüstü)", p: 29 }, { ad: "i3-13100F (Masaüstü)", p: 23 },
-        { ad: "i3-14100H (Laptop)", p: 23 }, { ad: "i3-14100K (Masaüstü)", p: 31 }, { ad: "i3-14100F (Masaüstü)", p: 25 },
+        // --- INTEL 6. NESİL (YENİ EKLENDİ) ---
+        { ad: "i7-6700K", p: 45 }, { ad: "i7-6700", p: 42 }, { ad: "i5-6600K", p: 35 }, { ad: "i5-6400", p: 30 }, { ad: "i3-6100", p: 22 },
 
-        { ad: "i5-6100H (Laptop)", p: 18 }, { ad: "i5-6100HX (Laptop)", p: 21 }, { ad: "i5-6100K (Masaüstü)", p: 26 }, { ad: "i5-6100F (Masaüstü)", p: 22 },
-        { ad: "i5-7100H (Laptop)", p: 21 }, { ad: "i5-7100HX (Laptop)", p: 25 }, { ad: "i5-7100K (Masaüstü)", p: 30 }, { ad: "i5-7100F (Masaüstü)", p: 26 },
-        { ad: "i5-8100H (Laptop)", p: 25 }, { ad: "i5-8100HX (Laptop)", p: 29 }, { ad: "i5-8100K (Masaüstü)", p: 34 }, { ad: "i5-8100F (Masaüstü)", p: 30 },
-        { ad: "i5-9100H (Laptop)", p: 29 }, { ad: "i5-9100HX (Laptop)", p: 34 }, { ad: "i5-9100K (Masaüstü)", p: 39 }, { ad: "i5-9100F (Masaüstü)", p: 35 },
-        { ad: "i5-10100H (Laptop)", p: 33 }, { ad: "i5-10100HX (Laptop)", p: 38 }, { ad: "i5-10100K (Masaüstü)", p: 43 }, { ad: "i5-10100F (Masaüstü)", p: 39 },
-        { ad: "i5-11100H (Laptop)", p: 37 }, { ad: "i5-11100HX (Laptop)", p: 42 }, { ad: "i5-11100K (Masaüstü)", p: 47 }, { ad: "i5-11100F (Masaüstü)", p: 43 },
-        { ad: "i5-12100H (Laptop)", p: 41 }, { ad: "i5-12100HX (Laptop)", p: 46 }, { ad: "i5-12100K (Masaüstü)", p: 51 }, { ad: "i5-12100F (Masaüstü)", p: 47 },
-        { ad: "i5-13100H (Laptop)", p: 45 }, { ad: "i5-13100HX (Laptop)", p: 50 }, { ad: "i5-13100K (Masaüstü)", p: 55 }, { ad: "i5-13100F (Masaüstü)", p: 51 },
-        { ad: "i5-14600H (Laptop)", p: 50 }, { ad: "i5-14600HX (Laptop)", p: 56 }, { ad: "i5-14600K (Masaüstü)", p: 60 }, { ad: "i5-14600F (Masaüstü)", p: 54 },
+        // --- DİĞER NESİLLER (ÖZETLENDİ) ---
+        { ad: "i3-8100F", p: 35 }, { ad: "i3-10100F", p: 50 }, { ad: "i3-12100F", p: 65 }, { ad: "i3-14100F", p: 78 },
+        { ad: "i5-12400F", p: 90 }, { ad: "i5-13600HX", p: 105 }, { ad: "i5-14600HX", p: 110 },
+        { ad: "i7-12700HX", p: 125 }, { ad: "i7-13700HX", p: 135 }, { ad: "i7-14700HX", p: 140 },
+        { ad: "i9-14900HX", p: 160 },
 
-        { ad: "i7-6100H (Laptop)", p: 28 }, { ad: "i7-6100HX (Laptop)", p: 32 }, { ad: "i7-6100K (Masaüstü)", p: 36 }, { ad: "i7-6100F (Masaüstü)", p: 31 },
-        { ad: "i7-7100H (Laptop)", p: 30 }, { ad: "i7-7100HX (Laptop)", p: 34 }, { ad: "i7-7100K (Masaüstü)", p: 38 }, { ad: "i7-7100F (Masaüstü)", p: 33 },
-        { ad: "i7-8100H (Laptop)", p: 33 }, { ad: "i7-8100HX (Laptop)", p: 37 }, { ad: "i7-8100K (Masaüstü)", p: 41 }, { ad: "i7-8100F (Masaüstü)", p: 36 },
-        { ad: "i7-9100H (Laptop)", p: 36 }, { ad: "i7-9100HX (Laptop)", p: 41 }, { ad: "i7-9100K (Masaüstü)", p: 45 }, { ad: "i7-9100F (Masaüstü)", p: 40 },
-        { ad: "i7-10100H (Laptop)", p: 39 }, { ad: "i7-10100HX (Laptop)", p: 44 }, { ad: "i7-10100K (Masaüstü)", p: 48 }, { ad: "i7-10100F (Masaüstü)", p: 43 },
-        { ad: "i7-11100H (Laptop)", p: 45 }, { ad: "i7-11100HX (Laptop)", p: 52 }, { ad: "i7-11100K (Masaüstü)", p: 56 }, { ad: "i7-11100F (Masaüstü)", p: 50 },
-        { ad: "i7-12100H (Laptop)", p: 50 }, { ad: "i7-12100HX (Laptop)", p: 58 }, { ad: "i7-12100K (Masaüstü)", p: 62 }, { ad: "i7-12100F (Masaüstü)", p: 55 },
-        { ad: "i7-13100H (Laptop)", p: 56 }, { ad: "i7-13100HX (Laptop)", p: 64 }, { ad: "i7-13100K (Masaüstü)", p: 68 }, { ad: "i7-13100F (Masaüstü)", p: 61 },
-        { ad: "i7-14700H (Laptop)", p: 62 }, { ad: "i7-14700HX (Laptop)", p: 71 }, { ad: "i7-14700K (Masaüstü)", p: 75 }, { ad: "i7-14700F (Masaüstü)", p: 67 },
-
-        { ad: "i9-7100H (Laptop)", p: 46 }, { ad: "i9-7100HX (Laptop)", p: 51 }, { ad: "i9-7100K (Masaüstü)", p: 56 }, { ad: "i9-7100F (Masaüstü)", p: 50 },
-        { ad: "i9-8100H (Laptop)", p: 49 }, { ad: "i9-8100HX (Laptop)", p: 54 }, { ad: "i9-8100K (Masaüstü)", p: 58 }, { ad: "i9-8100F (Masaüstü)", p: 52 },
-        { ad: "i9-9100H (Laptop)", p: 52 }, { ad: "i9-9100HX (Laptop)", p: 57 }, { ad: "i9-9100K (Masaüstü)", p: 61 }, { ad: "i9-9100F (Masaüstü)", p: 55 },
-        { ad: "i9-10100H (Laptop)", p: 55 }, { ad: "i9-10100HX (Laptop)", p: 62 }, { ad: "i9-10100K (Masaüstü)", p: 66 }, { ad: "i9-10100F (Masaüstü)", p: 60 },
-        { ad: "i9-11100H (Laptop)", p: 62 }, { ad: "i9-11100HX (Laptop)", p: 70 }, { ad: "i9-11100K (Masaüstü)", p: 74 }, { ad: "i9-11100F (Masaüstü)", p: 67 },
-        { LIGHTWEIGHT_MODE ad: "i9-12100H (Laptop)", p: 70 }, { ad: "i9-12100HX (Laptop)", p: 78 }, { ad: "i9-12100K (Masaüstü)", p: 82 }, { ad: "i9-12100F (Masaüstü)", p: 74 },
-        { ad: "i9-13100H (Laptop)", p: 78 }, { ad: "i9-13100HX (Laptop)", p: 86 }, { ad: "i9-13100K (Masaüstü)", p: 90 }, { ad: "i9-13100F (Masaüstü)", p: 82 },
-        { ad: "i9-14900K (Masaüstü)", p: 100 }, { ad: "i9-14900HX (Laptop)", p: 95 },
-
-
-
-        // AMD Ryzen
-        { ad: "Ryzen 3 1200 (Masaüstü)", p: 34 },
-        { ad: "Ryzen 3 1200X (Masaüstü)", p: 37 },
-
-        { ad: "Ryzen 3 1300 (Masaüstü)", p: 38 },
-        { ad: "Ryzen 3 1300X (Masaüstü)", p: 41 },
-
-        { ad: "Ryzen 3 2200 (Masaüstü)", p: 40 },
-        { ad: "Ryzen 3 2200G (Masaüstü)", p: 42 },
-        { ad: "Ryzen 3 5300G (Masaüstü)", p: 48 },
-
-        { ad: "Ryzen 3 3100 (Masaüstü)", p: 44 },
-        { ad: "Ryzen 3 3100X (Masaüstü)", p: 47 },
-
-        { ad: "Ryzen 3 3300 (Masaüstü)", p: 47 },
-        { ad: "Ryzen 3 3300X (Masaüstü)", p: 50 },
-
-        { ad: "Ryzen 3 4100 (Masaüstü)", p: 49 },
-        { ad: "Ryzen 3 4300G (Masaüstü)", p: 52 },
-
-        { ad: "Ryzen 3 7345H (Laptop)", p: 55 },
-        { ad: "Ryzen 3 7340HX (Laptop)", p: 58 },
- 
-
-        { ad: "Ryzen 5 1600 (Masaüstü)", p: 55 },
-        { ad: "Ryzen 5 1600X (Masaüstü)", p: 58 },
-
-        { ad: "Ryzen 5 2600 (Masaüstü)", p: 66 },
-        { ad: "Ryzen 5 2600X (Masaüstü)", p: 70 },
-
-        { ad: "Ryzen 5 3600 (Masaüstü)", p: 85 },
-        { ad: "Ryzen 5 3600X (Masaüstü)", p: 89 },
-
-        { ad: "Ryzen 5 5600 (Masaüstü)", p: 100 },
-        { ad: "Ryzen 5 5600X (Masaüstü)", p: 105 },
-
-
-        { ad: "Ryzen 5 7600 (Masaüstü)", p: 110 },
-        { ad: "Ryzen 5 7600X (Masaüstü)", p: 116 },
-
-        { ad: "Ryzen 5 7640H (Laptop)", p: 104 },
-        { ad: "Ryzen 5 7645HX (Laptop)", p: 108 },
-
-        { ad: "Ryzen 7 2700 (Masaüstü)", p: 78 },
-        { ad: "Ryzen 7 2700X (Masaüstü)", p: 83 },
-
-        { ad: "Ryzen 7 3700 (Masaüstü)", p: 100 },
-        { ad: "Ryzen 7 3700X (Masaüstü)", p: 105 },
-
-        { ad: "Ryzen 7 5800 (Masaüstü)", p: 120 },
-        { ad: "Ryzen 7 5800X (Masaüstü)", p: 125 },
-
-        { ad: "Ryzen 7 7700 (Masaüstü)", p: 130 },
-        { ad: "Ryzen 7 7700X (Masaüstü)", p: 135 },
-
-        { ad: "Ryzen 7 7845H (Laptop)", p: 118 },
-        { ad: "Ryzen 7 7845HX (Laptop)", p: 123 },
-        { ad: "Ryzen 7 8840HX (Laptop)", p: 126 },
-
-
-        { ad: "Ryzen 9 3900 (Masaüstü)", p: 102 },
-        { ad: "Ryzen 9 3900X (Masaüstü)", p: 107 },
-
-       { ad: "Ryzen 9 5900 (Masaüstü)", p: 122 },
-       { ad: "Ryzen 9 5900X (Masaüstü)", p: 127 },
-
-       { ad: "Ryzen 9 7950 (Masaüstü)", p: 145 },
-       { ad: "Ryzen 9 7950X (Masaüstü)", p: 150 },
-
-       { ad: "Ryzen 9 7945HX (Laptop)", p: 138 },
-       { ad: "Ryzen 9 8945HX (Laptop)", p: 142 },
-
-       { ad: "Ryzen 9 7945HX3D (Laptop)", p: 146 },
-       { ad: "Ryzen 9 9955HX3D (Laptop)", p: 148 },
-       { ad: "Ryzen 9 9955HX (Laptop)", p: 144 },
-
+        // --- AMD RYZEN ---
+        { ad: "Ryzen 5 3600", p: 85 }, { ad: "Ryzen 5 5600X", p: 115 }, { ad: "Ryzen 7 7700X", p: 160 }, { ad: "Ryzen 9 7950X", p: 200 }
     ],
     ramler: [
-        { ad: "2 GB RAM",  c: 0.10 },
-        { ad: "4 GB RAM",  c: 0.30 },
-        { ad: "6 GB RAM", c: 0.42 },
-        { ad: "8 GB RAM",  c: 0.55 },
-
-        { ad: "12 GB RAM", c: 0.65 },
-        { ad: "16 GB RAM", c: 0.75 }, 
-
-        { ad: "24 GB RAM", c: 0.80 },
-        { ad: "32 GB RAM", c: 0.85 },
-
-        { ad: "48 GB RAM", c: 0.88 },
-        { ad: "64 GB RAM", c: 0.90 },
-        { ad: "128 GB RAM", c: 0.92 },
-        { ad: "256 GB RAM", c: 0.93 },
-
+        { ad: "4 GB RAM", c: 0.30 }, { ad: "8 GB RAM", c: 0.60 }, { ad: "16 GB RAM", c: 1.0 }, { ad: "32 GB RAM", c: 1.3 }
     ],
     oyunlar: [
-        { ad: "Valorant (Düşük)", z: 2.4, d: 0.08 }, { ad: "Valorant (Yüksek)", z: 1.8, d: 0.08 },
-
-        { ad: "CS2 (Düşük)", z: 2.0, d: 0.12 }, { ad: "CS2 (Yüksek)", z: 1.3, d: 0.12 },
-
-        { ad: "CS:GO (Düşük)", z: 3.0, d: 0.07 }, { ad: "CS:GO (Yüksek)", z: 2.1, d: 0.07 },
-
-        { ad: "Zula (Düşük)", z: 3.2, d: 0.06 }, { ad: "Zula (Yüksek)", z: 2.6, d: 0.06 },
-
-        { ad: "Fortnite (Düşük)", z: 2.0, d: 0.14 }, { ad: "Fortnite (Yüksek)", z: 1.2, d: 0.14 },
-
-        { ad: "PUBG (Düşük)", z: 1.3, d: 0.18 }, { ad: "PUBG (Yüksek)", z: 0.8, d: 0.18 },
-
-        { ad: "Call of Duty: Warzone (Düşük)", z: 1.0, d: 0.22 }, { ad: "Call of Duty: Warzone (Yüksek)", z: 0.55, d: 0.22 },
-
-        { ad: "Farming Simulator 19 (Düşük)", z: 1.8, d: 0.10 }, { ad: "Farming Simulator 19 (Yüksek)", z: 1.3, d: 0.10 },
-
-        { ad: "Farming Simulator 22 (Düşük)", z: 1.5, d: 0.12 }, { ad: "Farming Simulator 22 (Yüksek)", z: 1.0, d: 0.12 },
-
-        { ad: "Farming Simulator 25 (Düşük)", z: 1.2, d: 0.14 }, { ad: "Farming Simulator 25 (Yüksek)", z: 0.75, d: 0.14 },
-
-        { ad: "FC 23 (Düşük)", z: 1.6, d: 0.10 }, { ad: "FC 23 (Yüksek)", z: 1.2, d: 0.10 },
-
-        { ad: "FC 24 (Düşük)", z: 1.4, d: 0.12 }, { ad: "FC 24 (Yüksek)", z: 1.0, d: 0.12 },
-
-        { ad: "FC 25 (Düşük)", z: 1.2, d: 0.14 }, { ad: "FC 25 (Yüksek)", z: 0.8, d: 0.14 },
-
-        { ad: "PES (Düşük)", z: 2.0, d: 0.09 }, { ad: "PES (Yüksek)", z: 1.4, d: 0.09 },
-
-        { ad: "Spider-Man (Düşük)", z: 1.1, d: 0.22 }, { ad: "Spider-Man (Yüksek)", z: 0.65, d: 0.22 },
-
-        { ad: "Minecraft (Düşük Shaders)", z: 1.6, d: 0.20 }, { ad: "Minecraft (Yüksek Shaders)", z: 0.95, d: 0.20 },
-
-        { ad: "Forza Horizon 5 (Düşük)", z: 1.5, d: 0.16 }, { ad: "Forza Horizon 5 (Yüksek)", z: 0.9, d: 0.16 },
-
-        { ad: "ETS 2 (Düşük)", z: 1.8, d: 0.12 }, { ad: "ETS 2 (Yüksek)", z: 1.2, d: 0.12 },
-
-        { ad: "GTA V / FiveM (Düşük)", z: 1.6, d: 0.18 }, { ad: "GTA V / FiveM (Yüksek)", z: 1.0, d: 0.18 },
-
-        { ad: "Cyberpunk 2077 (Düşük)", z: 0.75, d: 0.28 }, { ad: "Cyberpunk 2077 (Ultra)", z: 0.35, d: 0.28 },
-
-        { ad: "RDR 2 (Düşük)", z: 1.0, d: 0.24 }, { ad: "RDR 2 (Ultra)", z: 0.55, d: 0.24 },
- 
-        { ad: "God of War Ragnarök (Düşük)", z: 0.9, d: 0.22 }, { ad: "God of Go War Ragnarök (Yüksek)", z: 0.55, d: 0.22 }
-
+        { ad: "Valorant (Yüksek)", z: 1.6, d: 0.10 }, { ad: "CS2 (Yüksek)", z: 1.3, d: 0.12 },
+        { ad: "FC 26 (Yüksek)", z: 0.6, d: 0.15 }, { ad: "Cyberpunk 2077 (Ultra)", z: 0.3, d: 0.25 },
+        { ad: "GTA V (Yüksek)", z: 0.9, d: 0.18 }, { ad: "RDR 2 (Ultra)", z: 0.4, d: 0.22 }
     ]
 };
 
@@ -250,34 +100,27 @@ function hesapla() {
     let cp = parseFloat(document.getElementById("cpu").value);
     let rm = parseFloat(document.getElementById("ram").value);
     let oyunIndex = document.getElementById("oyun").value;
-    
     let oyunVerisi = veri.oyunlar[oyunIndex];
-    let oy = oyunVerisi.z;
-    let dalgalanma = oyunVerisi.d;
 
-    // Temel hesaplama
-    let temelFps = ((gp * 0.40) + (cp * 0.60)) * rm * oy;
-    
-    // Aralığı belirleme (Alt sınır ve Üst sınır)
-    let alt = Math.floor(temelFps * (1 - dalgalanma));
-    let ust = Math.floor(temelFps * (1 + dalgalanma));
+    let temelFps = ((gp * 0.75) + (cp * 0.25)) * rm * oyunVerisi.z;
+    let alt = Math.floor(temelFps * (1 - oyunVerisi.d));
+    let ust = Math.floor(temelFps * (1 + oyunVerisi.d));
 
     let fpsGosterge = document.getElementById("fps");
     let etiket = document.getElementById("fps-etiket");
 
-    // GERÇEKÇİ KONTROL: Eğer üst sınır bile 30 FPS'in altındaysa "Kaldırmaz" uyarısı ver
     if (ust < 30) {
         fpsGosterge.innerText = "Bu Donanım Bu Oyunu Kaldırmaz!";
-        fpsGosterge.style.color = "#ff4444"; // Kırmızı uyarı
-        fpsGosterge.style.fontSize = "22px"; // Yazı sığsın diye küçültme
+        fpsGosterge.style.color = "#ff4444";
+        fpsGosterge.style.fontSize = "22px";
         etiket.innerText = "Sistem Yetersiz";
     } else {
         fpsGosterge.innerText = alt + " - " + ust;
-        fpsGosterge.style.color = "#3fb950"; // Normal yeşil
-        fpsGosterge.style.fontSize = "40px"; // Normal boyut
+        fpsGosterge.style.color = "#3fb950";
+        fpsGosterge.style.fontSize = "40px";
         etiket.innerText = "Tahmini FPS Aralığı";
     }
-}
+} 
 window.onload = doldur;
 </script>
 </body>
