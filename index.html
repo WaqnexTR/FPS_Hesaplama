@@ -234,9 +234,29 @@ const veri = {
         { ad: "God of War Ragnarök (Düşük)", z: 0.9, d: 0.22 }, { ad: "God of War Ragnarök (Yüksek)", z: 0.55, d: 0.22 }
 
     ]
-};
+    
 
-function doldur() {
+};
+    function ramCarpani(ram) {
+    if (ram <= 8) return 0.85;
+    if (ram == 12) return 0.93;
+    if (ram == 16) return 1.0;
+    if (ram == 24) return 1.05;
+    if (ram >= 32) return 1.10;
+    return 1.0;
+}
+    function cpuTipCarpani(cpuAd) {
+    if (cpuAd.includes("HX")) return 1.10;
+    if (cpuAd.includes("K"))  return 1.05;
+    if (cpuAd.includes("H"))  return 0.95;
+    if (cpuAd.includes("F"))  return 1.00;
+    return 1.0;
+}
+
+
+
+{
+
     const g = document.getElementById("gpu"), c = document.getElementById("cpu"), r = document.getElementById("ram"), o = document.getElementById("oyun");
     g.innerHTML = ""; c.innerHTML = ""; r.innerHTML = ""; o.innerHTML = "";
     veri.ekranKartlari.forEach(x => g.innerHTML += `<option value="${x.p}">${x.ad}</option>`);
@@ -245,7 +265,25 @@ function doldur() {
     veri.oyunlar.forEach((x, index) => o.innerHTML += `<option value="${index}">${x.ad}</option>`);
 }
 
-function hesapla() {
+    function hesapla() {
+    let gpuAgirlik = 0.40;
+    let cpuAgirlik = 0.60;
+    let profilCarpan = 1.0;
+
+    if (oyunVerisi.tip === "espor") {
+        gpuAgirlik = 0.30;
+        cpuAgirlik = 0.70;
+        profilCarpan = 1.35;
+}
+    else if (oyunVerisi.tip === "aaa") {
+       gpuAgirlik = 0.65;
+       cpuAgirlik = 0.35;
+       profilCarpan = 0.85;
+}
+
+
+
+
     let gp = parseFloat(document.getElementById("gpu").value);
     let cp = parseFloat(document.getElementById("cpu").value);
     let rm = parseFloat(document.getElementById("ram").value);
@@ -254,9 +292,6 @@ function hesapla() {
     let oyunVerisi = veri.oyunlar[oyunIndex];
     let oy = oyunVerisi.z;
     let dalgalanma = oyunVerisi.d;
-
-    // Temel hesaplama
-    let temelFps = ((gp * 0.40) + (cp * 0.60)) * rm * oy;
     
     // Aralığı belirleme (Alt sınır ve Üst sınır)
     let alt = Math.floor(temelFps * (1 - dalgalanma));
@@ -277,8 +312,13 @@ function hesapla() {
         fpsGosterge.style.fontSize = "40px"; // Normal boyut
         etiket.innerText = "Tahmini FPS Aralığı";
     }
+    function fpsHesapla(gp, cp, ram, cpuAd, oyun) {
+  
+}
+
 }
 window.onload = doldur;
 </script>
 </body>
 </html>
+
