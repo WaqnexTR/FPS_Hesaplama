@@ -51,9 +51,17 @@ const veri = {
         { ad: "Radeon RX 9070 XT", p: 320 }, { ad: "RX 7900 XTX", p: 280 }, { ad: "RX 7900 XT", p: 240 }, { ad: "RX 7800 XT", p: 190 }, { ad: "RX 7700 XT", p: 165 }, { ad: "RX 7600 XT", p: 115 }, { ad: "RX 6800 XT", p: 160 }, { ad: "RX 6800", p: 145 }, { ad: "RX 6700 XT", p: 120 }, { ad: "RX 6600 XT", p: 95 }, { ad: "RX 6500 XT", p: 55 }
     ],
     islemciler: [
-        { ad: "i3-8100H", p: 38 }, { ad: "i3-8100K", p: 42 }, { ad: "i3-8100F", p: 35 }, { ad: "i3-14100F", p: 75 },
-        { ad: "i5-14600K", p: 115 }, { ad: "i5-14600HX", p: 110 }, { ad: "i7-14700K", p: 140 }, { ad: "i7-14700HX", p: 138 },
-        { ad: "i9-14900K", p: 160 }, { ad: "i9-14900HX", p: 158 },
+        // --- INTEL SERİSİ (8. Nesil - 14. Nesil) ---
+        // i3 Serisi (HX YOK)
+        { ad: "i3-8100H", p: 38 }, { ad: "i3-8100K", p: 42 }, { ad: "i3-8100F", p: 35 }, { ad: "i3-9100F", p: 40 }, { ad: "i3-10100F", p: 50 }, { ad: "i3-11100F", p: 58 }, { ad: "i3-12100F", p: 65 }, { ad: "i3-13100F", p: 72 }, { ad: "i3-14100F", p: 78 },
+        // i5 Serisi (HX VAR)
+        { ad: "i5-8400", p: 55 }, { ad: "i5-9400F", p: 60 }, { ad: "i5-10400F", p: 70 }, { ad: "i5-11400F", p: 80 }, { ad: "i5-12400F", p: 90 }, { ad: "i5-13600HX", p: 105 }, { ad: "i5-14600HX", p: 110 },
+        // i7 Serisi (HX VAR)
+        { ad: "i7-8700K", p: 85 }, { ad: "i7-9700K", p: 90 }, { ad: "i7-10700K", p: 95 }, { ad: "i7-11700K", p: 105 }, { ad: "i7-12700HX", p: 125 }, { ad: "i7-13700HX", p: 135 }, { ad: "i7-14700HX", p: 140 },
+        // i9 Serisi (HX VAR)
+        { ad: "i9-9900K", p: 110 }, { ad: "i9-10900K", p: 120 }, { ad: "i9-11900K", p: 125 }, { ad: "i9-12900HX", p: 145 }, { ad: "i9-13980HX", p: 155 }, { ad: "i9-14900HX", p: 160 },
+
+        // --- AMD SERİSİ ---
         { ad: "Ryzen 3 1200", p: 30 }, { ad: "Ryzen 3 1300X", p: 35 }, { ad: "Ryzen 3 2200G", p: 38 }, { ad: "Ryzen 3 3100", p: 45 }, { ad: "Ryzen 3 3300X", p: 52 }, { ad: "Ryzen 3 4100", p: 48 }, { ad: "Ryzen 3 4300G", p: 50 }, { ad: "Ryzen 3 5300G", p: 58 },
         { ad: "Ryzen 5 1600", p: 50 }, { ad: "Ryzen 5 2600", p: 65 }, { ad: "Ryzen 5 3600", p: 85 }, { ad: "Ryzen 5 5600X", p: 115 }, { ad: "Ryzen 5 7600X", p: 140 },
         { ad: "Ryzen 7 2700X", p: 80 }, { ad: "Ryzen 7 3700X", p: 105 }, { ad: "Ryzen 7 5800X", p: 135 }, { ad: "Ryzen 7 7700X", p: 160 },
@@ -67,28 +75,10 @@ const veri = {
     oyunlar: [
         { ad: "Valorant (Düşük)", z: 2.5, d: 0.10 }, { ad: "Valorant (Yüksek)", z: 1.6, d: 0.10 },
         { ad: "CS2 (Düşük)", z: 2.1, d: 0.12 }, { ad: "CS2 (Yüksek)", z: 1.3, d: 0.12 },
-        { ad: "CS:GO (Düşük)", z: 2.8, d: 0.10 }, { ad: "CS:GO (Yüksek)", z: 1.9, d: 0.10 },
-        { ad: "Zula (Düşük)", z: 3.5, d: 0.08 }, { ad: "Zula (Yüksek)", z: 2.5, d: 0.08 },
-        { ad: "Fortnite (Düşük)", z: 1.9, d: 0.15 }, { ad: "Fortnite (Yüksek)", z: 1.1, d: 0.15 },
-        { ad: "PUBG (Düşük)", z: 1.2, d: 0.18 }, { ad: "PUBG (Yüksek)", z: 0.7, d: 0.18 },
-        { ad: "Call of Duty: Warzone (Düşük)", z: 0.9, d: 0.20 }, { ad: "Call of Duty: Warzone (Yüksek)", z: 0.5, d: 0.20 },
-        { ad: "Farming Simulator 19 (Düşük)", z: 1.8, d: 0.12 }, { ad: "Farming Simulator 19 (Yüksek)", z: 1.2, d: 0.12 },
-        { ad: "Farming Simulator 22 (Düşük)", z: 1.5, d: 0.12 }, { ad: "Farming Simulator 22 (Yüksek)", z: 0.9, d: 0.12 },
-        { ad: "Farming Simulator 25 (Düşük)", z: 1.2, d: 0.15 }, { ad: "Farming Simulator 25 (Yüksek)", z: 0.7, d: 0.15 },
-        { ad: "Farming Simulator 26 (Düşük)", z: 1.0, d: 0.15 }, { ad: "Farming Simulator 26 (Yüksek)", z: 0.6, d: 0.15 },
-        { ad: "FC 23 (Düşük)", z: 1.6, d: 0.12 }, { ad: "FC 23 (Yüksek)", z: 1.1, d: 0.12 },
-        { ad: "FC 24 (Düşük)", z: 1.4, d: 0.12 }, { ad: "FC 24 (Yüksek)", z: 0.9, d: 0.12 },
-        { ad: "FC 25 (Düşük)", z: 1.2, d: 0.15 }, { ad: "FC 25 (Yüksek)", z: 0.7, d: 0.15 },
         { ad: "FC 26 (Düşük)", z: 1.0, d: 0.15 }, { ad: "FC 26 (Yüksek)", z: 0.6, d: 0.15 },
-        { ad: "PES (Düşük)", z: 1.9, d: 0.10 }, { ad: "PES (Yüksek)", z: 1.3, d: 0.10 },
-        { ad: "Spider-Man (Düşük)", z: 1.0, d: 0.20 }, { ad: "Spider-Man (Yüksek)", z: 0.6, d: 0.20 },
-        { ad: "Minecraft (Düşük Shaders)", z: 1.8, d: 0.25 }, { ad: "Minecraft (Yüksek Shaders)", z: 0.9, d: 0.25 },
-        { ad: "Forza Horizon 5 (Düşük)", z: 1.4, d: 0.15 }, { ad: "Forza Horizon 5 (Yüksek)", z: 0.8, d: 0.15 },
-        { ad: "ETS 2 (Düşük)", z: 1.8, d: 0.15 }, { ad: "ETS 2 (Yüksek)", z: 1.1, d: 0.15 },
-        { ad: "GTA V / FiveM (Düşük)", z: 1.6, d: 0.18 }, { ad: "GTA V / FiveM (Yüksek)", z: 0.9, d: 0.18 },
-        { ad: "Cyberpunk 2077 (Düşük)", z: 0.7, d: 0.25 }, { ad: "Cyberpunk 2077 (Ultra)", z: 0.3, d: 0.25 },
-        { ad: "RDR 2 (Düşük)", z: 0.9, d: 0.22 }, { ad: "RDR 2 (Ultra)", z: 0.4, d: 0.22 },
-        { ad: "God of War Ragnarök (Düşük)", z: 0.8, d: 0.18 }, { ad: "God of War Ragnarök (Yüksek)", z: 0.5, d: 0.18 }
+        { ad: "GTA V / FiveM (Yüksek)", z: 0.9, d: 0.18 },
+        { ad: "Cyberpunk 2077 (Ultra)", z: 0.3, d: 0.25 },
+        { ad: "RDR 2 (Ultra)", z: 0.4, d: 0.22 }
     ]
 };
 
@@ -111,26 +101,22 @@ function hesapla() {
     let oy = oyunVerisi.z;
     let dalgalanma = oyunVerisi.d;
 
-    // Temel hesaplama
     let temelFps = ((gp * 0.75) + (cp * 0.25)) * rm * oy;
-    
-    // Aralığı belirleme (Alt sınır ve Üst sınır)
     let alt = Math.floor(temelFps * (1 - dalgalanma));
     let ust = Math.floor(temelFps * (1 + dalgalanma));
 
     let fpsGosterge = document.getElementById("fps");
     let etiket = document.getElementById("fps-etiket");
 
-    // GERÇEKÇİ KONTROL: Eğer üst sınır bile 30 FPS'in altındaysa "Kaldırmaz" uyarısı ver
     if (ust < 30) {
         fpsGosterge.innerText = "Bu Donanım Bu Oyunu Kaldırmaz!";
-        fpsGosterge.style.color = "#ff4444"; // Kırmızı uyarı
-        fpsGosterge.style.fontSize = "22px"; // Yazı sığsın diye küçültme
+        fpsGosterge.style.color = "#ff4444";
+        fpsGosterge.style.fontSize = "22px";
         etiket.innerText = "Sistem Yetersiz";
     } else {
         fpsGosterge.innerText = alt + " - " + ust;
-        fpsGosterge.style.color = "#3fb950"; // Normal yeşil
-        fpsGosterge.style.fontSize = "40px"; // Normal boyut
+        fpsGosterge.style.color = "#3fb950";
+        fpsGosterge.style.fontSize = "40px";
         etiket.innerText = "Tahmini FPS Aralığı";
     }
 }
