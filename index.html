@@ -234,24 +234,9 @@ const veri = {
         { ad: "God of War Ragnarök (Düşük)", z: 0.9, d: 0.22 }, { ad: "God of War Ragnarök (Yüksek)", z: 0.55, d: 0.22 }
 
     ]
-    
+}
 
-};
-    function ramCarpani(ram) {
-    if (ram <= 8) return 0.85;
-    if (ram == 12) return 0.93;
-    if (ram == 16) return 1.0;
-    if (ram == 24) return 1.05;
-    if (ram >= 32) return 1.10;
-    return 1.0;
-}
-    function cpuTipCarpani(cpuAd) {
-    if (cpuAd.includes("HX")) return 1.10;
-    if (cpuAd.includes("K"))  return 1.05;
-    if (cpuAd.includes("H"))  return 0.95;
-    if (cpuAd.includes("F"))  return 1.00;
-    return 1.0;
-}
+
 
 
 
@@ -265,21 +250,7 @@ const veri = {
     veri.oyunlar.forEach((x, index) => o.innerHTML += `<option value="${index}">${x.ad}</option>`);
 }
 
-    function hesapla() {
-    let gpuAgirlik = 0.40;
-    let cpuAgirlik = 0.60;
-    let profilCarpan = 1.0;
-
-    if (oyunVerisi.tip === "espor") {
-        gpuAgirlik = 0.30;
-        cpuAgirlik = 0.70;
-        profilCarpan = 1.35;
-}
-    else if (oyunVerisi.tip === "aaa") {
-       gpuAgirlik = 0.65;
-       cpuAgirlik = 0.35;
-       profilCarpan = 0.85;
-}
+    
 
 
 
@@ -294,6 +265,7 @@ const veri = {
     let dalgalanma = oyunVerisi.d;
     
     // Aralığı belirleme (Alt sınır ve Üst sınır)
+    let temelFps = ((gp * 0.75) + (cp * 0.25)) * rm * oyunVerisi.z;
     let alt = Math.floor(temelFps * (1 - dalgalanma));
     let ust = Math.floor(temelFps * (1 + dalgalanma));
 
@@ -316,7 +288,6 @@ const veri = {
   
 }
 
-}
 window.onload = doldur;
 </script>
 </body>
