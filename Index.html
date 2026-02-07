@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmet FPS Predictor Pro</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #0d1117; color: white; display: flex; justify-content: center; padding: 20px; }
+        .container { background: #161b22; padding: 25px; border-radius: 12px; width: 450px; border: 1px solid #30363d; box-shadow: 0 8px 32px rgba(0,0,0,0.5); }
+        h2 { text-align: center; color: #58a6ff; text-transform: uppercase; margin-bottom: 20px; }
+        label { display: block; margin-top: 12px; font-size: 12px; color: #8b949e; font-weight: bold; }
+        select { width: 100%; padding: 10px; margin-top: 5px; background: #0d1117; border: 1px solid #30363d; color: white; border-radius: 6px; }
+        button { width: 100%; padding: 15px; margin-top: 25px; background: #238636; border: none; color: white; font-weight: bold; border-radius: 6px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #2ea043; }
+        .result-box { margin-top: 20px; padding: 15px; background: #0d1117; border: 2px solid #58a6ff; border-radius: 8px; text-align: center; }
+        #fps { font-size: 50px; color: #3fb950; display: block; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>FPS ANALİZ MERKEZİ</h2>
+
+    <label>EKRAN KARTI (GPU)</label>
+    <select id="gpu"></select>
+
+    <label>İŞLEMCİ (NESİL VE MODEL)</label>
+    <select id="cpu"></select>
+
+    <label>RAM BELLEK</label>
+    <select id="ram"></select>
+
+    <label>OYUN VE AYAR SEÇİMİ</label>
+    <select id="oyun"></select>
+
+    <button onclick="hesapla()">PERFORMANSI TEST ET</button>
+
+    <div class="result-box">
+        <span id="fps">0</span>
+        <p style="margin:0; font-size:14px; color:#8b949e;">Tahmini FPS</p>
+    </div>
+</div>
+
+<script>
+const veri = {
+    ekranKartlari: [
+        { ad: "NVIDIA RTX 5090", p: 500 }, { ad: "NVIDIA RTX 5080", p: 420 }, { ad: "NVIDIA RTX 5070", p: 320 }, { ad: "NVIDIA RTX 5060", p: 220 }, { ad: "NVIDIA RTX 5050", p: 160 },
+        { ad: "NVIDIA RTX 4090", p: 300 }, { ad: "NVIDIA RTX 4080", p: 250 }, { ad: "NVIDIA RTX 4070", p: 180 }, { ad: "NVIDIA RTX 4060", p: 110 }, { ad: "NVIDIA RTX 4050", p: 85 },
+        { ad: "NVIDIA RTX 3090", p: 230 }, { ad: "NVIDIA RTX 3060", p: 95 }, { ad: "NVIDIA RTX 3050", p: 65 }
+    ],
+    islemciler: [
+        { ad: "i9-14900K (Masaüstü)", p: 150 }, { ad: "i9-14900HX (Laptop)", p: 135 }, { ad: "i7-14700K (Masaüstü)", p: 125 }, { ad: "i7-14700HX (Laptop)", p: 115 }, { ad: "i5-14600K (Masaüstü)", p: 105 }, { ad: "i5-14500HX (Laptop)", p: 95 }, { ad: "i3-14100F (Masaüstü)", p: 70 },
+        { ad: "i9-13900K (Masaüstü)", p: 140 }, { ad: "i9-13980HX (Laptop)", p: 130 }, { ad: "i7-13700K (Masaüstü)", p: 118 }, { ad: "i7-13850HX (Laptop)", p: 112 }, { ad: "i7-13700H (Laptop)", p: 105 }, { ad: "i5-13600K (Masaüstü)", p: 98 }, { ad: "i5-13500HX (Laptop)", p: 92 }, { ad: "i3-13100F (Masaüstü)", p: 65 },
+        { ad: "i9-12900K (Masaüstü)", p: 125 }, { ad: "i9-12900HK (Laptop)", p: 115 }, { ad: "i7-12700K (Masaüstü)", p: 105 }, { ad: "i7-12700H (Laptop)", p: 90 }, { ad: "i5-12400F (Masaüstü)", p: 80 }, { ad: "i3-12100F (Masaüstü)", p: 60 },
+        { ad: "i9-11900K (Masaüstü)", p: 110 }, { ad: "i7-11800H (Laptop)", p: 85 }, { ad: "i5-11400F (Masaüstü)", p: 70 },
+        { ad: "i9-10900K (Masaüstü)", p: 100 }, { ad: "i7-10750H (Laptop)", p: 75 }, { ad: "i5-10400F (Masaüstü)", p: 65 },
+        { ad: "i9-9900K (Masaüstü)", p: 90 }, { ad: "i7-9750H (Laptop)", p: 65 }, { ad: "i5-9400F (Masaüstü)", p: 55 }
+    ],
+    ramler: [
+        { ad: "8 GB RAM", c: 0.7 }, { ad: "16 GB RAM", c: 1.0 }, { ad: "32 GB RAM", c: 1.2 }, { ad: "64 GB RAM", c: 1.3 }
+    ],
+    oyunlar: [
+        { ad: "Valorant (Düşük)", z: 2.5 }, { ad: "Valorant (Yüksek)", z: 1.6 },
+        { ad: "CS2 (Düşük)", z: 2.1 }, { ad: "CS2 (Yüksek)", z: 1.3 },
+        { ad: "Forza Horizon 5 (Düşük)", z: 1.4 }, { ad: "Forza Horizon 5 (Yüksek)", z: 0.8 },
+        { ad: "ETS 2 (Düşük)", z: 1.8 }, { ad: "ETS 2 (Yüksek)", z: 1.1 },
+        { ad: "GTA V / FiveM (Düşük)", z: 1.6 }, { ad: "GTA V / FiveM (Yüksek)", z: 0.9 },
+        { ad: "Cyberpunk 2077 (Düşük)", z: 0.7 }, { ad: "Cyberpunk 2077 (Ultra)", z: 0.3 },
+        { ad: "RDR 2 (Düşük)", z: 0.9 }, { ad: "RDR 2 (Ultra)", z: 0.4 },
+        { ad: "God of War Ragnarök (Düşük)", z: 0.8 }, { ad: "God of War Ragnarök (Yüksek)", z: 0.5 }
+    ]
+};
+
+function doldur() {
+    const g = document.getElementById("gpu"), c = document.getElementById("cpu"), r = document.getElementById("ram"), o = document.getElementById("oyun");
+    veri.ekranKartlari.forEach(x => g.innerHTML += `<option value="${x.p}">${x.ad}</option>`);
+    veri.islemciler.forEach(x => c.innerHTML += `<option value="${x.p}">${x.ad}</option>`);
+    veri.ramler.forEach(x => r.innerHTML += `<option value="${x.c}">${x.ad}</option>`);
+    veri.oyunlar.forEach(x => o.innerHTML += `<option value="${x.z}">${x.ad}</option>`);
+}
+
+function hesapla() {
+    let gp = parseFloat(document.getElementById("gpu").value);
+    let cp = parseFloat(document.getElementById("cpu").value);
+    let rm = parseFloat(document.getElementById("ram").value);
+    let oy = parseFloat(document.getElementById("oyun").value);
+    let fps = Math.floor(((gp * 0.75) + (cp * 0.25)) * rm * oy);
+    document.getElementById("fps").innerText = fps;
+}
+window.onload = doldur;
+</script>
+</body>
+</html>
