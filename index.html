@@ -44,7 +44,7 @@
 <script>
 const veri = {
     ekranKartlari: [
-        { ad: "NVIDIA RTX 5090", p: 500 }, { ad: "NVIDIA RTX 5080", p: 420 }, { ad: "NVIDIA RTX 5070 Tİ", p: 410 }, { ad: "NVIDIA RTX 5070", p: 320 }, { ad: "NVIDIA RTX 5060", p: 220 }, { ad: "NVIDIA RTX 5050", p: 160 }, 
+        { ad: "NVIDIA RTX 5090", p: 480 }, { ad: "NVIDIA RTX 5080", p: 420 }, { ad: "NVIDIA RTX 5070 Tİ", p: 410 }, { ad: "NVIDIA RTX 5070", p: 320 }, { ad: "NVIDIA RTX 5060", p: 220 }, { ad: "NVIDIA RTX 5050", p: 160 }, 
         { ad: "NVIDIA RTX 4090", p: 300 }, { ad: "NVIDIA RTX 4080", p: 250 }, { ad: "NVIDIA RTX 4070 Tİ SUPER", p: 210 }, { ad: "NVIDIA RTX 4070 Tİ", p: 190 }, { ad: "NVIDIA RTX 4070", p: 180 }, { ad: "NVIDIA RTX 4060 Tİ", p: 130 }, { ad: "NVIDIA RTX 4060", p: 110 }, { ad: "NVIDIA RTX 4050", p: 85 }, { ad: "NVIDIA RTX 3090 Tİ", p: 245 },
         { ad: "NVIDIA RTX 3090", p: 230 }, { ad: "NVIDIA RTX 3080 Tİ", p: 215 }, { ad: "NVIDIA RTX 3080", p: 200 }, { ad: "NVIDIA RTX 3070 Tİ", p: 160 }, { ad: "NVIDIA RTX 3070", p: 170 }, { ad: "NVIDIA RTX 3060 Tİ", p: 135 }, { ad: "NVIDIA RTX 3060", p: 95 }, { ad: "NVIDIA RTX 3050", p: 65 }, { ad: "RTX 2080 Tİ", p: 145 }, { ad: "RTX 2080 SUPER", p: 135 },
         { ad: "RTX 2080", p: 45 }, { ad: "RTX 2070 SUPER", p: 107 }, { ad: "RTX 2070", p: 65 }, { ad: "RTX 2060 SUPER", p: 97 }, { ad: "RTX 2060", p: 75 }, { ad: "RTX 2050", p: 75 }, { ad: "GTX 1660 Tİ", p: 85 }, { ad: "GTX 1660 SUPER", p: 80 }, { ad: "GTX 1660", p: 70 }, { ad: "GTX 1650 SUPER", p: 63 }, { ad: "GTX 1650", p: 55 }, { ad: "GTX 1080 Tİ", p: 135 }, { ad: "GTX 1080", p: 100 }, { ad: "GTX 1070 Tİ", p: 103 }, { ad: "GTX 1070", p: 90 }, { ad: "GTX 1060", p: 59 }, { ad: "GTX 1050 Tİ", p: 45 }, { ad: "GTX 1050", p: 40 }, { ad: "GTX 730", p: 15 }, { ad: "GTX 580", p: 25 },
@@ -114,30 +114,30 @@ const veri = {
     ramler: [
         { ad: "2 GB RAM", c: 0.10 }, { ad: "4 GB RAM", c: 0.20 }, { ad: "8 GB RAM", c: 0.40 }, { ad: "12 GB RAM", c: 0.53 },
         { ad: "16 GB RAM", c: 0.70 }, { ad: "24 GB RAM", c: 0.95 }, { ad: "32 GB RAM", c: 1.2 }, { ad: "48 GB RAM", c: 1.6 },
-        { ad: "64 GB RAM", c: 2.0 }, { ad: "128 GB RAM", c: 2.5 }, { ad: "256 GB RAM", c: 3.0 }
+        { ad: "64 GB RAM", c: 2.0 }, { ad: "128 GB RAM", c: 2.4 }, { ad: "256 GB RAM", c: 2.8 }
     ],
     oyunlar: [
-        { ad: "Valorant (Düşük)", z: 2.5, d: 0.10 }, { ad: "Valorant (Yüksek)", z: 1.6, d: 0.10 },
+        { ad: "Valorant (Düşük)", z: 2.2, d: 0.10 }, { ad: "Valorant (Yüksek)", z: 1.6, d: 0.10 },
         { ad: "CS2 (Düşük)", z: 2.1, d: 0.12 }, { ad: "CS2 (Yüksek)", z: 1.3, d: 0.12 },
         { ad: "CS:GO (Düşük)", z: 2.8, d: 0.10 }, { ad: "CS:GO (Yüksek)", z: 1.9, d: 0.10 },
-        { ad: "Zula (Düşük)", z: 3.5, d: 0.08 }, { ad: "Zula (Yüksek)", z: 2.5, d: 0.08 },
+        { ad: "Zula (Düşük)", z: 3.1, d: 0.08 }, { ad: "Zula (Yüksek)", z: 2.5, d: 0.08 },
         { ad: "Fortnite (Düşük)", z: 1.9, d: 0.15 }, { ad: "Fortnite (Yüksek)", z: 1.1, d: 0.15 },
         { ad: "PUBG (Düşük)", z: 1.2, d: 0.18 }, { ad: "PUBG (Yüksek)", z: 0.7, d: 0.18 },
         { ad: "Call of Duty: Warzone (Düşük)", z: 0.9, d: 0.20 }, { ad: "Call of Duty: Warzone (Yüksek)", z: 0.5, d: 0.20 },
-        { ad: "Farming Simulator 19 (Düşük)", z: 1.8, d: 0.12 }, { ad: "Farming Simulator 19 (Yüksek)", z: 1.2, d: 0.12 },
-        { ad: "Farming Simulator 22 (Düşük)", z: 1.5, d: 0.12 }, { ad: "Farming Simulator 22 (Yüksek)", z: 0.9, d: 0.12 },
-        { ad: "Farming Simulator 25 (Düşük)", z: 1.2, d: 0.15 }, { ad: "Farming Simulator 25 (Yüksek)", z: 0.7, d: 0.15 },
+        { ad: "Farming Simulator 19 (Düşük)", z: 1.7, d: 0.12 }, { ad: "Farming Simulator 19 (Yüksek)", z: 1.2, d: 0.12 },
+        { ad: "Farming Simulator 22 (Düşük)", z: 1.4, d: 0.12 }, { ad: "Farming Simulator 22 (Yüksek)", z: 0.9, d: 0.12 },
+        { ad: "Farming Simulator 25 (Düşük)", z: 1.1, d: 0.15 }, { ad: "Farming Simulator 25 (Yüksek)", z: 0.7, d: 0.15 },
         { ad: "Farming Simulator 26 (Düşük)", z: 1.0, d: 0.15 }, { ad: "Farming Simulator 26 (Yüksek)", z: 0.6, d: 0.15 },
-        { ad: "FC 23 (Düşük)", z: 1.6, d: 0.12 }, { ad: "FC 23 (Yüksek)", z: 1.1, d: 0.12 },
-        { ad: "FC 24 (Düşük)", z: 1.4, d: 0.12 }, { ad: "FC 24 (Yüksek)", z: 0.9, d: 0.12 },
-        { ad: "FC 25 (Düşük)", z: 1.2, d: 0.15 }, { ad: "FC 25 (Yüksek)", z: 0.7, d: 0.15 },
+        { ad: "FC 23 (Düşük)", z: 1.5, d: 0.12 }, { ad: "FC 23 (Yüksek)", z: 1.1, d: 0.12 },
+        { ad: "FC 24 (Düşük)", z: 1.3, d: 0.12 }, { ad: "FC 24 (Yüksek)", z: 0.9, d: 0.12 },
+        { ad: "FC 25 (Düşük)", z: 1.1, d: 0.15 }, { ad: "FC 25 (Yüksek)", z: 0.7, d: 0.15 },
         { ad: "FC 26 (Düşük)", z: 1.0, d: 0.15 }, { ad: "FC 26 (Yüksek)", z: 0.6, d: 0.15 },
         { ad: "PES (Düşük)", z: 1.9, d: 0.10 }, { ad: "PES (Yüksek)", z: 1.3, d: 0.10 },
         { ad: "Spider-Man (Düşük)", z: 1.0, d: 0.20 }, { ad: "Spider-Man (Yüksek)", z: 0.6, d: 0.20 },
-        { ad: "Minecraft (Düşük Shaders)", z: 1.8, d: 0.25 }, { ad: "Minecraft (Yüksek Shaders)", z: 0.9, d: 0.25 },
+        { ad: "Minecraft (Düşük Shaders)", z: 1.5, d: 0.25 }, { ad: "Minecraft (Yüksek Shaders)", z: 0.9, d: 0.25 },
         { ad: "Forza Horizon 5 (Düşük)", z: 1.4, d: 0.15 }, { ad: "Forza Horizon 5 (Yüksek)", z: 0.8, d: 0.15 },
-        { ad: "ETS 2 (Düşük)", z: 1.8, d: 0.15 }, { ad: "ETS 2 (Yüksek)", z: 1.1, d: 0.15 },
-        { ad: "GTA V / FiveM (Düşük)", z: 1.6, d: 0.18 }, { ad: "GTA V / FiveM (Yüksek)", z: 0.9, d: 0.18 },
+        { ad: "ETS 2 (Düşük)", z: 1.7, d: 0.15 }, { ad: "ETS 2 (Yüksek)", z: 1.1, d: 0.15 },
+        { ad: "GTA V / FiveM (Düşük)", z: 1.5, d: 0.18 }, { ad: "GTA V / FiveM (Yüksek)", z: 0.9, d: 0.18 },
         { ad: "Cyberpunk 2077 (Düşük)", z: 0.7, d: 0.25 }, { ad: "Cyberpunk 2077 (Ultra)", z: 0.3, d: 0.25 },
         { ad: "RDR 2 (Düşük)", z: 0.9, d: 0.22 }, { ad: "RDR 2 (Ultra)", z: 0.5, d: 0.23 },
         { ad: "God of War Ragnarök (Düşük)", z: 0.8, d: 0.18 }, { ad: "God of War Ragnarök (Yüksek)", z: 0.5, d: 0.18 }
