@@ -24,7 +24,7 @@
     <label>EKRAN KARTI (GPU)</label>
     <select id="gpu"></select>
 
-    <label>İŞLEMCİ (NESİL VE MODEL)</label>
+    <label>İŞLEMCİ (MODEL SEÇİN)</label>
     <select id="cpu"></select>
 
     <label>RAM BELLEK</label>
@@ -46,15 +46,34 @@ const veri = {
     ekranKartlari: [
         { ad: "NVIDIA RTX 5090", p: 500 }, { ad: "NVIDIA RTX 5080", p: 420 }, { ad: "NVIDIA RTX 5070", p: 320 }, { ad: "NVIDIA RTX 5060", p: 220 }, { ad: "NVIDIA RTX 5050", p: 160 },
         { ad: "NVIDIA RTX 4090", p: 300 }, { ad: "NVIDIA RTX 4080", p: 250 }, { ad: "NVIDIA RTX 4070", p: 180 }, { ad: "NVIDIA RTX 4060", p: 110 }, { ad: "NVIDIA RTX 4050", p: 85 },
-        { ad: "NVIDIA RTX 3090", p: 230 }, { ad: "NVIDIA RTX 3060", p: 95 }, { ad: "NVIDIA RTX 3050", p: 65 }
+        { ad: "NVIDIA RTX 3090", p: 230 }, { ad: "NVIDIA RTX 3080", p: 200 }, { ad: "NVIDIA RTX 3070", p: 170 }, { ad: "NVIDIA RTX 3060", p: 95 }, { ad: "NVIDIA RTX 3050", p: 65 },
+        { ad: "GTX 730", p: 15 }, { ad: "GTX 1060", p: 45 }, { ad: "GTX 1660", p: 65 }, { ad: "RTX 2050", p: 75 }, { ad: "RTX 2060", p: 90 }, { ad: "RTX 2070", p: 110 }, { ad: "RTX 2080", p: 130 }, { ad: "RTX 2090", p: 150 },
+        { ad: "Radeon RX 9070 XT", p: 320 }, { ad: "RX 7900 XTX", p: 280 }, { ad: "RX 7900 XT", p: 240 }, { ad: "RX 7800 XT", p: 190 }, { ad: "RX 7700 XT", p: 165 }, { ad: "RX 7600 XT", p: 115 }, { ad: "RX 6800 XT", p: 160 }, { ad: "RX 6800", p: 145 }, { ad: "RX 6700 XT", p: 120 }, { ad: "RX 6600 XT", p: 95 }, { ad: "RX 6500 XT", p: 55 }
     ],
     islemciler: [
-        { ad: "i9-14900K (Masaüstü)", p: 150 }, { ad: "i9-14900HX (Laptop)", p: 135 }, { ad: "i7-14700K (Masaüstü)", p: 125 }, { ad: "i7-14700HX (Laptop)", p: 115 }, { ad: "i5-14600K (Masaüstü)", p: 105 }, { ad: "i5-14500HX (Laptop)", p: 95 }, { ad: "i3-14100F (Masaüstü)", p: 70 },
-        { ad: "i9-13900K (Masaüstü)", p: 140 }, { ad: "i9-13980HX (Laptop)", p: 130 }, { ad: "i7-13700K (Masaüstü)", p: 118 }, { ad: "i7-13850HX (Laptop)", p: 112 }, { ad: "i7-13700H (Laptop)", p: 105 }, { ad: "i5-13600K (Masaüstü)", p: 98 }, { ad: "i5-13500HX (Laptop)", p: 92 }, { ad: "i3-13100F (Masaüstü)", p: 65 },
-        { ad: "i9-12900K (Masaüstü)", p: 125 }, { ad: "i9-12900HK (Laptop)", p: 115 }, { ad: "i7-12700K (Masaüstü)", p: 105 }, { ad: "i7-12700H (Laptop)", p: 90 }, { ad: "i5-12400F (Masaüstü)", p: 80 }, { ad: "i3-12100F (Masaüstü)", p: 60 },
-        { ad: "i9-11900K (Masaüstü)", p: 110 }, { ad: "i7-11800H (Laptop)", p: 85 }, { ad: "i5-11400F (Masaüstü)", p: 70 },
-        { ad: "i9-10900K (Masaüstü)", p: 100 }, { ad: "i7-10750H (Laptop)", p: 75 }, { ad: "i5-10400F (Masaüstü)", p: 65 },
-        { ad: "i9-9900K (Masaüstü)", p: 90 }, { ad: "i7-9750H (Laptop)", p: 65 }, { ad: "i5-9400F (Masaüstü)", p: 55 }
+        // INTEL LİSTESİ (KORUNAN)
+        { ad: "i9-14900K", p: 155 }, { ad: "i9-14900F", p: 145 }, { ad: "i9-14900HX", p: 140 }, { ad: "i9-14900H", p: 130 },
+        { ad: "i7-14700K", p: 135 }, { ad: "i7-14700F", p: 125 }, { ad: "i7-14700HX", p: 120 }, { ad: "i7-14700H", p: 110 },
+        { ad: "i5-14600K", p: 115 }, { ad: "i5-14600F", p: 105 }, { ad: "i5-14600HX", p: 100 }, { ad: "i5-14600H", p: 90 },
+        { ad: "i3-14100F", p: 75 }, { ad: "i3-14100H", p: 60 },
+        { ad: "i9-13900K", p: 145 }, { ad: "i9-13900F", p: 135 }, { ad: "i9-13900HX", p: 130 }, { ad: "i9-13900H", p: 120 },
+        { ad: "i7-13700K", p: 125 }, { ad: "i7-13700HX", p: 110 }, { ad: "i7-13700H", p: 100 },
+        { ad: "i5-13600K", p: 105 }, { ad: "i5-13600F", p: 95 }, { ad: "i5-13600HX", p: 90 }, { ad: "i5-13600H", p: 80 },
+        { ad: "i3-13100F", p: 65 }, { ad: "i3-13100H", p: 50 },
+
+        // AMD RYZEN LİSTESİ (YENİ EKLENEN)
+        // Ryzen 3
+        { ad: "Ryzen 3 1200", p: 30 }, { ad: "Ryzen 3 1300X", p: 35 }, { ad: "Ryzen 3 2200G", p: 38 }, { ad: "Ryzen 3 3100", p: 45 }, { ad: "Ryzen 3 3300X", p: 52 }, 
+        { ad: "Ryzen 3 4100", p: 55 }, { ad: "Ryzen 3 4300G", p: 58 }, { ad: "Ryzen 3 4300GE", p: 56 }, { ad: "Ryzen 3 5300G", p: 65 }, { ad: "Ryzen 3 5300X", p: 68 },
+        // Ryzen 5
+        { ad: "Ryzen 5 1400", p: 40 }, { ad: "Ryzen 5 1500X", p: 45 }, { ad: "Ryzen 5 1600", p: 50 }, { ad: "Ryzen 5 1600X", p: 55 }, { ad: "Ryzen 5 2600", p: 65 }, 
+        { ad: "Ryzen 5 2600X", p: 70 }, { ad: "Ryzen 5 3600", p: 85 }, { ad: "Ryzen 5 3600X", p: 90 }, { ad: "Ryzen 5 5600X", p: 110 }, { ad: "Ryzen 5 7600X", p: 135 },
+        // Ryzen 7
+        { ad: "Ryzen 7 1700", p: 60 }, { ad: "Ryzen 7 1700X", p: 65 }, { ad: "Ryzen 7 1800X", p: 70 }, { ad: "Ryzen 7 2700", p: 75 }, { ad: "Ryzen 7 2700X", p: 80 }, 
+        { ad: "Ryzen 7 3700X", p: 100 }, { ad: "Ryzen 7 3800X", p: 105 }, { ad: "Ryzen 7 5800X", p: 125 }, { ad: "Ryzen 7 7700X", p: 145 },
+        // Ryzen 9
+        { ad: "Ryzen 9 2900X", p: 95 }, { ad: "Ryzen 9 3900X", p: 120 }, { ad: "Ryzen 9 3950X", p: 130 }, { ad: "Ryzen 9 5900X", p: 140 }, { ad: "Ryzen 9 5950X", p: 150 }, 
+        { ad: "Ryzen 9 7900X", p: 160 }, { ad: "Ryzen 9 7950X", p: 175 }
     ],
     ramler: [
         { ad: "8 GB RAM", c: 0.7 }, { ad: "16 GB RAM", c: 1.0 }, { ad: "32 GB RAM", c: 1.2 }, { ad: "64 GB RAM", c: 1.3 }
