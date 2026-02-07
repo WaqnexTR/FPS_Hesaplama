@@ -44,7 +44,7 @@
 <script>
 const veri = {
     ekranKartlari: [
-        { ad: "NVIDIA RTX 5090", p: 480 }, { ad: "NVIDIA RTX 5080", p: 420 }, { ad: "NVIDIA RTX 5070 Tİ", p: 410 }, { ad: "NVIDIA RTX 5070", p: 320 }, { ad: "NVIDIA RTX 5060", p: 220 }, { ad: "NVIDIA RTX 5050", p: 160 }, 
+        { ad: "NVIDIA RTX 5090", p: 460 }, { ad: "NVIDIA RTX 5080", p: 420 }, { ad: "NVIDIA RTX 5070 Tİ", p: 410 }, { ad: "NVIDIA RTX 5070", p: 320 }, { ad: "NVIDIA RTX 5060", p: 220 }, { ad: "NVIDIA RTX 5050", p: 160 }, 
         { ad: "NVIDIA RTX 4090", p: 300 }, { ad: "NVIDIA RTX 4080", p: 250 }, { ad: "NVIDIA RTX 4070 Tİ SUPER", p: 210 }, { ad: "NVIDIA RTX 4070 Tİ", p: 190 }, { ad: "NVIDIA RTX 4070", p: 180 }, { ad: "NVIDIA RTX 4060 Tİ", p: 130 }, { ad: "NVIDIA RTX 4060", p: 110 }, { ad: "NVIDIA RTX 4050", p: 85 }, { ad: "NVIDIA RTX 3090 Tİ", p: 245 },
         { ad: "NVIDIA RTX 3090", p: 230 }, { ad: "NVIDIA RTX 3080 Tİ", p: 215 }, { ad: "NVIDIA RTX 3080", p: 200 }, { ad: "NVIDIA RTX 3070 Tİ", p: 160 }, { ad: "NVIDIA RTX 3070", p: 170 }, { ad: "NVIDIA RTX 3060 Tİ", p: 135 }, { ad: "NVIDIA RTX 3060", p: 95 }, { ad: "NVIDIA RTX 3050", p: 65 }, { ad: "RTX 2080 Tİ", p: 145 }, { ad: "RTX 2080 SUPER", p: 135 },
         { ad: "RTX 2080", p: 45 }, { ad: "RTX 2070 SUPER", p: 107 }, { ad: "RTX 2070", p: 65 }, { ad: "RTX 2060 SUPER", p: 97 }, { ad: "RTX 2060", p: 75 }, { ad: "RTX 2050", p: 75 }, { ad: "GTX 1660 Tİ", p: 85 }, { ad: "GTX 1660 SUPER", p: 80 }, { ad: "GTX 1660", p: 70 }, { ad: "GTX 1650 SUPER", p: 63 }, { ad: "GTX 1650", p: 55 }, { ad: "GTX 1080 Tİ", p: 135 }, { ad: "GTX 1080", p: 100 }, { ad: "GTX 1070 Tİ", p: 103 }, { ad: "GTX 1070", p: 90 }, { ad: "GTX 1060", p: 59 }, { ad: "GTX 1050 Tİ", p: 45 }, { ad: "GTX 1050", p: 40 }, { ad: "GTX 730", p: 15 }, { ad: "GTX 580", p: 25 },
@@ -52,15 +52,15 @@ const veri = {
     ],
     islemciler: [
         // Intel i3-i9 ve AMD Ryzen (X ve X'siz)
-        { ad: "i3-6100H (Laptop)", p: 12 }, { ad: "i3-6100K (Masaüstü)", p: 18 }, { ad: "i3-6100F (Masaüstü)", p: 14 },
-        { ad: "i3-7100H (Laptop)", p: 20 }, { ad: "i3-7100K (Masaüstü)", p: 30 }, { ad: "i3-7100F (Masaüstü)", p: 25 },
-        { ad: "i3-8100H (Laptop)", p: 29 }, { ad: "i3-8100K (Masaüstü)", p: 35 }, { ad: "i3-8100F (Masaüstü)", p: 31 },
-        { ad: "i3-9100H (Laptop)", p: 32 }, { ad: "i3-9100K (Masaüstü)", p: 37 }, { ad: "i3-9100F (Masaüstü)", p: 33 },
-        { ad: "i3-10100H (Laptop)", p: 34 }, { ad: "i3-10100K (Masaüstü)", p: 39 }, { ad: "i3-10100F (Masaüstü)", p: 35 },
-        { ad: "i3-11100H (Laptop)", p: 36 }, { ad: "i3-11100K (Masaüstü)", p: 41 }, { ad: "i3-11100F (Masaüstü)", p: 37 },
-        { ad: "i3-12100H (Laptop)", p: 38 }, { ad: "i3-12100K (Masaüstü)", p: 43 }, { ad: "i3-12100F (Masaüstü)", p: 39 },
-        { ad: "i3-13100H (Laptop)", p: 40 }, { ad: "i3-13100K (Masaüstü)", p: 45 }, { ad: "i3-13100F (Masaüstü)", p: 41 },
-        { ad: "i3-14100H (Laptop)", p: 42 }, { ad: "i3-14100K (Masaüstü)", p: 47 }, { ad: "i3-14100F (Masaüstü)", p: 43 },
+        { ad: "i3-6100H (Laptop)", p: 11 }, { ad: "i3-6100K (Masaüstü)", p: 21 }, { ad: "i3-6100F (Masaüstü)", p: 10 },
+        { ad: "i3-7100H (Laptop)", p: 19 }, { ad: "i3-7100K (Masaüstü)", p: 30 }, { ad: "i3-7100F (Masaüstü)", p: 18 },
+        { ad: "i3-8100H (Laptop)", p: 25 }, { ad: "i3-8100K (Masaüstü)", p: 35 }, { ad: "i3-8100F (Masaüstü)", p: 24 },
+        { ad: "i3-9100H (Laptop)", p: 35 }, { ad: "i3-9100K (Masaüstü)", p: 39 }, { ad: "i3-9100F (Masaüstü)", p: 33 },
+        { ad: "i3-10100H (Laptop)", p: 37 }, { ad: "i3-10100K (Masaüstü)", p: 41 }, { ad: "i3-10100F (Masaüstü)", p: 35 },
+        { ad: "i3-11100H (Laptop)", p: 39 }, { ad: "i3-11100K (Masaüstü)", p: 43 }, { ad: "i3-11100F (Masaüstü)", p: 37 },
+        { ad: "i3-12100H (Laptop)", p: 41 }, { ad: "i3-12100K (Masaüstü)", p: 47 }, { ad: "i3-12100F (Masaüstü)", p: 39 },
+        { ad: "i3-13100H (Laptop)", p: 43 }, { ad: "i3-13100K (Masaüstü)", p: 49 }, { ad: "i3-13100F (Masaüstü)", p: 41 },
+        { ad: "i3-14100H (Laptop)", p: 45 }, { ad: "i3-14100K (Masaüstü)", p: 51 }, { ad: "i3-14100F (Masaüstü)", p: 43 },
 
         { ad: "i5-6100H (Laptop)", p: 26 }, { ad: "i5-6100HX (Laptop)", p: 31 }, { ad: "i5-6100K (Masaüstü)", p: 39 }, { ad: "i5-6100F (Masaüstü)", p: 24 },
         { ad: "i5-7100H (Laptop)", p: 31 }, { ad: "i5-7100HX (Laptop)", p: 39 }, { ad: "i5-7100K (Masaüstü)", p: 45 }, { ad: "i5-7100F (Masaüstü)", p: 33 },
@@ -69,10 +69,10 @@ const veri = {
         { ad: "i5-10100H (Laptop)", p: 42 }, { ad: "i5-10100HX (Laptop)", p: 48 }, { ad: "i5-10100K (Masaüstü)", p: 51 }, { ad: "i5-10100F (Masaüstü)", p: 44 },
         { ad: "i5-11100H (Laptop)", p: 44 }, { ad: "i5-11100HX (Laptop)", p: 50 }, { ad: "i5-11100K (Masaüstü)", p: 53 }, { ad: "i5-11100F (Masaüstü)", p: 46 },
         { ad: "i5-12100H (Laptop)", p: 46 }, { ad: "i5-12100HX (Laptop)", p: 52 }, { ad: "i5-12100K (Masaüstü)", p: 55 }, { ad: "i5-12100F (Masaüstü)", p: 48 },
-        { ad: "i5-13100H (Laptop)", p: 48 }, { ad: "i5-13100HX (Laptop)", p: 54 }, { ad: "i5-13100K (Masaüstü)", p: 57 }, { ad: "i5-13100F (Masaüstü)", p: 50 },
-        { ad: "i5-14600H (Laptop)", p: 50 }, { ad: "i5-14600HX (Laptop)", p: 58 }, { ad: "i5-14600K (Masaüstü)", p: 60 }, { ad: "i5-14600F (Masaüstü)", p: 52 },
+        { ad: "i5-13100H (Laptop)", p: 55 }, { ad: "i5-13100HX (Laptop)", p: 60 }, { ad: "i5-13100K (Masaüstü)", p: 65 }, { ad: "i5-13100F (Masaüstü)", p: 53 },
+        { ad: "i5-14600H (Laptop)", p: 90 }, { ad: "i5-14600HX (Laptop)", p: 95 }, { ad: "i5-14600K (Masaüstü)", p: 100 }, { ad: "i5-14600F (Masaüstü)", p: 87 },
 
-        { ad: "i7-6100H (Laptop)", p: 35 }, { ad: "i7-6100HX (Laptop)", p: 40 }, { ad: "i7-6100K (Masaüstü)", p: 46 }, { ad: "i7-6100F (Masaüstü)", p: 33 },
+        { ad: "i7-6100H (Laptop)", p: 35 }, { ad: "i7-6100HX (Laptop)", p: 40 }, { ad: "i7-6100K (Masaüstü)", p: 46 }, { ad: "i7-6100F (Masaüstü)", p: 37 },
         { ad: "i7-7100H (Laptop)", p: 42 }, { ad: "i7-7100HX (Laptop)", p: 49 }, { ad: "i7-7100K (Masaüstü)", p: 55 }, { ad: "i7-7100F (Masaüstü)", p: 44 },
         { ad: "i7-8100H (Laptop)", p: 48 }, { ad: "i7-8100HX (Laptop)", p: 54 }, { ad: "i7-8100K (Masaüstü)", p: 57 }, { ad: "i7-8100F (Masaüstü)", p: 50 },
         { ad: "i7-9100H (Laptop)", p: 50 }, { ad: "i7-9100HX (Laptop)", p: 56 }, { ad: "i7-9100K (Masaüstü)", p: 59 }, { ad: "i7-9100F (Masaüstü)", p: 52 },
@@ -80,16 +80,16 @@ const veri = {
         { ad: "i7-11100H (Laptop)", p: 54 }, { ad: "i7-11100HX (Laptop)", p: 60 }, { ad: "i7-11100K (Masaüstü)", p: 63 }, { ad: "i7-11100F (Masaüstü)", p: 56 },
         { ad: "i7-12100H (Laptop)", p: 56 }, { ad: "i7-12100HX (Laptop)", p: 62 }, { ad: "i7-12100K (Masaüstü)", p: 65 }, { ad: "i7-12100F (Masaüstü)", p: 58 },
         { ad: "i7-13100H (Laptop)", p: 58 }, { ad: "i7-13100HX (Laptop)", p: 64 }, { ad: "i7-13100K (Masaüstü)", p: 67 }, { ad: "i7-13100F (Masaüstü)", p: 60 },
-        { ad: "i7-14700H (Laptop)", p: 61 }, { ad: "i7-14700HX (Laptop)", p: 68 }, { ad: "i7-14700K (Masaüstü)", p: 70 }, { ad: "i7-14700F (Masaüstü)", p: 63 },
+        { ad: "i7-14700H (Laptop)", p: 97 }, { ad: "i7-14700HX (Laptop)", p: 108 }, { ad: "i7-14700K (Masaüstü)", p: 113 }, { ad: "i7-14700F (Masaüstü)", p: 100 },
 
         { ad: "i9-7100H (Laptop)", p: 64 }, { ad: "i9-7100HX (Laptop)", p: 70 }, { ad: "i9-7100K (Masaüstü)", p: 76 }, { ad: "i9-7100F (Masaüstü)", p: 67 },
         { ad: "i9-8100H (Laptop)", p: 68 }, { ad: "i9-8100HX (Laptop)", p: 74 }, { ad: "i9-8100K (Masaüstü)", p: 77 }, { ad: "i9-8100F (Masaüstü)", p: 70 },
         { ad: "i9-9100H (Laptop)", p: 70 }, { ad: "i9-9100HX (Laptop)", p: 76 }, { ad: "i9-9100K (Masaüstü)", p: 79 }, { ad: "i9-9100F (Masaüstü)", p: 72 },
-        { ad: "i9-10100H (Laptop)", p: 72 }, { ad: "i9-10100HX (Laptop)", p: 78 }, { ad: "i9-10100K (Masaüstü)", p: 81 }, { ad: "i9-10100F (Masaüstü)", p: 74 },
-        { ad: "i9-11100H (Laptop)", p: 74 }, { ad: "i9-11100HX (Laptop))", p: 80 }, { ad: "i9-11100K (Masaüstü)", p: 83 }, { ad: "i9-11100F (Masaüstü)", p: 76 },
-        { ad: "i9-12100H (Laptop)", p: 76 }, { ad: "i9-12100HX (Laptop)", p: 82 }, { ad: "i9-12100K (Masaüstü)", p: 85 }, { ad: "i9-12100F (Masaüstü)", p: 78 },
-        { ad: "i9-13100H (Laptop)", p: 78 }, { ad: "i9-13100HX (Laptop)", p: 84 }, { ad: "i9-13100K (Masaüstü)", p: 87 }, { ad: "i9-13100F (Masaüstü)", p: 80 },
-        { ad: "i9-14900K (Masaüstü)", p: 160 }, { ad: "i9-14900HX (Laptop)", p: 158 },
+        { ad: "i9-10100H (Laptop)", p: 72 }, { ad: "i9-10100HX (Laptop)", p: 83 }, { ad: "i9-10100K (Masaüstü)", p: 87 }, { ad: "i9-10100F (Masaüstü)", p: 7 },
+        { ad: "i9-11100H (Laptop)", p: 104 }, { ad: "i9-11100HX (Laptop))", p: 113 }, { ad: "i9-11100K (Masaüstü)", p: 117 }, { ad: "i9-11100F (Masaüstü)", p: 106 },
+        { ad: "i9-12100H (Laptop)", p: 120 }, { ad: "i9-12100HX (Laptop)", p: 125 }, { ad: "i9-12100K (Masaüstü)", p: 129 }, { ad: "i9-12100F (Masaüstü)", p: 114 },
+        { ad: "i9-13100H (Laptop)", p: 130 }, { ad: "i9-13100HX (Laptop)", p: 135 }, { ad: "i9-13100K (Masaüstü)", p: 140 }, { ad: "i9-13100F (Masaüstü)", p: 125 },
+        { ad: "i9-14900K (Masaüstü)", p: 154 }, { ad: "i9-14900HX (Laptop)", p: 149 },
 
         // AMD Ryzen
         { ad: "Ryzen 3 1200 (Masaüstü)", p: 34 }, { ad: "Ryzen 3 1200X (Masaüstü)", p: 36 },  { ad: "Ryzen 3 7345H (Laptop)", p: 59 },
@@ -111,13 +111,13 @@ const veri = {
         { ad: "Ryzen 7 7700 (Masaüstü)", p: 134 }, { ad: "Ryzen 7 7700X (Masaüstü)", p: 139 },
 
         { ad: "Ryzen 9 3900 (Masaüstü)", p: 99 }, { ad: "Ryzen 9 3900X (Masaüstü)", p: 104 }, { ad: "Ryzen 9 8945HX (Laptop)", p: 155 }, 
-        { ad: "Ryzen 9 5900 (Masaüstü)", p: 124 }, { ad: "Ryzen 9 5900X (Masaüstü)", p: 129 }, { ad: "Ryzen 9 7945HX (Laptop)", p: 150 }, { ad: "Ryzen 9 9955HX3D (Laptop)", p: 169 },
-        { ad: "Ryzen 9 7950 (Masaüstü)", p: 149 }, { ad: "Ryzen 9 7950X (Masaüstü)", p: 154 }, { ad: "Ryzen 9 9955HX (Laptop)", p: 158 }, { ad: "Ryzen 9 7945HX3D (Laptop)", p: 153 },
+        { ad: "Ryzen 9 5900 (Masaüstü)", p: 124 }, { ad: "Ryzen 9 5900X (Masaüstü)", p: 129 }, { ad: "Ryzen 9 7945HX (Laptop)", p: 150 }, { ad: "Ryzen 9 9955HX3D (Laptop)", p: 156 },
+        { ad: "Ryzen 9 7950 (Masaüstü)", p: 149 }, { ad: "Ryzen 9 7950X (Masaüstü)", p: 152 }, { ad: "Ryzen 9 9955HX (Laptop)", p: 153 }, { ad: "Ryzen 9 7945HX3D (Laptop)", p: 154 },
     ],
     ramler: [
         { ad: "2 GB RAM", c: 0.15 }, { ad: "4 GB RAM", c: 0.30 }, { ad: "8 GB RAM", c: 0.50 }, { ad: "12 GB RAM", c: 0.55 },
         { ad: "16 GB RAM", c: 0.80 }, { ad: "24 GB RAM", c: 1.0 }, { ad: "32 GB RAM", c: 1.5 }, { ad: "48 GB RAM", c: 1.6 },
-        { ad: "64 GB RAM", c: 2.4 }, { ad: "128 GB RAM", c: 2.8 }, { ad: "256 GB RAM", c: 3.3 }
+        { ad: "64 GB RAM", c: 2.4 }, { ad: "128 GB RAM", c: 2.8 }, { ad: "256 GB RAM", c: 3.1 }
     ],
     oyunlar: [
         { ad: "Valorant (Düşük)", z: 2.2, d: 0.10 }, { ad: "Valorant (Yüksek)", z: 1.6, d: 0.10 },
