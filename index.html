@@ -12,7 +12,7 @@
         select { width: 100%; padding: 10px; margin-top: 5px; background: #0d1117; border: 1px solid #30363d; color: white; border-radius: 6px; }
         button { width: 100%; padding: 15px; margin-top: 25px; background: #238636; border: none; color: white; font-weight: bold; border-radius: 6px; cursor: pointer; font-size: 16px; }
         button:hover { background: #2ea043; }
-        .result-box { margin-top: 20px; padding: 15px; background: #0d1117; border: 2px solid #58a6ff; border-radius: 8px; text-align: center; }
+        .result-box { margin-top: 20px; padding: 15px; background: #0d1117; border: 2px solid #58a6ff; border-radius: 8px; text-align: center; min-height: 100px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
         #fps { font-size: 40px; color: #3fb950; display: block; font-weight: bold; }
     </style>
 </head>
@@ -37,7 +37,7 @@
 
     <div class="result-box">
         <span id="fps">0 - 0</span>
-        <p style="margin:0; font-size:14px; color:#8b949e;">Tahmini FPS Aralığı</p>
+        <p id="fps-etiket" style="margin:0; font-size:14px; color:#8b949e;">Tahmini FPS Aralığı</p>
     </div>
 </div>
 
@@ -65,7 +65,6 @@ const veri = {
         { ad: "64 GB RAM", c: 1.3 }, { ad: "128 GB RAM", c: 1.4 }, { ad: "256 GB RAM", c: 1.5 }
     ],
     oyunlar: [
-        // z: Güç katsayısı, d: Dalgalanma (Arallık) oranı
         { ad: "Valorant (Düşük)", z: 2.5, d: 0.10 }, { ad: "Valorant (Yüksek)", z: 1.6, d: 0.10 },
         { ad: "CS2 (Düşük)", z: 2.1, d: 0.12 }, { ad: "CS2 (Yüksek)", z: 1.3, d: 0.12 },
         { ad: "CS:GO (Düşük)", z: 2.8, d: 0.10 }, { ad: "CS:GO (Yüksek)", z: 1.9, d: 0.10 },
@@ -119,8 +118,21 @@ function hesapla() {
     let alt = Math.floor(temelFps * (1 - dalgalanma));
     let ust = Math.floor(temelFps * (1 + dalgalanma));
 
-    // Sonucu yazdır
-    document.getElementById("fps").innerText = alt + " - " + ust;
+    let fpsGosterge = document.getElementById("fps");
+    let etiket = document.getElementById("fps-etiket");
+
+    // GERÇEKÇİ KONTROL: Eğer üst sınır bile 30 FPS'in altındaysa "Kaldırmaz" uyarısı ver
+    if (ust < 30) {
+        fpsGosterge.innerText = "Bu Donanım Bu Oyunu Kaldırmaz!";
+        fpsGosterge.style.color = "#ff4444"; // Kırmızı uyarı
+        fpsGosterge.style.fontSize = "22px"; // Yazı sığsın diye küçültme
+        etiket.innerText = "Sistem Yetersiz";
+    } else {
+        fpsGosterge.innerText = alt + " - " + ust;
+        fpsGosterge.style.color = "#3fb950"; // Normal yeşil
+        fpsGosterge.style.fontSize = "40px"; // Normal boyut
+        etiket.innerText = "Tahmini FPS Aralığı";
+    }
 }
 window.onload = doldur;
 </script>
