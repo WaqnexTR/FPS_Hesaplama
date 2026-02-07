@@ -51,24 +51,29 @@ const veri = {
         { ad: "Radeon RX 9070 XT", p: 320 }, { ad: "RX 7900 XTX", p: 280 }, { ad: "RX 7900 XT", p: 240 }, { ad: "RX 7800 XT", p: 190 }, { ad: "RX 7700 XT", p: 165 }, { ad: "RX 7600 XT", p: 115 }, { ad: "RX 6800 XT", p: 160 }, { ad: "RX 6800", p: 145 }, { ad: "RX 6700 XT", p: 120 }, { ad: "RX 6600 XT", p: 95 }, { ad: "RX 6500 XT", p: 55 }
     ],
     islemciler: [
-        // --- INTEL 14. NESİL ---
-        { ad: "i9-14900K", p: 155 }, { ad: "i9-14900HX", p: 140 }, { ad: "i7-14700K", p: 135 }, { ad: "i7-14700HX", p: 120 }, { ad: "i5-14600K", p: 115 }, { ad: "i5-14500HX", p: 100 }, { ad: "i3-14100F", p: 75 },
-        // --- INTEL 13. NESİL ---
-        { ad: "i9-13900K", p: 145 }, { ad: "i9-13980HX", p: 142 }, { ad: "i7-13700K", p: 125 }, { ad: "i7-13700H", p: 105 }, { ad: "i5-13600K", p: 105 }, { ad: "i5-13500H", p: 85 }, { ad: "i3-13100F", p: 65 },
-        // --- INTEL 12. NESİL ---
-        { ad: "i9-12900K", p: 130 }, { ad: "i9-12900H", p: 115 }, { ad: "i7-12700K", p: 115 }, { ad: "i7-12700H", p: 95 }, { ad: "i5-12400F", p: 90 }, { ad: "i5-12500H", p: 75 }, { ad: "i3-12100F", p: 60 },
-        // --- INTEL 11. NESİL ---
-        { ad: "i9-11900K", p: 110 }, { ad: "i7-11700K", p: 100 }, { ad: "i7-11800H", p: 88 }, { ad: "i5-11400F", p: 80 }, { ad: "i5-11400H", p: 68 },
-        // --- INTEL 10. NESİL ---
-        { ad: "i9-10900K", p: 100 }, { ad: "i7-10750H", p: 78 }, { ad: "i5-10300H", p: 60 }, { ad: "i3-10100F", p: 50 },
-        // --- INTEL 9. NESİL ---
-        { ad: "i9-9900K", p: 85 }, { ad: "i7-9750H", p: 68 }, { ad: "i5-9300H", p: 52 }, { ad: "i3-9100F", p: 40 },
-        // --- INTEL 8. NESİL ---
-        { ad: "i7-8750H", p: 60 }, { ad: "i5-8300H", p: 45 }, { ad: "i3-8100", p: 35 },
+        // --- CORE i3 SERİSİ (8'den 14'e) ---
+        { ad: "i3-8100", p: 35 }, { ad: "i3-9100F", p: 40 }, { ad: "i3-10100F", p: 50 }, { ad: "i3-10300H", p: 55 }, 
+        { ad: "i3-1115G4", p: 58 }, { ad: "i3-12100F", p: 65 }, { ad: "i3-13100F", p: 70 }, { ad: "i3-14100F", p: 75 },
+
+        // --- CORE i5 SERİSİ (8'den 14'e) ---
+        { ad: "i5-8400", p: 50 }, { ad: "i5-8300H", p: 48 }, { ad: "i5-9400F", p: 60 }, { ad: "i5-9300H", p: 55 },
+        { ad: "i5-10400F", p: 70 }, { ad: "i5-10300H", p: 65 }, { ad: "i5-11400F", p: 80 }, { ad: "i5-11400H", p: 75 },
+        { ad: "i5-12400F", p: 90 }, { ad: "i5-12500H", p: 85 }, { ad: "i5-13600K", p: 105 }, { ad: "i5-13500H", p: 95 },
+        { ad: "i5-14600K", p: 115 }, { ad: "i5-14500HX", p: 105 },
+
+        // --- CORE i7 SERİSİ (8'den 14'e) ---
+        { ad: "i7-8700K", p: 65 }, { ad: "i7-8750H", p: 62 }, { ad: "i7-9700K", p: 75 }, { ad: "i7-9750H", p: 70 },
+        { ad: "i7-10700K", p: 90 }, { ad: "i7-10750H", p: 82 }, { ad: "i7-11700K", p: 100 }, { ad: "i7-11800H", p: 92 },
+        { ad: "i7-12700K", p: 115 }, { ad: "i7-12700H", p: 105 }, { ad: "i7-13700K", p: 125 }, { ad: "i7-13700HX", p: 118 },
+        { ad: "i7-14700K", p: 135 }, { ad: "i7-14700HX", p: 128 },
+
+        // --- CORE i9 SERİSİ (9'dan 14'e) ---
+        { ad: "i9-9900K", p: 85 }, { ad: "i9-9980HK", p: 80 }, { ad: "i9-10900K", p: 100 }, { ad: "i9-10885H", p: 92 },
+        { ad: "i9-11900K", p: 110 }, { ad: "i9-11980HK", p: 105 }, { ad: "i9-12900K", p: 130 }, { ad: "i9-12900HX", p: 122 },
+        { ad: "i9-13900K", p: 145 }, { ad: "i9-13980HX", p: 140 }, { ad: "i9-14900K", p: 155 }, { ad: "i9-14900HX", p: 148 },
 
         // --- AMD RYZEN LİSTESİ ---
-        { ad: "Ryzen 3 1200", p: 30 }, { ad: "Ryzen 3 3100", p: 45 }, { ad: "Ryzen 5 1600", p: 50 }, { ad: "Ryzen 5 3600", p: 85 }, { ad: "Ryzen 5 5600X", p: 110 }, { ad: "Ryzen 5 7600X", p: 135 },
-        { ad: "Ryzen 7 3700X", p: 100 }, { ad: "Ryzen 7 5800X", p: 125 }, { ad: "Ryzen 7 7700X", p: 145 }, { ad: "Ryzen 9 3900X", p: 120 }, { ad: "Ryzen 9 5900X", p: 140 }, { ad: "Ryzen 9 7950X", p: 175 }
+        { ad: "Ryzen 3 3100", p: 45 }, { ad: "Ryzen 5 3600", p: 85 }, { ad: "Ryzen 5 5600X", p: 110 }, { ad: "Ryzen 7 5800X", p: 125 }, { ad: "Ryzen 9 5900X", p: 140 }, { ad: "Ryzen 9 7950X", p: 175 }
     ],
     ramler: [
         { ad: "2 GB RAM", c: 0.35 }, { ad: "4 GB RAM", c: 0.5 }, { ad: "8 GB RAM", c: 0.75 }, { ad: "12 GB RAM", c: 0.85 },
@@ -89,6 +94,7 @@ const veri = {
 
 function doldur() {
     const g = document.getElementById("gpu"), c = document.getElementById("cpu"), r = document.getElementById("ram"), o = document.getElementById("oyun");
+    g.innerHTML = ""; c.innerHTML = ""; r.innerHTML = ""; o.innerHTML = ""; // İçini temizle
     veri.ekranKartlari.forEach(x => g.innerHTML += `<option value="${x.p}">${x.ad}</option>`);
     veri.islemciler.forEach(x => c.innerHTML += `<option value="${x.p}">${x.ad}</option>`);
     veri.ramler.forEach(x => r.innerHTML += `<option value="${x.c}">${x.ad}</option>`);
