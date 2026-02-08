@@ -88,7 +88,7 @@ font-weight: bold;
 <select id="cpu"></select>
 <label>RAM (BELLEK)</label>
 <select id="ram"></select>
-<label>Ekran Çözününürlüğü </label>
+<label>Ekran Çözününürlüğü (GÖRÜNTÜ KALİTESİ)</label>
 <select id="cozunurluk"></select>
 <label>OYUN VE AYAR SEÇİMİ</label>
 <select id="oyun"></select>
@@ -479,10 +479,12 @@ function doldur() {
 const g = document.getElementById("gpu"),
 c = document.getElementById("cpu"),
 r = document.getElementById("ram"),
+e = document.getElementById("cozunurluk"),
 o = document.getElementById("oyun");
 g.innerHTML = "";
 c.innerHTML = "";
 r.innerHTML = "";
+e.innerHTML = "";
 o.innerHTML = "";
 veri.ekranKartlari.forEach(x =>
 g.innerHTML += `<option value="${x.p}">${x.ad}</option>`
@@ -493,6 +495,9 @@ c.innerHTML += `<option value="${x.p}">${x.ad}</option>`
 veri.ramler.forEach(x =>
 r.innerHTML += `<option value="${x.c}">${x.ad}</option>`
 );
+veri.cozunurlukler.forEach(x =>
+e.innerHTML += `<option value="${x.c}">${x.ad}</option>`
+);
 veri.oyunlar.forEach((x, index) =>
 o.innerHTML += `<option value="${index}">${x.ad}</option>`
 );
@@ -501,6 +506,7 @@ function hesapla() {
 let gp = parseFloat(document.getElementById("gpu").value);
 let cp = parseFloat(document.getElementById("cpu").value);
 let rm = parseFloat(document.getElementById("ram").value);
+let cz = parseFloat(document.getElementById("cozunurluk").value);
 let oyunIndex = document.getElementById("oyun").value;
 let oyunVerisi = veri.oyunlar[oyunIndex];
 let oy = oyunVerisi.z;
@@ -533,4 +539,3 @@ window.onload = doldur;
 </script>
 </body>
 </html>
-
