@@ -503,37 +503,41 @@ o.innerHTML += `<option value="${index}">${x.ad}</option>`
 );
 }
 function hesapla() {
-let gp = parseFloat(document.getElementById("gpu").value);
-let cp = parseFloat(document.getElementById("cpu").value);
-let rm = parseFloat(document.getElementById("ram").value);
-let cz = parseFloat(document.getElementById("cozunurluk").value);
-let oyunIndex = document.getElementById("oyun").value;
-let oyunVerisi = veri.oyunlar[oyunIndex];
-let oy = oyunVerisi.z;
-let dalgalanma = oyunVerisi.d;
-// Temel hesaplama
-let temelFps = ((gp * 0.70) + (cp * 0.60)) * rm * oy (cz * 0.15);
-// Aralığı belirleme (Alt sınır ve Üst sınır)
-let alt = Math.floor(temelFps * (1 - dalgalanma));
-let ust = Math.floor(temelFps * (1 + dalgalanma));
-let fpsGosterge = document.getElementById("fps");
-let etiket = document.getElementById("fps-etiket");
-// GERÇEKÇİ KONTROL: Eğer üst sınır bile 30 FPS'in altındaysa "Kaldırmaz" uyarısı ver
-if (ust < 30) {
-fpsGosterge.innerText = "Bu Donanım Bu Oyunu Kaldırmaz!";
-fpsGosterge.style.color = "#ff4444";
-// Kırmızı uyarı
-fpsGosterge.style.fontSize = "22px";
-// Yazı sığsın diye küçültme
-etiket.innerText = "Sistem Yetersiz";
-} else {
-fpsGosterge.innerText = alt + " - " + ust;
-fpsGosterge.style.color = "#3fb950";
-// Normal yeşil
-fpsGosterge.style.fontSize = "40px";
-// Normal boyut
-etiket.innerText = "Tahmini FPS Aralığı";
-}
+    // Değerleri alıyoruz
+    let gp = parseFloat(document.getElementById("gpu").value);
+    let cp = parseFloat(document.getElementById("cpu").value);
+    let rm = parseFloat(document.getElementById("ram").value);
+    let cz = parseFloat(document.getElementById("cozunurluk").value);
+    let oyunIndex = document.getElementById("oyun").value;
+    
+    // Veriyi çekiyoruz
+    let oyunVerisi = veri.oyunlar[oyunIndex];
+    let oy = oyunVerisi.z;
+    let dalgalanma = oyunVerisi.d;
+
+    // HATAYI BURADA DÜZELTTİK: 
+    // Aradaki çarpma işaretini (*) ve Math.pow komutunu ekledik.
+    let czCarpani = Math.pow(cz / 15, 0.75); 
+    let temelFps = ((gp * 0.70) + (cp * 0.60)) * rm * oy * czCarpani;
+
+    // Aralığı hesaplıyoruz
+    let alt = Math.floor(temelFps * (1 - dalgalanma));
+    let ust = Math.floor(temelFps * (1 + dalgalanma));
+
+    let fpsGosterge = document.getElementById("fps");
+    let etiket = document.getElementById("fps-etiket");
+
+    if (ust < 30) {
+        fpsGosterge.innerText = "Kaldırmaz!";
+        fpsGosterge.style.color = "#ff4444";
+        fpsGosterge.style.fontSize = "30px";
+        etiket.innerText = "Sistem Yetersiz";
+    } else {
+        fpsGosterge.innerText = alt + " - " + ust;
+        fpsGosterge.style.color = "#3fb950";
+        fpsGosterge.style.fontSize = "40px";
+        etiket.innerText = "Tahmini FPS Aralığı";
+    }
 }
 window.onload = doldur;
 </script>
