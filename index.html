@@ -480,7 +480,7 @@ let oyunVerisi = veri.oyunlar[oyunIndex];
 let oy = oyunVerisi.z;
 let dalgalanma = oyunVerisi.d;
 // Temel hesaplama
-let temelFps = ((gp * 0.70) + (cp * 0.65)) * rm * oy;
+let temelFps = ((gp * 0.70) + (cp * 0.60)) * rm * oy;
 // Aralığı belirleme (Alt sınır ve Üst sınır)
 let alt = Math.floor(temelFps * (1 - dalgalanma));
 let ust = Math.floor(temelFps * (1 + dalgalanma));
