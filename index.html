@@ -512,14 +512,14 @@ let oyunVerisi = veri.oyunlar[oyunIndex];
 let oy = oyunVerisi.z;
 let dalgalanma = oyunVerisi.d;
 // Temel hesaplama
-let temelFps = ((gp * 0.70) + (cp * 0.60)) * rm * oy (cz / 15, 0,75);
+let temelFps = ((gp * 0.70) + (cp * 0.60)) * rm * oy (cz / 15,0.75);
 // Aralığı belirleme (Alt sınır ve Üst sınır)
 let alt = Math.floor(temelFps * (1 - dalgalanma));
 let ust = Math.floor(temelFps * (1 + dalgalanma));
 let fpsGosterge = document.getElementById("fps");
 let etiket = document.getElementById("fps-etiket");
-// GERÇEKÇİ KONTROL: Eğer üst sınır bile 20 FPS'in altındaysa "Kaldırmaz" uyarısı ver
-if (ust < 20) {
+// GERÇEKÇİ KONTROL: Eğer üst sınır bile 30 FPS'in altındaysa "Kaldırmaz" uyarısı ver
+if (ust < 30) {
 fpsGosterge.innerText = "Bu Donanım Bu Oyunu Kaldırmaz!";
 fpsGosterge.style.color = "#ff4444";
 // Kırmızı uyarı
