@@ -2,7 +2,7 @@
   "name": "waqofps",
   "short_name": "waqofps",
   "start_url": "index.html",
-  "display": "browser",
+  "display": "standalone",
   "icons": [
     {
       "src": "favicon.png",
