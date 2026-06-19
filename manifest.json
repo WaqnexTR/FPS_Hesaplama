@@ -1,6 +1,6 @@
 {
-  "name": "Ahmet FPS Predictor Pro",
-  "short_name": "FPS Pro",
+  "name": "waqofps",
+  "short_name": "waqofps",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [
