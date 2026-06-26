@@ -141,14 +141,14 @@ body.light-mode .result-box {
 }
         /* Ana Kutu (FPS Analiz Merkezi) - Gece Modu */
 .container {
-    background-color: #000000 !important; /* Tam siyah/koyu gri */
+    background-color: #000000; /* Tam siyah/koyu gri */
     border: 1px solid #30363d;
     color: #ffffff;
 }
 
 /* FPS Sonuç Kutusu - Gece Modu */
 .result-box {
-    background-color: #000000 !important; /* Burayı tam siyah yaptık */
+    background-color: #000000; /* Burayı tam siyah yaptık */
     border: 1px solid #30363d;
     color: #ffffff;
 }
@@ -163,7 +163,12 @@ body.light-mode {
     background-color: #f0f0f0;
 }
         body.light-mode .container {
-    background-color: #ffffff !important; /* Gündüz modunda beyaz olsun */
+    background-color: #ffffff; /* Gündüz modunda beyaz olsun */
+}
+        body.light-mode .result-box {
+    background-color: #f6f8fa !important; /* Gündüz için açık bir renk */
+    color: #000 !important; /* Yazıları siyah yap */
+    border: 1px solid #d0d7de;
 }
     </style>
 </head>
