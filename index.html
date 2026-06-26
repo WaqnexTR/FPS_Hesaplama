@@ -125,6 +125,20 @@ body.light-mode #theme-toggle {
     background-color: #000000;
     color: #ffffff;
 }
+        /* FPS Kutusu - Gece Modu (Varsayılan) */
+.result-box {
+    background-color: #1a1a1a; 
+    color: #00ff00; /* FPS değeri için yeşil tonu */
+    border: 1px solid #333;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* FPS Kutusu - Aydınlık Mod */
+body.light-mode .result-box {
+    background-color: #eeeeee; /* Açık gri */
+    color: #000000;            /* Siyah yazı */
+    border: 1px solid #cccccc;
+}
     </style>
 </head>
 <body>
