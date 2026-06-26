@@ -81,9 +81,40 @@
             display: block;
             font-weight: bold;
         }
+        /* Mod Değiştir Butonu */
+#theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background: #58a6ff;
+    border: none;
+    border-radius: 6px;
+    color: #0d1117;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 9999;
+}
+
+/* Aydınlık Mod Sınıfı */
+body.light-mode {
+    background: #f0f2f5;
+    color: #000;
+}
+body.light-mode .container {
+    background: #ffffff;
+    border: 1px solid #d0d7de;
+}
+body.light-mode select {
+    background: #f6f8fa;
+    border: 1px solid #d0d7de;
+    color: #000;
+}
+body.light-mode label { color: #57606a; }
     </style>
 </head>
 <body>
+    <button id="theme-toggle">Gündüz/Gece</button>
     <div class="container">
         <h2>FPS ANALİZ MERKEZİ</h2>
         <label>EKRAN KARTI (GPU)</label>
@@ -108,8 +139,8 @@
 const veri = {
 ekranKartlari: [
 { ad: "NVIDIA RTX 5090 (Masaüstü)", p: 380 },
-{ ad: "NVIDIA RTX 5090 (Laptop 140W)", p: 360 },
-{ ad: "NVIDIA RTX 5090 (Laptop 115W)", p: 345 },
+{ ad: "NVIDIA RTX 5090 (Laptop 140W)", p: 354 },
+{ ad: "NVIDIA RTX 5090 (Laptop 115W)", p: 342 },
 { ad: "NVIDIA RTX 5080 (Masaüstü)", p: 357 },
 { ad: "NVIDIA RTX 5080 (Laptop 140W)", p: 337 },
 { ad: "NVIDIA RTX 5080 (Laptop 115W)", p: 327 },
@@ -674,6 +705,9 @@ function hesapla() {
         etiket.innerText = "Tahmini FPS Aralığı";
     }
 }
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+    document.body.classList.toggle("light-mode");
+});
 window.onload = doldur;
 </script>
 </body>
