@@ -113,10 +113,22 @@ body.light-mode select {
     color: #000;
 }
 body.light-mode label { color: #57606a; }
+        /* Butonun varsayılan (Gece Modu) hali */
+#theme-toggle {
+    background-color: #ffffff;
+    color: #000000;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Butonun Gündüz Modu hali */
+body.light-mode #theme-toggle {
+    background-color: #000000;
+    color: #ffffff;
+}
     </style>
 </head>
 <body>
-    <button id="theme-toggle">Gündüz/Gece</button>
+    <button id="theme-toggle">Dark/Light</button>
     <div class="container">
         <h2>FPS ANALİZ MERKEZİ</h2>
         <label>EKRAN KARTI (GPU)</label>
