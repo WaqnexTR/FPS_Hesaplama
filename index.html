@@ -285,78 +285,82 @@
 
         <!-- İçindekiler Kutusu -->
         <div class="toc-box">
-            <h3>İçindekiler</h3>
+            <h3 id="txt-toc-title">İçindekiler</h3>
             <ul>
-                <li><a href="#fps-nedir">1. FPS Nedir?</a></li>
-                <li><a href="#fps-hesaplama">2. Oyun FPS Hesaplama Nasıl Yapılır?</a></li>
-                <li><a href="#fps-arttirma">3. FPS Arttırma Yöntemleri</a></li>
-                <li><a href="#sik-sorulan-sorular">4. Sık Sorulan Sorular</a></li>
+                <li><a href="#fps-nedir" id="txt-toc-1">1. FPS Nedir?</a></li>
+                <li><a href="#fps-hesaplama" id="txt-toc-2">2. Oyun FPS Hesaplama Nasıl Yapılır?</a></li>
+                <li><a href="#fps-arttirma" id="txt-toc-3">3. FPS Arttırma Yöntemleri</a></li>
+                <li><a href="#sik-sorulan-sorular" id="txt-toc-4">4. Sık Sorulan Sorular</a></li>
             </ul>
         </div>
 
         <!-- Bölüm 1: FPS Nedir? -->
         <div id="fps-nedir" class="content-section">
-            <h3>FPS Nedir?</h3>
-            <p>FPS, İngilizce <strong>Frames Per Second</strong> kelimesinin kısaltmasıdır. Türkçesi saniyedeki kare sayısıdır[cite: 2]. Oyunlarda ne kadar yüksek FPS alırsanız görüntü o kadar akıcı olur[cite: 2].</p>
+            <h3 id="txt-sec1-title">FPS Nedir?</h3>
+            <p id="txt-sec1-desc">FPS, İngilizce <strong>Frames Per Second</strong> kelimesinin kısaltmasıdır. Türkçesi saniyedeki kare sayısıdır. Oyunlarda ne kadar yüksek FPS alırsanız görüntü o kadar akıcı olur.</p>
             <table class="fps-table">
-                <tr>
-                    <th>FPS Değeri</th>
-                    <th>Oyun Deneyimi</th>
-                </tr>
-                <tr>
-                    <td>30 FPS</td>
-                    <td>Oynanabilir[cite: 2]</td>
-                </tr>
-                <tr>
-                    <td>60 FPS</td>
-                    <td>Akıcı[cite: 2]</td>
-                </tr>
-                <tr>
-                    <td>120 FPS</td>
-                    <td>Çok Akıcı[cite: 2]</td>
-                </tr>
-                <tr>
-                    <td>144+ FPS</td>
-                    <td>Rekabetçi Oyuncular İçin İdeal[cite: 2]</td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th id="txt-th-fps">FPS Değeri</th>
+                        <th id="txt-th-exp">Oyun Deneyimi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>30 FPS</td>
+                        <td id="txt-t1">Oynanabilir</td>
+                    </tr>
+                    <tr>
+                        <td>60 FPS</td>
+                        <td id="txt-t2">Akıcı</td>
+                    </tr>
+                    <tr>
+                        <td>120 FPS</td>
+                        <td id="txt-t3">Çok Akıcı</td>
+                    </tr>
+                    <tr>
+                        <td>144+ FPS</td>
+                        <td id="txt-t4">Rekabetçi Oyuncular İçin İdeal</td>
+                    </tr>
+                </tbody>
             </table>
         </div>
 
         <!-- Bölüm 2: Oyun FPS Hesaplama Nasıl Yapılır? -->
         <div id="fps-hesaplama" class="content-section">
-            <h3>Oyun FPS Hesaplama Nasıl Yapılır?</h3>
-            <p>FPS değeri aşağıdaki donanımlara göre değişir[cite: 3]:</p>
+            <h3 id="txt-sec2-title">Oyun FPS Hesaplama Nasıl Yapılır?</h3>
+            <p id="txt-sec2-desc">FPS değeri aşağıdaki donanımlara göre değişir:</p>
             <ul>
-                <li><strong>Ekran Kartı (GPU):</strong> Grafik işlemlerini yürütür.</li>
-                <li><strong>İşlemci (CPU):</strong> Oyun içindeki hesaplamaları yapar.</li>
-                <li><strong>RAM:</strong> Anlık verileri saklar.</li>
-                <li><strong>Çözünürlük:</strong> Görüntü kalitesi arttıkça yük biner.</li>
+                <li id="txt-li-gpu"><strong>Ekran Kartı (GPU):</strong> Grafik işlemlerini yürütür.</li>
+                <li id="txt-li-cpu"><strong>İşlemci (CPU):</strong> Oyun içindeki hesaplamaları yapar.</li>
+                <li id="txt-li-ram"><strong>RAM:</strong> Anlık verileri saklar.</li>
+                <li id="txt-li-res"><strong>Çözünürlük:</strong> Görüntü kalitesi arttıkça yük biner.</li>
             </ul>
         </div>
 
         <!-- Bölüm 3: FPS Arttırma Yöntemleri -->
         <div id="fps-arttirma" class="content-section">
-            <h3>FPS Arttırma Yöntemleri</h3>
-            <p>Daha fazla FPS almak için şunları yapabilirsiniz[cite: 3]:</p>
+            <h3 id="txt-sec3-title">FPS Arttırma Yöntemleri</h3>
+            <p id="txt-sec3-desc">Daha fazla FPS almak için şunları yapabilirsiniz:</p>
             <ul>
-                <li>Grafik ayarlarını düşürün[cite: 3]</li>
-                <li>Güncel ekran kartı sürücüsü kurun[cite: 3]</li>
-                <li>Arka planda çalışan programları kapatın[cite: 3]</li>
-                <li>SSD kullanın[cite: 3]</li>
-                <li>RAM yükseltin[cite: 3]</li>
-                <li>Performans modunu açın[cite: 3]</li>
+                <li id="txt-boost-1">Grafik ayarlarını düşürün</li>
+                <li id="txt-boost-2">Güncel ekran kartı sürücüsü kurun</li>
+                <li id="txt-boost-3">Arka planda çalışan programları kapatın</li>
+                <li id="txt-boost-4">SSD kullanın</li>
+                <li id="txt-boost-5">RAM yükseltin</li>
+                <li id="txt-boost-6">Performans modunu açın</li>
             </ul>
         </div>
 
         <!-- Bölüm 4: Sık Sorulan Sorular -->
         <div id="sik-sorulan-sorular" class="content-section">
-            <h3>Sık Sorulan Sorular</h3>
-            <p><strong>FPS Hesaplama Aracı Gerçek Sonuç Verir mi?</strong><br>
-            Araç, donanım özelliklerinize ve oyun motoru çarpanlarına bağlı olarak gerçeğe en yakın tahmini performans aralığını sunar.</p>
-            <p><strong>60 FPS Yeterli mi?</strong><br>
-            Günlük oyun deneyimleri ve hikayeli oyunlar için 60 FPS oldukça yeterli ve akıcıdır.</p>
-            <p><strong>144 FPS Gerekli mi?</strong><br>
-            Counter-Strike 2, Valorant gibi rekabetçi nişancı oyunlarında yüksek yenileme hızına sahip monitörler için önerilir.</p>
+            <h3 id="txt-sec4-title">Sık Sorulan Sorular</h3>
+            <p><strong id="txt-q1">FPS Hesaplama Aracı Gerçek Sonuç Verir mi?</strong><br>
+            <span id="txt-a1">Araç, donanım özelliklerinize ve oyun motoru çarpanlarına bağlı olarak gerçeğe en yakın tahmini performans aralığını sunar.</span></p>
+            <p><strong id="txt-q2">60 FPS Yeterli mi?</strong><br>
+            <span id="txt-a2">Günlük oyun deneyimleri ve hikayeli oyunlar için 60 FPS oldukça yeterli ve akıcıdır.</span></p>
+            <p><strong id="txt-q3">144 FPS Gerekli mi?</strong><br>
+            <span id="txt-a3">Counter-Strike 2, Valorant gibi rekabetçi nişancı oyunlarında yüksek yenileme hızına sahip monitörler için önerilir.</span></p>
         </div>
     </div>
 
@@ -373,7 +377,41 @@ const metinler = {
         btnHesapla: "PERFORMANSI TEST ET",
         fpsEtiket: "Tahmini FPS Aralığı",
         yetersizEtiket: "Sistem Yetersiz",
-        kaldirmaz: "Kaldırmaz!"
+        kaldirmaz: "Kaldırmaz!",
+        tocTitle: "İçindekiler",
+        toc1: "1. FPS Nedir?",
+        toc2: "2. Oyun FPS Hesaplama Nasıl Yapılır?",
+        toc3: "3. FPS Arttırma Yöntemleri",
+        toc4: "4. Sık Sorulan Sorular",
+        sec1Title: "FPS Nedir?",
+        sec1Desc: "FPS, İngilizce <strong>Frames Per Second</strong> kelimesinin kısaltmasıdır. Türkçesi saniyedeki kare sayısıdır. Oyunlarda ne kadar yüksek FPS alırsanız görüntü o kadar akıcı olur.",
+        thFps: "FPS Değeri",
+        thExp: "Oyun Deneyimi",
+        t1: "Oynanabilir",
+        t2: "Akıcı",
+        t3: "Çok Akıcı",
+        t4: "Rekabetçi Oyuncular İçin İdeal",
+        sec2Title: "Oyun FPS Hesaplama Nasıl Yapılır?",
+        sec2Desc: "FPS değeri aşağıdaki donanımlara göre değişir:",
+        liGpu: "<strong>Ekran Kartı (GPU):</strong> Grafik işlemlerini yürütür.",
+        liCpu: "<strong>İşlemci (CPU):</strong> Oyun içindeki hesaplamaları yapar.",
+        liRam: "<strong>RAM:</strong> Anlık verileri saklar.",
+        liRes: "<strong>Çözünürlük:</strong> Görüntü kalitesi arttıkça yük biner.",
+        sec3Title: "FPS Arttırma Yöntemleri",
+        sec3Desc: "Daha fazla FPS almak için şunları yapabilirsiniz:",
+        boost1: "Grafik ayarlarını düşürün",
+        boost2: "Güncel ekran kartı sürücüsü kurun",
+        boost3: "Arka planda çalışan programları kapatın",
+        boost4: "SSD kullanın",
+        boost5: "RAM yükseltin",
+        boost6: "Performans modunu açın",
+        sec4Title: "Sık Sorulan Sorular",
+        q1: "FPS Hesaplama Aracı Gerçek Sonuç Verir mi?",
+        a1: "Araç, donanım özelliklerinize ve oyun motoru çarpanlarına bağlı olarak gerçeğe en yakın tahmini performans aralığını sunar.",
+        q2: "60 FPS Yeterli mi?",
+        a2: "Günlük oyun deneyimleri ve hikayeli oyunlar için 60 FPS oldukça yeterli ve akıcıdır.",
+        q3: "144 FPS Gerekli mi?",
+        a3: "Counter-Strike 2, Valorant gibi rekabetçi nişancı oyunlarında yüksek yenileme hızına sahip monitörler için önerilir."
     },
     en: {
         baslik: "FPS ANALYSIS CENTER",
@@ -385,7 +423,41 @@ const metinler = {
         btnHesapla: "TEST PERFORMANCE",
         fpsEtiket: "Estimated FPS Range",
         yetersizEtiket: "System Insufficient",
-        kaldirmaz: "Can't Run!"
+        kaldirmaz: "Can't Run!",
+        tocTitle: "Table of Contents",
+        toc1: "1. What is FPS?",
+        toc2: "2. How to Calculate Game FPS?",
+        toc3: "3. Methods to Increase FPS",
+        toc4: "4. Frequently Asked Questions",
+        sec1Title: "What is FPS?",
+        sec1Desc: "FPS stands for <strong>Frames Per Second</strong>. It is the number of frames rendered each second. The higher the FPS in games, the smoother the motion appears.",
+        thFps: "FPS Value",
+        thExp: "Gaming Experience",
+        t1: "Playable",
+        t2: "Smooth",
+        t3: "Very Smooth",
+        t4: "Ideal for Competitive Gamers",
+        sec2Title: "How to Calculate Game FPS?",
+        sec2Desc: "FPS values vary depending on the following hardware components:",
+        liGpu: "<strong>Graphics Card (GPU):</strong> Handles graphical processing.",
+        liCpu: "<strong>Processor (CPU):</strong> Handles in-game calculations.",
+        liRam: "<strong>RAM:</strong> Stores temporary data.",
+        liRes: "<strong>Resolution:</strong> Higher image quality increases load.",
+        sec3Title: "Methods to Increase FPS",
+        sec3Desc: "You can do the following to get more FPS:",
+        boost1: "Lower graphic settings",
+        boost2: "Install up-to-date GPU drivers",
+        boost3: "Close background running applications",
+        boost4: "Use an SSD",
+        boost5: "Upgrade RAM",
+        boost6: "Enable performance mode",
+        sec4Title: "Frequently Asked Questions",
+        q1: "Does the FPS Calculator Give Accurate Results?",
+        a1: "The tool provides the closest estimated performance range based on your hardware specifications and game engine multipliers.",
+        q2: "Is 60 FPS Enough?",
+        a2: "For casual gaming experiences and story-driven games, 60 FPS is quite sufficient and smooth.",
+        q3: "Is 144 FPS Necessary?",
+        a3: "It is recommended for high refresh rate monitors in competitive shooter games like Counter-Strike 2 and Valorant."
     }
 };
 
@@ -941,7 +1013,7 @@ function dilDegistir() {
     aktifDil = (aktifDil === "tr") ? "en" : "tr";
     document.getElementById("lang-toggle").innerText = (aktifDil === "tr") ? "EN" : "TR";
     
-    // Arayüz etiketlerini güncelle
+    // Arayüz ve yeni eklenen metin etiketlerini güncelle
     document.getElementById("txt-baslik").innerText = metinler[aktifDil].baslik;
     document.getElementById("txt-lbl-gpu").innerText = metinler[aktifDil].lblGpu;
     document.getElementById("txt-lbl-cpu").innerText = metinler[aktifDil].lblCpu;
@@ -949,6 +1021,46 @@ function dilDegistir() {
     document.getElementById("txt-lbl-coz").innerText = metinler[aktifDil].lblCoz;
     document.getElementById("txt-lbl-oyun").innerText = metinler[aktifDil].lblOyun;
     document.getElementById("txt-btn-hesapla").innerText = metinler[aktifDil].btnHesapla;
+
+    // İçindekiler ve Açıklama Alanları Dil Güncellemesi
+    document.getElementById("txt-toc-title").innerText = metinler[aktifDil].tocTitle;
+    document.getElementById("txt-toc-1").innerText = metinler[aktifDil].toc1;
+    document.getElementById("txt-toc-2").innerText = metinler[aktifDil].toc2;
+    document.getElementById("txt-toc-3").innerText = metinler[aktifDil].toc3;
+    document.getElementById("txt-toc-4").innerText = metinler[aktifDil].toc4;
+
+    document.getElementById("txt-sec1-title").innerText = metinler[aktifDil].sec1Title;
+    document.getElementById("txt-sec1-desc").innerHTML = metinler[aktifDil].sec1Desc;
+    document.getElementById("txt-th-fps").innerText = metinler[aktifDil].thFps;
+    document.getElementById("txt-th-exp").innerText = metinler[aktifDil].thExp;
+    document.getElementById("txt-t1").innerText = metinler[aktifDil].t1;
+    document.getElementById("txt-t2").innerText = metinler[aktifDil].t2;
+    document.getElementById("txt-t3").innerText = metinler[aktifDil].t3;
+    document.getElementById("txt-t4").innerText = metinler[aktifDil].t4;
+
+    document.getElementById("txt-sec2-title").innerText = metinler[aktifDil].sec2Title;
+    document.getElementById("txt-sec2-desc").innerText = metinler[aktifDil].sec2Desc;
+    document.getElementById("txt-li-gpu").innerHTML = metinler[aktifDil].liGpu;
+    document.getElementById("txt-li-cpu").innerHTML = metinler[aktifDil].liCpu;
+    document.getElementById("txt-li-ram").innerHTML = metinler[aktifDil].liRam;
+    document.getElementById("txt-li-res").innerHTML = metinler[aktifDil].liRes;
+
+    document.getElementById("txt-sec3-title").innerText = metinler[aktifDil].sec3Title;
+    document.getElementById("txt-sec3-desc").innerText = metinler[aktifDil].sec3Desc;
+    document.getElementById("txt-boost-1").innerText = metinler[aktifDil].boost1;
+    document.getElementById("txt-boost-2").innerText = metinler[aktifDil].boost2;
+    document.getElementById("txt-boost-3").innerText = metinler[aktifDil].boost3;
+    document.getElementById("txt-boost-4").innerText = metinler[aktifDil].boost4;
+    document.getElementById("txt-boost-5").innerText = metinler[aktifDil].boost5;
+    document.getElementById("txt-boost-6").innerText = metinler[aktifDil].boost6;
+
+    document.getElementById("txt-sec4-title").innerText = metinler[aktifDil].sec4Title;
+    document.getElementById("txt-q1").innerText = metinler[aktifDil].q1;
+    document.getElementById("txt-a1").innerText = metinler[aktifDil].a1;
+    document.getElementById("txt-q2").innerText = metinler[aktifDil].q2;
+    document.getElementById("txt-a2").innerText = metinler[aktifDil].a2;
+    document.getElementById("txt-q3").innerText = metinler[aktifDil].q3;
+    document.getElementById("txt-a3").innerText = metinler[aktifDil].a3;
     
     // Seçim kutularındaki içerikleri seçilen dile göre yeniden doldur
     doldur();
