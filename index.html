@@ -131,6 +131,7 @@
             color: #58a6ff;
             text-decoration: none;
             font-size: 14px;
+            cursor: pointer;
         }
         .toc-box a:hover {
             text-decoration: underline;
@@ -373,10 +374,10 @@
         <div class="toc-box">
             <h3 id="txt-toc-title">İçindekiler</h3>
             <ul>
-                <li><a href="#fps-nedir" id="txt-toc-1">1. FPS Nedir?</a></li>
-                <li><a href="#fps-hesaplama" id="txt-toc-2">2. Oyun FPS Hesaplama Nasıl Yapılır?</a></li>
-                <li><a href="#fps-arttirma" id="txt-toc-3">3. FPS Arttırma Yöntemleri</a></li>
-                <li><a href="#sik-sorulan-sorular" id="txt-toc-4">4. Sık Sorulan Sorular</a></li>
+                <li><a onclick="tocGit('fps-nedir')" id="txt-toc-1">1. FPS Nedir?</a></li>
+                <li><a onclick="tocGit('fps-hesaplama')" id="txt-toc-2">2. Oyun FPS Hesaplama Nasıl Yapılır?</a></li>
+                <li><a onclick="tocGit('fps-arttirma')" id="txt-toc-3">3. FPS Arttırma Yöntemleri</a></li>
+                <li><a onclick="tocGit('sik-sorulan-sorular')" id="txt-toc-4">4. Sık Sorulan Sorular</a></li>
             </ul>
         </div>
 
@@ -526,7 +527,23 @@ function toggleAccordion(button) {
     }
 }
 
-// SSS İçi Akordiyon Fonksiyonu (Tıklamanın dış kutuyu kapatmasını önler)
+// İçindekilerden Tıklandığında Kutuyu Açıp Oraya Kaydırma Fonksiyonu
+function tocGit(id) {
+    const section = document.getElementById(id);
+    if (section) {
+        if (!section.classList.contains('active')) {
+            section.classList.add('active');
+            const span = section.querySelector('.accordion-header span:last-child');
+            if (span) span.innerText = '-';
+        }
+        // Kutunun animasyonunun başlamasına izin verip ardından kaydırıyoruz
+        setTimeout(() => {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 50);
+    }
+}
+
+// SSS İçi Akordiyon Fonksiyonu
 function toggleFaq(event, button) {
     event.stopPropagation();
     const item = button.parentElement;
