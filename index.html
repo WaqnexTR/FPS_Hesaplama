@@ -1071,7 +1071,7 @@ function dilDegistir() {
     if(fpsGosterge.innerText.includes("Kaldırmaz") || fpsGosterge.innerText.includes("Can't Run")) {
         etiket.innerText = metinler[aktifDil].yetersizEtiket;
         fpsGosterge.innerText = metinler[aktifDil].kaldirmaz;
-    } else if(fpsGosterge.innerText !== "0 - 0") {
+    } else {
         etiket.innerText = metinler[aktifDil].fpsEtiket;
     }
 }
@@ -1080,7 +1080,7 @@ function temaDegistir() {
     document.body.classList.toggle("light-mode");
     const temaButonu = document.getElementById("theme-toggle");
     if (document.body.classList.contains("light-mode")) {
-        temaButonu.innerText = "☀️";
+        temaButonu.innerText = "☀️️";
     } else {
         temaButonu.innerText = "🌙";
     }
