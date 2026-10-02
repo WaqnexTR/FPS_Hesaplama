@@ -341,7 +341,7 @@
             </div>
         </div>
 
-        <!-- İçindekiler Kutusu -->
+        <!-- İçindekiler Kutusu (Artık Diğerleriyle Aynı Akordiyon Yapısında) -->
         <div class="content-section">
             <button class="accordion-header" onclick="toggleAccordion(this)">
                 <span id="txt-toc-title">İçindekiler</span> <span>+</span>
@@ -356,7 +356,7 @@
             </div>
         </div>
 
-        <!-- Bölüm 1: FPS Nedir? -->
+        <!-- Bölüm 1: FPS Nedir? (Akordiyon) -->
         <div id="fps-nedir" class="content-section">
             <button class="accordion-header" onclick="toggleAccordion(this)">
                 <span id="txt-sec1-title">FPS Nedir?</span> <span>+</span>
@@ -392,7 +392,7 @@
             </div>
         </div>
 
-        <!-- Bölüm 2: Oyun FPS Hesaplama Nasıl Yapılır? -->
+        <!-- Bölüm 2: Oyun FPS Hesaplama Nasıl Yapılır? (Akordiyon) -->
         <div id="fps-hesaplama" class="content-section">
             <button class="accordion-header" onclick="toggleAccordion(this)">
                 <span id="txt-sec2-title">Oyun FPS Hesaplama Nasıl Yapılır?</span> <span>+</span>
@@ -408,7 +408,7 @@
             </div>
         </div>
 
-        <!-- Bölüm 3: FPS Arttırma Yöntemleri -->
+        <!-- Bölüm 3: FPS Arttırma Yöntemleri (Akordiyon) -->
         <div id="fps-arttirma" class="content-section">
             <button class="accordion-header" onclick="toggleAccordion(this)">
                 <span id="txt-sec3-title">FPS Arttırma Yöntemleri</span> <span>+</span>
@@ -426,7 +426,7 @@
             </div>
         </div>
 
-        <!-- Bölüm 4: Sık Sorulan Sorular -->
+        <!-- Bölüm 4: Sık Sorulan Sorular (Akordiyon) -->
         <div id="sik-sorulan-sorular" class="content-section">
             <button class="accordion-header" onclick="toggleAccordion(this)">
                 <span id="txt-sec4-title">Sık Sorulan Sorular</span> <span>+</span>
@@ -1041,190 +1041,304 @@ oyunlar: [
 { adTr: "Minecraft (Düşük Shaders)", adEn: "Minecraft (Low Shaders)", z: 1.5, d: 0.25 },
 { adTr: "Minecraft (Yüksek Shaders)", adEn: "Minecraft (High Shaders)", z: 0.9, d: 0.25 },
 { adTr: "Forza Horizon 5 (Düşük)", adEn: "Forza Horizon 5 (Low)", z: 1.4, d: 0.15 },
-{ adTr: "Forza Horizon 5 (Yüksek)", id: "fh5-high", adEn: "Forza Horizon 5 (High)", z: 0.8, d: 0.15 },
+{ adTr: "Forza Horizon 5 (Yüksek)", adEn: "Forza Horizon 5 (High)", z: 0.8, d: 0.15 },
 { adTr: "Forza Horizon 5 (Ultra)", adEn: "Forza Horizon 5 (Ultra)", z: 0.55, d: 0.16 },
 { adTr: "Forza Horizon 6 (Düşük)", adEn: "Forza Horizon 6 (Low)", z: 1.10, d: 0.16 },
-{ adTr: "Forza Horizon 6 (Yüksek)", adEn: "Forza Horizon 6 (High)", z: 0.65, d: 0.16 }
-]
+{ adTr: "Forza Horizon 6 (Yüksek)", adEn: "Forza Horizon 6 (High)", z: 0.65, d: 0.16 },
+{ adTr: "Forza Horizon 6 (Ultra)", adEn: "Forza Horizon 6 (Ultra)", z: 0.42, d: 0.18 },
+{ adTr: "ETS 2 (Düşük)", adEn: "ETS 2 (Low)", z: 1.7, d: 0.15 },
+{ adTr: "ETS 2 (Orta)", adEn: "ETS 2 (Medium)", z: 1.36, d: 0.15 },
+{ adTr: "ETS 2 (Yüksek)", adEn: "ETS 2 (High)", z: 1.1, d: 0.15 },
+{ adTr: "GTA IV (Düşük)", adEn: "GTA IV (Low)", z: 1.80, d: 0.28 },
+{ adTr: "GTA IV (Yüksek)", adEn: "GTA IV (High)", z: 1.30, d: 0.32 },
+{ adTr: "GTA IV (Ultra)", adEn: "GTA IV (Ultra)", z: 0.95, d: 0.38 },
+{ adTr: "GTA V (Düşük)", adEn: "GTA V (Low)", z: 1.5, d: 0.18 },
+{ adTr: "GTA V (Yüksek)", adEn: "GTA V (High)", z: 0.9, d: 0.18 },
+{ adTr: "GTA V (Ultra)", adEn: "GTA V (Ultra)", z: 0.65, d: 0.18 },
+{ adTr: "RDR 2 (Düşük)", adEn: "RDR 2 (Low)", z: 0.90, d: 0.22 },
+{ adTr: "RDR 2 (Orta)", adEn: "RDR 2 (Medium)", z: 0.72, d: 0.22 }, 
+{ adTr: "RDR 2 (Yüksek)", adEn: "RDR 2 (High)", z: 0.54, d: 0.22 }, 
+{ adTr: "RDR 2 (Ultra)", adEn: "RDR 2 (Ultra)", z: 0.41, d: 0.22 }, 
+{ adTr: "God of War Ragnarök (Düşük)", adEn: "God of War Ragnarok (Low)", z: 0.8, d: 0.18 },
+{ adTr: "God of War Ragnarök (Orta)", adEn: "God of War Ragnarok (Medium)", z: 0.64, d: 0.18 }, 
+{ adTr: "God of War Ragnarök (Yüksek)", adEn: "God of War Ragnarok (High)", z: 0.5, d: 0.18 },
+{ adTr: "God of War Ragnarök (Ultra)", adEn: "God of War Ragnarok (Ultra)", z: 0.38, d: 0.18 },
+{ adTr: "ARK Survival Evolved (Düşük)", adEn: "ARK Survival Evolved (Low)", z: 0.8, d: 0.22 },
+{ adTr: "ARK Survival Evolved (Yüksek)", adEn: "ARK Survival Evolved (High)", z: 0.4, d: 0.22 },
+{ adTr: "DayZ (Düşük)", adEn: "DayZ (Low)", z: 1.0, d: 0.20 },
+{ adTr: "DayZ (Yüksek)", adEn: "DayZ (High)", z: 0.6, d: 0.20 },
+{ adTr: "Assassin’s Creed Valhalla (Düşük)", adEn: "Assassin’s Creed Valhalla (Low)", z: 0.8, d: 0.20 },
+{ adTr: "Assassin’s Creed Valhalla (Yüksek)", adEn: "Assassin’s Creed Valhalla (High)", z: 0.5, d: 0.20 },
+{ adTr: "Assassin’s Creed Mirage (Düşük)", adEn: "Assassin’s Creed Mirage (Low)", z: 1.1, d: 0.18 },
+{ adTr: "Assassin’s Creed Mirage (Yüksek)", adEn: "Assassin’s Creed Mirage (High)", z: 0.7, d: 0.18 },
+{ adTr: "Watch Dogs Legion (Düşük)", adEn: "Watch Dogs Legion (Low)", z: 0.7, d: 0.22 },
+{ adTr: "Watch Dogs Legion (Yüksek)", adEn: "Watch Dogs Legion (High)", z: 0.4, d: 0.22 },
+{ adTr: "Hogwarts Legacy (Düşük)", adEn: "Hogwarts Legacy (Low)", z: 0.9, d: 0.22 },
+{ adTr: "Hogwarts Legacy (Orta)", adEn: "Hogwarts Legacy (Medium)", z: 0.72, d: 0.22 }, 
+{ adTr: "Hogwarts Legacy (Yüksek)", adEn: "Hogwarts Legacy (High)", z: 0.5, d: 0.22 },
+{ adTr: "Hogwarts Legacy (Ultra)", adEn: "Hogwarts Legacy (Ultra)", z: 0.35, d: 0.22 },
+{ adTr: "Assetto Corsa (Düşük)", adEn: "Assetto Corsa (Low)", z: 1.8, d: 0.15 },
+{ adTr: "Assetto Corsa (Yüksek)", adEn: "Assetto Corsa (High)", z: 1.3, d: 0.15 },
+{ adTr: "Assetto Corsa Competizione (Düşük)", adEn: "Assetto Corsa Competizione (Low)", z: 1.0, d: 0.20 },
+{ adTr: "Assetto Corsa Competizione (Yüksek)", adEn: "Assetto Corsa Competizione (High)", z: 0.6, d: 0.20 },
+{ adTr: "Need for Speed Unbound (Düşük)", adEn: "Need for Speed Unbound (Low)", z: 1.1, d: 0.18 },
+{ adTr: "Need for Speed Unbound (Yüksek)", adEn: "Need for Speed Unbound (High)", z: 0.7, d: 0.18 },
+{ adTr: "Apex Legends (Düşük)", adEn: "Apex Legends (Low)", z: 1.6, d: 0.15 },
+{ adTr: "Apex Legends (Yüksek)", adEn: "Apex Legends (High)", z: 1.1, d: 0.15 },
+{ adTr: "Rainbow Six Siege (Düşük)", adEn: "Rainbow Six Siege (Low)", z: 1.8, d: 0.12 },
+{ adTr: "Rainbow Six Siege (Yüksek)", adEn: "Rainbow Six Siege (High)", z: 1.3, d: 0.12 },
+{ adTr: "Overwatch 2 (Düşük)", adEn: "Overwatch 2 (Low)", z: 1.7, d: 0.12 },
+{ adTr: "Overwatch 2 (Yüksek)", adEn: "Overwatch 2 (High)", z: 1.2, d: 0.12 },
+{ adTr: "The Last of Us Part I (Düşük)", adEn: "The Last of Us Part I (Low)", z: 0.8, d: 0.24 },
+{ adTr: "The Last of Us Part I (Yüksek)", adEn: "The Last of Us Part I (High)", z: 0.5, d: 0.24 },
+{ adTr: "The Last of Us Part I (Ultra)", adEn: "The Last of Us Part I (Ultra)", z: 0.34, d: 0.24 },
+{ adTr: "The Last of Us Part II (Düşük)", adEn: "The Last of Us Part II (Low)", z: 0.7, d: 0.26 },
+{ adTr: "The Last of Us Part II (Yüksek)", adEn: "The Last of Us Part II (High)", z: 0.45, d: 0.26 },
+{ adTr: "The Last of Us Part II (Ultra)", adEn: "The Last of Us Part II (Ultra)", z: 0.3, d: 0.26 },
+{ adTr: "Cyberpunk 2077 (Düşük)", adEn: "Cyberpunk 2077 (Low)", z: 0.70, d: 0.25 },
+{ adTr: "Cyberpunk 2077 (Orta)", adEn: "Cyberpunk 2077 (Medium)", z: 0.56, d: 0.25 }, 
+{ adTr: "Cyberpunk 2077 (Ultra)", adEn: "Cyberpunk 2077 (Ultra)", z: 0.31, d: 0.25 }, 
+{ adTr: "Uncharted: Hırsızlar Mirası Koleksiyonu (Düşük)", adEn: "Uncharted: Legacy of Thieves Collection (Low)", z: 1.25, d: 0.16 },
+{ adTr: "Uncharted: Hırsızlar Mirası Koleksiyonu (Yüksek)", adEn: "Uncharted: Legacy of Thieves Collection (High)", z: 0.85, d: 0.16 },
+{ adTr: "Uncharted: Hırsızlar Mirası Koleksiyonu (Ultra)", adEn: "Uncharted: Legacy of Thieves Collection (Ultra)", z: 0.60, d: 0.18 },
+{ adTr: "Dying Light 1 (Düşük)", adEn: "Dying Light 1 (Low)", z: 1.90, d: 0.10 },
+{ adTr: "Dying Light 1 (Yüksek)", adEn: "Dying Light 1 (High)", z: 1.50, d: 0.12 },
+{ adTr: "Dying Light 1 (Ultra)", adEn: "Dying Light 1 (Ultra)", z: 1.20, d: 0.14 },
+{ adTr: "Dying Light 2 (Düşük)", adEn: "Dying Light 2 (Low)", z: 1.10, d: 0.18 },
+{ adTr: "Dying Light 2 (Yüksek)", adEn: "Dying Light 2 (High)", z: 0.75, d: 0.18 },
+{ adTr: "Dying Light 2 (Ultra)", adEn: "Dying Light 2 (Ultra)", z: 0.55, d: 0.20 },
+{ adTr: "The Forest (Düşük)", adEn: "The Forest (Low)", z: 1.80, d: 0.12 },
+{ adTr: "The Forest (Yüksek)", adEn: "The Forest (High)", z: 1.30, d: 0.12 },
+{ adTr: "Sons Of The Forest (Düşük)", adEn: "Sons Of The Forest (Low)", z: 1.10, d: 0.18 },
+{ adTr: "Sons Of The Forest (Yüksek)", adEn: "Sons Of The Forest (High)", z: 0.75, d: 0.18 },
+{ adTr: "Sons Of The Forest (Ultra)", adEn: "Sons Of The Forest (Ultra)", z: 0.52, d: 0.20 },
+{ adTr: "Outlast 1 (Yüksek)", adEn: "Outlast 1 (High)", z: 2.40, d: 0.10 },
+{ adTr: "Outlast 2 (Yüksek)", adEn: "Outlast 2 (High)", z: 1.80, d: 0.12 },
+{ adTr: "The Outlast Trials (Düşük)", adEn: "The Outlast Trials (Low)", z: 1.40, d: 0.15 },
+{ adTr: "The Outlast Trials (Yüksek)", adEn: "The Outlast Trials (High)", z: 0.95, d: 0.15 },
+{ adTr: "The Outlast Trials (Ultra)", adEn: "The Outlast Trials (Ultra)", z: 0.70, d: 0.16 },
+{ adTr: "NBA 2K23 (Düşük)", adEn: "NBA 2K23 (Low)", z: 1.60, d: 0.12 },
+{ adTr: "NBA 2K23 (Yüksek)", adEn: "NBA 2K23 (High)", z: 1.10, d: 0.12 },
+{ adTr: "NBA 2K24 (Düşük)", adEn: "NBA 2K24 (Low)", z: 1.40, d: 0.14 },
+{ adTr: "NBA 2K24 (Yüksek)", adEn: "NBA 2K24 (High)", z: 0.95, d: 0.14 },
+{ adTr: "NBA 2K25 (Düşük)", adEn: "NBA 2K25 (Low)", z: 1.10, d: 0.15 },
+{ adTr: "NBA 2K25 (Yüksek)", adEn: "NBA 2K25 (High)", z: 0.75, d: 0.15 },
+{ adTr: "NBA 2K25 (Ultra)", adEn: "NBA 2K25 (Ultra)", z: 0.55, d: 0.15 },
+{ adTr: "NBA 2K26 (Düşük)", adEn: "NBA 2K26 (Low)", z: 1.05, d: 0.16 },
+{ adTr: "NBA 2K26 (Yüksek)", adEn: "NBA 2K26 (High)", z: 0.70, d: 0.16 },
+{ adTr: "NBA 2K26 (Ultra)", adEn: "NBA 2K26 (Ultra)", z: 0.50, d: 0.18 },
+{ adTr: "Rust (Düşük)", adEn: "Rust (Low)", z: 1.25, d: 0.22 },
+{ adTr: "Rust (Yüksek)", adEn: "Rust (High)", z: 0.85, d: 0.25 },
+{ adTr: "Rust (Ultra)", adEn: "Rust (Ultra)", z: 0.60, d: 0.28 },
+{ adTr: "007 First Light (Düşük)", adEn: "007 First Light (Low)", z: 0.85, d: 0.18 },
+{ adTr: "007 First Light (Yüksek)", adEn: "007 First Light (High)", z: 0.55, d: 0.20 },
+{ adTr: "007 First Light (Ultra )", adEn: "007 First Light (Ultra)", z: 0.35, d: 0.24 },
+{ adTr: "Resident Evil 2 Remake (Düşük)", adEn: "Resident Evil 2 Remake (Low)", z: 1.50, d: 0.12 },
+{ adTr: "Resident Evil 2 Remake (Orta)", adEn: "Resident Evil 2 Remake (Medium)", z: 1.25, d: 0.12 },
+{ adTr: "Resident Evil 2 Remake (Yüksek)", adEn: "Resident Evil 2 Remake (High)", z: 1.05, d: 0.12 },
+{ adTr: "Resident Evil 3 Remake (Düşük)", adEn: "Resident Evil 3 Remake (Low)", z: 1.55, d: 0.12 },
+{ adTr: "Resident Evil 3 Remake (Orta)", adEn: "Resident Evil 3 Remake (Medium)", z: 1.30, d: 0.12 },
+{ adTr: "Resident Evil 3 Remake (Yüksek)", adEn: "Resident Evil 3 Remake (High)", z: 1.10, d: 0.12 },
+{ adTr: "Resident Evil 3 Remake (Ultra)", adEn: "Resident Evil 3 Remake (Ultra)", z: 0.80, d: 0.14 },
+{ adTr: "Resident Evil 4 Remake (Düşük)", adEn: "Resident Evil 4 Remake (Low)", z: 1.15, d: 0.16 },
+{ adTr: "Resident Evil 4 Remake (Orta)", adEn: "Resident Evil 4 Remake (Medium)", z: 0.95, d: 0.16 },
+{ adTr: "Resident Evil 4 Remake (Yüksek)", adEn: "Resident Evil 4 Remake (High)", z: 0.78, d: 0.16 },
+{ adTr: "Resident Evil 4 Remake (Ultra)", adEn: "Resident Evil 4 Remake (Ultra)", z: 0.55, d: 0.18 },
+{ adTr: "Resident Evil Requiem (Düşük)", adEn: "Resident Evil Requiem (Low)", z: 0.75, d: 0.20 },
+{ adTr: "Resident Evil Requiem (Orta)", adEn: "Resident Evil Requiem (Medium)", z: 0.60, d: 0.21 },
+{ adTr: "Resident Evil Requiem (Yüksek)", adEn: "Resident Evil Requiem (High)", z: 0.50, d: 0.22 },
+{ adTr: "Resident Evil Requiem (Ultra)", adEn: "Resident Evil Requiem (Ultra)", z: 0.32, d: 0.25 },
+],
 };
 
-// Sayfa Yüklendiğinde Listeleri Doldur ve Seçimleri Ayarla
-function listeleriDoldur() {
-    const gpuSelect = document.getElementById("gpu");
-    const cpuSelect = document.getElementById("cpu");
-    const ramSelect = document.getElementById("ram");
-    const cozSelect = document.getElementById("cozunurluk");
-    const oyunSelect = document.getElementById("oyun");
-
-    gpuSelect.innerHTML = "";
-    cpuSelect.innerHTML = "";
-    ramSelect.innerHTML = "";
-    cozSelect.innerHTML = "";
-    oyunSelect.innerHTML = "";
-
-    // GPU Listesi
-    veri.ekranKartlari.forEach((item, index) => {
-        let opt = document.createElement("option");
-        opt.value = index;
-        opt.textContent = aktifDil === "tr" ? item.adTr : item.adEn;
-        gpuSelect.appendChild(opt);
+function doldur() {
+    const g = document.getElementById("gpu"),
+    c = document.getElementById("cpu"),
+    r = document.getElementById("ram"),
+    e = document.getElementById("cozunurluk"),
+    o = document.getElementById("oyun");
+    
+    g.innerHTML = "";
+    c.innerHTML = "";
+    r.innerHTML = "";
+    e.innerHTML = "";
+    o.innerHTML = "";
+    
+    veri.ekranKartlari.forEach(x => {
+        let isim = (aktifDil === "tr") ? x.adTr : x.adEn;
+        g.innerHTML += `<option value="${x.p}">${isim}</option>`;
     });
-
-    // CPU Listesi
-    veri.islemciler.forEach((item, index) => {
-        let opt = document.createElement("option");
-        opt.value = index;
-        opt.textContent = aktifDil === "tr" ? item.adTr : item.adEn;
-        cpuSelect.appendChild(opt);
+    veri.islemciler.forEach(x => {
+        let isim = (aktifDil === "tr") ? x.adTr : x.adEn;
+        c.innerHTML += `<option value="${x.p}">${isim}</option>`;
     });
-
-    // RAM Listesi
-    veri.ramler.forEach((item, index) => {
-        let opt = document.createElement("option");
-        opt.value = index;
-        opt.textContent = aktifDil === "tr" ? item.adTr : item.adEn;
-        ramSelect.appendChild(opt);
+    veri.ramler.forEach(x => {
+        let isim = (aktifDil === "tr") ? x.adTr : x.adEn;
+        r.innerHTML += `<option value="${x.c}">${isim}</option>`;
     });
-
-    // Çözünürlük Listesi
-    veri.cozunurlukler.forEach((item, index) => {
-        let opt = document.createElement("option");
-        opt.value = index;
-        opt.textContent = aktifDil === "tr" ? item.adTr : item.adEn;
-        cozSelect.appendChild(opt);
+    veri.cozunurlukler.forEach(x => {
+        let isim = (aktifDil === "tr") ? x.adTr : x.adEn;
+        e.innerHTML += `<option value="${x.p}">${isim}</option>`;
     });
-
-    // Oyun Listesi
-    veri.oyunlar.forEach((item, index) => {
-        let opt = document.createElement("option");
-        opt.value = index;
-        opt.textContent = aktifDil === "tr" ? item.adTr : item.adEn;
-        oyunSelect.appendChild(opt);
+    veri.oyunlar.forEach((x, index) => {
+        let isim = (aktifDil === "tr") ? x.adTr : x.adEn;
+        o.innerHTML += `<option value="${index}">${isim}</option>`;
     });
 }
 
-// Arayüz Metinlerini Güncelleme
-function arayuzuGuncelle() {
-    const m = metinler[aktifDil];
-    document.getElementById("txt-baslik").innerText = m.baslik;
-    document.getElementById("txt-lbl-gpu").innerText = m.lblGpu;
-    document.getElementById("txt-lbl-cpu").innerText = m.lblCpu;
-    document.getElementById("txt-lbl-ram").innerText = m.lblRam;
-    document.getElementById("txt-lbl-coz").innerText = m.lblCoz;
-    document.getElementById("txt-lbl-oyun").innerText = m.lblOyun;
-    document.getElementById("txt-btn-hesapla").innerText = m.btnHesapla;
-    document.getElementById("fps-etiket").innerText = m.fpsEtiket;
-
-    document.getElementById("txt-toc-title").innerText = m.tocTitle;
-    document.getElementById("txt-toc-1").innerText = m.toc1;
-    document.getElementById("txt-toc-2").innerText = m.toc2;
-    document.getElementById("txt-toc-3").innerText = m.toc3;
-    document.getElementById("txt-toc-4").innerText = m.toc4;
-
-    document.getElementById("txt-sec1-title").innerText = m.sec1Title;
-    document.getElementById("txt-sec1-desc").innerHTML = m.sec1Desc;
-    document.getElementById("txt-th-fps").innerText = m.thFps;
-    document.getElementById("txt-th-exp").innerText = m.thExp;
-    document.getElementById("txt-t1").innerText = m.t1;
-    document.getElementById("txt-t2").innerText = m.t2;
-    document.getElementById("txt-t3").innerText = m.t3;
-    document.getElementById("txt-t4").innerText = m.t4;
-
-    document.getElementById("txt-sec2-title").innerText = m.sec2Title;
-    document.getElementById("txt-sec2-desc").innerText = m.sec2Desc;
-    document.getElementById("txt-li-gpu").innerHTML = m.liGpu;
-    document.getElementById("txt-li-cpu").innerHTML = m.liCpu;
-    document.getElementById("txt-li-ram").innerHTML = m.liRam;
-    document.getElementById("txt-li-res").innerHTML = m.liRes;
-
-    document.getElementById("txt-sec3-title").innerText = m.sec3Title;
-    document.getElementById("txt-sec3-desc").innerText = m.sec3Desc;
-    document.getElementById("txt-boost-1").innerText = m.boost1;
-    document.getElementById("txt-boost-2").innerText = m.boost2;
-    document.getElementById("txt-boost-3").innerText = m.boost3;
-    document.getElementById("txt-boost-4").innerText = m.boost4;
-    document.getElementById("txt-boost-5").innerText = m.boost5;
-    document.getElementById("txt-boost-6").innerText = m.boost6;
-
-    document.getElementById("txt-sec4-title").innerText = m.sec4Title;
-    document.getElementById("txt-q1").innerText = m.q1;
-    document.getElementById("txt-a1").innerText = m.a1;
-    document.getElementById("txt-q2").innerText = m.q2;
-    document.getElementById("txt-a2").innerText = m.a2;
-    document.getElementById("txt-q3").innerText = m.q3;
-    document.getElementById("txt-a3").innerText = m.a3;
-    document.getElementById("txt-q4").innerText = m.q4;
-    document.getElementById("txt-a4").innerText = m.a4;
-    document.getElementById("txt-q5").innerText = m.q5;
-    document.getElementById("txt-a5").innerText = m.a5;
-    document.getElementById("txt-q6").innerText = m.q6;
-    document.getElementById("txt-a6").innerText = m.a6;
-
-    document.getElementById("lang-toggle").innerText = aktifDil === "tr" ? "EN" : "TR";
-}
-
-// Dil Değiştirme Fonksiyonu
 function dilDegistir() {
-    aktifDil = aktifDil === "tr" ? "en" : "tr";
-    const secilenGpu = document.getElementById("gpu").value;
-    const secilenCpu = document.getElementById("cpu").value;
-    const secilenRam = document.getElementById("ram").value;
-    const secilenCoz = document.getElementById("cozunurluk").value;
-    const secilenOyun = document.getElementById("oyun").value;
+    aktifDil = (aktifDil === "tr") ? "en" : "tr";
+    document.getElementById("lang-toggle").innerText = (aktifDil === "tr") ? "EN" : "TR";
+    
+    document.getElementById("txt-baslik").innerText = metinler[aktifDil].baslik;
+    document.getElementById("txt-lbl-gpu").innerText = metinler[aktifDil].lblGpu;
+    document.getElementById("txt-lbl-cpu").innerText = metinler[aktifDil].lblCpu;
+    document.getElementById("txt-lbl-ram").innerText = metinler[aktifDil].lblRam;
+    document.getElementById("txt-lbl-coz").innerText = metinler[aktifDil].lblCoz;
+    document.getElementById("txt-lbl-oyun").innerText = metinler[aktifDil].lblOyun;
+    document.getElementById("txt-btn-hesapla").innerText = metinler[aktifDil].btnHesapla;
 
-    listeleriDoldur();
-    arayuzuGuncelle();
+    document.getElementById("txt-toc-title").innerText = metinler[aktifDil].tocTitle;
+    document.getElementById("txt-toc-1").innerText = metinler[aktifDil].toc1;
+    document.getElementById("txt-toc-2").innerText = metinler[aktifDil].toc2;
+    document.getElementById("txt-toc-3").innerText = metinler[aktifDil].toc3;
+    document.getElementById("txt-toc-4").innerText = metinler[aktifDil].toc4;
 
-    document.getElementById("gpu").value = secilenGpu;
-    document.getElementById("cpu").value = secilenCpu;
-    document.getElementById("ram").value = secilenRam;
-    document.getElementById("cozunurluk").value = secilenCoz;
-    document.getElementById("oyun").value = secilenOyun;
-}
+    document.getElementById("txt-sec1-title").innerText = metinler[aktifDil].sec1Title;
+    document.getElementById("txt-sec1-desc").innerHTML = metinler[aktifDil].sec1Desc;
+    document.getElementById("txt-th-fps").innerText = metinler[aktifDil].thFps;
+    document.getElementById("txt-th-exp").innerText = metinler[aktifDil].thExp;
+    document.getElementById("txt-t1").innerText = metinler[aktifDil].t1;
+    document.getElementById("txt-t2").innerText = metinler[aktifDil].t2;
+    document.getElementById("txt-t3").innerText = metinler[aktifDil].t3;
+    document.getElementById("txt-t4").innerText = metinler[aktifDil].t4;
 
-// Tema Değiştirme Fonksiyonu
-function temaDegistir() {
-    const body = document.body;
-    body.classList.toggle("light-mode");
-    const themeBtn = document.getElementById("theme-toggle");
-    if (body.classList.contains("light-mode")) {
-        themeBtn.innerText = "☀️";
+    document.getElementById("txt-sec2-title").innerText = metinler[aktifDil].sec2Title;
+    document.getElementById("txt-sec2-desc").innerText = metinler[aktifDil].sec2Desc;
+    document.getElementById("txt-li-gpu").innerHTML = metinler[aktifDil].liGpu;
+    document.getElementById("txt-li-cpu").innerHTML = metinler[aktifDil].liCpu;
+    document.getElementById("txt-li-ram").innerHTML = metinler[aktifDil].liRam;
+    document.getElementById("txt-li-res").innerHTML = metinler[aktifDil].liRes;
+
+    document.getElementById("txt-sec3-title").innerText = metinler[aktifDil].sec3Title;
+    document.getElementById("txt-sec3-desc").innerText = metinler[aktifDil].sec3Desc;
+    document.getElementById("txt-boost-1").innerText = metinler[aktifDil].boost1;
+    document.getElementById("txt-boost-2").innerText = metinler[aktifDil].boost2;
+    document.getElementById("txt-boost-3").innerText = metinler[aktifDil].boost3;
+    document.getElementById("txt-boost-4").innerText = metinler[aktifDil].boost4;
+    document.getElementById("txt-boost-5").innerText = metinler[aktifDil].boost5;
+    document.getElementById("txt-boost-6").innerText = metinler[aktifDil].boost6;
+
+    document.getElementById("txt-sec4-title").innerText = metinler[aktifDil].sec4Title;
+    document.getElementById("txt-q1").innerText = metinler[aktifDil].q1;
+    document.getElementById("txt-a1").innerText = metinler[aktifDil].a1;
+    document.getElementById("txt-q2").innerText = metinler[aktifDil].q2;
+    document.getElementById("txt-a2").innerText = metinler[aktifDil].a2;
+    document.getElementById("txt-q3").innerText = metinler[aktifDil].q3;
+    document.getElementById("txt-a3").innerText = metinler[aktifDil].a3;
+    document.getElementById("txt-q4").innerText = metinler[aktifDil].q4;
+    document.getElementById("txt-a4").innerText = metinler[aktifDil].a4;
+    document.getElementById("txt-q5").innerText = metinler[aktifDil].q5;
+    document.getElementById("txt-a5").innerText = metinler[aktifDil].a5;
+    document.getElementById("txt-q6").innerText = metinler[aktifDil].q6;
+    document.getElementById("txt-a6").innerText = metinler[aktifDil].a6;
+    
+    doldur();
+
+    let etiket = document.getElementById("fps-etiket");
+    let fpsGosterge = document.getElementById("fps");
+    if(fpsGosterge.innerText.includes("Kaldırmaz") || fpsGosterge.innerText.includes("Can't Run")) {
+        etiket.innerText = metinler[aktifDil].yetersizEtiket;
+        fpsGosterge.innerText = metinler[aktifDil].kaldirmaz;
     } else {
-        themeBtn.innerText = "🌙";
+        etiket.innerText = metinler[aktifDil].fpsEtiket;
     }
 }
 
-// FPS Hesaplama Algoritması
-function hesapla() {
-    const gpuIdx = document.getElementById("gpu").value;
-    const cpuIdx = document.getElementById("cpu").value;
-    const ramIdx = document.getElementById("ram").value;
-    const cozIdx = document.getElementById("cozunurluk").value;
-    const oyunIdx = document.getElementById("oyun").value;
-
-    const gpuP = veri.ekranKartlari[gpuIdx].p;
-    const cpuP = veri.islemciler[cpuIdx].p;
-    const ramC = veri.ramler[ramIdx].c;
-    const cozP = veri.cozunurlukler[cozIdx].p;
-    const oyunZ = veri.oyunlar[oyunIdx].z;
-
-    // Temel FPS formülü
-    let bazFps = ((gpuP * 0.5) + (cpuP * 0.3) + (cozP * 0.2)) * oyunZ * ramC;
-
-    if (bazFps < 10) bazFps = 10;
-
-    let minFps = Math.floor(bazFps * 0.85);
-    let maxFps = Math.floor(bazFps * 1.15);
-
-    const fpsSpan = document.getElementById("fps");
-    fpsSpan.innerText = `${minFps} - ${maxFps}`;
+function temaDegistir() {
+    document.body.classList.toggle("light-mode");
+    const temaButonu = document.getElementById("theme-toggle");
+    if (document.body.classList.contains("light-mode")) {
+        temaButonu.innerText = "☀️";
+    } else {
+        temaButonu.innerText = "🌙";
+    }
 }
 
-// Sayfa ilk açıldığında listeleri ve metinleri yükle
-window.onload = function() {
-    listeleriDoldur();
-    arayuzuGuncelle();
-};
+function hesapla() {
+    let gp = parseFloat(document.getElementById("gpu").value);
+    let cp = parseFloat(document.getElementById("cpu").value);
+    let rm = parseFloat(document.getElementById("ram").value);
+    let cz = parseFloat(document.getElementById("cozunurluk").value);
+    let oyunIndex = document.getElementById("oyun").value;
+    
+    let oyunVerisi = veri.oyunlar[oyunIndex];
+    let oy = oyunVerisi.z;
+    let dalgalanma = oyunVerisi.d;
+
+    let czCarpani = Math.pow(cz / 15, 0.75); 
+    let temelFps = ((gp * 0.70) + (cp * 0.60)) * rm * oy * czCarpani;
+
+    let alt = Math.floor(temelFps * (1 - dalgalanma));
+    let ust = Math.floor(temelFps * (1 + dalgalanma));
+
+    let fpsGosterge = document.getElementById("fps");
+    let etiket = document.getElementById("fps-etiket");
+
+    if (ust < 30) {
+        fpsGosterge.innerText = metinler[aktifDil].kaldirmaz;
+        fpsGosterge.style.color = "#ff4444";
+        fpsGosterge.style.fontSize = "30px";
+        etiket.innerText = metinler[aktifDil].yetersizEtiket;
+    } else {
+        fpsGosterge.innerText = alt + " - " + ust;
+        fpsGosterge.style.color = "#3fb950";
+        fpsGosterge.style.fontSize = "40px";
+        etiket.innerText = metinler[aktifDil].fpsEtiket;
+    }
+}
+
+// Akordiyon Açma / Kapatma Fonksiyonu
+function toggleAccordion(button) {
+    const section = button.parentElement;
+    section.classList.toggle('active');
+    const span = button.querySelector('span:last-child');
+    if (section.classList.contains('active')) {
+        span.innerText = '-';
+    } else {
+        span.innerText = '+';
+    }
+}
+
+// İçindekilerden Tıklandığında İlgili Bölümü Açıp Oraya Kaydırma
+function tocGit(id) {
+    const section = document.getElementById(id);
+    if (section) {
+        if (!section.classList.contains('active')) {
+            section.classList.add('active');
+            const span = section.querySelector('.accordion-header span:last-child');
+            if (span) span.innerText = '-';
+        }
+        setTimeout(() => {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 50);
+    }
+}
+
+// SSS İçi Akordiyon Fonksiyonu
+function toggleFaq(event, button) {
+    event.stopPropagation();
+    const item = button.parentElement;
+    item.classList.toggle('active');
+    const span = button.querySelector('span:last-child');
+    if (item.classList.contains('active')) {
+        span.innerText = '-';
+    } else {
+        span.innerText = '+';
+    }
+}
+
+window.onload = doldur;
 </script>
 </body>
 </html>
