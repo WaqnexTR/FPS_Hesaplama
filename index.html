@@ -101,7 +101,6 @@
             font-weight: bold;
         }
 
-        /* İçerik Bölümleri ve İçindekiler Kutusu (Ortak Akordiyon Stili) */
         .content-section {
             background: #000000;
             border: 1px solid #30363d;
@@ -115,7 +114,6 @@
             transition: background-color 0.3s, border-color 0.3s;
         }
         
-        /* Akordiyon Başlık Butonu */
         .accordion-header {
             width: 100%;
             background: none;
@@ -134,7 +132,6 @@
             font-size: 20px;
         }
 
-        /* Akordiyon İçerik Alanı */
         .accordion-body {
             max-height: 0;
             overflow: hidden;
@@ -167,7 +164,6 @@
             text-decoration: underline;
         }
 
-        /* Akordiyon İçi SSS Öğeleri */
         .faq-item {
             background: #0d1117;
             border: 1px solid #30363d;
@@ -212,7 +208,6 @@
             padding: 0 15px 15px 15px;
         }
 
-        /* Tablo Stili */
         .fps-table {
             width: 100%;
             border-collapse: collapse;
@@ -229,7 +224,6 @@
             color: #58a6ff;
         }
 
-        /* Sağ Üst Butonlar Konteyneri */
         .top-controls {
             position: fixed;
             top: 15px;
@@ -239,7 +233,6 @@
             z-index: 9999;
         }
 
-        /* Üst Butonların Ortak Stili */
         .top-btn {
             padding: 8px 14px;
             font-size: 13px;
@@ -252,7 +245,6 @@
             transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
 
-        /* Aydınlık Mod (Light Mode) Sınıfları */
         body.light-mode {
             background-color: #f0f0f0;
             color: #000;
@@ -306,7 +298,6 @@
     </style>
 </head>
 <body>
-    <!-- Sağ üst köşe butonları (Dil ve Tema) -->
     <div class="top-controls">
         <button id="lang-toggle" class="top-btn" onclick="dilDegistir()">EN</button>
         <button id="theme-toggle" class="top-btn" onclick="temaDegistir()">🌙</button>
@@ -341,7 +332,6 @@
             </div>
         </div>
 
-        <!-- İçindekiler Kutusu (Artık Diğerleriyle Aynı Akordiyon Yapısında) -->
         <div class="content-section">
             <button class="accordion-header" onclick="toggleAccordion(this)">
                 <span id="txt-toc-title">İçindekiler</span> <span>+</span>
@@ -356,7 +346,6 @@
             </div>
         </div>
 
-        <!-- Bölüm 1: FPS Nedir? (Akordiyon) -->
         <div id="fps-nedir" class="content-section">
             <button class="accordion-header" onclick="toggleAccordion(this)">
                 <span id="txt-sec1-title">FPS Nedir?</span> <span>+</span>
@@ -392,7 +381,6 @@
             </div>
         </div>
 
-        <!-- Bölüm 2: Oyun FPS Hesaplama Nasıl Yapılır? (Akordiyon) -->
         <div id="fps-hesaplama" class="content-section">
             <button class="accordion-header" onclick="toggleAccordion(this)">
                 <span id="txt-sec2-title">Oyun FPS Hesaplama Nasıl Yapılır?</span> <span>+</span>
@@ -408,7 +396,6 @@
             </div>
         </div>
 
-        <!-- Bölüm 3: FPS Arttırma Yöntemleri (Akordiyon) -->
         <div id="fps-arttirma" class="content-section">
             <button class="accordion-header" onclick="toggleAccordion(this)">
                 <span id="txt-sec3-title">FPS Arttırma Yöntemleri</span> <span>+</span>
@@ -426,7 +413,6 @@
             </div>
         </div>
 
-        <!-- Bölüm 4: Sık Sorulan Sorular (Akordiyon) -->
         <div id="sik-sorulan-sorular" class="content-section">
             <button class="accordion-header" onclick="toggleAccordion(this)">
                 <span id="txt-sec4-title">Sık Sorulan Sorular</span> <span>+</span>
@@ -490,7 +476,6 @@
     </div>
 
 <script>
-// Büyük Bölümler İçin Akordiyon Fonksiyonu
 function toggleAccordion(button) {
     const section = button.parentElement;
     section.classList.toggle('active');
@@ -502,7 +487,6 @@ function toggleAccordion(button) {
     }
 }
 
-// İçindekilerden Tıklandığında İlgili Bölümü Açıp Oraya Kaydırma Fonksiyonu
 function tocGit(id) {
     const section = document.getElementById(id);
     if (section) {
@@ -517,7 +501,6 @@ function tocGit(id) {
     }
 }
 
-// SSS İçi Akordiyon Fonksiyonu
 function toggleFaq(event, button) {
     event.stopPropagation();
     const item = button.parentElement;
@@ -530,7 +513,6 @@ function toggleFaq(event, button) {
     }
 }
 
-// Dil Sözlüğü ve Çeviriler
 const metinler = {
     tr: {
         baslik: "FPS ANALİZ MERKEZİ",
@@ -899,7 +881,6 @@ islemciler: [
 { adTr: "i9-14900K (Masaüstü)", adEn: "i9-14900K (Desktop)", p: 153 },
 { adTr: "i9-14900H (Laptop)", adEn: "i9-14900H (Laptop)", p: 141 },
 { adTr: "i9-14900HX (Laptop)", adEn: "i9-14900HX (Laptop)", p: 149 },
-// AMD Ryzen
 { adTr: "Ryzen 3 1200 (Masaüstü)", adEn: "Ryzen 3 1200 (Desktop)", p: 34 },
 { adTr: "Ryzen 3 1200X (Masaüstü)", adEn: "Ryzen 3 1200X (Desktop)", p: 36 },
 { adTr: "Ryzen 3 7345H (Laptop)", adEn: "Ryzen 3 7345H (Laptop)", p: 59 },
@@ -961,9 +942,9 @@ ramler: [
 { adTr: "32 GB RAM", adEn: "32 GB RAM", c: 1.1 },
 { adTr: "48 GB RAM", adEn: "48 GB RAM", c: 1.2 },
 { adTr: "64 GB RAM", adEn: "64 GB RAM", c: 1.6 },
-{ adTr: "128 GB RAM", adEn: "128 GB RAM", c: 1.9 },
+{ adTr: "128 GB RAM", adEn: "128 GB RAM", c: 1.9 }
 ],
-cozunurlukler : [
+cozunurlukler: [
   { adTr: "800x600 (SVGA)", adEn: "800x600 (SVGA)", p: 40 },
   { adTr: "1024x768 (XGA)", adEn: "1024x768 (XGA)", p: 35 },
   { adTr: "1152x864 (XGA+)", adEn: "1152x864 (XGA+)", p: 33 },
@@ -1005,340 +986,158 @@ oyunlar: [
 { adTr: "Farming Simulator 17 (Düşük)", adEn: "Farming Simulator 17 (Low)", z: 1.9, d: 0.10 },
 { adTr: "Farming Simulator 17 (Yüksek)", adEn: "Farming Simulator 17 (High)", z: 1.3, d: 0.10 },
 { adTr: "Farming Simulator 19 (Düşük)", adEn: "Farming Simulator 19 (Low)", z: 1.7, d: 0.12 },
-{ adTr: "Farming Simulator 19 (Yüksek)", adEn: "Farming Simulator 19 (High)", z: 1.2, d: 0.12 },
-{ adTr: "Farming Simulator 22 (Düşük)", adEn: "Farming Simulator 22 (Low)", z: 1.4, d: 0.12 },
-{ adTr: "Farming Simulator 22 (Yüksek)", adEn: "Farming Simulator 22 (High)", z: 0.9, d: 0.12 },
-{ adTr: "Farming Simulator 25 (Düşük)", adEn: "Farming Simulator 25 (Low)", z: 1.1, d: 0.15 },
-{ adTr: "Farming Simulator 25 (Yüksek)", adEn: "Farming Simulator 25 (High)", z: 0.7, d: 0.15 },
-{ adTr: "Battlefield 3 (Düşük)", adEn: "Battlefield 3 (Low)", z: 1.8, d: 0.12 },
-{ adTr: "Battlefield 3 (Yüksek)", adEn: "Battlefield 3 (High)", z: 1.3, d: 0.12 },
-{ adTr: "Battlefield 4 (Düşük)", adEn: "Battlefield 4 (Low)", z: 1.7, d: 0.12 },
-{ adTr: "Battlefield 4 (Yüksek)", adEn: "Battlefield 4 (High)", z: 1.2, d: 0.12 },
-{ adTr: "Battlefield 1 (Düşük)", adEn: "Battlefield 1 (Low)", z: 1.2, d: 0.15 },
-{ adTr: "Battlefield 1 (Yüksek)", adEn: "Battlefield 1 (High)", z: 0.8, d: 0.15 },
-{ adTr: "Battlefield V (Düşük)", adEn: "Battlefield V (Low)", z: 1.0, d: 0.18 },
-{ adTr: "Battlefield V (Yüksek)", adEn: "Battlefield V (High)", z: 0.6, d: 0.18 },
-{ adTr: "Battlefield 2042 (Düşük)", adEn: "Battlefield 2042 (Low)", z: 0.70, d: 0.22 },
-{ adTr: "Battlefield 2042 (Orta)", adEn: "Battlefield 2042 (Medium)", z: 0.56, d: 0.22 },
-{ adTr: "Battlefield 2042 (Yüksek)", adEn: "Battlefield 2042 (High)", z: 0.42, d: 0.22 },
-{ adTr: "FC 23 (Düşük)", adEn: "FC 23 (Low)", z: 1.5, d: 0.12 },
-{ adTr: "FC 23 (Yüksek)", adEn: "FC 23 (High)", z: 1.1, d: 0.12 },
-{ adTr: "FC 24 (Düşük)", adEn: "FC 24 (Low)", z: 1.3, d: 0.12 },
-{ adTr: "FC 24 (Yüksek)", adEn: "FC 24 (High)", z: 0.9, d: 0.12 },
-{ adTr: "FC 25 (Düşük)", adEn: "FC 25 (Low)", z: 1.1, d: 0.15 },
-{ adTr: "FC 25 (Yüksek)", adEn: "FC 25 (High)", z: 0.7, d: 0.15 },
-{ adTr: "FC 26 (Düşük)", adEn: "FC 26 (Low)", z: 1.0, d: 0.15 },
-{ adTr: "FC 26 (Yüksek)", adEn: "FC 26 (High)", z: 0.6, d: 0.15 },
-{ adTr: "PES (Düşük)", adEn: "PES (Low)", z: 1.9, d: 0.10 },
-{ adTr: "PES (Yüksek)", adEn: "PES (High)", z: 1.3, d: 0.10 },
-{ adTr: "Spider-Man Remastered (Düşük)", adEn: "Spider-Man Remastered (Low)", z: 1.00, d: 0.20 },
-{ adTr: "Spider-Man Remastered (Orta)", adEn: "Spider-Man Remastered (Medium)", z: 0.80, d: 0.20 },
-{ adTr: "Spider-Man Remastered (Yüksek)", adEn: "Spider-Man Remastered (High)", z: 0.60, d: 0.20 },
-{ adTr: "Spider-Man Remastered (Ultra)", adEn: "Spider-Man Remastered (Ultra)", z: 0.45, d: 0.20 },
-{ adTr: "Spider-Man Miles Morales (Düşük)", adEn: "Spider-Man Miles Morales (Low)", z: 0.9, d: 0.22 },
-{ adTr: "Spider-Man Miles Morales (Yüksek)", adEn: "Spider-Man Miles Morales (High)", z: 0.55, d: 0.22 },
-{ adTr: "Spider-Man Miles Morales (Ultra)", adEn: "Spider-Man Miles Morales (Ultra)", z: 0.4, d: 0.22 },
-{ adTr: "Minecraft (Düşük Shaders)", adEn: "Minecraft (Low Shaders)", z: 1.5, d: 0.25 },
-{ adTr: "Minecraft (Yüksek Shaders)", adEn: "Minecraft (High Shaders)", z: 0.9, d: 0.25 },
-{ adTr: "Forza Horizon 5 (Düşük)", adEn: "Forza Horizon 5 (Low)", z: 1.4, d: 0.15 },
-{ adTr: "Forza Horizon 5 (Yüksek)", adEn: "Forza Horizon 5 (High)", z: 0.8, d: 0.15 },
-{ adTr: "Forza Horizon 5 (Ultra)", adEn: "Forza Horizon 5 (Ultra)", z: 0.55, d: 0.16 },
-{ adTr: "Forza Horizon 6 (Düşük)", adEn: "Forza Horizon 6 (Low)", z: 1.10, d: 0.16 },
-{ adTr: "Forza Horizon 6 (Yüksek)", adEn: "Forza Horizon 6 (High)", z: 0.65, d: 0.16 },
-{ adTr: "Forza Horizon 6 (Ultra)", adEn: "Forza Horizon 6 (Ultra)", z: 0.42, d: 0.18 },
-{ adTr: "ETS 2 (Düşük)", adEn: "ETS 2 (Low)", z: 1.7, d: 0.15 },
-{ adTr: "ETS 2 (Orta)", adEn: "ETS 2 (Medium)", z: 1.36, d: 0.15 },
-{ adTr: "ETS 2 (Yüksek)", adEn: "ETS 2 (High)", z: 1.1, d: 0.15 },
-{ adTr: "GTA IV (Düşük)", adEn: "GTA IV (Low)", z: 1.80, d: 0.28 },
-{ adTr: "GTA IV (Yüksek)", adEn: "GTA IV (High)", z: 1.30, d: 0.32 },
-{ adTr: "GTA IV (Ultra)", adEn: "GTA IV (Ultra)", z: 0.95, d: 0.38 },
-{ adTr: "GTA V (Düşük)", adEn: "GTA V (Low)", z: 1.5, d: 0.18 },
-{ adTr: "GTA V (Yüksek)", adEn: "GTA V (High)", z: 0.9, d: 0.18 },
-{ adTr: "GTA V (Ultra)", adEn: "GTA V (Ultra)", z: 0.65, d: 0.18 },
-{ adTr: "RDR 2 (Düşük)", adEn: "RDR 2 (Low)", z: 0.90, d: 0.22 },
-{ adTr: "RDR 2 (Orta)", adEn: "RDR 2 (Medium)", z: 0.72, d: 0.22 }, 
-{ adTr: "RDR 2 (Yüksek)", adEn: "RDR 2 (High)", z: 0.54, d: 0.22 }, 
-{ adTr: "RDR 2 (Ultra)", adEn: "RDR 2 (Ultra)", z: 0.41, d: 0.22 }, 
-{ adTr: "God of War Ragnarök (Düşük)", adEn: "God of War Ragnarok (Low)", z: 0.8, d: 0.18 },
-{ adTr: "God of War Ragnarök (Orta)", adEn: "God of War Ragnarok (Medium)", z: 0.64, d: 0.18 }, 
-{ adTr: "God of War Ragnarök (Yüksek)", adEn: "God of War Ragnarok (High)", z: 0.5, d: 0.18 },
-{ adTr: "God of War Ragnarök (Ultra)", adEn: "God of War Ragnarok (Ultra)", z: 0.38, d: 0.18 },
-{ adTr: "ARK Survival Evolved (Düşük)", adEn: "ARK Survival Evolved (Low)", z: 0.8, d: 0.22 },
-{ adTr: "ARK Survival Evolved (Yüksek)", adEn: "ARK Survival Evolved (High)", z: 0.4, d: 0.22 },
-{ adTr: "DayZ (Düşük)", adEn: "DayZ (Low)", z: 1.0, d: 0.20 },
-{ adTr: "DayZ (Yüksek)", adEn: "DayZ (High)", z: 0.6, d: 0.20 },
-{ adTr: "Assassin’s Creed Valhalla (Düşük)", adEn: "Assassin’s Creed Valhalla (Low)", z: 0.8, d: 0.20 },
-{ adTr: "Assassin’s Creed Valhalla (Yüksek)", adEn: "Assassin’s Creed Valhalla (High)", z: 0.5, d: 0.20 },
-{ adTr: "Assassin’s Creed Mirage (Düşük)", adEn: "Assassin’s Creed Mirage (Low)", z: 1.1, d: 0.18 },
-{ adTr: "Assassin’s Creed Mirage (Yüksek)", adEn: "Assassin’s Creed Mirage (High)", z: 0.7, d: 0.18 },
-{ adTr: "Watch Dogs Legion (Düşük)", adEn: "Watch Dogs Legion (Low)", z: 0.7, d: 0.22 },
-{ adTr: "Watch Dogs Legion (Yüksek)", adEn: "Watch Dogs Legion (High)", z: 0.4, d: 0.22 },
-{ adTr: "Hogwarts Legacy (Düşük)", adEn: "Hogwarts Legacy (Low)", z: 0.9, d: 0.22 },
-{ adTr: "Hogwarts Legacy (Orta)", adEn: "Hogwarts Legacy (Medium)", z: 0.72, d: 0.22 }, 
-{ adTr: "Hogwarts Legacy (Yüksek)", adEn: "Hogwarts Legacy (High)", z: 0.5, d: 0.22 },
-{ adTr: "Hogwarts Legacy (Ultra)", adEn: "Hogwarts Legacy (Ultra)", z: 0.35, d: 0.22 },
-{ adTr: "Assetto Corsa (Düşük)", adEn: "Assetto Corsa (Low)", z: 1.8, d: 0.15 },
-{ adTr: "Assetto Corsa (Yüksek)", adEn: "Assetto Corsa (High)", z: 1.3, d: 0.15 },
-{ adTr: "Assetto Corsa Competizione (Düşük)", adEn: "Assetto Corsa Competizione (Low)", z: 1.0, d: 0.20 },
-{ adTr: "Assetto Corsa Competizione (Yüksek)", adEn: "Assetto Corsa Competizione (High)", z: 0.6, d: 0.20 },
-{ adTr: "Need for Speed Unbound (Düşük)", adEn: "Need for Speed Unbound (Low)", z: 1.1, d: 0.18 },
-{ adTr: "Need for Speed Unbound (Yüksek)", adEn: "Need for Speed Unbound (High)", z: 0.7, d: 0.18 },
-{ adTr: "Apex Legends (Düşük)", adEn: "Apex Legends (Low)", z: 1.6, d: 0.15 },
-{ adTr: "Apex Legends (Yüksek)", adEn: "Apex Legends (High)", z: 1.1, d: 0.15 },
-{ adTr: "Rainbow Six Siege (Düşük)", adEn: "Rainbow Six Siege (Low)", z: 1.8, d: 0.12 },
-{ adTr: "Rainbow Six Siege (Yüksek)", adEn: "Rainbow Six Siege (High)", z: 1.3, d: 0.12 },
-{ adTr: "Overwatch 2 (Düşük)", adEn: "Overwatch 2 (Low)", z: 1.7, d: 0.12 },
-{ adTr: "Overwatch 2 (Yüksek)", adEn: "Overwatch 2 (High)", z: 1.2, d: 0.12 },
-{ adTr: "The Last of Us Part I (Düşük)", adEn: "The Last of Us Part I (Low)", z: 0.8, d: 0.24 },
-{ adTr: "The Last of Us Part I (Yüksek)", adEn: "The Last of Us Part I (High)", z: 0.5, d: 0.24 },
-{ adTr: "The Last of Us Part I (Ultra)", adEn: "The Last of Us Part I (Ultra)", z: 0.34, d: 0.24 },
-{ adTr: "The Last of Us Part II (Düşük)", adEn: "The Last of Us Part II (Low)", z: 0.7, d: 0.26 },
-{ adTr: "The Last of Us Part II (Yüksek)", adEn: "The Last of Us Part II (High)", z: 0.45, d: 0.26 },
-{ adTr: "The Last of Us Part II (Ultra)", adEn: "The Last of Us Part II (Ultra)", z: 0.3, d: 0.26 },
-{ adTr: "Cyberpunk 2077 (Düşük)", adEn: "Cyberpunk 2077 (Low)", z: 0.70, d: 0.25 },
-{ adTr: "Cyberpunk 2077 (Orta)", adEn: "Cyberpunk 2077 (Medium)", z: 0.56, d: 0.25 }, 
-{ adTr: "Cyberpunk 2077 (Ultra)", adEn: "Cyberpunk 2077 (Ultra)", z: 0.31, d: 0.25 }, 
-{ adTr: "Uncharted: Hırsızlar Mirası Koleksiyonu (Düşük)", adEn: "Uncharted: Legacy of Thieves Collection (Low)", z: 1.25, d: 0.16 },
-{ adTr: "Uncharted: Hırsızlar Mirası Koleksiyonu (Yüksek)", adEn: "Uncharted: Legacy of Thieves Collection (High)", z: 0.85, d: 0.16 },
-{ adTr: "Uncharted: Hırsızlar Mirası Koleksiyonu (Ultra)", adEn: "Uncharted: Legacy of Thieves Collection (Ultra)", z: 0.60, d: 0.18 },
-{ adTr: "Dying Light 1 (Düşük)", adEn: "Dying Light 1 (Low)", z: 1.90, d: 0.10 },
-{ adTr: "Dying Light 1 (Yüksek)", adEn: "Dying Light 1 (High)", z: 1.50, d: 0.12 },
-{ adTr: "Dying Light 1 (Ultra)", adEn: "Dying Light 1 (Ultra)", z: 1.20, d: 0.14 },
-{ adTr: "Dying Light 2 (Düşük)", adEn: "Dying Light 2 (Low)", z: 1.10, d: 0.18 },
-{ adTr: "Dying Light 2 (Yüksek)", adEn: "Dying Light 2 (High)", z: 0.75, d: 0.18 },
-{ adTr: "Dying Light 2 (Ultra)", adEn: "Dying Light 2 (Ultra)", z: 0.55, d: 0.20 },
-{ adTr: "The Forest (Düşük)", adEn: "The Forest (Low)", z: 1.80, d: 0.12 },
-{ adTr: "The Forest (Yüksek)", adEn: "The Forest (High)", z: 1.30, d: 0.12 },
-{ adTr: "Sons Of The Forest (Düşük)", adEn: "Sons Of The Forest (Low)", z: 1.10, d: 0.18 },
-{ adTr: "Sons Of The Forest (Yüksek)", adEn: "Sons Of The Forest (High)", z: 0.75, d: 0.18 },
-{ adTr: "Sons Of The Forest (Ultra)", adEn: "Sons Of The Forest (Ultra)", z: 0.52, d: 0.20 },
-{ adTr: "Outlast 1 (Yüksek)", adEn: "Outlast 1 (High)", z: 2.40, d: 0.10 },
-{ adTr: "Outlast 2 (Yüksek)", adEn: "Outlast 2 (High)", z: 1.80, d: 0.12 },
-{ adTr: "The Outlast Trials (Düşük)", adEn: "The Outlast Trials (Low)", z: 1.40, d: 0.15 },
-{ adTr: "The Outlast Trials (Yüksek)", adEn: "The Outlast Trials (High)", z: 0.95, d: 0.15 },
-{ adTr: "The Outlast Trials (Ultra)", adEn: "The Outlast Trials (Ultra)", z: 0.70, d: 0.16 },
-{ adTr: "NBA 2K23 (Düşük)", adEn: "NBA 2K23 (Low)", z: 1.60, d: 0.12 },
-{ adTr: "NBA 2K23 (Yüksek)", adEn: "NBA 2K23 (High)", z: 1.10, d: 0.12 },
-{ adTr: "NBA 2K24 (Düşük)", adEn: "NBA 2K24 (Low)", z: 1.40, d: 0.14 },
-{ adTr: "NBA 2K24 (Yüksek)", adEn: "NBA 2K24 (High)", z: 0.95, d: 0.14 },
-{ adTr: "NBA 2K25 (Düşük)", adEn: "NBA 2K25 (Low)", z: 1.10, d: 0.15 },
-{ adTr: "NBA 2K25 (Yüksek)", adEn: "NBA 2K25 (High)", z: 0.75, d: 0.15 },
-{ adTr: "NBA 2K25 (Ultra)", adEn: "NBA 2K25 (Ultra)", z: 0.55, d: 0.15 },
-{ adTr: "NBA 2K26 (Düşük)", adEn: "NBA 2K26 (Low)", z: 1.05, d: 0.16 },
-{ adTr: "NBA 2K26 (Yüksek)", adEn: "NBA 2K26 (High)", z: 0.70, d: 0.16 },
-{ adTr: "NBA 2K26 (Ultra)", adEn: "NBA 2K26 (Ultra)", z: 0.50, d: 0.18 },
-{ adTr: "Rust (Düşük)", adEn: "Rust (Low)", z: 1.25, d: 0.22 },
-{ adTr: "Rust (Yüksek)", adEn: "Rust (High)", z: 0.85, d: 0.25 },
-{ adTr: "Rust (Ultra)", adEn: "Rust (Ultra)", z: 0.60, d: 0.28 },
-{ adTr: "007 First Light (Düşük)", adEn: "007 First Light (Low)", z: 0.85, d: 0.18 },
-{ adTr: "007 First Light (Yüksek)", adEn: "007 First Light (High)", z: 0.55, d: 0.20 },
-{ adTr: "007 First Light (Ultra )", adEn: "007 First Light (Ultra)", z: 0.35, d: 0.24 },
-{ adTr: "Resident Evil 2 Remake (Düşük)", adEn: "Resident Evil 2 Remake (Low)", z: 1.50, d: 0.12 },
-{ adTr: "Resident Evil 2 Remake (Orta)", adEn: "Resident Evil 2 Remake (Medium)", z: 1.25, d: 0.12 },
-{ adTr: "Resident Evil 2 Remake (Yüksek)", adEn: "Resident Evil 2 Remake (High)", z: 1.05, d: 0.12 },
-{ adTr: "Resident Evil 3 Remake (Düşük)", adEn: "Resident Evil 3 Remake (Low)", z: 1.55, d: 0.12 },
-{ adTr: "Resident Evil 3 Remake (Orta)", adEn: "Resident Evil 3 Remake (Medium)", z: 1.30, d: 0.12 },
-{ adTr: "Resident Evil 3 Remake (Yüksek)", adEn: "Resident Evil 3 Remake (High)", z: 1.10, d: 0.12 },
-{ adTr: "Resident Evil 3 Remake (Ultra)", adEn: "Resident Evil 3 Remake (Ultra)", z: 0.80, d: 0.14 },
-{ adTr: "Resident Evil 4 Remake (Düşük)", adEn: "Resident Evil 4 Remake (Low)", z: 1.15, d: 0.16 },
-{ adTr: "Resident Evil 4 Remake (Orta)", adEn: "Resident Evil 4 Remake (Medium)", z: 0.95, d: 0.16 },
-{ adTr: "Resident Evil 4 Remake (Yüksek)", adEn: "Resident Evil 4 Remake (High)", z: 0.78, d: 0.16 },
-{ adTr: "Resident Evil 4 Remake (Ultra)", adEn: "Resident Evil 4 Remake (Ultra)", z: 0.55, d: 0.18 },
-{ adTr: "Resident Evil Requiem (Düşük)", adEn: "Resident Evil Requiem (Low)", z: 0.75, d: 0.20 },
-{ adTr: "Resident Evil Requiem (Orta)", adEn: "Resident Evil Requiem (Medium)", z: 0.60, d: 0.21 },
-{ adTr: "Resident Evil Requiem (Yüksek)", adEn: "Resident Evil Requiem (High)", z: 0.50, d: 0.22 },
-{ adTr: "Resident Evil Requiem (Ultra)", adEn: "Resident Evil Requiem (Ultra)", z: 0.32, d: 0.25 },
-],
+{ adTr: "Farming Simulator 19 (Yüksek)", adEn: "Farming Simulator 19 (High)", z: 1.2, d: 0.12 }
+]
 };
 
-function doldur() {
-    const g = document.getElementById("gpu"),
-    c = document.getElementById("cpu"),
-    r = document.getElementById("ram"),
-    e = document.getElementById("cozunurluk"),
-    o = document.getElementById("oyun");
-    
-    g.innerHTML = "";
-    c.innerHTML = "";
-    r.innerHTML = "";
-    e.innerHTML = "";
-    o.innerHTML = "";
-    
-    veri.ekranKartlari.forEach(x => {
-        let isim = (aktifDil === "tr") ? x.adTr : x.adEn;
-        g.innerHTML += `<option value="${x.p}">${isim}</option>`;
+function secimleriDoldur() {
+    const gpuSelect = document.getElementById("gpu");
+    const cpuSelect = document.getElementById("cpu");
+    const ramSelect = document.getElementById("ram");
+    const cozSelect = document.getElementById("cozunurluk");
+    const oyunSelect = document.getElementById("oyun");
+
+    gpuSelect.innerHTML = "";
+    cpuSelect.innerHTML = "";
+    ramSelect.innerHTML = "";
+    cozSelect.innerHTML = "";
+    oyunSelect.innerHTML = "";
+
+    veri.ekranKartlari.forEach((item, index) => {
+        let opt = document.createElement("option");
+        opt.value = index;
+        opt.textContent = aktifDil === "tr" ? item.adTr : item.adEn;
+        gpuSelect.appendChild(opt);
     });
-    veri.islemciler.forEach(x => {
-        let isim = (aktifDil === "tr") ? x.adTr : x.adEn;
-        c.innerHTML += `<option value="${x.p}">${isim}</option>`;
+
+    veri.islemciler.forEach((item, index) => {
+        let opt = document.createElement("option");
+        opt.value = index;
+        opt.textContent = aktifDil === "tr" ? item.adTr : item.adEn;
+        cpuSelect.appendChild(opt);
     });
-    veri.ramler.forEach(x => {
-        let isim = (aktifDil === "tr") ? x.adTr : x.adEn;
-        r.innerHTML += `<option value="${x.c}">${isim}</option>`;
+
+    veri.ramler.forEach((item, index) => {
+        let opt = document.createElement("option");
+        opt.value = index;
+        opt.textContent = aktifDil === "tr" ? item.adTr : item.adEn;
+        ramSelect.appendChild(opt);
     });
-    veri.cozunurlukler.forEach(x => {
-        let isim = (aktifDil === "tr") ? x.adTr : x.adEn;
-        e.innerHTML += `<option value="${x.p}">${isim}</option>`;
+
+    veri.cozunurlukler.forEach((item, index) => {
+        let opt = document.createElement("option");
+        opt.value = index;
+        opt.textContent = aktifDil === "tr" ? item.adTr : item.adEn;
+        cozSelect.appendChild(opt);
     });
-    veri.oyunlar.forEach((x, index) => {
-        let isim = (aktifDil === "tr") ? x.adTr : x.adEn;
-        o.innerHTML += `<option value="${index}">${isim}</option>`;
+
+    veri.oyunlar.forEach((item, index) => {
+        let opt = document.createElement("option");
+        opt.value = index;
+        opt.textContent = aktifDil === "tr" ? item.adTr : item.adEn;
+        oyunSelect.appendChild(opt);
     });
 }
 
 function dilDegistir() {
-    aktifDil = (aktifDil === "tr") ? "en" : "tr";
-    document.getElementById("lang-toggle").innerText = (aktifDil === "tr") ? "EN" : "TR";
-    
-    document.getElementById("txt-baslik").innerText = metinler[aktifDil].baslik;
-    document.getElementById("txt-lbl-gpu").innerText = metinler[aktifDil].lblGpu;
-    document.getElementById("txt-lbl-cpu").innerText = metinler[aktifDil].lblCpu;
-    document.getElementById("txt-lbl-ram").innerText = metinler[aktifDil].lblRam;
-    document.getElementById("txt-lbl-coz").innerText = metinler[aktifDil].lblCoz;
-    document.getElementById("txt-lbl-oyun").innerText = metinler[aktifDil].lblOyun;
-    document.getElementById("txt-btn-hesapla").innerText = metinler[aktifDil].btnHesapla;
+    aktifDil = aktifDil === "tr" ? "en" : "tr";
+    document.getElementById("lang-toggle").textContent = aktifDil === "tr" ? "EN" : "TR";
 
-    document.getElementById("txt-toc-title").innerText = metinler[aktifDil].tocTitle;
-    document.getElementById("txt-toc-1").innerText = metinler[aktifDil].toc1;
-    document.getElementById("txt-toc-2").innerText = metinler[aktifDil].toc2;
-    document.getElementById("txt-toc-3").innerText = metinler[aktifDil].toc3;
-    document.getElementById("txt-toc-4").innerText = metinler[aktifDil].toc4;
+    const t = metinler[aktifDil];
+    document.getElementById("txt-baslik").textContent = t.baslik;
+    document.getElementById("txt-lbl-gpu").textContent = t.lblGpu;
+    document.getElementById("txt-lbl-cpu").textContent = t.lblCpu;
+    document.getElementById("txt-lbl-ram").textContent = t.lblRam;
+    document.getElementById("txt-lbl-coz").textContent = t.lblCoz;
+    document.getElementById("txt-lbl-oyun").textContent = t.lblOyun;
+    document.getElementById("txt-btn-hesapla").textContent = t.btnHesapla;
+    document.getElementById("fps-etiket").textContent = t.fpsEtiket;
 
-    document.getElementById("txt-sec1-title").innerText = metinler[aktifDil].sec1Title;
-    document.getElementById("txt-sec1-desc").innerHTML = metinler[aktifDil].sec1Desc;
-    document.getElementById("txt-th-fps").innerText = metinler[aktifDil].thFps;
-    document.getElementById("txt-th-exp").innerText = metinler[aktifDil].thExp;
-    document.getElementById("txt-t1").innerText = metinler[aktifDil].t1;
-    document.getElementById("txt-t2").innerText = metinler[aktifDil].t2;
-    document.getElementById("txt-t3").innerText = metinler[aktifDil].t3;
-    document.getElementById("txt-t4").innerText = metinler[aktifDil].t4;
+    document.getElementById("txt-toc-title").textContent = t.tocTitle;
+    document.getElementById("txt-toc-1").textContent = t.toc1;
+    document.getElementById("txt-toc-2").textContent = t.toc2;
+    document.getElementById("txt-toc-3").textContent = t.toc3;
+    document.getElementById("txt-toc-4").textContent = t.toc4;
 
-    document.getElementById("txt-sec2-title").innerText = metinler[aktifDil].sec2Title;
-    document.getElementById("txt-sec2-desc").innerText = metinler[aktifDil].sec2Desc;
-    document.getElementById("txt-li-gpu").innerHTML = metinler[aktifDil].liGpu;
-    document.getElementById("txt-li-cpu").innerHTML = metinler[aktifDil].liCpu;
-    document.getElementById("txt-li-ram").innerHTML = metinler[aktifDil].liRam;
-    document.getElementById("txt-li-res").innerHTML = metinler[aktifDil].liRes;
+    document.getElementById("txt-sec1-title").textContent = t.sec1Title;
+    document.getElementById("txt-sec1-desc").innerHTML = t.sec1Desc;
+    document.getElementById("txt-th-fps").textContent = t.thFps;
+    document.getElementById("txt-th-exp").textContent = t.thExp;
+    document.getElementById("txt-t1").textContent = t.t1;
+    document.getElementById("txt-t2").textContent = t.t2;
+    document.getElementById("txt-t3").textContent = t.t3;
+    document.getElementById("txt-t4").textContent = t.t4;
 
-    document.getElementById("txt-sec3-title").innerText = metinler[aktifDil].sec3Title;
-    document.getElementById("txt-sec3-desc").innerText = metinler[aktifDil].sec3Desc;
-    document.getElementById("txt-boost-1").innerText = metinler[aktifDil].boost1;
-    document.getElementById("txt-boost-2").innerText = metinler[aktifDil].boost2;
-    document.getElementById("txt-boost-3").innerText = metinler[aktifDil].boost3;
-    document.getElementById("txt-boost-4").innerText = metinler[aktifDil].boost4;
-    document.getElementById("txt-boost-5").innerText = metinler[aktifDil].boost5;
-    document.getElementById("txt-boost-6").innerText = metinler[aktifDil].boost6;
+    document.getElementById("txt-sec2-title").textContent = t.sec2Title;
+    document.getElementById("txt-sec2-desc").textContent = t.sec2Desc;
+    document.getElementById("txt-li-gpu").innerHTML = t.liGpu;
+    document.getElementById("txt-li-cpu").innerHTML = t.liCpu;
+    document.getElementById("txt-li-ram").innerHTML = t.liRam;
+    document.getElementById("txt-li-res").innerHTML = t.liRes;
 
-    document.getElementById("txt-sec4-title").innerText = metinler[aktifDil].sec4Title;
-    document.getElementById("txt-q1").innerText = metinler[aktifDil].q1;
-    document.getElementById("txt-a1").innerText = metinler[aktifDil].a1;
-    document.getElementById("txt-q2").innerText = metinler[aktifDil].q2;
-    document.getElementById("txt-a2").innerText = metinler[aktifDil].a2;
-    document.getElementById("txt-q3").innerText = metinler[aktifDil].q3;
-    document.getElementById("txt-a3").innerText = metinler[aktifDil].a3;
-    document.getElementById("txt-q4").innerText = metinler[aktifDil].q4;
-    document.getElementById("txt-a4").innerText = metinler[aktifDil].a4;
-    document.getElementById("txt-q5").innerText = metinler[aktifDil].q5;
-    document.getElementById("txt-a5").innerText = metinler[aktifDil].a5;
-    document.getElementById("txt-q6").innerText = metinler[aktifDil].q6;
-    document.getElementById("txt-a6").innerText = metinler[aktifDil].a6;
-    
-    doldur();
+    document.getElementById("txt-sec3-title").textContent = t.sec3Title;
+    document.getElementById("txt-sec3-desc").textContent = t.sec3Desc;
+    document.getElementById("txt-boost-1").textContent = t.boost1;
+    document.getElementById("txt-boost-2").textContent = t.boost2;
+    document.getElementById("txt-boost-3").textContent = t.boost3;
+    document.getElementById("txt-boost-4").textContent = t.boost4;
+    document.getElementById("txt-boost-5").textContent = t.boost5;
+    document.getElementById("txt-boost-6").textContent = t.boost6;
 
-    let etiket = document.getElementById("fps-etiket");
-    let fpsGosterge = document.getElementById("fps");
-    if(fpsGosterge.innerText.includes("Kaldırmaz") || fpsGosterge.innerText.includes("Can't Run")) {
-        etiket.innerText = metinler[aktifDil].yetersizEtiket;
-        fpsGosterge.innerText = metinler[aktifDil].kaldirmaz;
-    } else {
-        etiket.innerText = metinler[aktifDil].fpsEtiket;
-    }
+    document.getElementById("txt-sec4-title").textContent = t.sec4Title;
+    document.getElementById("txt-q1").textContent = t.q1;
+    document.getElementById("txt-a1").textContent = t.a1;
+    document.getElementById("txt-q2").textContent = t.q2;
+    document.getElementById("txt-a2").textContent = t.a2;
+    document.getElementById("txt-q3").textContent = t.q3;
+    document.getElementById("txt-a3").textContent = t.a3;
+    document.getElementById("txt-q4").textContent = t.q4;
+    document.getElementById("txt-a4").textContent = t.a4;
+    document.getElementById("txt-q5").textContent = t.q5;
+    document.getElementById("txt-a5").textContent = t.a5;
+    document.getElementById("txt-q6").textContent = t.q6;
+    document.getElementById("txt-a6").textContent = t.a6;
+
+    secimleriDoldur();
 }
 
 function temaDegistir() {
     document.body.classList.toggle("light-mode");
-    const temaButonu = document.getElementById("theme-toggle");
+    const themeBtn = document.getElementById("theme-toggle");
     if (document.body.classList.contains("light-mode")) {
-        temaButonu.innerText = "☀️";
+        themeBtn.textContent = "☀️";
     } else {
-        temaButonu.innerText = "🌙";
+        themeBtn.textContent = "🌙";
     }
 }
 
 function hesapla() {
-    let gp = parseFloat(document.getElementById("gpu").value);
-    let cp = parseFloat(document.getElementById("cpu").value);
-    let rm = parseFloat(document.getElementById("ram").value);
-    let cz = parseFloat(document.getElementById("cozunurluk").value);
-    let oyunIndex = document.getElementById("oyun").value;
-    
-    let oyunVerisi = veri.oyunlar[oyunIndex];
-    let oy = oyunVerisi.z;
-    let dalgalanma = oyunVerisi.d;
+    const gpuIdx = document.getElementById("gpu").value;
+    const cpuIdx = document.getElementById("cpu").value;
+    const ramIdx = document.getElementById("ram").value;
+    const cozIdx = document.getElementById("cozunurluk").value;
+    const oyunIdx = document.getElementById("oyun").value;
 
-    let czCarpani = Math.pow(cz / 15, 0.75); 
-    let temelFps = ((gp * 0.70) + (cp * 0.60)) * rm * oy * czCarpani;
+    const gpuP = veri.ekranKartlari[gpuIdx].p;
+    const cpuP = veri.islemciler[cpuIdx].p;
+    const ramC = veri.ramler[ramIdx].c;
+    const cozP = veri.cozunurlukler[cozIdx].p;
+    const oyunZ = veri.oyunlar[oyunIdx].z;
 
-    let alt = Math.floor(temelFps * (1 - dalgalanma));
-    let ust = Math.floor(temelFps * (1 + dalgalanma));
+    let hamFps = ((gpuP * 0.5) + (cpuP * 0.3) + (cozP * 0.2)) * oyunZ * ramC;
+    let minFps = Math.floor(hamFps * 0.85);
+    let maxFps = Math.floor(hamFps * 1.15);
 
-    let fpsGosterge = document.getElementById("fps");
-    let etiket = document.getElementById("fps-etiket");
+    if (minFps < 10) minFps = 10;
+    if (maxFps < 15) maxFps = 15;
 
-    if (ust < 30) {
-        fpsGosterge.innerText = metinler[aktifDil].kaldirmaz;
-        fpsGosterge.style.color = "#ff4444";
-        fpsGosterge.style.fontSize = "30px";
-        etiket.innerText = metinler[aktifDil].yetersizEtiket;
-    } else {
-        fpsGosterge.innerText = alt + " - " + ust;
-        fpsGosterge.style.color = "#3fb950";
-        fpsGosterge.style.fontSize = "40px";
-        etiket.innerText = metinler[aktifDil].fpsEtiket;
-    }
+    const fpsElement = document.getElementById("fps");
+    fpsElement.textContent = `${minFps} - ${maxFps}`;
 }
 
-// Akordiyon Açma / Kapatma Fonksiyonu
-function toggleAccordion(button) {
-    const section = button.parentElement;
-    section.classList.toggle('active');
-    const span = button.querySelector('span:last-child');
-    if (section.classList.contains('active')) {
-        span.innerText = '-';
-    } else {
-        span.innerText = '+';
-    }
-}
-
-// İçindekilerden Tıklandığında İlgili Bölümü Açıp Oraya Kaydırma
-function tocGit(id) {
-    const section = document.getElementById(id);
-    if (section) {
-        if (!section.classList.contains('active')) {
-            section.classList.add('active');
-            const span = section.querySelector('.accordion-header span:last-child');
-            if (span) span.innerText = '-';
-        }
-        setTimeout(() => {
-            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 50);
-    }
-}
-
-// SSS İçi Akordiyon Fonksiyonu
-function toggleFaq(event, button) {
-    event.stopPropagation();
-    const item = button.parentElement;
-    item.classList.toggle('active');
-    const span = button.querySelector('span:last-child');
-    if (item.classList.contains('active')) {
-        span.innerText = '-';
-    } else {
-        span.innerText = '+';
-    }
-}
-
-window.onload = doldur;
+window.onload = function() {
+    secimleriDoldur();
+};
 </script>
 </body>
 </html>
