@@ -12,19 +12,21 @@
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
-            background: #0d1117;
+            background: #050505;
             color: white;
             display: flex;
             justify-content: center;
             padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
         }
         .container {
-            background: #161b22;
+            background: #000000;
             padding: 25px;
             border-radius: 12px;
             width: 450px;
             border: 1px solid #30363d;
             box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            transition: background-color 0.3s, border-color 0.3s;
         }
         h2 {
             text-align: center;
@@ -48,7 +50,7 @@
             color: white;
             border-radius: 6px;
         }
-        button {
+        button.hesapla-btn {
             width: 100%;
             padding: 15px;
             margin-top: 25px;
@@ -60,14 +62,14 @@
             cursor: pointer;
             font-size: 16px;
         }
-        button:hover {
+        button.hesapla-btn:hover {
             background: #2ea043;
         }
         .result-box {
             margin-top: 20px;
             padding: 15px;
-            background: #0d1117;
-            border: 2px solid #58a6ff;
+            background: #000000;
+            border: 1px solid #30363d;
             border-radius: 8px;
             text-align: center;
             min-height: 100px;
@@ -75,6 +77,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            transition: background-color 0.3s, border-color 0.3s;
         }
         #fps {
             font-size: 40px;
@@ -82,112 +85,85 @@
             display: block;
             font-weight: bold;
         }
-        /* Mod Değiştir Butonu */
-#theme-toggle {
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    margin: 0;
-    padding: 8px 16px;
-    font-size: 14px;
-    background: #28a745;
-    border: none;
-    border-radius: 6px;
-    color: #ffffff;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 9999;
-}
 
-/* Aydınlık Mod Sınıfı */
-body.light-mode {
-    background: #f0f2f5;
-    color: #000;
-}
-body.light-mode .container {
-    background: #ffffff;
-    border: 1px solid #d0d7de;
-}
-body.light-mode select {
-    background: #f6f8fa;
-    border: 1px solid #d0d7de;
-    color: #000;
-}
-body.light-mode label { color: #57606a; }
-        /* Butonun varsayılan (Gece Modu) hali */
-#theme-toggle {
-    background-color: #ffffff;
-    color: #000000;
-    transition: background-color 0.3s, color 0.3s;
-}
+        /* Sağ Üst Butonlar Konteyneri */
+        .top-controls {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 8px;
+            z-index: 9999;
+        }
 
-/* Butonun Gündüz Modu hali */
-body.light-mode #theme-toggle {
-    background-color: #000000;
-    color: #ffffff;
-}
-        /* FPS Kutusu - Gece Modu (Varsayılan) */
-.result-box {
-    background-color: #1a1a1a; 
-    color: #00ff00; /* FPS değeri için yeşil tonu */
-    border: 1px solid #333;
-    transition: background-color 0.3s, color 0.3s;
-}
+        /* Üst Butonların Ortak Stili */
+        .top-btn {
+            padding: 8px 14px;
+            font-size: 13px;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            background: #ffffff;
+            color: #000000;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
 
-/* FPS Kutusu - Aydınlık Mod */
-body.light-mode .result-box {
-    background-color: #eeeeee; /* Açık gri */
-    color: #000000;            /* Siyah yazı */
-    border: 1px solid #cccccc;
-}
-        /* Ana Kutu (FPS Analiz Merkezi) - Gece Modu */
-.container {
-    background-color: #000000; /* Tam siyah/koyu gri */
-    border: 1px solid #30363d;
-    color: #ffffff;
-}
-
-/* FPS Sonuç Kutusu - Gece Modu */
-.result-box {
-    background-color: #000000; /* Burayı tam siyah yaptık */
-    border: 1px solid #30363d;
-    color: #ffffff;
-}
-        /* Genel Arka Plan - Gece Modu */
-body {
-    background-color: #050505;
-    transition: background-color 0.3s;
-}
-
-/* Genel Arka Plan - Gündüz Modu */
-body.light-mode {
-    background-color: #f0f0f0;
-}
+        /* Aydınlık Mod (Light Mode) Sınıfları */
+        body.light-mode {
+            background-color: #f0f0f0;
+            color: #000;
+        }
         body.light-mode .container {
-    background-color: #ffffff; /* Gündüz modunda beyaz olsun */
-}
+            background-color: #ffffff;
+            border: 1px solid #d0d7de;
+        }
+        body.light-mode select {
+            background: #f6f8fa;
+            border: 1px solid #d0d7de;
+            color: #000;
+        }
+        body.light-mode label { 
+            color: #57606a; 
+        }
         body.light-mode .result-box {
-    background-color: #f6f8fa !important; /* Gündüz için açık bir renk */
-    color: #000 !important; /* Yazıları siyah yap */
-    border: 1px solid #d0d7de;
-}
+            background-color: #f6f8fa !important;
+            border: 1px solid #d0d7de;
+        }
+        body.light-mode .top-btn {
+            background-color: #000000;
+            color: #ffffff;
+            border-color: #30363d;
+        }
     </style>
 </head>
 <body>
-    <button id="theme-toggle">Dark/Light</button>
+    <!-- Sağ üst köşe butonları (Dil ve Tema) -->
+    <div class="top-controls">
+        <button id="lang-toggle" class="top-btn" onclick="dilDegistir()">EN</button>
+        <button id="theme-toggle" class="top-btn" onclick="temaDegistir()">🌙</button>
+    </div>
+
     <div class="container">
-        <h2>FPS ANALİZ MERKEZİ</h2>
-        <label>EKRAN KARTI (GPU)</label>
+        <h2 id="txt-baslik">FPS ANALİZ MERKEZİ</h2>
+        
+        <label id="txt-lbl-gpu">EKRAN KARTI (GPU)</label>
         <select id="gpu"></select>
-        <label>İŞLEMCİ (CPU)</label>
+        
+        <label id="txt-lbl-cpu">İŞLEMCİ (CPU)</label>
         <select id="cpu"></select>
-        <label>RAM (BELLEK)</label>
+        
+        <label id="txt-lbl-ram">RAM (BELLEK)</label>
         <select id="ram"></select>
-        <label>Ekran Çözününürlüğü (GÖRÜNTÜ KALİTESİ)</label>
+        
+        <label id="txt-lbl-coz">Ekran Çözünürlüğü (GÖRÜNTÜ KALİTESİ)</label>
         <select id="cozunurluk"></select>
-        <label>OYUN VE AYAR SEÇİMİ</label>
+        
+        <label id="txt-lbl-oyun">OYUN VE AYAR SEÇİMİ</label>
         <select id="oyun"></select>
-        <button type="button" onclick="hesapla()">PERFORMANSI TEST ET</button>
+        
+        <button type="button" class="hesapla-btn" id="txt-btn-hesapla" onclick="hesapla()">PERFORMANSI TEST ET</button>
+        
         <div class="result-box">
             <span id="fps">0 - 0</span>
             <p id="fps-etiket" style="margin:0; font-size:14px; color:#8b949e;">
@@ -195,7 +171,72 @@ body.light-mode {
             </p>
         </div>
     </div>
+
 <script>
+// Dil Sözlüğü
+const metinler = {
+    tr: {
+        baslik: "FPS ANALİZ MERKEZİ",
+        lblGpu: "EKRAN KARTI (GPU)",
+        lblCpu: "İŞLEMCİ (CPU)",
+        lblRam: "RAM (BELLEK)",
+        lblCoz: "Ekran Çözünürlüğü (GÖRÜNTÜ KALİTESİ)",
+        lblOyun: "OYUN VE AYAR SEÇİMİ",
+        btnHesapla: "PERFORMANSI TEST ET",
+        fpsEtiket: "Tahmini FPS Aralığı",
+        yetersizEtiket: "Sistem Yetersiz",
+        kaldirmaz: "Kaldırmaz!"
+    },
+    en: {
+        baslik: "FPS ANALYSIS CENTER",
+        lblGpu: "GRAPHICS CARD (GPU)",
+        lblCpu: "PROCESSOR (CPU)",
+        lblRam: "RAM (MEMORY)",
+        lblCoz: "Screen Resolution (IMAGE QUALITY)",
+        lblOyun: "GAME AND SETTING SELECTION",
+        btnHesapla: "TEST PERFORMANCE",
+        fpsEtiket: "Estimated FPS Range",
+        yetersizEtiket: "System Insufficient",
+        kaldirmaz: "Can't Run!"
+    }
+};
+
+let aktifDil = "tr";
+
+function dilDegistir() {
+    aktifDil = (aktifDil === "tr") ? "en" : "tr";
+    document.getElementById("lang-toggle").innerText = (aktifDil === "tr") ? "EN" : "TR";
+    
+    // Metinleri güncelle
+    document.getElementById("txt-baslik").innerText = metinler[aktifDil].baslik;
+    document.getElementById("txt-lbl-gpu").innerText = metinler[aktifDil].lblGpu;
+    document.getElementById("txt-lbl-cpu").innerText = metinler[aktifDil].lblCpu;
+    document.getElementById("txt-lbl-ram").innerText = metinler[aktifDil].lblRam;
+    document.getElementById("txt-lbl-coz").innerText = metinler[aktifDil].lblCoz;
+    document.getElementById("txt-lbl-oyun").innerText = metinler[aktifDil].lblOyun;
+    document.getElementById("txt-btn-hesapla").innerText = metinler[aktifDil].btnHesapla;
+    
+    // Eğer hesaplama yapıldıysa sonuç etiketini de dile göre güncelle
+    let etiket = document.getElementById("fps-etiket");
+    let fpsGosterge = document.getElementById("fps");
+    if(fpsGosterge.innerText.includes("Kaldırmaz") || fpsGosterge.innerText.includes("Can't Run")) {
+        etiket.innerText = metinler[aktifDil].yetersizEtiket;
+        fpsGosterge.innerText = metinler[aktifDil].kaldirmaz;
+    } else if(fpsGosterge.innerText !== "0 - 0") {
+        etiket.innerText = metinler[aktifDil].fpsEtiket;
+    }
+}
+
+function temaDegistir() {
+    document.body.classList.toggle("light-mode");
+    const temaButonu = document.getElementById("theme-toggle");
+    if (document.body.classList.contains("light-mode")) {
+        temaButonu.innerText = "☀️";
+    } else {
+        temaButonu.innerText = "🌙";
+    }
+}
+
 const veri = {
 ekranKartlari: [
 { ad: "NVIDIA RTX 5090 (Masaüstü)", p: 380 },
@@ -706,33 +747,37 @@ oyunlar: [
 { ad: "Resident Evil Requiem (Ultra)", z: 0.32, d: 0.25 },
 ],
 };
+
 function doldur() {
-const g = document.getElementById("gpu"),
-c = document.getElementById("cpu"),
-r = document.getElementById("ram"),
-e = document.getElementById("cozunurluk"),
-o = document.getElementById("oyun");
-g.innerHTML = "";
-c.innerHTML = "";
-r.innerHTML = "";
-e.innerHTML = "";
-o.innerHTML = "";
-veri.ekranKartlari.forEach(x =>
-g.innerHTML += `<option value="${x.p}">${x.ad}</option>`
-);
-veri.islemciler.forEach(x =>
-c.innerHTML += `<option value="${x.p}">${x.ad}</option>`
-);
-veri.ramler.forEach(x =>
-r.innerHTML += `<option value="${x.c}">${x.ad}</option>`
-);
-veri.cozunurlukler.forEach(x =>
-e.innerHTML += `<option value="${x.p}">${x.ad}</option>`
-);
-veri.oyunlar.forEach((x, index) =>
-o.innerHTML += `<option value="${index}">${x.ad}</option>`
-);
+    const g = document.getElementById("gpu"),
+    c = document.getElementById("cpu"),
+    r = document.getElementById("ram"),
+    e = document.getElementById("cozunurluk"),
+    o = document.getElementById("oyun");
+    
+    g.innerHTML = "";
+    c.innerHTML = "";
+    r.innerHTML = "";
+    e.innerHTML = "";
+    o.innerHTML = "";
+    
+    veri.ekranKartlari.forEach(x =>
+        g.innerHTML += `<option value="${x.p}">${x.ad}</option>`
+    );
+    veri.islemciler.forEach(x =>
+        c.innerHTML += `<option value="${x.p}">${x.ad}</option>`
+    );
+    veri.ramler.forEach(x =>
+        r.innerHTML += `<option value="${x.c}">${x.ad}</option>`
+    );
+    veri.cozunurlukler.forEach(x =>
+        e.innerHTML += `<option value="${x.p}">${x.ad}</option>`
+    );
+    veri.oyunlar.forEach((x, index) =>
+        o.innerHTML += `<option value="${index}">${x.ad}</option>`
+    );
 }
+
 function hesapla() {
     let gp = parseFloat(document.getElementById("gpu").value);
     let cp = parseFloat(document.getElementById("cpu").value);
@@ -754,20 +799,18 @@ function hesapla() {
     let etiket = document.getElementById("fps-etiket");
 
     if (ust < 30) {
-        fpsGosterge.innerText = "Kaldırmaz!";
+        fpsGosterge.innerText = metinler[aktifDil].kaldirmaz;
         fpsGosterge.style.color = "#ff4444";
         fpsGosterge.style.fontSize = "30px";
-        etiket.innerText = "Sistem Yetersiz";
+        etiket.innerText = metinler[aktifDil].yetersizEtiket;
     } else {
         fpsGosterge.innerText = alt + " - " + ust;
         fpsGosterge.style.color = "#3fb950";
         fpsGosterge.style.fontSize = "40px";
-        etiket.innerText = "Tahmini FPS Aralığı";
+        etiket.innerText = metinler[aktifDil].fpsEtiket;
     }
 }
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-    document.body.classList.toggle("light-mode");
-});
+
 window.onload = doldur;
 </script>
 </body>
