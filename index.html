@@ -136,12 +136,12 @@
             text-decoration: underline;
         }
 
-        /* İçerik Bölümleri Stili */
+        /* İçerik Bölümleri (Akordiyon Ana Kutu) Stili */
         .content-section {
             background: #000000;
             border: 1px solid #30363d;
             border-radius: 12px;
-            padding: 25px;
+            padding: 15px 20px;
             margin-top: 25px;
             width: 100%;
             max-width: 450px;
@@ -149,10 +149,38 @@
             box-shadow: 0 8px 32px rgba(0,0,0,0.5);
             transition: background-color 0.3s, border-color 0.3s;
         }
-        .content-section h3 {
+        
+        /* Akordiyon Başlık Butonu */
+        .accordion-header {
+            width: 100%;
+            background: none;
+            border: none;
             color: #58a6ff;
-            margin-top: 0;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
         }
+        .accordion-header span {
+            font-size: 20px;
+        }
+
+        /* Akordiyon İçerik Alanı */
+        .accordion-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0;
+        }
+        .content-section.active .accordion-body {
+            max-height: 1000px;
+            padding-top: 15px;
+        }
+
         .content-section p, .content-section ul {
             font-size: 14px;
             color: #c9d1d9;
@@ -166,7 +194,7 @@
             margin-bottom: 6px;
         }
 
-        /* Akordiyon (Açılır-Kapanır SSS) Stilleri */
+        /* Akordiyon İçi SSS Öğeleri */
         .faq-item {
             background: #0d1117;
             border: 1px solid #30363d;
@@ -283,6 +311,9 @@
         body.light-mode .content-section li {
             color: #24292f;
         }
+        body.light-mode .accordion-header {
+            color: #0969da;
+        }
         body.light-mode .faq-item {
             background: #f6f8fa;
             border-color: #d0d7de;
@@ -349,138 +380,156 @@
             </ul>
         </div>
 
-        <!-- Bölüm 1: FPS Nedir? -->
+        <!-- Bölüm 1: FPS Nedir? (Akordiyon) -->
         <div id="fps-nedir" class="content-section">
-            <h3 id="txt-sec1-title">FPS Nedir?</h3>
-            <p id="txt-sec1-desc">FPS, İngilizce <strong>Frames Per Second</strong> kelimesinin kısaltmasıdır. Türkçesi saniyedeki kare sayısıdır. Oyunlarda ne kadar yüksek FPS alırsanız görüntü o kadar akıcı olur.</p>
-            <table class="fps-table">
-                <thead>
-                    <tr>
-                        <th id="txt-th-fps">FPS Değeri</th>
-                        <th id="txt-th-exp">Oyun Deneyimi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>30 FPS</td>
-                        <td id="txt-t1">Oynanabilir</td>
-                    </tr>
-                    <tr>
-                        <td>60 FPS</td>
-                        <td id="txt-t2">Akıcı</td>
-                    </tr>
-                    <tr>
-                        <td>120 FPS</td>
-                        <td id="txt-t3">Çok Akıcı</td>
-                    </tr>
-                    <tr>
-                        <td>144+ FPS</td>
-                        <td id="txt-t4">Rekabetçi Oyuncular İçin İdeal</td>
-                    </tr>
-                </tbody>
-            </table>
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span id="txt-sec1-title">FPS Nedir?</span> <span>+</span>
+            </button>
+            <div class="accordion-body">
+                <p id="txt-sec1-desc">FPS, İngilizce <strong>Frames Per Second</strong> kelimesinin kısaltmasıdır. Türkçesi saniyedeki kare sayısıdır. Oyunlarda ne kadar yüksek FPS alırsanız görüntü o kadar akıcı olur.</p>
+                <table class="fps-table">
+                    <thead>
+                        <tr>
+                            <th id="txt-th-fps">FPS Değeri</th>
+                            <th id="txt-th-exp">Oyun Deneyimi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>30 FPS</td>
+                            <td id="txt-t1">Oynanabilir</td>
+                        </tr>
+                        <tr>
+                            <td>60 FPS</td>
+                            <td id="txt-t2">Akıcı</td>
+                        </tr>
+                        <tr>
+                            <td>120 FPS</td>
+                            <td id="txt-t3">Çok Akıcı</td>
+                        </tr>
+                        <tr>
+                            <td>144+ FPS</td>
+                            <td id="txt-t4">Rekabetçi Oyuncular İçin İdeal</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-        <!-- Bölüm 2: Oyun FPS Hesaplama Nasıl Yapılır? -->
+        <!-- Bölüm 2: Oyun FPS Hesaplama Nasıl Yapılır? (Akordiyon) -->
         <div id="fps-hesaplama" class="content-section">
-            <h3 id="txt-sec2-title">Oyun FPS Hesaplama Nasıl Yapılır?</h3>
-            <p id="txt-sec2-desc">FPS değeri aşağıdaki donanımlara göre değişir:</p>
-            <ul>
-                <li id="txt-li-gpu"><strong>Ekran Kartı (GPU):</strong> Grafik işlemlerini yürütür.</li>
-                <li id="txt-li-cpu"><strong>İşlemci (CPU):</strong> Oyun içindeki hesaplamaları yapar.</li>
-                <li id="txt-li-ram"><strong>RAM:</strong> Anlık verileri saklar.</li>
-                <li id="txt-li-res"><strong>Çözünürlük:</strong> Görüntü kalitesi arttıkça yük biner.</li>
-            </ul>
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span id="txt-sec2-title">Oyun FPS Hesaplama Nasıl Yapılır?</span> <span>+</span>
+            </button>
+            <div class="accordion-body">
+                <p id="txt-sec2-desc">FPS değeri aşağıdaki donanımlara göre değişir:</p>
+                <ul>
+                    <li id="txt-li-gpu"><strong>Ekran Kartı (GPU):</strong> Grafik işlemlerini yürütür.</li>
+                    <li id="txt-li-cpu"><strong>İşlemci (CPU):</strong> Oyun içindeki hesaplamaları yapar.</li>
+                    <li id="txt-li-ram"><strong>RAM:</strong> Anlık verileri saklar.</li>
+                    <li id="txt-li-res"><strong>Çözünürlük:</strong> Görüntü kalitesi arttıkça yük biner.</li>
+                </ul>
+            </div>
         </div>
 
-        <!-- Bölüm 3: FPS Arttırma Yöntemleri -->
+        <!-- Bölüm 3: FPS Arttırma Yöntemleri (Akordiyon) -->
         <div id="fps-arttirma" class="content-section">
-            <h3 id="txt-sec3-title">FPS Arttırma Yöntemleri</h3>
-            <p id="txt-sec3-desc">Daha fazla FPS almak için şunları yapabilirsiniz:</p>
-            <ul>
-                <li id="txt-boost-1">Grafik ayarlarını düşürün</li>
-                <li id="txt-boost-2">Güncel ekran kartı sürücüsü kurun</li>
-                <li id="txt-boost-3">Arka planda çalışan programları kapatın</li>
-                <li id="txt-boost-4">SSD kullanın</li>
-                <li id="txt-boost-5">RAM yükseltin</li>
-                <li id="txt-boost-6">Performans modunu açın</li>
-            </ul>
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span id="txt-sec3-title">FPS Arttırma Yöntemleri</span> <span>+</span>
+            </button>
+            <div class="accordion-body">
+                <p id="txt-sec3-desc">Daha fazla FPS almak için şunları yapabilirsiniz:</p>
+                <ul>
+                    <li id="txt-boost-1">Grafik ayarlarını düşürün</li>
+                    <li id="txt-boost-2">Güncel ekran kartı sürücüsü kurun</li>
+                    <li id="txt-boost-3">Arka planda çalışan programları kapatın</li>
+                    <li id="txt-boost-4">SSD kullanın</li>
+                    <li id="txt-boost-5">RAM yükseltin</li>
+                    <li id="txt-boost-6">Performans modunu açın</li>
+                </ul>
+            </div>
         </div>
 
-        <!-- Bölüm 4: Sık Sorulan Sorular (Akordiyon Sistemi) -->
+        <!-- Bölüm 4: Sık Sorulan Sorular (Akordiyon) -->
         <div id="sik-sorulan-sorular" class="content-section">
-            <h3 id="txt-sec4-title">Sık Sorulan Sorular</h3>
-            
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    <span id="txt-q1">FPS Hesaplama Aracı Gerçek Sonuç Verir mi?</span> <span>+</span>
-                </button>
-                <div class="faq-answer">
-                    <p id="txt-a1">Araç, donanım özelliklerinize ve oyun motoru çarpanlarına bağlı olarak gerçeğe oldukça yakın tahmini bir performans aralığı sunar.</p>
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span id="txt-sec4-title">Sık Sorulan Sorular</span> <span>+</span>
+            </button>
+            <div class="accordion-body" style="padding-top: 10px;">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(event, this)">
+                        <span id="txt-q1">FPS Hesaplama Aracı Gerçek Sonuç Verir mi?</span> <span>+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p id="txt-a1">Araç, donanım özelliklerinize ve oyun motoru çarpanlarına bağlı olarak gerçeğe oldukça yakın tahmini bir performans aralığı sunar.</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    <span id="txt-q2">60 FPS Yeterli mi?</span> <span>+</span>
-                </button>
-                <div class="faq-answer">
-                    <p id="txt-a2">Günlük oyun deneyimleri ve hikayeli oyunlar için 60 FPS oldukça yeterli ve akıcıdır.</p>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(event, this)">
+                        <span id="txt-q2">60 FPS Yeterli mi?</span> <span>+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p id="txt-a2">Günlük oyun deneyimleri ve hikayeli oyunlar için 60 FPS oldukça yeterli ve akıcıdır.</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    <span id="txt-q3">144 FPS Gerekli mi?</span> <span>+</span>
-                </button>
-                <div class="faq-answer">
-                    <p id="txt-a3">Counter-Strike 2, Valorant gibi rekabetçi nişancı oyunlarında yüksek yenileme hızına sahip monitörler için önerilir.</p>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(event, this)">
+                        <span id="txt-q3">144 FPS Gerekli mi?</span> <span>+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p id="txt-a3">Counter-Strike 2, Valorant gibi rekabetçi nişancı oyunlarında yüksek yenileme hızına sahip monitörler için önerilir.</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    <span id="txt-q4">Laptop ve Masaüstü Performansı Neden Farklı?</span> <span>+</span>
-                </button>
-                <div class="faq-answer">
-                    <p id="txt-a4">Laptop bileşenleri ısınma ve güç (Watt) sınırlamaları nedeniyle masaüstü dengelerine göre biraz daha düşük performans verebilir.</p>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(event, this)">
+                        <span id="txt-q4">Laptop ve Masaüstü Performansı Neden Farklı?</span> <span>+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p id="txt-a4">Laptop bileşenleri ısınma ve güç (Watt) sınırlamaları nedeniyle masaüstü dengelerine göre biraz daha düşük performans verebilir.</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    <span id="txt-q5">Çözünürlük FPS'i Nasıl Etkiler?</span> <span>+</span>
-                </button>
-                <div class="faq-answer">
-                    <p id="txt-a5">Çözünürlük arttıkça ekran kartına binen yük artar, bu da doğrudan FPS değerinin düşmesine neden olur.</p>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(event, this)">
+                        <span id="txt-q5">Çözünürlük FPS'i Nasıl Etkiler?</span> <span>+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p id="txt-a5">Çözünürlük arttıkça ekran kartına binen yük artar, bu da doğrudan FPS değerinin düşmesine neden olur.</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    <span id="txt-q6">Bu Test Ücretsiz mi?</span> <span>+</span>
-                </button>
-                <div class="faq-answer">
-                    <p id="txt-a6">Evet, WaqoFPS tamamen ücretsiz bir performans analiz aracıdır ve dilediğiniz kadar test yapabilirsiniz.</p>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(event, this)">
+                        <span id="txt-q6">Bu Test Ücretsiz mi?</span> <span>+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p id="txt-a6">Evet, WaqoFPS tamamen ücretsiz bir performans analiz aracıdır ve dilediğiniz kadar test yapabilirsiniz.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
 <script>
-// Akordiyon (Açılır-Kapanır SSS) Fonksiyonu
-function toggleFaq(button) {
-    const item = button.parentElement;
-    const allItems = document.querySelectorAll('.faq-item');
-    
-    // İsteğe bağlı: Diğerlerini kapatmak istersen bu döngüyü açabilirsin, şimdilik bağımsız açılıyor.
-    allItems.forEach(i => {
-        if (i !== item) {
-            i.classList.remove('active');
-            i.querySelector('.faq-question span:last-child').innerText = '+';
-        }
-    });
+// Büyük Bölümler İçin Akordiyon Fonksiyonu
+function toggleAccordion(button) {
+    const section = button.parentElement;
+    section.classList.toggle('active');
+    const span = button.querySelector('span:last-child');
+    if (section.classList.contains('active')) {
+        span.innerText = '-';
+    } else {
+        span.innerText = '+';
+    }
+}
 
+// SSS İçi Akordiyon Fonksiyonu (Tıklamanın dış kutuyu kapatmasını önler)
+function toggleFaq(event, button) {
+    event.stopPropagation();
+    const item = button.parentElement;
     item.classList.toggle('active');
     const span = button.querySelector('span:last-child');
     if (item.classList.contains('active')) {
