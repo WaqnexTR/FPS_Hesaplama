@@ -166,6 +166,51 @@
             margin-bottom: 6px;
         }
 
+        /* Akordiyon (Açılır-Kapanır SSS) Stilleri */
+        .faq-item {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            color: #ffffff;
+            padding: 15px;
+            text-align: left;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-question:hover {
+            background: rgba(88, 166, 255, 0.05);
+        }
+        .faq-question span {
+            font-size: 16px;
+            color: #58a6ff;
+            font-weight: bold;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 15px;
+            color: #8b949e;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 150px;
+            padding: 0 15px 15px 15px;
+        }
+
         /* Tablo Stili */
         .fps-table {
             width: 100%;
@@ -237,6 +282,16 @@
         body.light-mode .content-section p, 
         body.light-mode .content-section li {
             color: #24292f;
+        }
+        body.light-mode .faq-item {
+            background: #f6f8fa;
+            border-color: #d0d7de;
+        }
+        body.light-mode .faq-question {
+            color: #24292f;
+        }
+        body.light-mode .faq-answer {
+            color: #57606a;
         }
         body.light-mode .fps-table th {
             background: #f6f8fa;
@@ -352,28 +407,89 @@
             </ul>
         </div>
 
-        <!-- Bölüm 4: Sık Sorulan Sorular -->
+        <!-- Bölüm 4: Sık Sorulan Sorular (Akordiyon Sistemi) -->
         <div id="sik-sorulan-sorular" class="content-section">
             <h3 id="txt-sec4-title">Sık Sorulan Sorular</h3>
-            <p><strong id="txt-q1">FPS Hesaplama Aracı Gerçek Sonuç Verir mi?</strong><br>
-            <span id="txt-a1">Kesinlikle birebir gerçek sonuç vermez çünkü her bilgisayarın arka planda çalışan uygulamaları, sürücü güncellemeleri ve ısı değerleri farklıdır; ancak donanım gücüne ve oyun motorlarına göre gerçeğe yakın bir performans aralığını başarılı bir şekilde sunar.</span></p>
             
-            <p><strong id="txt-q2">60 FPS Yeterli mi?</strong><br>
-            <span id="txt-a2">Günlük oyun deneyimleri ve hikayeli oyunlar için 60 FPS oldukça yeterli ve akıcıdır.</span></p>
-            
-            <p><strong id="txt-q3">144 FPS Gerekli mi?</strong><br>
-            <span id="txt-a3">Counter-Strike 2, Valorant gibi rekabetçi nişancı oyunlarında yüksek yenileme hızına sahip monitörler için önerilir.</span></p>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    <span id="txt-q1">FPS Hesaplama Aracı Gerçek Sonuç Verir mi?</span> <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    <p id="txt-a1">Araç, donanım özelliklerinize ve oyun motoru çarpanlarına bağlı olarak gerçeğe oldukça yakın tahmini bir performans aralığı sunar.</p>
+                </div>
+            </div>
 
-            <p><strong id="txt-q4">Laptop ve Masaüstü Performansı Neden Farklı?</strong><br>
-            <span id="txt-a4">Laptop bileşenleri ısınma ve güç (Watt) sınırlamaları nedeniyle masaüstü dengelerine göre biraz daha düşük performans verebilir.</span></p>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    <span id="txt-q2">60 FPS Yeterli mi?</span> <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    <p id="txt-a2">Günlük oyun deneyimleri ve hikayeli oyunlar için 60 FPS oldukça yeterli ve akıcıdır.</p>
+                </div>
+            </div>
 
-            <p><strong id="txt-q5">Çözünürlük FPS'i Nasıl Etkiler?</strong><br>
-            <span id="txt-a5">Çözünürlük arttıkça ekran kartına binen yük artar, bu da doğrudan FPS değerinin düşmesine neden olur.</span></p>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    <span id="txt-q3">144 FPS Gerekli mi?</span> <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    <p id="txt-a3">Counter-Strike 2, Valorant gibi rekabetçi nişancı oyunlarında yüksek yenileme hızına sahip monitörler için önerilir.</p>
+                </div>
+            </div>
 
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    <span id="txt-q4">Laptop ve Masaüstü Performansı Neden Farklı?</span> <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    <p id="txt-a4">Laptop bileşenleri ısınma ve güç (Watt) sınırlamaları nedeniyle masaüstü dengelerine göre biraz daha düşük performans verebilir.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    <span id="txt-q5">Çözünürlük FPS'i Nasıl Etkiler?</span> <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    <p id="txt-a5">Çözünürlük arttıkça ekran kartına binen yük artar, bu da doğrudan FPS değerinin düşmesine neden olur.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    <span id="txt-q6">Bu Test Ücretsiz mi?</span> <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    <p id="txt-a6">Evet, WaqoFPS tamamen ücretsiz bir performans analiz aracıdır ve dilediğiniz kadar test yapabilirsiniz.</p>
+                </div>
+            </div>
         </div>
     </div>
 
 <script>
+// Akordiyon (Açılır-Kapanır SSS) Fonksiyonu
+function toggleFaq(button) {
+    const item = button.parentElement;
+    const allItems = document.querySelectorAll('.faq-item');
+    
+    // İsteğe bağlı: Diğerlerini kapatmak istersen bu döngüyü açabilirsin, şimdilik bağımsız açılıyor.
+    allItems.forEach(i => {
+        if (i !== item) {
+            i.classList.remove('active');
+            i.querySelector('.faq-question span:last-child').innerText = '+';
+        }
+    });
+
+    item.classList.toggle('active');
+    const span = button.querySelector('span:last-child');
+    if (item.classList.contains('active')) {
+        span.innerText = '-';
+    } else {
+        span.innerText = '+';
+    }
+}
+
 // Dil Sözlüğü ve Çeviriler
 const metinler = {
     tr: {
@@ -416,7 +532,7 @@ const metinler = {
         boost6: "Performans modunu açın",
         sec4Title: "Sık Sorulan Sorular",
         q1: "FPS Hesaplama Aracı Gerçek Sonuç Verir mi?",
-        a1: "Araç, donanım özelliklerinize ve oyun motoru çarpanlarına bağlı olarak gerçeğe en yakın tahmini performans aralığını sunar.",
+        a1: "Araç, donanım özelliklerinize ve oyun motoru çarpanlarına bağlı olarak gerçeğe oldukça yakın tahmini bir performans aralığı sunar.",
         q2: "60 FPS Yeterli mi?",
         a2: "Günlük oyun deneyimleri ve hikayeli oyunlar için 60 FPS oldukça yeterli ve akıcıdır.",
         q3: "144 FPS Gerekli mi?",
