@@ -10,23 +10,37 @@
     <title>waqofps - FPS Hesaplama ve Oyun Performans Testi</title>
     <meta name="description" content="WaqoFPS ile ekran kartı, işlemci ve RAM seçerek oyunlarda alacağınız tahmini FPS değerlerini hesaplayın. Yüzlerce ekran kartı ve işlemci desteğiyle ücretsiz FPS analiz aracı.">
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             font-family: 'Segoe UI', sans-serif;
             background: #050505;
             color: white;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
             padding: 20px;
             transition: background-color 0.3s, color 0.3s;
+            margin: 0;
+        }
+        .main-wrapper {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .container {
             background: #000000;
             padding: 25px;
             border-radius: 12px;
-            width: 450px;
+            width: 100%;
+            max-width: 450px;
             border: 1px solid #30363d;
             box-shadow: 0 8px 32px rgba(0,0,0,0.5);
             transition: background-color 0.3s, border-color 0.3s;
+            box-sizing: border-box;
         }
         h2 {
             text-align: center;
@@ -49,6 +63,7 @@
             border: 1px solid #30363d;
             color: white;
             border-radius: 6px;
+            box-sizing: border-box;
         }
         button.hesapla-btn {
             width: 100%;
@@ -86,6 +101,88 @@
             font-weight: bold;
         }
 
+        /* İçindekiler Kutusu Stili */
+        .toc-box {
+            background: #000000;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin-top: 30px;
+            width: 100%;
+            max-width: 450px;
+            box-sizing: border-box;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .toc-box h3 {
+            color: #58a6ff;
+            margin-top: 0;
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+        .toc-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .toc-box li {
+            margin-bottom: 8px;
+        }
+        .toc-box a {
+            color: #58a6ff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .toc-box a:hover {
+            text-decoration: underline;
+        }
+
+        /* İçerik Bölümleri Stili */
+        .content-section {
+            background: #000000;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 25px;
+            width: 100%;
+            max-width: 450px;
+            box-sizing: border-box;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .content-section h3 {
+            color: #58a6ff;
+            margin-top: 0;
+        }
+        .content-section p, .content-section ul {
+            font-size: 14px;
+            color: #c9d1d9;
+            line-height: 1.5;
+        }
+        .content-section ul {
+            padding-left: 20px;
+            margin-bottom: 0;
+        }
+        .content-section li {
+            margin-bottom: 6px;
+        }
+
+        /* Tablo Stili */
+        .fps-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 13px;
+        }
+        .fps-table th, .fps-table td {
+            border: 1px solid #30363d;
+            padding: 8px;
+            text-align: left;
+        }
+        .fps-table th {
+            background: #0d1117;
+            color: #58a6ff;
+        }
+
         /* Sağ Üst Butonlar Konteyneri */
         .top-controls {
             position: fixed;
@@ -114,7 +211,9 @@
             background-color: #f0f0f0;
             color: #000;
         }
-        body.light-mode .container {
+        body.light-mode .container,
+        body.light-mode .toc-box,
+        body.light-mode .content-section {
             background-color: #ffffff;
             border: 1px solid #d0d7de;
         }
@@ -135,6 +234,17 @@
             color: #ffffff;
             border-color: #30363d;
         }
+        body.light-mode .content-section p, 
+        body.light-mode .content-section li {
+            color: #24292f;
+        }
+        body.light-mode .fps-table th {
+            background: #f6f8fa;
+        }
+        body.light-mode .fps-table th, 
+        body.light-mode .fps-table td {
+            border-color: #d0d7de;
+        }
     </style>
 </head>
 <body>
@@ -144,31 +254,109 @@
         <button id="theme-toggle" class="top-btn" onclick="temaDegistir()">🌙</button>
     </div>
 
-    <div class="container">
-        <h2 id="txt-baslik">FPS ANALİZ MERKEZİ</h2>
-        
-        <label id="txt-lbl-gpu">EKRAN KARTI (GPU)</label>
-        <select id="gpu"></select>
-        
-        <label id="txt-lbl-cpu">İŞLEMCİ (CPU)</label>
-        <select id="cpu"></select>
-        
-        <label id="txt-lbl-ram">RAM (BELLEK)</label>
-        <select id="ram"></select>
-        
-        <label id="txt-lbl-coz">Ekran Çözünürlüğü (GÖRÜNTÜ KALİTESİ)</label>
-        <select id="cozunurluk"></select>
-        
-        <label id="txt-lbl-oyun">OYUN VE AYAR SEÇİMİ</label>
-        <select id="oyun"></select>
-        
-        <button type="button" class="hesapla-btn" id="txt-btn-hesapla" onclick="hesapla()">PERFORMANSI TEST ET</button>
-        
-        <div class="result-box">
-            <span id="fps">0 - 0</span>
-            <p id="fps-etiket" style="margin:0; font-size:14px; color:#8b949e;">
-                Tahmini FPS Aralığı
-            </p>
+    <div class="main-wrapper">
+        <div class="container">
+            <h2 id="txt-baslik">FPS ANALİZ MERKEZİ</h2>
+            
+            <label id="txt-lbl-gpu">EKRAN KARTI (GPU)</label>
+            <select id="gpu"></select>
+            
+            <label id="txt-lbl-cpu">İŞLEMCİ (CPU)</label>
+            <select id="cpu"></select>
+            
+            <label id="txt-lbl-ram">RAM (BELLEK)</label>
+            <select id="ram"></select>
+            
+            <label id="txt-lbl-coz">Ekran Çözünürlüğü (GÖRÜNTÜ KALİTESİ)</label>
+            <select id="cozunurluk"></select>
+            
+            <label id="txt-lbl-oyun">OYUN VE AYAR SEÇİMİ</label>
+            <select id="oyun"></select>
+            
+            <button type="button" class="hesapla-btn" id="txt-btn-hesapla" onclick="hesapla()">PERFORMANSI TEST ET</button>
+            
+            <div class="result-box">
+                <span id="fps">0 - 0</span>
+                <p id="fps-etiket" style="margin:0; font-size:14px; color:#8b949e;">
+                    Tahmini FPS Aralığı
+                </p>
+            </div>
+        </div>
+
+        <!-- İçindekiler Kutusu -->
+        <div class="toc-box">
+            <h3>İçindekiler</h3>
+            <ul>
+                <li><a href="#fps-nedir">1. FPS Nedir?</a></li>
+                <li><a href="#fps-hesaplama">2. Oyun FPS Hesaplama Nasıl Yapılır?</a></li>
+                <li><a href="#fps-arttirma">3. FPS Arttırma Yöntemleri</a></li>
+                <li><a href="#sik-sorulan-sorular">4. Sık Sorulan Sorular</a></li>
+            </ul>
+        </div>
+
+        <!-- Bölüm 1: FPS Nedir? -->
+        <div id="fps-nedir" class="content-section">
+            <h3>FPS Nedir?</h3>
+            <p>FPS, İngilizce <strong>Frames Per Second</strong> kelimesinin kısaltmasıdır. Türkçesi saniyedeki kare sayısıdır[cite: 2]. Oyunlarda ne kadar yüksek FPS alırsanız görüntü o kadar akıcı olur[cite: 2].</p>
+            <table class="fps-table">
+                <tr>
+                    <th>FPS Değeri</th>
+                    <th>Oyun Deneyimi</th>
+                </tr>
+                <tr>
+                    <td>30 FPS</td>
+                    <td>Oynanabilir[cite: 2]</td>
+                </tr>
+                <tr>
+                    <td>60 FPS</td>
+                    <td>Akıcı[cite: 2]</td>
+                </tr>
+                <tr>
+                    <td>120 FPS</td>
+                    <td>Çok Akıcı[cite: 2]</td>
+                </tr>
+                <tr>
+                    <td>144+ FPS</td>
+                    <td>Rekabetçi Oyuncular İçin İdeal[cite: 2]</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Bölüm 2: Oyun FPS Hesaplama Nasıl Yapılır? -->
+        <div id="fps-hesaplama" class="content-section">
+            <h3>Oyun FPS Hesaplama Nasıl Yapılır?</h3>
+            <p>FPS değeri aşağıdaki donanımlara göre değişir[cite: 3]:</p>
+            <ul>
+                <li><strong>Ekran Kartı (GPU):</strong> Grafik işlemlerini yürütür.</li>
+                <li><strong>İşlemci (CPU):</strong> Oyun içindeki hesaplamaları yapar.</li>
+                <li><strong>RAM:</strong> Anlık verileri saklar.</li>
+                <li><strong>Çözünürlük:</strong> Görüntü kalitesi arttıkça yük biner.</li>
+            </ul>
+        </div>
+
+        <!-- Bölüm 3: FPS Arttırma Yöntemleri -->
+        <div id="fps-arttirma" class="content-section">
+            <h3>FPS Arttırma Yöntemleri</h3>
+            <p>Daha fazla FPS almak için şunları yapabilirsiniz[cite: 3]:</p>
+            <ul>
+                <li>Grafik ayarlarını düşürün[cite: 3]</li>
+                <li>Güncel ekran kartı sürücüsü kurun[cite: 3]</li>
+                <li>Arka planda çalışan programları kapatın[cite: 3]</li>
+                <li>SSD kullanın[cite: 3]</li>
+                <li>RAM yükseltin[cite: 3]</li>
+                <li>Performans modunu açın[cite: 3]</li>
+            </ul>
+        </div>
+
+        <!-- Bölüm 4: Sık Sorulan Sorular -->
+        <div id="sik-sorulan-sorular" class="content-section">
+            <h3>Sık Sorulan Sorular</h3>
+            <p><strong>FPS Hesaplama Aracı Gerçek Sonuç Verir mi?</strong><br>
+            Araç, donanım özelliklerinize ve oyun motoru çarpanlarına bağlı olarak gerçeğe en yakın tahmini performans aralığını sunar.</p>
+            <p><strong>60 FPS Yeterli mi?</strong><br>
+            Günlük oyun deneyimleri ve hikayeli oyunlar için 60 FPS oldukça yeterli ve akıcıdır.</p>
+            <p><strong>144 FPS Gerekli mi?</strong><br>
+            Counter-Strike 2, Valorant gibi rekabetçi nişancı oyunlarında yüksek yenileme hızına sahip monitörler için önerilir.</p>
         </div>
     </div>
 
