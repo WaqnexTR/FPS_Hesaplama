@@ -306,6 +306,22 @@
     </style>
 </head>
 <body>
+     <!-- İçindekiler Kutusu (Artık Diğerleriyle Aynı Akordiyon Yapısında) -->
+        <div class="content-section">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span id="txt-toc-title">İçindekiler</span> <span>+</span>
+            </button>
+            <div class="accordion-body">
+                <ul>
+                    <li><a onclick="tocGit('fps-nedir')" id="txt-toc-1">1. FPS Nedir?</a></li>
+                    <li><a onclick="tocGit('fps-hesaplama')" id="txt-toc-2">2. Oyun FPS Hesaplama Nasıl Yapılır?</a></li>
+                    <li><a onclick="tocGit('fps-arttirma')" id="txt-toc-3">3. FPS Arttırma Yöntemleri</a></li>
+                    <li><a onclick="tocGit('sik-sorulan-sorular')" id="txt-toc-4">4. Sık Sorulan Sorular</a></li>
+                </ul>
+            </div>
+        </div>
+
+    
     <!-- Sağ üst köşe butonları (Dil ve Tema) -->
     <div class="top-controls">
         <button id="lang-toggle" class="top-btn" onclick="dilDegistir()">EN</button>
@@ -336,21 +352,6 @@
             <div class="result-box">
                 <span id="fps">0 - 0</span>
               <p id="txt-fps-etiket" style="margin:0; font-size:14px; color:#8b949e;">Tahmini FPS Aralığı</p>
-            </div>
-        </div>
-
-        <!-- İçindekiler Kutusu (Artık Diğerleriyle Aynı Akordiyon Yapısında) -->
-        <div class="content-section">
-            <button class="accordion-header" onclick="toggleAccordion(this)">
-                <span id="txt-toc-title">İçindekiler</span> <span>+</span>
-            </button>
-            <div class="accordion-body">
-                <ul>
-                    <li><a onclick="tocGit('fps-nedir')" id="txt-toc-1">1. FPS Nedir?</a></li>
-                    <li><a onclick="tocGit('fps-hesaplama')" id="txt-toc-2">2. Oyun FPS Hesaplama Nasıl Yapılır?</a></li>
-                    <li><a onclick="tocGit('fps-arttirma')" id="txt-toc-3">3. FPS Arttırma Yöntemleri</a></li>
-                    <li><a onclick="tocGit('sik-sorulan-sorular')" id="txt-toc-4">4. Sık Sorulan Sorular</a></li>
-                </ul>
             </div>
         </div>
 
