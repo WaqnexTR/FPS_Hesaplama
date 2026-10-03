@@ -1,927 +1,1154 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="favicon.png">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WaqOfFPS - Sistem FPS Hesaplama ve Optimizasyon</title>
+    <title>waqofps - FPS Hesaplama ve Oyun Performans Testi</title>
+    <meta name="description" content="WaqoFPS ile ekran kartı, işlemci ve RAM seçerek oyunlarda alacağınız tahmini FPS değerlerini hesaplayın. Yüzlerce ekran kartı ve işlemci desteğiyle ücretsiz FPS analiz aracı.">
     <style>
-        :root {
-            --bg-color: #0d1117;
-            --container-bg: #161b22;
-            --text-color: #c9d1d9;
-            --text-muted: #8b949e;
-            --border-color: #30363d;
-            --accent-color: #58a6ff;
-            --accent-hover: #1f6feb;
-            --success-color: #3fb950;
-            --danger-color: #ff4444;
-            --card-bg: #21262d;
+        html {
+            scroll-behavior: smooth;
         }
-
-        .light-mode {
-            --bg-color: #f0f2f5;
-            --container-bg: #ffffff;
-            --text-color: #24292e;
-            --text-muted: #586069;
-            --border-color: #e1e4e8;
-            --accent-color: #0366d6;
-            --accent-hover: #0056b3;
-            --success-color: #28a745;
-            --danger-color: #d73a49;
-            --card-bg: #f6f8fa;
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
-            transition: background 0.3s, color 0.3s;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: var(--container-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-        }
-
-        .header-bar {
+            font-family: 'Segoe UI', sans-serif;
+            background: #050505;
+            color: white;
             display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-bottom: 20px;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
+            margin: 0;
         }
-
-        .top-btn {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            padding: 8px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.2s;
+        .main-wrapper {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-
-        .top-btn:hover {
-            border-color: var(--accent-color);
+        .container {
+            background: #000000;
+            padding: 25px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 450px;
+            border: 1px solid #30363d;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            transition: background-color 0.3s, border-color 0.3s;
+            box-sizing: border-box;
         }
-
-        h1 {
+        h2 {
             text-align: center;
-            color: var(--accent-color);
-            margin-bottom: 30px;
-        }
-
-        .form-group {
+            color: #58a6ff;
+            text-transform: uppercase;
             margin-bottom: 20px;
         }
-
         label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
+            margin-top: 12px;
+            font-size: 12px;
+            color: #8b949e;
+            font-weight: bold;
         }
-
         select {
             width: 100%;
-            padding: 12px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            border-radius: 6px;
-            font-size: 16px;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        select:focus {
-            border-color: var(--accent-color);
-        }
-
-        .btn-hesapla {
-            width: 100%;
-            padding: 14px;
-            background: var(--accent-color);
+            padding: 10px;
+            margin-top: 5px;
+            background: #0d1117;
+            border: 1px solid #30363d;
             color: white;
-            border: none;
             border-radius: 6px;
-            font-size: 18px;
+            box-sizing: border-box;
+        }
+        button.hesapla-btn {
+            width: 100%;
+            padding: 15px;
+            margin-top: 25px;
+            background: #238636;
+            border: none;
+            color: white;
             font-weight: bold;
+            border-radius: 6px;
             cursor: pointer;
-            transition: background 0.2s;
-            margin-top: 10px;
+            font-size: 16px;
         }
-
-        .btn-hesapla:hover {
-            background: var(--accent-hover);
+        button.hesapla-btn:hover {
+            background: #2ea043;
         }
-
-        .sonuc-kutu {
-            margin-top: 30px;
-            padding: 20px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: #000000;
+            border: 1px solid #30363d;
             border-radius: 8px;
             text-align: center;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s, border-color 0.3s;
         }
-
         #fps {
             font-size: 40px;
+            color: #3fb950;
+            display: block;
             font-weight: bold;
-            color: var(--success-color);
-            margin-top: 10px;
         }
 
-        /* Akordiyon Stilleri */
-        .accordion-section {
-            margin-top: 25px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            background: var(--card-bg);
-            overflow: hidden;
-        }
-
-        .accordion-header {
+        /* İçerik Bölümleri ve İçindekiler Kutusu (Ortak Akordiyon Stili) */
+        .content-section {
+            background: #000000;
+            border: 1px solid #30363d;
+            border-radius: 12px;
             padding: 15px 20px;
-            background: var(--container-bg);
+            margin-top: 25px;
+            width: 100%;
+            max-width: 450px;
+            box-sizing: border-box;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        
+        /* Akordiyon Başlık Butonu */
+        .accordion-header {
+            width: 100%;
+            background: none;
+            border: none;
+            color: #58a6ff;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-weight: bold;
-            user-select: none;
+            padding: 5px 0;
+        }
+        .accordion-header span {
+            font-size: 20px;
         }
 
-        .accordion-header:hover {
-            background: var(--card-bg);
-        }
-
-        .accordion-content {
+        /* Akordiyon İçerik Alanı */
+        .accordion-body {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
-            padding: 0 20px;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0;
+        }
+        .content-section.active .accordion-body {
+            max-height: 1000px;
+            padding-top: 15px;
         }
 
-        .accordion-section.active .accordion-content {
-            max-height: 2000px;
-            padding: 20px;
+        .content-section p, .content-section ul {
+            font-size: 14px;
+            color: #c9d1d9;
+            line-height: 1.5;
         }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        th, td {
-            border: 1px solid var(--border-color);
-            padding: 10px;
-            text-align: left;
-        }
-
-        th {
-            background: var(--container-bg);
-        }
-
-        ul {
+        .content-section ul {
             padding-left: 20px;
+            margin-bottom: 0;
+        }
+        .content-section li {
+            margin-bottom: 6px;
+        }
+        .content-section a {
+            color: #58a6ff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .content-section a:hover {
+            text-decoration: underline;
         }
 
-        li {
-            margin-bottom: 8px;
-        }
-
+        /* Akordiyon İçi SSS Öğeleri */
         .faq-item {
-            margin-bottom: 12px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            background: var(--container-bg);
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            transition: background-color 0.3s, border-color 0.3s;
         }
-
         .faq-question {
-            padding: 12px 15px;
+            width: 100%;
+            background: none;
+            border: none;
+            color: #ffffff;
+            padding: 15px;
+            text-align: left;
+            font-size: 14px;
+            font-weight: bold;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-weight: 600;
         }
-
+        .faq-question:hover {
+            background: rgba(88, 166, 255, 0.05);
+        }
+        .faq-question span {
+            font-size: 16px;
+            color: #58a6ff;
+            font-weight: bold;
+        }
         .faq-answer {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            transition: max-height 0.3s ease, padding 0.3s ease;
             padding: 0 15px;
-            color: var(--text-muted);
+            color: #8b949e;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 150px;
+            padding: 0 15px 15px 15px;
         }
 
-        .faq-item.active .faq-answer {
-            max-height: 500px;
-            padding: 12px 15px;
+        /* Tablo Stili */
+        .fps-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 13px;
+        }
+        .fps-table th, .fps-table td {
+            border: 1px solid #30363d;
+            padding: 8px;
+            text-align: left;
+        }
+        .fps-table th {
+            background: #0d1117;
+            color: #58a6ff;
+        }
+
+        /* Sağ Üst Butonlar Konteyneri */
+        .top-controls {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 8px;
+            z-index: 9999;
+        }
+
+        /* Üst Butonların Ortak Stili */
+        .top-btn {
+            padding: 8px 14px;
+            font-size: 13px;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            background: #ffffff;
+            color: #000000;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        /* Aydınlık Mod (Light Mode) Sınıfları */
+        body.light-mode {
+            background-color: #f0f0f0;
+            color: #000;
+        }
+        body.light-mode .container,
+        body.light-mode .content-section {
+            background-color: #ffffff;
+            border: 1px solid #d0d7de;
+        }
+        body.light-mode select {
+            background: #f6f8fa;
+            border: 1px solid #d0d7de;
+            color: #000;
+        }
+        body.light-mode label { 
+            color: #57606a; 
+        }
+        body.light-mode .result-box {
+            background-color: #f6f8fa !important;
+            border: 1px solid #d0d7de;
+        }
+        body.light-mode .top-btn {
+            background-color: #000000;
+            color: #ffffff;
+            border-color: #30363d;
+        }
+        body.light-mode .content-section p, 
+        body.light-mode .content-section li {
+            color: #24292f;
+        }
+        body.light-mode .accordion-header {
+            color: #0969da;
+        }
+        body.light-mode .faq-item {
+            background: #f6f8fa;
+            border-color: #d0d7de;
+        }
+        body.light-mode .faq-question {
+            color: #24292f;
+        }
+        body.light-mode .faq-answer {
+            color: #57606a;
+        }
+        body.light-mode .fps-table th {
+            background: #f6f8fa;
+        }
+        body.light-mode .fps-table th, 
+        body.light-mode .fps-table td {
+            border-color: #d0d7de;
         }
     </style>
 </head>
 <body>
-
-<div class="container">
-    <div class="header-bar">
-        <button class="top-btn" id="theme-toggle" onclick="temaDegistir()">🌙</button>
-        <button class="top-btn" id="lang-toggle" onclick="dilDegistir()">EN</button>
+    <!-- Sağ üst köşe butonları (Dil ve Tema) -->
+    <div class="top-controls">
+        <button id="lang-toggle" class="top-btn" onclick="dilDegistir()">EN</button>
+        <button id="theme-toggle" class="top-btn" onclick="temaDegistir()">🌙</button>
     </div>
 
-    <h1 id="txt-baslik">WaqOfFPS - Sistem FPS Hesaplama</h1>
-
-    <!-- Form Alanları -->
-    <div class="form-group">
-        <label id="txt-lbl-gpu" for="gpu">Ekran Kartı (GPU):</label>
-        <select id="gpu"></select>
-    </div>
-
-    <div class="form-group">
-        <label id="txt-lbl-cpu" for="cpu">İşlemci (CPU):</label>
-        <select id="cpu"></select>
-    </div>
-
-    <div class="form-group">
-        <label id="txt-lbl-ram" for="ram">RAM:</label>
-        <select id="ram"></select>
-    </div>
-
-    <div class="form-group">
-        <label id="txt-lbl-coz" for="cozunurluk">Çözünürlük:</label>
-        <select id="cozunurluk"></select>
-    </div>
-
-    <div class="form-group">
-        <label id="txt-lbl-oyun" for="oyun">Oyun:</label>
-        <select id="oyun"></select>
-    </div>
-
-    <button class="btn-hesapla" id="txt-btn-hesapla" onclick="hesapla()">FPS Hesapla</button>
-
-    <div class="sonuc-kutu">
-        <div id="fps-etiket">Tahmini FPS Değeri:</div>
-        <div id="fps">-</div>
-    </div>
-
-    <!-- Akordiyon Bölümleri -->
-    <!-- 1. İçindekiler -->
-    <div class="accordion-section" id="sec-toc">
-        <div class="accordion-header" onclick="toggleAccordion(this)">
-            <span id="txt-toc-title">İçindekiler</span>
-            <span>+</span>
-        </div>
-        <div class="accordion-content">
-            <ul>
-                <li><a href="javascript:void(0)" onclick="tocGit('sec-fps')" id="txt-toc-1">1. FPS Hesaplama ve Tablo</a></li>
-                <li><a href="javascript:void(0)" onclick="tocGit('sec-bilesen')" id="txt-toc-2">2. Bileşenlerin FPS'e Etkisi</a></li>
-                <li><a href="javascript:void(0)" onclick="tocGit('sec-opt')" id="txt-toc-3">3. Performans Artırma (Boost) Yöntemleri</a></li>
-                <li><a href="javascript:void(0)" onclick="tocGit('sec-faq')" id="txt-toc-4">4. Sıkça Sorulan Sorular (SSS)</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- 2. FPS Hesaplama ve Tablo -->
-    <div class="accordion-section" id="sec-fps">
-        <div class="accordion-header" onclick="toggleAccordion(this)">
-            <span id="txt-sec1-title">1. FPS Hesaplama ve Tablo</span>
-            <span>+</span>
-        </div>
-        <div class="accordion-content">
-            <p id="txt-sec1-desc">Sisteminizin seçilen oyun ve ayarlarda verebileceği tahmini performans aralığı aşağıdadır:</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th id="txt-th-fps">FPS Aralığı</th>
-                        <th id="txt-th-exp">Açıklama</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td id="txt-t1">60+ FPS</td><td id="txt-t2">Akıcı ve yağ gibi bir oyun deneyimi sunar.</td></tr>
-                    <tr><td id="txt-t3">30 - 60 FPS</td><td id="txt-t4">Oynanabilir düzeydedir ancak bazı sahnelerde kasmalar yaşanabilir.</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- 3. Bileşenlerin FPS'e Etkisi -->
-    <div class="accordion-section" id="sec-bilesen">
-        <div class="accordion-header" onclick="toggleAccordion(this)">
-            <span id="txt-sec2-title">2. Bileşenlerin FPS'e Etkisi</span>
-            <span>+</span>
-        </div>
-        <div class="accordion-content">
-            <p id="txt-sec2-desc">Donanım parçalarının oyun performansındaki rolü:</p>
-            <ul>
-                <li id="txt-li-gpu"><b>GPU (Ekran Kartı):</b> Grafik kalitesini ve çözünürlüğü doğrudan belirler.</li>
-                <li id="txt-li-cpu"><b>CPU (İşlemci):</b> Yapay zeka, fizik hesaplamaları ve anlık veri akışını yönetir.</li>
-                <li id="txt-li-ram"><b>RAM:</b> Oyun içi varlıkların hızlı yüklenmesini sağlar, yetersizliği takılmalara yol açar.</li>
-                <li id="txt-li-res"><b>Çözünürlük:</b> Ekrandaki piksel sayısı arttıkça ekran kartına binen yük artar, FPS düşer.</li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- 4. Performans Artırma Yöntemleri -->
-    <div class="accordion-section" id="sec-opt">
-        <div class="accordion-header" onclick="toggleAccordion(this)">
-            <span id="txt-sec3-title">3. Performans Artırma (Boost) Yöntemleri</span>
-            <span>+</span>
-        </div>
-        <div class="accordion-content">
-            <p id="txt-sec3-desc">Oyun performansını artırmak için uygulayabileceğiniz ipuçları:</p>
-            <ul>
-                <li id="txt-txt-boost-1">Grafik sürücülerinizi (NVIDIA/AMD) sürekli güncel tutun.</li>
-                <li id="txt-txt-boost-2">Arka planda çalışan gereksiz uygulamaları kapatın.</li>
-                <li id="txt-txt-boost-3">Windows güç planını "Yüksek Performans" moduna getirin.</li>
-                <li id="txt-txt-boost-4">Oyun içi ayarları düşürerek (Gölgeler, Kenar Yumuşatma vb.) FPS kazanın.</li>
-                <li id="txt-txt-boost-5">Isınma sorunlarını önlemek için düzenli bakım ve temizlik yapın.</li>
-                <li id="txt-txt-boost-6">Disk birleştirme ve SSD optimizasyonlarına dikkat edin.</li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- 5. Sıkça Sorulan Sorular (SSS) -->
-    <div class="accordion-section" id="sec-faq">
-        <div class="accordion-header" onclick="toggleAccordion(this)">
-            <span id="txt-sec4-title">4. Sıkça Sorulan Sorular (SSS)</span>
-            <span>+</span>
-        </div>
-        <div class="accordion-content">
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(event, this)"><span id="txt-q1">Bu hesaplama kesin sonuç mu verir?</span><span>+</span></div>
-                <div class="faq-answer" id="txt-a1">Tahmini bir değer sunar; sistem sıcaklığı ve arka plan uygulamalarına göre değişiklik gösterebilir.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(event, this)"><span id="txt-q2">Laptop ve masaüstü bileşenleri neden ayrı?</span><span>+</span></div>
-                <div class="faq-answer" id="txt-a2">Laptop donanımları güç ve ısınma sınırlandırmaları nedeniyle masaüstü muadillerinden farklı performans gösterir.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(event, this)"><span id="txt-q3">RAM miktarı FPS'i doğrudan etkiler mi?</span><span>+</span></div>
-                <div class="faq-answer" id="txt-a3">Doğrudan devasa bir FPS artışı sağlamasa da düşük RAM anlık takılmalara (stuttering) sebep olur.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(event, this)"><span id="txt-q4">Çözünürlük düşünce neden FPS artar?</span><span>+</span></div>
-                <div class="faq-answer" id="txt-a4">Ekran kartının işleyeceği piksel sayısı azaldığı için yük hafifler ve kare hızı yükselir.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(event, this)"><span id="txt-q5">Sürücü güncellemek neden önemlidir?</span><span>+</span></div>
-                <div class="faq-answer" id="txt-a5">Yeni çıkan oyunlar için ekran kartı üreticileri özel optimizasyon yamaları yayınlar.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(event, this)"><span id="txt-q6">Termal macun değişimi FPS'i etkiler mi?</span><span>+</span></div>
-                <div class="faq-answer" id="txt-a6">İşlemci veya ekran kartı aşırı ısınmaktan dolayı hız düşürüyorsa (thermal throttling), macun değişimi performansı eski haline getirir.</div>
+    <div class="main-wrapper">
+        <div class="container">
+            <h2 id="txt-baslik">FPS ANALİZ MERKEZİ</h2>
+            
+            <label id="txt-lbl-gpu">EKRAN KARTI (GPU)</label>
+            <select id="gpu"></select>
+            
+            <label id="txt-lbl-cpu">İŞLEMCİ (CPU)</label>
+            <select id="cpu"></select>
+            
+            <label id="txt-lbl-ram">RAM (BELLEK)</label>
+            <select id="ram"></select>
+            
+            <label id="txt-lbl-coz">Ekran Çözünürlüğü (GÖRÜNTÜ KALİTESİ)</label>
+            <select id="cozunurluk"></select>
+            
+            <label id="txt-lbl-oyun">OYUN VE AYAR SEÇİMİ</label>
+            <select id="oyun"></select>
+            
+            <button type="button" class="hesapla-btn" id="txt-btn-hesapla" onclick="hesapla()">PERFORMANSI TEST ET</button>
+            
+            <div class="result-box">
+                <span id="fps">0 - 0</span>
+                <p id="fps-etiket" style="margin:0; font-size:14px; color:#8b949e;">
+                    Tahmini FPS Aralığı
+                </p>
             </div>
         </div>
+
+        <!-- İçindekiler Kutusu (Artık Diğerleriyle Aynı Akordiyon Yapısında) -->
+        <div class="content-section">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span id="txt-toc-title">İçindekiler</span> <span>+</span>
+            </button>
+            <div class="accordion-body">
+                <ul>
+                    <li><a onclick="tocGit('fps-nedir')" id="txt-toc-1">1. FPS Nedir?</a></li>
+                    <li><a onclick="tocGit('fps-hesaplama')" id="txt-toc-2">2. Oyun FPS Hesaplama Nasıl Yapılır?</a></li>
+                    <li><a onclick="tocGit('fps-arttirma')" id="txt-toc-3">3. FPS Arttırma Yöntemleri</a></li>
+                    <li><a onclick="tocGit('sik-sorulan-sorular')" id="txt-toc-4">4. Sık Sorulan Sorular</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bölüm 1: FPS Nedir? (Akordiyon) -->
+        <div id="fps-nedir" class="content-section">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span id="txt-sec1-title">FPS Nedir?</span> <span>+</span>
+            </button>
+            <div class="accordion-body">
+                <p id="txt-sec1-desc">FPS, İngilizce <strong>Frames Per Second</strong> kelimesinin kısaltmasıdır. Türkçesi saniyedeki kare sayısıdır. Oyunlarda ne kadar yüksek FPS alırsanız görüntü o kadar akıcı olur.</p>
+                <table class="fps-table">
+                    <thead>
+                        <tr>
+                            <th id="txt-th-fps">FPS Değeri</th>
+                            <th id="txt-th-exp">Oyun Deneyimi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>30 FPS</td>
+                            <td id="txt-t1">Oynanabilir</td>
+                        </tr>
+                        <tr>
+                            <td>60 FPS</td>
+                            <td id="txt-t2">Akıcı</td>
+                        </tr>
+                        <tr>
+                            <td>120 FPS</td>
+                            <td id="txt-t3">Çok Akıcı</td>
+                        </tr>
+                        <tr>
+                            <td>144+ FPS</td>
+                            <td id="txt-t4">Rekabetçi Oyuncular İçin İdeal</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Bölüm 2: Oyun FPS Hesaplama Nasıl Yapılır? (Akordiyon) -->
+        <div id="fps-hesaplama" class="content-section">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span id="txt-sec2-title">Oyun FPS Hesaplama Nasıl Yapılır?</span> <span>+</span>
+            </button>
+            <div class="accordion-body">
+                <p id="txt-sec2-desc">FPS değeri aşağıdaki donanımlara göre değişir:</p>
+                <ul>
+                    <li id="txt-li-gpu"><strong>Ekran Kartı (GPU):</strong> Grafik işlemlerini yürütür.</li>
+                    <li id="txt-li-cpu"><strong>İşlemci (CPU):</strong> Oyun içindeki hesaplamaları yapar.</li>
+                    <li id="txt-li-ram"><strong>RAM:</strong> Anlık verileri saklar.</li>
+                    <li id="txt-li-res"><strong>Çözünürlük:</strong> Görüntü kalitesi arttıkça yük biner.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bölüm 3: FPS Arttırma Yöntemleri (Akordiyon) -->
+        <div id="fps-arttirma" class="content-section">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span id="txt-sec3-title">FPS Arttırma Yöntemleri</span> <span>+</span>
+            </button>
+            <div class="accordion-body">
+                <p id="txt-sec3-desc">Daha fazla FPS almak için şunları yapabilirsiniz:</p>
+                <ul>
+                    <li id="txt-boost-1">Grafik ayarlarını düşürün</li>
+                    <li id="txt-boost-2">Güncel ekran kartı sürücüsü kurun</li>
+                    <li id="txt-boost-3">Arka planda çalışan programları kapatın</li>
+                    <li id="txt-boost-4">SSD kullanın</li>
+                    <li id="txt-boost-5">RAM yükseltin</li>
+                    <li id="txt-boost-6">Performans modunu açın</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bölüm 4: Sık Sorulan Sorular (Akordiyon) -->
+        <div id="sik-sorulan-sorular" class="content-section">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span id="txt-sec4-title">Sık Sorulan Sorular</span> <span>+</span>
+            </button>
+            <div class="accordion-body" style="padding-top: 10px;">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(event, this)">
+                        <span id="txt-q1">FPS Hesaplama Aracı Gerçek Sonuç Verir mi?</span> <span>+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p id="txt-a1">Araç, donanım özelliklerinize ve oyun motoru çarpanlarına bağlı olarak gerçeğe oldukça yakın tahmini bir performans aralığı sunar.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(event, this)">
+                        <span id="txt-q2">60 FPS Yeterli mi?</span> <span>+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p id="txt-a2">Günlük oyun deneyimleri ve hikayeli oyunlar için 60 FPS oldukça yeterli ve akıcıdır.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(event, this)">
+                        <span id="txt-q3">144 FPS Gerekli mi?</span> <span>+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p id="txt-a3">Counter-Strike 2, Valorant gibi rekabetçi nişancı oyunlarında yüksek yenileme hızına sahip monitörler için önerilir.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(event, this)">
+                        <span id="txt-q4">Laptop ve Masaüstü Performansı Neden Farklı?</span> <span>+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p id="txt-a4">Laptop bileşenleri ısınma ve güç (Watt) sınırlamaları nedeniyle masaüstü dengelerine göre biraz daha düşük performans verebilir.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(event, this)">
+                        <span id="txt-q5">Çözünürlük FPS'i Nasıl Etkiler?</span> <span>+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p id="txt-a5">Çözünürlük arttıkça ekran kartına binen yük artar, bu da doğrudan FPS değerinin düşmesine neden olur.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(event, this)">
+                        <span id="txt-q6">Bu Test Ücretsiz mi?</span> <span>+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p id="txt-a6">Evet, WaqoFPS tamamen ücretsiz bir performans analiz aracıdır ve dilediğiniz kadar test yapabilirsiniz.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 
 <script>
-let aktifDil = "tr";
+// Büyük Bölümler İçin Akordiyon Fonksiyonu
+function toggleAccordion(button) {
+    const section = button.parentElement;
+    section.classList.toggle('active');
+    const span = button.querySelector('span:last-child');
+    if (section.classList.contains('active')) {
+        span.innerText = '-';
+    } else {
+        span.innerText = '+';
+    }
+}
 
+// İçindekilerden Tıklandığında İlgili Bölümü Açıp Oraya Kaydırma Fonksiyonu
+function tocGit(id) {
+    const section = document.getElementById(id);
+    if (section) {
+        if (!section.classList.contains('active')) {
+            section.classList.add('active');
+            const span = section.querySelector('.accordion-header span:last-child');
+            if (span) span.innerText = '-';
+        }
+        setTimeout(() => {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 50);
+    }
+}
+
+// SSS İçi Akordiyon Fonksiyonu
+function toggleFaq(event, button) {
+    event.stopPropagation();
+    const item = button.parentElement;
+    item.classList.toggle('active');
+    const span = button.querySelector('span:last-child');
+    if (item.classList.contains('active')) {
+        span.innerText = '-';
+    } else {
+        span.innerText = '+';
+    }
+}
+
+// Dil Sözlüğü ve Çeviriler
 const metinler = {
     tr: {
-        baslik: "WaqOfFPS - Sistem FPS Hesaplama",
-        lblGpu: "Ekran Kartı (GPU):",
-        lblCpu: "İşlemci (CPU):",
-        lblRam: "RAM:",
-        lblCoz: "Çözünürlük:",
-        lblOyun: "Oyun:",
-        btnHesapla: "FPS Hesapla",
-        fpsEtiket: "Tahmini FPS Değeri:",
-        yetersizEtiket: "Sistem Durumu:",
-        kaldirmaz: "Bu Sistem Bu Oyunu Kaldırmaz!",
+        baslik: "FPS ANALİZ MERKEZİ",
+        lblGpu: "EKRAN KARTI (GPU)",
+        lblCpu: "İŞLEMCİ (CPU)",
+        lblRam: "RAM (BELLEK)",
+        lblCoz: "Ekran Çözünürlüğü (GÖRÜNTÜ KALİTESİ)",
+        lblOyun: "OYUN VE AYAR SEÇİMİ",
+        btnHesapla: "PERFORMANSI TEST ET",
+        fpsEtiket: "Tahmini FPS Aralığı",
+        yetersizEtiket: "Sistem Yetersiz",
+        kaldirmaz: "Kaldırmaz!",
         tocTitle: "İçindekiler",
-        toc1: "1. FPS Hesaplama ve Tablo",
-        toc2: "2. Bileşenlerin FPS'e Etkisi",
-        toc3: "3. Performans Artırma (Boost) Yöntemleri",
-        toc4: "4. Sıkça Sorulan Sorular (SSS)",
-        sec1Title: "1. FPS Hesaplama ve Tablo",
-        sec1Desc: "Sisteminizin seçilen oyun ve ayarlarda verebileceği tahmini performans aralığı aşağıdadır:",
-        thFps: "FPS Aralığı",
-        thExp: "Açıklama",
-        t1: "60+ FPS",
-        t2: "Akıcı ve yağ gibi bir oyun deneyimi sunar.",
-        t3: "30 - 60 FPS",
-        t4: "Oynanabilir düzeydedir ancak bazı sahnelerde kasmalar yaşanabilir.",
-        sec2Title: "2. Bileşenlerin FPS'e Etkisi",
-        sec2Desc: "Donanım parçalarının oyun performansındaki rolü:",
-        liGpu: "<b>GPU (Ekran Kartı):</b> Grafik kalitesini ve çözünürlüğü doğrudan belirler.",
-        liCpu: "<b>CPU (İşlemci):</b> Yapay zeka, fizik hesaplamaları ve anlık veri akışını yönetir.",
-        liRam: "<b>RAM:</b> Oyun içi varlıkların hızlı yüklenmesini sağlar, yetersizliği takılmalara yol açar.",
-        liRes: "<b>Çözünürlük:</b> Ekrandaki piksel sayısı arttıkça ekran kartına binen yük artar, FPS düşer.",
-        sec3Title: "3. Performans Artırma (Boost) Yöntemleri",
-        sec3Desc: "Oyun performansını artırmak için uygulayabileceğiniz ipuçları:",
-        boost1: "Grafik sürücülerinizi (NVIDIA/AMD) sürekli güncel tutun.",
-        boost2: "Arka planda çalışan gereksiz uygulamaları kapatın.",
-        boost3: "Windows güç planını \"Yüksek Performans\" moduna getirin.",
-        boost4: "Oyun içi ayarları düşürerek (Gölgeler, Kenar Yumuşatma vb.) FPS kazanın.",
-        boost5: "Isınma sorunlarını önlemek için düzenli bakım ve temizlik yapın.",
-        boost6: "Disk birleştirme ve SSD optimizasyonlarına dikkat edin.",
-        sec4Title: "4. Sıkça Sorulan Sorular (SSS)",
-        q1: "Bu hesaplama kesin sonuç mu verir?",
-        a1: "Tahmini bir değer sunar; sistem sıcaklığı ve arka plan uygulamalarına göre değişiklik gösterebilir.",
-        q2: "Laptop ve masaüstü bileşenleri neden ayrı?",
-        a2: "Laptop donanımları güç ve ısınma sınırlandırmaları nedeniyle masaüstü muadillerinden farklı performans gösterir.",
-        q3: "RAM miktarı FPS'i doğrudan etkiler mi?",
-        a3: "Doğrudan devasa bir FPS artışı sağlamasa da düşük RAM anlık takılmalara (stuttering) sebep olur.",
-        q4: "Çözünürlük düşünce neden FPS artar?",
-        a4: "Ekran kartının işleyeceği piksel sayısı azaldığı için yük hafifler ve kare hızı yükselir.",
-        q5: "Sürücü güncellemek neden önemlidir?",
-        a5: "Yeni çıkan oyunlar için ekran kartı üreticileri özel optimizasyon yamaları yayınlar.",
-        q6: "Termal macun değişimi FPS'i etkiler mi?",
-        a6: "İşlemci veya ekran kartı aşırı ısınmaktan dolayı hız düşürüyorsa (thermal throttling), macun değişimi performansı eski haline getirir."
+        toc1: "1. FPS Nedir?",
+        toc2: "2. Oyun FPS Hesaplama Nasıl Yapılır?",
+        toc3: "3. FPS Arttırma Yöntemleri",
+        toc4: "4. Sık Sorulan Sorular",
+        sec1Title: "FPS Nedir?",
+        sec1Desc: "FPS, İngilizce <strong>Frames Per Second</strong> kelimesinin kısaltmasıdır. Türkçesi saniyedeki kare sayısıdır. Oyunlarda ne kadar yüksek FPS alırsanız görüntü o kadar akıcı olur.",
+        thFps: "FPS Değeri",
+        thExp: "Oyun Deneyimi",
+        t1: "Oynanabilir",
+        t2: "Akıcı",
+        t3: "Çok Akıcı",
+        t4: "Rekabetçi Oyuncular İçin İdeal",
+        sec2Title: "Oyun FPS Hesaplama Nasıl Yapılır?",
+        sec2Desc: "FPS değeri aşağıdaki donanımlara göre değişir:",
+        liGpu: "<strong>Ekran Kartı (GPU):</strong> Grafik işlemlerini yürütür.",
+        liCpu: "<strong>İşlemci (CPU):</strong> Oyun içindeki hesaplamaları yapar.",
+        liRam: "<strong>RAM:</strong> Anlık verileri saklar.",
+        liRes: "<strong>Çözünürlük:</strong> Görüntü kalitesi arttıkça yük biner.",
+        sec3Title: "FPS Arttırma Yöntemleri",
+        sec3Desc: "Daha fazla FPS almak için şunları yapabilirsiniz:",
+        boost1: "Grafik ayarlarını düşürün",
+        boost2: "Güncel ekran kartı sürücüsü kurun",
+        boost3: "Arka planda çalışan programları kapatın",
+        boost4: "SSD kullanın",
+        boost5: "RAM yükseltin",
+        boost6: "Performans modunu açın",
+        sec4Title: "Sık Sorulan Sorular",
+        q1: "FPS Hesaplama Aracı Gerçek Sonuç Verir mi?",
+        a1: "Araç, donanım özelliklerinize ve oyun motoru çarpanlarına bağlı olarak gerçeğe oldukça yakın tahmini bir performans aralığı sunar.",
+        q2: "60 FPS Yeterli mi?",
+        a2: "Günlük oyun deneyimleri ve hikayeli oyunlar için 60 FPS oldukça yeterli ve akıcıdır.",
+        q3: "144 FPS Gerekli mi?",
+        a3: "Counter-Strike 2, Valorant gibi rekabetçi nişancı oyunlarında yüksek yenileme hızına sahip monitörler için önerilir.",
+        q4: "Laptop ve Masaüstü Performansı Neden Farklı?",
+        a4: "Laptop bileşenleri ısınma ve güç (Watt) sınırlamaları nedeniyle masaüstü dengelerine göre biraz daha düşük performans verebilir.",
+        q5: "Çözünürlük FPS'i Nasıl Etkiler?",
+        a5: "Çözünürlük arttıkça ekran kartına binen yük artar, bu da doğrudan FPS değerinin düşmesine neden olur.",
+        q6: "Bu Test Ücretsiz mi?",
+        a6: "Evet, WaqoFPS tamamen ücretsiz bir performans analiz aracıdır ve dilediğiniz kadar test yapabilirsiniz."
     },
     en: {
-        baslik: "WaqOfFPS - System FPS Calculator",
-        lblGpu: "Graphics Card (GPU):",
-        lblCpu: "Processor (CPU):",
-        lblRam: "RAM:",
-        lblCoz: "Resolution:",
-        lblOyun: "Game:",
-        btnHesapla: "Calculate FPS",
-        fpsEtiket: "Estimated FPS Value:",
-        yetersizEtiket: "System Status:",
-        kaldirmaz: "This System Can't Run This Game!",
+        baslik: "FPS ANALYSIS CENTER",
+        lblGpu: "GRAPHICS CARD (GPU)",
+        lblCpu: "PROCESSOR (CPU)",
+        lblRam: "RAM (MEMORY)",
+        lblCoz: "Screen Resolution (IMAGE QUALITY)",
+        lblOyun: "GAME AND SETTING SELECTION",
+        btnHesapla: "TEST PERFORMANCE",
+        fpsEtiket: "Estimated FPS Range",
+        yetersizEtiket: "System Insufficient",
+        kaldirmaz: "Can't Run!",
         tocTitle: "Table of Contents",
-        toc1: "1. FPS Calculation and Table",
-        toc2: "2. Impact of Components on FPS",
-        toc3: "3. Performance Boost Methods",
-        toc4: "4. Frequently Asked Questions (FAQ)",
-        sec1Title: "1. FPS Calculation and Table",
-        sec1Desc: "Below is the estimated performance range your system can provide in the selected game and settings:",
-        thFps: "FPS Range",
-        thExp: "Description",
-        t1: "60+ FPS",
-        t2: "Offers a smooth and fluid gaming experience.",
-        t3: "30 - 60 FPS",
-        t4: "Playable, but stuttering may occur in some scenes.",
-        sec2Title: "2. Impact of Components on FPS",
-        sec2Desc: "The role of hardware parts in gaming performance:",
-        liGpu: "<b>GPU (Graphics Card):</b> Directly determines graphics quality and resolution.",
-        liCpu: "<b>CPU (Processor):</b> Manages AI, physics calculations, and real-time data flow.",
-        liRam: "<b>RAM:</b> Ensures fast loading of in-game assets; insufficiency causes stutters.",
-        liRes: "<b>Resolution:</b> As the pixel count increases, the load on the GPU increases and FPS drops.",
-        sec3Title: "3. Performance Boost Methods",
-        sec3Desc: "Tips you can apply to boost gaming performance:",
-        boost1: "Keep your graphics drivers (NVIDIA/AMD) constantly updated.",
-        boost2: "Close unnecessary background applications.",
-        boost3: "Set the Windows power plan to \"High Performance\".",
-        boost4: "Gain FPS by lowering in-game settings (Shadows, Anti-Aliasing, etc.).",
-        boost5: "Perform regular maintenance and cleaning to prevent overheating issues.",
-        boost6: "Pay attention to disk defragmentation and SSD optimizations.",
-        sec4Title: "4. Frequently Asked Questions (FAQ)",
-        q1: "Does this calculation give an exact result?",
-        a1: "It provides an estimated value; it may vary depending on system temperature and background applications.",
-        q2: "Why are laptop and desktop components separate?",
-        a2: "Laptop hardware performs differently from desktop counterparts due to power and thermal limits.",
-        q3: "Does the amount of RAM directly affect FPS?",
-        a3: "Although it doesn't provide a massive FPS boost directly, low RAM causes sudden stuttering.",
-        q4: "Why does FPS increase when resolution drops?",
-        a4: "Since the pixel count for the GPU to process decreases, the load lightens and frame rate increases.",
-        q5: "Why is updating drivers important?",
-        a5: "Graphics card manufacturers release special optimization patches for newly released games.",
-        q6: "Does changing thermal paste affect FPS?",
-        a6: "If the processor or graphics card is throttling due to overheating, replacing the paste restores performance."
+        toc1: "1. What is FPS?",
+        toc2: "2. How to Calculate Game FPS?",
+        toc3: "3. Methods to Increase FPS",
+        toc4: "4. Frequently Asked Questions",
+        sec1Title: "What is FPS?",
+        sec1Desc: "FPS stands for <strong>Frames Per Second</strong>. It is the number of frames rendered each second. The higher the FPS in games, the smoother the motion appears.",
+        thFps: "FPS Value",
+        thExp: "Gaming Experience",
+        t1: "Playable",
+        t2: "Smooth",
+        t3: "Very Smooth",
+        t4: "Ideal for Competitive Gamers",
+        sec2Title: "How to Calculate Game FPS?",
+        sec2Desc: "FPS values vary depending on the following hardware components:",
+        liGpu: "<strong>Graphics Card (GPU):</strong> Handles graphical processing.",
+        liCpu: "<strong>Processor (CPU):</strong> Handles in-game calculations.",
+        liRam: "<strong>RAM:</strong> Stores temporary data.",
+        liRes: "<strong>Resolution:</strong> Higher image quality increases load.",
+        sec3Title: "Methods to Increase FPS",
+        sec3Desc: "You can do the following to get more FPS:",
+        boost1: "Lower graphic settings",
+        boost2: "Install up-to-date GPU drivers",
+        boost3: "Close background running applications",
+        boost4: "Use an SSD",
+        boost5: "Upgrade RAM",
+        boost6: "Enable performance mode",
+        sec4Title: "Frequently Asked Questions",
+        q1: "Does the FPS Calculator Give Accurate Results?",
+        a1: "The tool provides the closest estimated performance range based on your hardware specifications and game engine multipliers.",
+        q2: "Is 60 FPS Enough?",
+        a2: "For casual gaming experiences and story-driven games, 60 FPS is quite sufficient and smooth.",
+        q3: "Is 144 FPS Necessary?",
+        a3: "It is recommended for high refresh rate monitors in competitive shooter games like Counter-Strike 2 and Valorant.",
+        q4: "Why Do Laptop and Desktop Performance Differ?",
+        a4: "Laptop components may perform slightly lower than desktops due to thermal and power (Watt) limitations.",
+        q5: "How Does Resolution Affect FPS?",
+        a5: "As the resolution increases, the load on the graphics card rises, directly causing a drop in FPS.",
+        q6: "Is This Test Free?",
+        a6: "Yes, WaqoFPS is a completely free performance analysis tool and you can run as many tests as you like."
     }
 };
 
+let aktifDil = "tr";
+
 const veri = {
-    ekranKartlari: [
-        { adTr: "RTX 2050 (Masaüstü)", adEn: "RTX 2050 (Desktop)", p: 75 },
-        { adTr: "GTX 1660 Tİ (Masaüstü)", adEn: "GTX 1660 TI (Desktop)", p: 85 },
-        { adTr: "GTX 1660 Tİ (Laptop)", adEn: "GTX 1660 TI (Laptop)", p: 70 },
-        { adTr: "GTX 1660 SUPER (Masaüstü)", adEn: "GTX 1660 SUPER (Desktop)", p: 80 },
-        { adTr: "GTX 1660 (Masaüstü)", adEn: "GTX 1660 (Desktop)", p: 70 },
-        { adTr: "GTX 1660 (Laptop)", adEn: "GTX 1660 (Laptop)", p: 58 },
-        { adTr: "GTX 1650 SUPER (Masaüstü)", adEn: "GTX 1650 SUPER (Desktop)", p: 63 },
-        { adTr: "GTX 1650 (Masaüstü)", adEn: "GTX 1650 (Desktop)", p: 55 },
-        { adTr: "GTX 1650 Tİ (Laptop)", adEn: "GTX 1650 TI (Laptop)", p: 57 },
-        { adTr: "GTX 1650 (Laptop)", adEn: "GTX 1650 (Laptop)", p: 45 },
-        { adTr: "GTX 1080 Tİ (Masaüstü)", adEn: "GTX 1080 TI (Desktop)", p: 135 },
-        { adTr: "GTX 1080 (Masaüstü)", adEn: "GTX 1080 (Desktop)", p: 100 },
-        { adTr: "GTX 1070 Tİ (Masaüstü)", adEn: "GTX 1070 TI (Desktop)", p: 103 },
-        { adTr: "GTX 1070 (Masaüstü)", adEn: "GTX 1070 (Desktop)", p: 90 },
-        { adTr: "GTX 1060 (Masaüstü)", adEn: "GTX 1060 (Desktop)", p: 59 },
-        { adTr: "GTX 1050 Tİ (Masaüstü)", adEn: "GTX 1050 TI (Desktop)", p: 45 },
-        { adTr: "GTX 1050 (Masaüstü)", adEn: "GTX 1050 (Desktop)", p: 40 },
-        { adTr: "GTX 730 (Masaüstü)", adEn: "GTX 730 (Desktop)", p: 15 },
-        { adTr: "GTX 580 (Masaüstü)", adEn: "GTX 580 (Desktop)", p: 25 },
-        { adTr: "GTX 1070 Tİ (Laptop)", adEn: "GTX 1070 TI (Laptop)", p: 80 },
-        { adTr: "GTX 1070 (Laptop)", adEn: "GTX 1070 (Laptop)", p: 60 },
-        { adTr: "GTX 1060 (Laptop)", adEn: "GTX 1060 (Laptop)", p: 45 },
-        { adTr: "GTX 1050 Tİ (Laptop)", adEn: "GTX 1050 TI (Laptop)", p: 35 },
-        { adTr: "GTX 1050 (Laptop)", adEn: "GTX 1050 (Laptop)", p: 30 },
-        { adTr: "RX 9070 XT (Masaüstü)", adEn: "RX 9070 XT (Desktop)", p: 210 },
-        { adTr: "RX 9070 (Masaüstü)", adEn: "RX 9070 (Desktop)", p: 200 },
-        { adTr: "RX 9060 XT (Masaüstü)", adEn: "RX 9060 XT (Desktop)", p: 200 },
-        { adTr: "RX 9060 (Masaüstü)", adEn: "RX 9060 (Desktop)", p: 190 },
-        { adTr: "RX 7900 XTX (Masaüstü)", adEn: "RX 7900 XTX (Desktop)", p: 190 },
-        { adTr: "RX 7900 XT (Masaüstü)", adEn: "RX 7900 XT (Desktop)", p: 180 },
-        { adTr: "RX 7800 XT (Masaüstü)", adEn: "RX 7800 XT (Desktop)", p: 175 },
-        { adTr: "RX 7700 XT (Masaüstü)", adEn: "RX 7700 XT (Desktop)", p: 165 },
-        { adTr: "RX 7600 XT (Masaüstü)", adEn: "RX 7600 XT (Desktop)", p: 115 },
-        { adTr: "RX 6950 XT (Masaüstü)", adEn: "RX 6950 XT (Desktop)", p: 175 },
-        { adTr: "RX 6900 XT (Masaüstü)", adEn: "RX 6900 XT (Desktop)", p: 170 },
-        { adTr: "RX 6800 XT (Masaüstü)", adEn: "RX 6800 XT (Desktop)", p: 160 },
-        { adTr: "RX 6800 (Masaüstü)", adEn: "RX 6800 (Desktop)", p: 120 },
-        { adTr: "RX 6700 XT (Masaüstü)", adEn: "RX 6700 XT (Desktop)", p: 125 },
-        { adTr: "RX 6700 (Masaüstü)", adEn: "RX 6700 (Desktop)", p: 110 },
-        { adTr: "RX 6600 XT (Masaüstü)", adEn: "RX 6600 XT (Desktop)", p: 95 },
-        { adTr: "RX 6600 (Masaüstü)", adEn: "RX 6600 (Desktop)", p: 80 },
-        { adTr: "RX 6500 XT (Masaüstü)", adEn: "RX 6500 XT (Desktop)", p: 70 },
-        { adTr: "RX 6500 (Masaüstü)", adEn: "RX 6500 (Desktop)", p: 65 },
-        { adTr: "RX 5700 XT (Masaüstü)", adEn: "RX 5700 XT (Desktop)", p: 115 },
-        { adTr: "RX 5700 (Masaüstü)", adEn: "RX 5700 (Desktop)", p: 105 },
-        { adTr: "RX 5600 XT (Masaüstü)", adEn: "RX 5600 XT (Desktop)", p: 65 },
-        { adTr: "RX 5500 XT (Masaüstü)", adEn: "RX 5500 XT (Desktop)", p: 55 },
-        { adTr: "RX 580 (Masaüstü)", adEn: "RX 580 (Desktop)", p: 43 },
-        { adTr: "RX 7900 (Laptop)", adEn: "RX 7900 (Laptop)", p: 140 },
-        { adTr: "RX 7800 (Laptop)", adEn: "RX 7800 (Laptop)", p: 135 },
-        { adTr: "RX 7700 (Laptop)", adEn: "RX 7700 (Laptop)", p: 130 },
-        { adTr: "RX 6950M (Laptop)", adEn: "RX 6950M (Laptop)", p: 120 },
-        { adTr: "RX 6900M (Laptop)", adEn: "RX 6900M (Laptop)", p: 115 },
-        { adTr: "RX 6800M (Laptop)", adEn: "RX 6800M (Laptop)", p: 105},
-        { adTr: "RX 6700M (Laptop)", adEn: "RX 6700M (Laptop)", p: 90 },
-        { adTr: "RX 6600M (Laptop)", adEn: "RX 6600M (Laptop)", p: 70 },
-        { adTr: "RX 6500M (Laptop)", adEn: "RX 6500M (Laptop)", p: 60 },
-        { adTr: "RX 5700M (Laptop)", adEn: "RX 5700M (Laptop)", p: 90 },
-        { adTr: "RX 5600M (Laptop)", adEn: "RX 5600M (Laptop)", p: 60 },
-        { adTr: "RX 5500M (Laptop)", adEn: "RX 5500M (Laptop)", p: 50 }
-    ],
-    islemciler: [
-        { adTr: "i3-6300H (Laptop)", adEn: "i3-6300H (Laptop)", p: 12 },
-        { adTr: "i3-7300H (Laptop)", adEn: "i3-7300H (Laptop)", p: 20 },
-        { adTr: "i3-8300H (Laptop)", adEn: "i3-8300H (Laptop)", p: 26 },
-        { adTr: "i3-8300K (Masaüstü)", adEn: "i3-8300K (Desktop)", p: 36 },
-        { adTr: "i3-9300K (Masaüstü)", adEn: "i3-9300K (Desktop)", p: 40 },
-        { adTr: "i3-9300KF (Masaüstü)", adEn: "i3-9300KF (Desktop)", p: 40 },
-        { adTr: "i3-9300F (Masaüstü)", adEn: "i3-9300F (Desktop)", p: 34 },
-        { adTr: "i3-10300H (Laptop)", adEn: "i3-10300H (Laptop)", p: 38 },
-        { adTr: "i3-10300KF (Masaüstü)", adEn: "i3-10300KF (Desktop)", p: 42 },
-        { adTr: "i3-10300F (Masaüstü)", adEn: "i3-10300F (Desktop)", p: 36 },
-        { adTr: "i3-11300H (Laptop)", adEn: "i3-11300H (Laptop)", p: 40 },
-        { adTr: "i3-11300KF (Masaüstü)", adEn: "i3-11300KF (Desktop)", p: 44 },
-        { adTr: "i3-11300F (Masaüstü)", adEn: "i3-11300F (Desktop)", p: 38 },
-        { adTr: "i3-12300H (Laptop)", adEn: "i3-12300H (Laptop)", p: 42 },
-        { adTr: "i3-12300KF (Masaüstü)", adEn: "i3-12300KF (Desktop)", p: 48 },
-        { adTr: "i3-12300F (Masaüstü)", adEn: "i3-12300F (Desktop)", p: 40 },
-        { adTr: "i3-13300H (Laptop)", adEn: "i3-13300H (Laptop)", p: 44 },
-        { adTr: "i3-13300KF (Masaüstü)", adEn: "i3-13300KF (Desktop)", p: 50 },
-        { adTr: "i3-13300F (Masaüstü)", adEn: "i3-13300F (Desktop)", p: 42 },
-        { adTr: "i3-14300H (Laptop)", adEn: "i3-14300H (Laptop)", p: 46 },
-        { adTr: "i3-14300KF (Masaüstü)", adEn: "i3-14300KF (Desktop)", p: 52 },
-        { adTr: "i3-14300F (Masaüstü)", adEn: "i3-14300F (Desktop)", p: 44 },
-        { adTr: "i5-6600H (Laptop)", adEn: "i5-6600H (Laptop)", p: 40 },
-        { adTr: "i5-6600K (Masaüstü)", adEn: "i5-6600K (Desktop)", p: 55 },
-        { adTr: "i5-7600H (Laptop)", adEn: "i5-7600H (Laptop)", p: 52 },
-        { adTr: "i5-7600K (Masaüstü)", adEn: "i5-7600K (Desktop)", p: 61 },
-        { adTr: "i5-8600H (Laptop)", adEn: "i5-8600H (Laptop)", p: 56 },
-        { adTr: "i5-8600K (Masaüstü)", adEn: "i5-8600K (Desktop)", p: 65 },
-        { adTr: "i5-9600K (Masaüstü)", adEn: "i5-9600K (Desktop)", p: 72 },
-        { adTr: "i5-9600KF (Masaüstü)", adEn: "i5-9600KF (Desktop)", p: 72 },
-        { adTr: "i5-9600F (Masaüstü)", adEn: "i5-9600F (Desktop)", p: 64 },
-        { adTr: "i5-10600H (Laptop)", adEn: "i5-10600H (Laptop)", p: 61 },
-        { adTr: "i5-10600K (Masaüstü)", adEn: "i5-10600K (Desktop)", p: 74 },
-        { adTr: "i5-10600KF (Masaüstü)", adEn: "i5-10600KF (Desktop)", p: 74 },
-        { adTr: "i5-10600F (Masaüstü)", adEn: "i5-10600F (Desktop)", p: 64 },
-        { adTr: "i5-11600H (Laptop)", adEn: "i5-11600H (Laptop)", p: 72 },
-        { adTr: "i5-11600K (Masaüstü)", adEn: "i5-11600K (Desktop)", p: 81 },
-        { adTr: "i5-11600KF (Masaüstü)", adEn: "i5-11600KF (Desktop)", p: 81 },
-        { adTr: "i5-11600F (Masaüstü)", adEn: "i5-11600F (Desktop)", p: 74 },
-        { adTr: "i5-12600H (Laptop)", adEn: "i5-12600H (Laptop)", p: 72 },
-        { adTr: "i5-12600HX (Laptop)", adEn: "i5-12600HX (Laptop)", p: 78 },
-        { adTr: "i5-12600K (Masaüstü)", adEn: "i5-12600K (Desktop)", p: 85 },
-        { adTr: "i5-12600KF (Masaüstü)", adEn: "i5-12600KF (Desktop)", p: 85 },
-        { adTr: "i5-12600F (Masaüstü)", adEn: "i5-12600F (Desktop)", p: 75 },
-        { adTr: "i5-13600H (Laptop)", adEn: "i5-13600H (Laptop)", p: 80 },
-        { adTr: "i5-13600HX (Laptop)", adEn: "i5-13600HX (Laptop)", p: 85 },
-        { adTr: "i5-13600K (Masaüstü)", adEn: "i5-13600K (Desktop)", p: 90 },
-        { adTr: "i5-13600KF (Masaüstü)", adEn: "i5-13600KF (Desktop)", p: 90 },
-        { adTr: "i5-13600F (Masaüstü)", adEn: "i5-13600F (Desktop)", p: 82 },
-        { adTr: "i5-14600H (Laptop)", adEn: "i5-14600H (Laptop)", p: 87 },
-        { adTr: "i5-14600HX (Laptop)", adEn: "i5-14600HX (Laptop)", p: 95 },
-        { adTr: "i5-14600K (Masaüstü)", adEn: "i5-14600K (Desktop)", p: 100 },
-        { adTr: "i5-14600KF (Masaüstü)", adEn: "i5-14600KF (Desktop)", p: 100 },
-        { adTr: "i5-14600F (Masaüstü)", adEn: "i5-14600F (Desktop)", p: 90 },
-        { adTr: "i7-6700H (Laptop)", adEn: "i7-6700H (Laptop)", p: 37 },
-        { adTr: "i7-6700K (Masaüstü)", adEn: "i7-6700K (Desktop)", p: 46 },
-        { adTr: "i7-7700H (Laptop)", adEn: "i7-7700H (Laptop)", p: 41 },
-        { adTr: "i7-7700K (Masaüstü)", adEn: "i7-7700K (Desktop)", p: 50 },
-        { adTr: "i7-8700H (Laptop)", adEn: "i7-8700H (Laptop)", p: 45 },
-        { adTr: "i7-8700K (Masaüstü)", adEn: "i7-8700K (Desktop)", p: 54 },
-        { adTr: "i7-9700K (Masaüstü)", adEn: "i7-9700K (Desktop)", p: 59 },
-        { adTr: "i7-9700KF (Masaüstü)", adEn: "i7-9700KF (Desktop)", p: 59 },
-        { adTr: "i7-9700F (Masaüstü)", adEn: "i7-9700F (Desktop)", p: 52 },
-        { adTr: "i7-10700H (Laptop)", adEn: "i7-10700H (Laptop)", p: 51 },
-        { adTr: "i7-10700K (Masaüstü)", adEn: "i7-10700K (Desktop)", p: 63 },
-        { adTr: "i7-10700KF (Masaüstü)", adEn: "i7-10700KF (Desktop)", p: 63 },
-        { adTr: "i7-10700F (Masaüstü)", adEn: "i7-10700F (Desktop)", p: 54 },
-        { adTr: "i7-11700H (Laptop)", adEn: "i7-11700H (Laptop)", p: 68 },
-        { adTr: "i7-11700K (Masaüstü)", adEn: "i7-11700K (Desktop)", p: 87 },
-        { adTr: "i7-11700KF (Masaüstü)", adEn: "i7-11700KF (Desktop)", p: 87 },
-        { adTr: "i7-11700F (Masaüstü)", adEn: "i7-11700F (Desktop)", p: 74 },
-        { adTr: "i7-12700H (Laptop)", adEn: "i7-12700H (Laptop)", p: 76 },
-        { adTr: "i7-12700HX (Laptop)", adEn: "i7-12700HX (Laptop)", p: 90 },
-        { adTr: "i7-12700K (Masaüstü)", adEn: "i7-12700K (Desktop)", p: 96 },
-        { adTr: "i7-12700KF (Masaüstü)", adEn: "i7-12700KF (Desktop)", p: 96 },
-        { adTr: "i7-12700F (Masaüstü)", adEn: "i7-12700F (Desktop)", p: 80 },
-        { adTr: "i7-13700H (Laptop)", adEn: "i7-13700H (Laptop)", p: 87 },
-        { adTr: "i7-13700HX (Laptop)", adEn: "i7-13700HX (Laptop)", p: 103 },
-        { adTr: "i7-13700K (Masaüstü)", adEn: "i7-13700K (Desktop)", p: 106 },
-        { adTr: "i7-13650HX (Laptop)", adEn: "i7-13650HX (Laptop)", p: 102 },
-        { adTr: "i7-13700KF (Masaüstü)", adEn: "i7-13700KF (Desktop)", p: 106 },
-        { adTr: "i7-13700F (Masaüstü)", adEn: "i7-13700F (Desktop)", p: 93 },
-        { adTr: "i7-14700H (Laptop)", adEn: "i7-14700H (Laptop)", p: 98 },
-        { adTr: "i7-14650HX (Laptop)", adEn: "i7-14650HX (Laptop)", p: 107 },
-        { adTr: "i7-14700HX (Laptop)", adEn: "i7-14700HX (Laptop)", p: 109 },
-        { adTr: "i7-14700K (Masaüstü)", adEn: "i7-14700K (Desktop)", p: 114 },
-        { adTr: "i7-14700KF (Masaüstü)", adEn: "i7-14700KF (Desktop)", p: 114 },
-        { adTr: "i7-14700F (Masaüstü)", adEn: "i7-14700F (Desktop)", p: 101 },
-        { adTr: "i9-10900HK (Laptop)", adEn: "i9-10900HK (Laptop)", p: 99 },
-        { adTr: "i9-10900 (Masaüstü)", adEn: "i9-10900 (Desktop)", p: 98 },
-        { adTr: "i9-10900K (Masaüstü)", adEn: "i9-10900K (Desktop)", p: 110 },
-        { adTr: "i9-10900KF (Masaüstü)", adEn: "i9-10900KF (Desktop)", p: 110 },
-        { adTr: "i9-10900F (Masaüstü)", adEn: "i9-10900F (Desktop)", p: 100 },
-        { adTr: "i9-11900H (Laptop)", adEn: "i9-11900H (Laptop)", p: 97 },
-        { adTr: "i9-11900HK (Laptop)", adEn: "i9-11900HK (Laptop)", p: 100 },
-        { adTr: "i9-11900K (Masaüstü)", adEn: "i9-11900K (Desktop)", p: 118 },
-        { adTr: "i9-11900KF (Masaüstü)", adEn: "i9-11900KF (Desktop)", p: 118 },
-        { adTr: "i9-11900F (Masaüstü)", adEn: "i9-11900F (Desktop)", p: 107 },
-        { adTr: "i9-11900 (Masaüstü)", adEn: "i9-11900 (Desktop)", p: 105 },
-        { adTr: "i9-12900H (Laptop)", adEn: "i9-12900H (Laptop)", p: 121 },
-        { adTr: "i9-12900HX (Laptop)", adEn: "i9-12900HX (Laptop)", p: 126 },
-        { adTr: "i9-12900K (Masaüstü)", adEn: "i9-12900K (Desktop)", p: 130 },
-        { adTr: "i9-12900KF (Masaüstü)", adEn: "i9-12900KF (Desktop)", p: 132 },
-        { adTr: "i9-12900F (Masaüstü)", adEn: "i9-12900F (Desktop)", p: 115 },
-        { adTr: "i9-12900 (Masaüstü)", adEn: "i9-12900 (Desktop)", p: 110 },
-        { adTr: "i9-13900H (Laptop)", adEn: "i9-13900H (Laptop)", p: 131 },
-        { adTr: "i9-13900HX (Laptop)", adEn: "i9-13900HX (Laptop)", p: 136 },
-        { adTr: "i9-13900K (Masaüstü)", adEn: "i9-13900K (Desktop)", p: 141 },
-        { adTr: "i9-13900KF (Masaüstü)", adEn: "i9-13900KF (Desktop)", p: 143 },
-        { adTr: "i9-13900F (Masaüstü)", adEn: "i9-13900F (Desktop)", p: 126 },
-        { adTr: "i9-13900 (Masaüstü)", adEn: "i9-13900 (Desktop)", p: 121 },
-        { adTr: "i9-14900 (Masaüstü)", adEn: "i9-14900 (Desktop)", p: 136 },
-        { adTr: "i9-14900F (Masaüstü)", adEn: "i9-14900F (Desktop)", p: 144 },
-        { adTr: "i9-14900KF (Masaüstü)", adEn: "i9-14900KF (Desktop)", p: 153 },
-        { adTr: "i9-14900K (Masaüstü)", adEn: "i9-14900K (Desktop)", p: 153 },
-        { adTr: "i9-14900H (Laptop)", adEn: "i9-14900H (Laptop)", p: 141 },
-        { adTr: "i9-14900HX (Laptop)", adEn: "i9-14900HX (Laptop)", p: 149 },
-        { adTr: "Ryzen 3 1200 (Masaüstü)", adEn: "Ryzen 3 1200 (Desktop)", p: 34 },
-        { adTr: "Ryzen 3 1200X (Masaüstü)", adEn: "Ryzen 3 1200X (Desktop)", p: 36 },
-        { adTr: "Ryzen 3 7345H (Laptop)", adEn: "Ryzen 3 7345H (Laptop)", p: 59 },
-        { adTr: "Ryzen 3 1300 (Masaüstü)", adEn: "Ryzen 3 1300 (Desktop)", p: 39 },
-        { adTr: "Ryzen 3 1300X (Masaüstü)", adEn: "Ryzen 3 1300X (Desktop)", p: 42 },
-        { adTr: "Ryzen 3 7340HX (Laptop)", adEn: "Ryzen 3 7340HX (Laptop)", p: 63 },
-        { adTr: "Ryzen 3 2200 (Masaüstü)", adEn: "Ryzen 3 2200 (Desktop)", p: 40 },
-        { adTr: "Ryzen 3 2200G (Masaüstü)", adEn: "Ryzen 3 2200G (Desktop)", p: 42 },
-        { adTr: "Ryzen 3 5300G (Masaüstü)", adEn: "Ryzen 3 5300G (Desktop)", p: 49 },
-        { adTr: "Ryzen 3 3100 (Masaüstü)", adEn: "Ryzen 3 3100 (Desktop)", p: 42 },
-        { adTr: "Ryzen 3 3100X (Masaüstü)", adEn: "Ryzen 3 3100X (Desktop)", p: 45 },
-        { adTr: "Ryzen 3 3300 (Masaüstü)", adEn: "Ryzen 3 3300 (Desktop)", p: 46 },
-        { adTr: "Ryzen 3 3300X (Masaüstü)", adEn: "Ryzen 3 3300X (Desktop)", p: 48 },
-        { adTr: "Ryzen 3 4100 (Masaüstü)", adEn: "Ryzen 3 4100 (Desktop)", p: 50 },
-        { adTr: "Ryzen 3 4300G (Masaüstü)", adEn: "Ryzen 3 4300G (Desktop)", p: 53 },
-        { adTr: "Ryzen 5 1600 (Masaüstü)", adEn: "Ryzen 5 1600 (Desktop)", p: 52 },
-        { adTr: "Ryzen 5 1600X (Masaüstü)", adEn: "Ryzen 5 1600X (Desktop)", p: 54 },
-        { adTr: "Ryzen 5 7640H (Laptop)", adEn: "Ryzen 5 7640H (Laptop)", p: 115 },
-        { adTr: "Ryzen 5 2600 (Masaüstü)", adEn: "Ryzen 5 2600 (Desktop)", p: 67 },
-        { adTr: "Ryzen 5 2600X (Masaüstü)", adEn: "Ryzen 5 2600X (Desktop)", p: 70 },
-        { adTr: "Ryzen 5 7645HX (Laptop)", adEn: "Ryzen 5 7645HX (Laptop)", p: 120 },
-        { adTr: "Ryzen 5 3600 (Masaüstü)", adEn: "Ryzen 5 3600 (Desktop)", p: 87 },
-        { adTr: "Ryzen 5 3600X (Masaüstü)", adEn: "Ryzen 5 3600X (Desktop)", p: 90 },
-        { adTr: "Ryzen 5 5600 (Masaüstü)", adEn: "Ryzen 5 5600 (Desktop)", p: 104 },
-        { adTr: "Ryzen 5 5600X (Masaüstü)", adEn: "Ryzen 5 5600X (Desktop)", p: 109 },
-        { adTr: "Ryzen 5 7600 (Masaüstü)", adEn: "Ryzen 5 7600 (Desktop)", p: 114 },
-        { adTr: "Ryzen 5 7600X (Masaüstü)", adEn: "Ryzen 5 7600X (Desktop)", p: 124 },
-        { adTr: "Ryzen 7 2700 (Masaüstü)", adEn: "Ryzen 7 2700 (Desktop)", p: 79 },
-        { adTr: "Ryzen 7 2700X (Masaüstü)", adEn: "Ryzen 7 2700X (Desktop)", p: 84 },
-        { adTr: "Ryzen 7 7845H (Laptop)", adEn: "Ryzen 7 7845H (Laptop)", p: 127 },
-        { adTr: "Ryzen 7 3700 (Masaüstü)", adEn: "Ryzen 7 3700 (Desktop)", p: 104 },
-        { adTr: "Ryzen 7 3700X (Masaüstü)", adEn: "Ryzen 7 3700X (Desktop)", p: 109 },
-        { adTr: "Ryzen 7 7845HX (Laptop)", adEn: "Ryzen 7 7845HX (Laptop)", p: 134 },
-        { adTr: "Ryzen 7 5800 (Masaüstü)", adEn: "Ryzen 7 5800 (Desktop)", p: 124 },
-        { adTr: "Ryzen 7 5800X (Masaüstü)", adEn: "Ryzen 7 5800X (Desktop)", p: 129 },
-        { adTr: "Ryzen 7 8840HX (Laptop)", adEn: "Ryzen 7 8840HX (Laptop)", p: 138 },
-        { adTr: "Ryzen 7 7700 (Masaüstü)", adEn: "Ryzen 7 7700 (Desktop)", p: 134 },
-        { adTr: "Ryzen 7 7700X (Masaüstü)", adEn: "Ryzen 7 7700X (Desktop)", p: 139 },
-        { adTr: "Ryzen 9 3900 (Masaüstü)", adEn: "Ryzen 9 3900 (Desktop)", p: 99 },
-        { adTr: "Ryzen 9 3900X (Masaüstü)", adEn: "Ryzen 9 3900X (Desktop)", p: 104 },
-        { adTr: "Ryzen 9 8945HX (Laptop)", adEn: "Ryzen 9 8945HX (Laptop)", p: 155 },
-        { adTr: "Ryzen 9 5900 (Masaüstü)", adEn: "Ryzen 9 5900 (Desktop)", p: 124 },
-        { adTr: "Ryzen 9 5900X (Masaüstü)", adEn: "Ryzen 9 5900X (Desktop)", p: 129 },
-        { adTr: "Ryzen 9 7945HX (Laptop)", adEn: "Ryzen 9 7945HX (Laptop)", p: 150 },
-        { adTr: "Ryzen 9 9955HX3D (Laptop)", adEn: "Ryzen 9 9955HX3D (Laptop)", p: 156 },
-        { adTr: "Ryzen 9 7950 (Masaüstü)", adEn: "Ryzen 9 7950 (Desktop)", p: 149 },
-        { adTr: "Ryzen 9 7950X (Masaüstü)", adEn: "Ryzen 9 7950X (Desktop)", p: 152 },
-        { adTr: "Ryzen 9 9955HX (Laptop)", adEn: "Ryzen 9 9955HX (Laptop)", p: 153 },
-        { adTr: "Ryzen 9 7945HX3D (Laptop)", adEn: "Ryzen 9 7945HX3D (Laptop)", p: 154 }
-    ],
-    ramler: [
-        { adTr: "2 GB RAM", adEn: "2 GB RAM", c: 0.25 },
-        { adTr: "4 GB RAM", adEn: "4 GB RAM", c: 0.55 },
-        { adTr: "6 GB RAM", adEn: "6 GB RAM", c: 0.58 },
-        { adTr: "8 GB RAM", adEn: "8 GB RAM", c: 0.65 },
-        { adTr: "12 GB RAM", adEn: "12 GB RAM", c: 0.70 },
-        { adTr: "16 GB RAM", adEn: "16 GB RAM", c: 0.95 },
-        { adTr: "24 GB RAM", adEn: "24 GB RAM", c: 1.0 },
-        { adTr: "32 GB RAM", adEn: "32 GB RAM", c: 1.1 },
-        { adTr: "48 GB RAM", adEn: "48 GB RAM", c: 1.2 },
-        { adTr: "64 GB RAM", adEn: "64 GB RAM", c: 1.6 },
-        { adTr: "128 GB RAM", adEn: "128 GB RAM", c: 1.9 }
-    ],
-    cozunurlukler: [
-        { adTr: "800x600 (SVGA)", adEn: "800x600 (SVGA)", p: 40 },
-        { adTr: "1024x768 (XGA)", adEn: "1024x768 (XGA)", p: 35 },
-        { adTr: "1152x864 (XGA+)", adEn: "1152x864 (XGA+)", p: 33 },
-        { adTr: "1280x720 (HD)", adEn: "1280x720 (HD)", p: 30 },
-        { adTr: "1366x768 (HD+)", adEn: "1366x768 (HD+)", p: 28 },
-        { adTr: "1440x900 (WXGA+)", adEn: "1440x900 (WXGA+)", p: 25 },
-        { adTr: "1600x900 (HD+ Geniş)", adEn: "1600x900 (HD+ Wide)", p: 23 },
-        { adTr: "1600x1200 (UXGA)", adEn: "1600x1200 (UXGA)", p: 20 },
-        { adTr: "1680x1050 (WSXGA+)", adEn: "1680x1050 (WSXGA+)", p: 18 },
-        { adTr: "1920x1080 (Full HD)", adEn: "1920x1080 (Full HD)", p: 15 },
-        { adTr: "1920x1200 (WUXGA)", adEn: "1920x1200 (WUXGA)", p: 13 },
-        { adTr: "2048x1080 (Full HD+)", adEn: "2048x1080 (Full HD+)", p: 12 },
-        { adTr: "2560x1080 (UltraWide FHD)", adEn: "2560x1080 (UltraWide FHD)", p: 10 },
-        { adTr: "2560x1440 (2K QHD)", adEn: "2560x1440 (2K QHD)", p: 8 },
-        { adTr: "3440x1440 (UltraWide QHD)", adEn: "3440x1440 (UltraWide QHD)", p: 7 },
-        { adTr: "3840x1600 (UltraWide 4K)", adEn: "3840x1600 (UltraWide 4K)", p: 6 },
-        { adTr: "3840x2160 (4K UHD)", adEn: "3840x2160 (4K UHD)", p: 5 },
-        { adTr: "5120x1440 (UltraWide 5K)", adEn: "5120x1440 (UltraWide 5K)", p: 4 },
-        { adTr: "5120x2880 (5K Retina)", adEn: "5120x2880 (5K Retina)", p: 3 },
-        { adTr: "7680x4320 (8K UHD)", adEn: "7680x4320 (8K UHD)", p: 1 }
-    ],
-    oyunlar: [
-        { adTr: "Valorant (Düşük)", adEn: "Valorant (Low)", z: 2.2, d: 0.10 },
-        { adTr: "Valorant (Orta)", adEn: "Valorant (Medium)", z: 1.76, d: 0.10 },
-        { adTr: "Valorant (Yüksek)", adEn: "Valorant (High)", z: 1.6, d: 0.10 },
-        { adTr: "CS2 (Düşük)", adEn: "CS2 (Low)", z: 2.1, d: 0.12 },
-        { adTr: "CS2 (Orta)", adEn: "CS2 (Medium)", z: 1.68, d: 0.12 }, 
-        { adTr: "CS2 (Yüksek)", adEn: "CS2 (High)", z: 1.3, d: 0.12 },
-        { adTr: "CS:GO (Düşük)", adEn: "CS:GO (Low)", z: 2.8, d: 0.10 },
-        { adTr: "CS:GO (Yüksek)", adEn: "CS:GO (High)", z: 1.9, d: 0.10 },
-        { adTr: "Zula (Düşük)", adEn: "Zula (Low)", z: 3.1, d: 0.08 },
-        { adTr: "Zula (Yüksek)", adEn: "Zula (High)", z: 2.5, d: 0.08 },
-        { adTr: "Fortnite (Düşük)", adEn: "Fortnite (Low)", z: 1.9, d: 0.15 },
-        { adTr: "Fortnite (Yüksek)", adEn: "Fortnite (High)", z: 1.1, d: 0.15 },
-        { adTr: "PUBG (Düşük)", adEn: "PUBG (Low)", z: 1.2, d: 0.18 },
-        { adTr: "PUBG (Yüksek)", adEn: "PUBG (High)", z: 0.7, d: 0.18 },
-        { adTr: "Call of Duty: Warzone (Düşük)", adEn: "Call of Duty: Warzone (Low)", z: 0.9, d: 0.20 },
-        { adTr: "Call of Duty: Warzone (Yüksek)", adEn: "Call of Duty: Warzone (High)", z: 0.5, d: 0.20 },
-        { adTr: "Farming Simulator 17 (Düşük)", adEn: "Farming Simulator 17 (Low)", z: 1.9, d: 0.10 },
-        { adTr: "Farming Simulator 17 (Yüksek)", adEn: "Farming Simulator 17 (High)", z: 1.3, d: 0.10 },
-        { adTr: "Farming Simulator 19 (Düşük)", adEn: "Farming Simulator 19 (Low)", z: 1.7, d: 0.12 },
-        { adTr: "Farming Simulator 19 (Yüksek)", adEn: "Farming Simulator 19 (High)", z: 1.2, d: 0.12 },
-        { adTr: "Farming Simulator 22 (Düşük)", adEn: "Farming Simulator 22 (Low)", z: 1.4, d: 0.12 },
-        { adTr: "Farming Simulator 22 (Yüksek)", adEn: "Farming Simulator 22 (High)", z: 0.9, d: 0.12 },
-        { adTr: "Farming Simulator 25 (Düşük)", adEn: "Farming Simulator 25 (Low)", z: 1.1, d: 0.15 },
-        { adTr: "Farming Simulator 25 (Yüksek)", adEn: "Farming Simulator 25 (High)", z: 0.7, d: 0.15 },
-        { adTr: "Battlefield 3 (Düşük)", adEn: "Battlefield 3 (Low)", z: 1.8, d: 0.12 },
-        { adTr: "Battlefield 3 (Yüksek)", adEn: "Battlefield 3 (High)", z: 1.3, d: 0.12 },
-        { adTr: "Battlefield 4 (Düşük)", adEn: "Battlefield 4 (Low)", z: 1.7, d: 0.12 },
-        { adTr: "Battlefield 4 (Yüksek)", adEn: "Battlefield 4 (High)", z: 1.2, d: 0.12 },
-        { adTr: "Battlefield 1 (Düşük)", adEn: "Battlefield 1 (Low)", z: 1.2, d: 0.15 },
-        { adTr: "Battlefield 1 (Yüksek)", adEn: "Battlefield 1 (High)", z: 0.8, d: 0.15 },
-        { adTr: "Battlefield V (Düşük)", adEn: "Battlefield V (Low)", z: 1.0, d: 0.18 },
-        { adTr: "Battlefield V (Yüksek)", adEn: "Battlefield V (High)", z: 0.6, d: 0.18 },
-        { adTr: "Battlefield 2042 (Düşük)", adEn: "Battlefield 2042 (Low)", z: 0.70, d: 0.22 },
-        { adTr: "Battlefield 2042 (Orta)", adEn: "Battlefield 2042 (Medium)", z: 0.56, d: 0.22 },
-        { adTr: "Battlefield 2042 (Yüksek)", adEn: "Battlefield 2042 (High)", z: 0.42, d: 0.22 },
-        { adTr: "FC 23 (Düşük)", adEn: "FC 23 (Low)", z: 1.5, d: 0.12 },
-        { adTr: "FC 23 (Yüksek)", adEn: "FC 23 (High)", z: 1.1, d: 0.12 },
-        { adTr: "FC 24 (Düşük)", adEn: "FC 24 (Low)", z: 1.3, d: 0.12 },
-        { adTr: "FC 24 (Yüksek)", adEn: "FC 24 (High)", z: 0.9, d: 0.12 },
-        { adTr: "FC 25 (Düşük)", adEn: "FC 25 (Low)", z: 1.1, d: 0.15 },
-        { adTr: "FC 25 (Yüksek)", adEn: "FC 25 (High)", z: 0.7, d: 0.15 },
-        { adTr: "FC 26 (Düşük)", adEn: "FC 26 (Low)", z: 1.0, d: 0.15 },
-        { adTr: "FC 26 (Yüksek)", adEn: "FC 26 (High)", z: 0.6, d: 0.15 },
-        { adTr: "PES (Düşük)", adEn: "PES (Low)", z: 1.9, d: 0.10 },
-        { adTr: "PES (Yüksek)", adEn: "PES (High)", z: 1.3, d: 0.10 },
-        { adTr: "Spider-Man Remastered (Düşük)", adEn: "Spider-Man Remastered (Low)", z: 1.00, d: 0.20 },
-        { adTr: "Spider-Man Remastered (Orta)", adEn: "Spider-Man Remastered (Medium)", z: 0.80, d: 0.20 },
-        { adTr: "Spider-Man Remastered (Yüksek)", adEn: "Spider-Man Remastered (High)", z: 0.60, d: 0.20 },
-        { adTr: "Spider-Man Remastered (Ultra)", adEn: "Spider-Man Remastered (Ultra)", z: 0.45, d: 0.20 },
-        { adTr: "Spider-Man Miles Morales (Düşük)", adEn: "Spider-Man Miles Morales (Low)", z: 0.9, d: 0.22 },
-        { adTr: "Spider-Man Miles Morales (Yüksek)", adEn: "Spider-Man Miles Morales (High)", z: 0.55, d: 0.22 },
-        { adTr: "Spider-Man Miles Morales (Ultra)", adEn: "Spider-Man Miles Morales (Ultra)", z: 0.4, d: 0.22 },
-        { adTr: "Minecraft (Düşük Shaders)", adEn: "Minecraft (Low Shaders)", z: 1.5, d: 0.25 },
-        { adTr: "Minecraft (Yüksek Shaders)", adEn: "Minecraft (High Shaders)", z: 0.9, d: 0.25 },
-        { adTr: "Forza Horizon 5 (Düşük)", adEn: "Forza Horizon 5 (Low)", z: 1.4, d: 0.15 },
-        { adTr: "Forza Horizon 5 (Yüksek)", adEn: "Forza Horizon 5 (High)", z: 0.8, d: 0.15 },
-        { adTr: "Forza Horizon 5 (Ultra)", adEn: "Forza Horizon 5 (Ultra)", z: 0.55, d: 0.16 },
-        { adTr: "Forza Horizon 6 (Düşük)", adEn: "Forza Horizon 6 (Low)", z: 1.10, d: 0.16 },
-        { adTr: "Forza Horizon 6 (Yüksek)", adEn: "Forza Horizon 6 (High)", z: 0.65, d: 0.16 },
-        { adTr: "Forza Horizon 6 (Ultra)", adEn: "Forza Horizon 6 (Ultra)", z: 0.42, d: 0.18 },
-        { adTr: "ETS 2 (Düşük)", adEn: "ETS 2 (Low)", z: 1.7, d: 0.15 },
-        { adTr: "ETS 2 (Orta)", adEn: "ETS 2 (Medium)", z: 1.36, d: 0.15 },
-        { adTr: "ETS 2 (Yüksek)", adEn: "ETS 2 (High)", z: 1.1, d: 0.15 },
-        { adTr: "GTA IV (Düşük)", adEn: "GTA IV (Low)", z: 1.80, d: 0.28 },
-        { adTr: "GTA IV (Yüksek)", adEn: "GTA IV (High)", z: 1.30, d: 0.32 },
-        { adTr: "GTA IV (Ultra)", adEn: "GTA IV (Ultra)", z: 0.95, d: 0.38 },
-        { adTr: "GTA V (Düşük)", adEn: "GTA V (Low)", z: 1.5, d: 0.18 },
-        { adTr: "GTA V (Yüksek)", adEn: "GTA V (High)", z: 0.9, d: 0.18 },
-        { adTr: "GTA V (Ultra)", adEn: "GTA V (Ultra)", z: 0.65, d: 0.18 },
-        { adTr: "RDR 2 (Düşük)", adEn: "RDR 2 (Low)", z: 0.90, d: 0.22 },
-        { adTr: "RDR 2 (Orta)", adEn: "RDR 2 (Medium)", z: 0.72, d: 0.22 }, 
-        { adTr: "RDR 2 (Yüksek)", adEn: "RDR 2 (High)", z: 0.54, d: 0.22 }, 
-        { adTr: "RDR 2 (Ultra)", adEn: "RDR 2 (Ultra)", z: 0.41, d: 0.22 }, 
-        { adTr: "God of War Ragnarök (Düşük)", adEn: "God of War Ragnarok (Low)", z: 0.8, d: 0.18 },
-        { adTr: "God of War Ragnarök (Orta)", adEn: "God of War Ragnarok (Medium)", z: 0.64, d: 0.18 }, 
-        { adTr: "God of War Ragnarök (Yüksek)", adEn: "God of War Ragnarok (High)", z: 0.5, d: 0.18 },
-        { adTr: "God of War Ragnarök (Ultra)", adEn: "God of War Ragnarok (Ultra)", z: 0.38, d: 0.18 },
-        { adTr: "ARK Survival Evolved (Düşük)", adEn: "ARK Survival Evolved (Low)", z: 0.8, d: 0.22 },
-        { adTr: "ARK Survival Evolved (Yüksek)", adEn: "ARK Survival Evolved (High)", z: 0.4, d: 0.22 },
-        { adTr: "DayZ (Düşük)", adEn: "DayZ (Low)", z: 1.0, d: 0.20 },
-        { adTr: "DayZ (Yüksek)", adEn: "DayZ (High)", z: 0.6, d: 0.20 },
-        { adTr: "Assassin’s Creed Valhalla (Düşük)", adEn: "Assassin’s Creed Valhalla (Low)", z: 0.8, d: 0.20 },
-        { adTr: "Assassin’s Creed Valhalla (Yüksek)", adEn: "Assassin’s Creed Valhalla (High)", z: 0.5, d: 0.20 },
-        { adTr: "Assassin’s Creed Mirage (Düşük)", adEn: "Assassin’s Creed Mirage (Low)", z: 1.1, d: 0.18 },
-        { adTr: "Assassin’s Creed Mirage (Yüksek)", adEn: "Assassin’s Creed Mirage (High)", z: 0.7, d: 0.18 },
-        { adTr: "Watch Dogs Legion (Düşük)", adEn: "Watch Dogs Legion (Low)", z: 0.7, d: 0.22 },
-        { adTr: "Watch Dogs Legion (Yüksek)", adEn: "Watch Dogs Legion (High)", z: 0.4, d: 0.22 },
-        { adTr: "Hogwarts Legacy (Düşük)", adEn: "Hogwarts Legacy (Low)", z: 0.9, d: 0.22 },
-        { adTr: "Hogwarts Legacy (Orta)", adEn: "Hogwarts Legacy (Medium)", z: 0.72, d: 0.22 }, 
-        { adTr: "Hogwarts Legacy (Yüksek)", adEn: "Hogwarts Legacy (High)", z: 0.5, d: 0.22 },
-        { adTr: "Hogwarts Legacy (Ultra)", adEn: "Hogwarts Legacy (Ultra)", z: 0.35, d: 0.22 },
-        { adTr: "Assetto Corsa (Düşük)", adEn: "Assetto Corsa (Low)", z: 1.8, d: 0.15 },
-        { adTr: "Assetto Corsa (Yüksek)", adEn: "Assetto Corsa (High)", z: 1.3, d: 0.15 },
-        { adTr: "Assetto Corsa Competizione (Düşük)", adEn: "Assetto Corsa Competizione (Low)", z: 1.0, d: 0.20 },
-        { adTr: "Assetto Corsa Competizione (Yüksek)", adEn: "Assetto Corsa Competizione (High)", z: 0.6, d: 0.20 },
-        { adTr: "Need for Speed Unbound (Düşük)", adEn: "Need for Speed Unbound (Low)", z: 1.1, d: 0.18 },
-        { adTr: "Need for Speed Unbound (Yüksek)", adEn: "Need for Speed Unbound (High)", z: 0.7, d: 0.18 },
-        { adTr: "Apex Legends (Düşük)", adEn: "Apex Legends (Low)", z: 1.6, d: 0.15 },
-        { adTr: "Apex Legends (Yüksek)", adEn: "Apex Legends (High)", z: 1.1, d: 0.15 },
-        { adTr: "Rainbow Six Siege (Düşük)", adEn: "Rainbow Six Siege (Low)", z: 1.8, d: 0.12 },
-        { adTr: "Rainbow Six Siege (Yüksek)", adEn: "Rainbow Six Siege (High)", z: 1.3, d: 0.12 },
-        { adTr: "Overwatch 2 (Düşük)", adEn: "Overwatch 2 (Low)", z: 1.7, d: 0.12 },
-        { adTr: "Overwatch 2 (Yüksek)", adEn: "Overwatch 2 (High)", z: 1.2, d: 0.12 },
-        { adTr: "The Last of Us Part I (Düşük)", adEn: "The Last of Us Part I (Low)", z: 0.8, d: 0.24 },
-        { adTr: "The Last of Us Part I (Yüksek)", adEn: "The Last of Us Part I (High)", z: 0.5, d: 0.24 },
-        { adTr: "The Last of Us Part I (Ultra)", adEn: "The Last of Us Part I (Ultra)", z: 0.34, d: 0.24 },
-        { adTr: "The Last of Us Part II (Düşük)", adEn: "The Last of Us Part II (Low)", z: 0.7, d: 0.26 },
-        { adTr: "The Last of Us Part II (Yüksek)", adEn: "The Last of Us Part II (High)", z: 0.45, d: 0.26 },
-        { adTr: "The Last of Us Part II (Ultra)", adEn: "The Last of Us Part II (Ultra)", z: 0.3, d: 0.26 },
-        { adTr: "Cyberpunk 2077 (Düşük)", adEn: "Cyberpunk 2077 (Low)", z: 0.70, d: 0.25 },
-        { adTr: "Cyberpunk 2077 (Orta)", adEn: "Cyberpunk 2077 (Medium)", z: 0.56, d: 0.25 }, 
-        { adTr: "Cyberpunk 2077 (Ultra)", adEn: "Cyberpunk 2077 (Ultra)", z: 0.31, d: 0.25 }, 
-        { adTr: "Uncharted: Hırsızlar Mirası Koleksiyonu (Düşük)", adEn: "Uncharted: Legacy of Thieves Collection (Low)", z: 1.25, d: 0.16 },
-        { adTr: "Uncharted: Hırsızlar Mirası Koleksiyonu (Yüksek)", adEn: "Uncharted: Legacy of Thieves Collection (High)", z: 0.85, d: 0.16 },
-        { adTr: "Uncharted: Hırsızlar Mirası Koleksiyonu (Ultra)", adEn: "Uncharted: Legacy of Thieves Collection (Ultra)", z: 0.60, d: 0.18 },
-        { adTr: "Dying Light 1 (Düşük)", adEn: "Dying Light 1 (Low)", z: 1.90, d: 0.10 },
-        { adTr: "Dying Light 1 (Yüksek)", adEn: "Dying Light 1 (High)", z: 1.50, d: 0.12 },
-        { adTr: "Dying Light 1 (Ultra)", adEn: "Dying Light 1 (Ultra)", z: 1.20, d: 0.14 },
-        { adTr: "Dying Light 2 (Düşük)", adEn: "Dying Light 2 (Low)", z: 1.10, d: 0.18 },
-        { adTr: "Dying Light 2 (Yüksek)", adEn: "Dying Light 2 (High)", z: 0.75, d: 0.18 },
-        { adTr: "Dying Light 2 (Ultra)", adEn: "Dying Light 2 (Ultra)", z: 0.55, d: 0.20 },
-        { adTr: "The Forest (Düşük)", adEn: "The Forest (Low)", z: 1.80, d: 0.12 },
-        { adTr: "The Forest (Yüksek)", adEn: "The Forest (High)", z: 1.30, d: 0.12 },
-        { adTr: "Sons Of The Forest (Düşük)", adEn: "Sons Of The Forest (Low)", z: 1.10, d: 0.18 },
-        { adTr: "Sons Of The Forest (Yüksek)", adEn: "Sons Of The Forest (High)", z: 0.75, d: 0.18 },
-        { adTr: "Sons Of The Forest (Ultra)", adEn: "Sons Of The Forest (Ultra)", z: 0.52, d: 0.20 },
-        { adTr: "Outlast 1 (Yüksek)", adEn: "Outlast 1 (High)", z: 2.40, d: 0.10 },
-        { adTr: "Outlast 2 (Yüksek)", adEn: "Outlast 2 (High)", z: 1.80, d: 0.12 },
-        { adTr: "The Outlast Trials (Düşük)", adEn: "The Outlast Trials (Low)", z: 1.40, d: 0.15 },
-        { adTr: "The Outlast Trials (Yüksek)", adEn: "The Outlast Trials (High)", z: 0.95, d: 0.15 },
-        { adTr: "The Outlast Trials (Ultra)", adEn: "The Outlast Trials (Ultra)", z: 0.70, d: 0.16 },
-        { adTr: "NBA 2K23 (Düşük)", adEn: "NBA 2K23 (Low)", z: 1.60, d: 0.12 },
-        { adTr: "NBA 2K23 (Yüksek)", adEn: "NBA 2K23 (High)", z: 1.10, d: 0.12 },
-        { adTr: "NBA 2K24 (Düşük)", adEn: "NBA 2K24 (Low)", z: 1.40, d: 0.14 },
-        { adTr: "NBA 2K24 (Yüksek)", adEn: "NBA 2K24 (High)", z: 0.95, d: 0.14 },
-        { adTr: "NBA 2K25 (Düşük)", adEn: "NBA 2K25 (Low)", z: 1.10, d: 0.15 },
-        { adTr: "NBA 2K25 (Yüksek)", adEn: "NBA 2K25 (High)", z: 0.75, d: 0.15 },
-        { adTr: "NBA 2K25 (Ultra)", adEn: "NBA 2K25 (Ultra)", z: 0.55, d: 0.15 },
-        { adTr: "NBA 2K26 (Düşük)", adEn: "NBA 2K26 (Low)", z: 1.05, d: 0.16 },
-        { adTr: "NBA 2K26 (Yüksek)", adEn: "NBA 2K26 (High)", z: 0.70, d: 0.16 },
-        { adTr: "NBA 2K26 (Ultra)", adEn: "NBA 2K26 (Ultra)", z: 0.50, d: 0.18 },
-        { adTr: "Rust (Düşük)", adEn: "Rust (Low)", z: 1.25, d: 0.22 },
-        { adTr: "Rust (Yüksek)", adEn: "Rust (High)", z: 0.85, d: 0.25 },
-        { adTr: "Rust (Ultra)", adEn: "Rust (Ultra)", z: 0.60, d: 0.28 },
-        { adTr: "007 First Light (Düşük)", adEn: "007 First Light (Low)", z: 0.85, d: 0.18 },
-        { adTr: "007 First Light (Yüksek)", adEn: "007 First Light (High)", z: 0.55, d: 0.20 },
-        { adTr: "007 First Light (Ultra )", adEn: "007 First Light (Ultra)", z: 0.35, d: 0.24 },
-        { adTr: "Resident Evil 2 Remake (Düşük)", adEn: "Resident Evil 2 Remake (Low)", z: 1.50, d: 0.12 },
-        { adTr: "Resident Evil 2 Remake (Orta)", adEn: "Resident Evil 2 Remake (Medium)", z: 1.25, d: 0.12 },
-        { adTr: "Resident Evil 2 Remake (Yüksek)", adEn: "Resident Evil 2 Remake (High)", z: 1.05, d: 0.12 },
-        { adTr: "Resident Evil 3 Remake (Düşük)", adEn: "Resident Evil 3 Remake (Low)", z: 1.55, d: 0.12 },
-        { adTr: "Resident Evil 3 Remake (Orta)", adEn: "Resident Evil 3 Remake (Medium)", z: 1.30, d: 0.12 },
-        { adTr: "Resident Evil 3 Remake (Yüksek)", adEn: "Resident Evil 3 Remake (High)", z: 1.10, d: 0.12 },
-        { adTr: "Resident Evil 3 Remake (Ultra)", adEn: "Resident Evil 3 Remake (Ultra)", z: 0.80, d: 0.14 },
-        { adTr: "Resident Evil 4 Remake (Düşük)", adEn: "Resident Evil 4 Remake (Low)", z: 1.15, d: 0.16 },
-        { adTr: "Resident Evil 4 Remake (Orta)", adEn: "Resident Evil 4 Remake (Medium)", z: 0.95, d: 0.16 },
-        { adTr: "Resident Evil 4 Remake (Yüksek)", adEn: "Resident Evil 4 Remake (High)", z: 0.78, d: 0.16 },
-        { adTr: "Resident Evil 4 Remake (Ultra)", adEn: "Resident Evil 4 Remake (Ultra)", z: 0.55, d: 0.18 },
-        { adTr: "Resident Evil Requiem (Düşük)", adEn: "Resident Evil Requiem (Low)", z: 0.75, d: 0.20 },
-        { adTr: "Resident Evil Requiem (Orta)", adEn: "Resident Evil Requiem (Medium)", z: 0.60, d: 0.21 },
-        { adTr: "Resident Evil Requiem (Yüksek)", adEn: "Resident Evil Requiem (High)", z: 0.50, d: 0.22 },
-        { adTr: "Resident Evil Requiem (Ultra)", adEn: "Resident Evil Requiem (Ultra)", z: 0.32, d: 0.25 }
-    ]
+ekranKartlari: [
+{ adTr: "NVIDIA RTX 5090 (Masaüstü)", adEn: "NVIDIA RTX 5090 (Desktop)", p: 380 },
+{ adTr: "NVIDIA RTX 5090 (Laptop 140W)", adEn: "NVIDIA RTX 5090 (Laptop 140W)", p: 354 },
+{ adTr: "NVIDIA RTX 5090 (Laptop 115W)", adEn: "NVIDIA RTX 5090 (Laptop 115W)", p: 342 },
+{ adTr: "NVIDIA RTX 5080 (Masaüstü)", adEn: "NVIDIA RTX 5080 (Desktop)", p: 357 },
+{ adTr: "NVIDIA RTX 5080 (Laptop 140W)", adEn: "NVIDIA RTX 5080 (Laptop 140W)", p: 337 },
+{ adTr: "NVIDIA RTX 5080 (Laptop 115W)", adEn: "NVIDIA RTX 5080 (Laptop 115W)", p: 327 },
+{ adTr: "NVIDIA RTX 5070 Tİ (Masaüstü)", adEn: "NVIDIA RTX 5070 TI (Desktop)", p: 345 },
+{ adTr: "NVIDIA RTX 5070 (Masaüstü)", adEn: "NVIDIA RTX 5070 (Desktop)", p: 320 },
+{ adTr: "NVIDIA RTX 5070 (Laptop 140W)", adEn: "NVIDIA RTX 5070 (Laptop 140W)", p: 305 },
+{ adTr: "NVIDIA RTX 5070 (Laptop 115W)", adEn: "NVIDIA RTX 5070 (Laptop 115W)", p: 290 },
+{ adTr: "NVIDIA RTX 5060 (Masaüstü)", adEn: "NVIDIA RTX 5060 (Desktop)", p: 300 },
+{ adTr: "NVIDIA RTX 5060 (Laptop 140W)", adEn: "NVIDIA RTX 5060 (Laptop 140W)", p: 290 },
+{ adTr: "NVIDIA RTX 5060 (Laptop 115W)", adEn: "NVIDIA RTX 5060 (Laptop 115W)", p: 275 },
+{ adTr: "NVIDIA RTX 5050 (Masaüstü)", adEn: "NVIDIA RTX 5050 (Desktop)", p: 220 },
+{ adTr: "NVIDIA RTX 5050 (Laptop 140W)", adEn: "NVIDIA RTX 5050 (Laptop 140W)", p: 195 },
+{ adTr: "NVIDIA RTX 5050 (Laptop 115W)", adEn: "NVIDIA RTX 5050 (Laptop 115W)", p: 170 },
+{ adTr: "NVIDIA RTX 4090 (Masaüstü)", adEn: "NVIDIA RTX 4090 (Desktop)", p: 300 },
+{ adTr: "NVIDIA RTX 4090 (Laptop 140W)", adEn: "NVIDIA RTX 4090 (Laptop 140W)", p: 280 },
+{ adTr: "NVIDIA RTX 4090 (Laptop 115W)", adEn: "NVIDIA RTX 4090 (Laptop 115W)", p: 270 },
+{ adTr: "NVIDIA RTX 4080 SUPER (Masaüstü)", adEn: "NVIDIA RTX 4080 SUPER (Desktop)", p: 275 },
+{ adTr: "NVIDIA RTX 4080 (Masaüstü)", adEn: "NVIDIA RTX 4080 (Desktop)", p: 260 },
+{ adTr: "NVIDIA RTX 4080 (Laptop 140W)", adEn: "NVIDIA RTX 4080 (Laptop 140W)", p: 240 },
+{ adTr: "NVIDIA RTX 4080 (Laptop 115W)", adEn: "NVIDIA RTX 4080 (Laptop 115W)", p: 225 },
+{ adTr: "NVIDIA RTX 4070 Tİ SUPER (Masaüstü)", adEn: "NVIDIA RTX 4070 TI SUPER (Desktop)", p: 230 },
+{ adTr: "NVIDIA RTX 4070 Tİ (Masaüstü)", adEn: "NVIDIA RTX 4070 TI (Desktop)", p: 210 },
+{ adTr: "NVIDIA RTX 4070 Tİ (Laptop 140W)", adEn: "NVIDIA RTX 4070 TI (Laptop 140W)", p: 190 },
+{ adTr: "NVIDIA RTX 4070 Tİ (Laptop 115W)", adEn: "NVIDIA RTX 4070 TI (Laptop 115W)", p: 175 },
+{ adTr: "NVIDIA RTX 4070 (Masaüstü)", adEn: "NVIDIA RTX 4070 (Desktop)", p: 190 },
+{ adTr: "NVIDIA RTX 4070 (Laptop 140W)", adEn: "NVIDIA RTX 4070 (Laptop 140W)", p: 175 },
+{ adTr: "NVIDIA RTX 4070 (Laptop 115W)", adEn: "NVIDIA RTX 4070 (Laptop 115W)", p: 160 },
+{ adTr: "NVIDIA RTX 4060 Tİ (Masaüstü)", adEn: "NVIDIA RTX 4060 TI (Desktop)", p: 175 },
+{ adTr: "NVIDIA RTX 4060 (Masaüstü)", adEn: "NVIDIA RTX 4060 (Desktop)", p: 150 },
+{ adTr: "NVIDIA RTX 4060 (Laptop 140W)", adEn: "NVIDIA RTX 4060 (Laptop 140W)", p: 135 },
+{ adTr: "NVIDIA RTX 4060 (Laptop 115W)", adEn: "NVIDIA RTX 4060 (Laptop 115W)", p: 120 },
+{ adTr: "NVIDIA RTX 4050 (Masaüstü)", adEn: "NVIDIA RTX 4050 (Desktop)", p: 120 },
+{ adTr: "NVIDIA RTX 4050 (Laptop 140W)", adEn: "NVIDIA RTX 4050 (Laptop 140W)", p: 100 },
+{ adTr: "NVIDIA RTX 4050 (Laptop 115W)", adEn: "NVIDIA RTX 4050 (Laptop 115W)", p: 85 },
+{ adTr: "NVIDIA RTX 3090 (Masaüstü)", adEn: "NVIDIA RTX 3090 (Desktop)", p: 140 },
+{ adTr: "NVIDIA RTX 3080 Tİ (Masaüstü)", adEn: "NVIDIA RTX 3080 TI (Desktop)", p: 215 },
+{ adTr: "NVIDIA RTX 3080 Tİ (Laptop 165W)", adEn: "NVIDIA RTX 3080 TI (Laptop 165W)", p: 190 },
+{ adTr: "NVIDIA RTX 3080 Tİ (Laptop 115W)", adEn: "NVIDIA RTX 3080 TI (Laptop 115W)", p: 180 },
+{ adTr: "NVIDIA RTX 3080 (Masaüstü)", adEn: "NVIDIA RTX 3080 (Desktop)", p: 200 },
+{ adTr: "NVIDIA RTX 3080 (Laptop 165W)", adEn: "NVIDIA RTX 3080 (Laptop 165W)", p: 180 },
+{ adTr: "NVIDIA RTX 3080 (Laptop 140W)", adEn: "NVIDIA RTX 3080 (Laptop 140W)", p: 170 },
+{ adTr: "NVIDIA RTX 3080 (Laptop 115W)", adEn: "NVIDIA RTX 3080 (Laptop 115W)", p: 155 },
+{ adTr: "NVIDIA RTX 3070 Tİ (Masaüstü)", adEn: "NVIDIA RTX 3070 TI (Desktop)", p: 160 },
+{ adTr: "NVIDIA RTX 3070 Tİ (Laptop 140W)", adEn: "NVIDIA RTX 3070 TI (Laptop 140W)", p: 145 },
+{ adTr: "NVIDIA RTX 3070 Tİ (Laptop 115W)", adEn: "NVIDIA RTX 3070 TI (Laptop 115W)", p: 130 },
+{ adTr: "NVIDIA RTX 3070 Tİ (Laptop 100W)", adEn: "NVIDIA RTX 3070 TI (Laptop 100W)", p: 120 },
+{ adTr: "NVIDIA RTX 3070 (Masaüstü)", adEn: "NVIDIA RTX 3070 (Desktop)", p: 150 },
+{ adTr: "NVIDIA RTX 3070 (Laptop 140W)", adEn: "NVIDIA RTX 3070 (Laptop 140W)", p: 130 },
+{ adTr: "NVIDIA RTX 3070 (Laptop 115W)", adEn: "NVIDIA RTX 3070 (Laptop 115W)", p: 115 },
+{ adTr: "NVIDIA RTX 3070 (Laptop 100W)", adEn: "NVIDIA RTX 3070 (Laptop 100W)", p: 110 },
+{ adTr: "NVIDIA RTX 3070 (Laptop 80W)", adEn: "NVIDIA RTX 3070 (Laptop 80W)", p: 95 },
+{ adTr: "NVIDIA RTX 3060 Tİ (Masaüstü)", adEn: "NVIDIA RTX 3060 TI (Desktop)", p: 125 },
+{ adTr: "NVIDIA RTX 3060 (Masaüstü)", adEn: "NVIDIA RTX 3060 (Desktop)", p: 95 },
+{ adTr: "NVIDIA RTX 3060 (Laptop 115W)", adEn: "NVIDIA RTX 3060 (Laptop 115W)", p: 85 },
+{ adTr: "NVIDIA RTX 3060 (Laptop 80W)", adEn: "NVIDIA RTX 3060 (Laptop 80W)", p: 75 },
+{ adTr: "NVIDIA RTX 3060 (Laptop 95W)", adEn: "NVIDIA RTX 3060 (Laptop 95W)", p: 80 },
+{ adTr: "NVIDIA RTX 3060 (Laptop 60W)", adEn: "NVIDIA RTX 3060 (Laptop 60W)", p: 65 },
+{ adTr: "NVIDIA RTX 3050 (Masaüstü)", adEn: "NVIDIA RTX 3050 (Desktop)", p: 65 },
+{ adTr: "NVIDIA RTX 3050 Tİ (Laptop 80W)", adEn: "NVIDIA RTX 3050 TI (Laptop 80W)", p: 75 },
+{ adTr: "NVIDIA RTX 3050 Tİ (Laptop 60W)", adEn: "NVIDIA RTX 3050 TI (Laptop 60W)", p: 65 },
+{ adTr: "NVIDIA RTX 3050 (Laptop 80W)", adEn: "NVIDIA RTX 3050 (Laptop 80W)", p: 55 },
+{ adTr: "NVIDIA RTX 3050 (Laptop 60W)", adEn: "NVIDIA RTX 3050 (Laptop 60W)", p: 45 },
+{ adTr: "RTX 2080 Tİ (Masaüstü)", adEn: "RTX 2080 TI (Desktop)", p: 145 },
+{ adTr: "RTX 2080 SUPER (Masaüstü)", adEn: "RTX 2080 SUPER (Desktop)", p: 135 },
+{ adTr: "RTX 2080 SUPER (Laptop)", adEn: "RTX 2080 SUPER (Laptop)", p: 100 },
+{ adTr: "RTX 2080 (Masaüstü)", adEn: "RTX 2080 (Desktop)", p: 45 },
+{ adTr: "RTX 2080 (Laptop)", adEn: "RTX 2080 (Laptop)", p: 35 },
+{ adTr: "RTX 2070 SUPER (Masaüstü)", adEn: "RTX 2070 SUPER (Desktop)", p: 107 },
+{ adTr: "RTX 2070 SUPER (Laptop)", adEn: "RTX 2070 SUPER (Laptop)", p: 97 },
+{ adTr: "RTX 2070 (Masaüstü)", adEn: "RTX 2070 (Desktop)", p: 65 },
+{ adTr: "RTX 2070 (Laptop)", adEn: "RTX 2070 (Laptop)", p: 55 },
+{ adTr: "RTX 2060 SUPER (Masaüstü)", adEn: "RTX 2060 SUPER (Desktop)", p: 97 },
+{ adTr: "RTX 2060 SUPER (Laptop)", adEn: "RTX 2060 SUPER (Laptop)", p: 87 },
+{ adTr: "RTX 2060 (Masaüstü)", adEn: "RTX 2060 (Desktop)", p: 75 },
+{ adTr: "RTX 2060 (Laptop)", adEn: "RTX 2060 (Laptop)", p: 64 },
+{ adTr: "RTX 2050 (Masaüstü)", adEn: "RTX 2050 (Desktop)", p: 75 },
+{ adTr: "GTX 1660 Tİ (Masaüstü)", adEn: "GTX 1660 TI (Desktop)", p: 85 },
+{ adTr: "GTX 1660 Tİ (Laptop)", adEn: "GTX 1660 TI (Laptop)", p: 70 },
+{ adTr: "GTX 1660 SUPER (Masaüstü)", adEn: "GTX 1660 SUPER (Desktop)", p: 80 },
+{ adTr: "GTX 1660 (Masaüstü)", adEn: "GTX 1660 (Desktop)", p: 70 },
+{ adTr: "GTX 1660 (Laptop)", adEn: "GTX 1660 (Laptop)", p: 58 },
+{ adTr: "GTX 1650 SUPER (Masaüstü)", adEn: "GTX 1650 SUPER (Desktop)", p: 63 },
+{ adTr: "GTX 1650 (Masaüstü)", adEn: "GTX 1650 (Desktop)", p: 55 },
+{ adTr: "GTX 1650 Tİ (Laptop)", adEn: "GTX 1650 TI (Laptop)", p: 57 },
+{ adTr: "GTX 1650 (Laptop)", adEn: "GTX 1650 (Laptop)", p: 45 },
+{ adTr: "GTX 1080 Tİ (Masaüstü)", adEn: "GTX 1080 TI (Desktop)", p: 135 },
+{ adTr: "GTX 1080 (Masaüstü)", adEn: "GTX 1080 (Desktop)", p: 100 },
+{ adTr: "GTX 1070 Tİ (Masaüstü)", adEn: "GTX 1070 TI (Desktop)", p: 103 },
+{ adTr: "GTX 1070 (Masaüstü)", adEn: "GTX 1070 (Desktop)", p: 90 },
+{ adTr: "GTX 1060 (Masaüstü)", adEn: "GTX 1060 (Desktop)", p: 59 },
+{ adTr: "GTX 1050 Tİ (Masaüstü)", adEn: "GTX 1050 TI (Desktop)", p: 45 },
+{ adTr: "GTX 1050 (Masaüstü)", adEn: "GTX 1050 (Desktop)", p: 40 },
+{ adTr: "GTX 730 (Masaüstü)", adEn: "GTX 730 (Desktop)", p: 15 },
+{ adTr: "GTX 580 (Masaüstü)", adEn: "GTX 580 (Desktop)", p: 25 },
+{ adTr: "GTX 1070 Tİ (Laptop)", adEn: "GTX 1070 TI (Laptop)", p: 80 },
+{ adTr: "GTX 1070 (Laptop)", adEn: "GTX 1070 (Laptop)", p: 60 },
+{ adTr: "GTX 1060 (Laptop)", adEn: "GTX 1060 (Laptop)", p: 45 },
+{ adTr: "GTX 1050 Tİ (Laptop)", adEn: "GTX 1050 TI (Laptop)", p: 35 },
+{ adTr: "GTX 1050 (Laptop)", adEn: "GTX 1050 (Laptop)", p: 30 },
+{ adTr: "RX 9070 XT (Masaüstü)", adEn: "RX 9070 XT (Desktop)", p: 210 },
+{ adTr: "RX 9070 (Masaüstü)", adEn: "RX 9070 (Desktop)", p: 200 },
+{ adTr: "RX 9060 XT (Masaüstü)", adEn: "RX 9060 XT (Desktop)", p: 200 },
+{ adTr: "RX 9060 (Masaüstü)", adEn: "RX 9060 (Desktop)", p: 190 },
+{ adTr: "RX 7900 XTX (Masaüstü)", adEn: "RX 7900 XTX (Desktop)", p: 190 },
+{ adTr: "RX 7900 XT (Masaüstü)", adEn: "RX 7900 XT (Desktop)", p: 180 },
+{ adTr: "RX 7800 XT (Masaüstü)", adEn: "RX 7800 XT (Desktop)", p: 175 },
+{ adTr: "RX 7700 XT (Masaüstü)", adEn: "RX 7700 XT (Desktop)", p: 165 },
+{ adTr: "RX 7600 XT (Masaüstü)", adEn: "RX 7600 XT (Desktop)", p: 115 },
+{ adTr: "RX 6950 XT (Masaüstü)", adEn: "RX 6950 XT (Desktop)", p: 175 },
+{ adTr: "RX 6900 XT (Masaüstü)", adEn: "RX 6900 XT (Desktop)", p: 170 },
+{ adTr: "RX 6800 XT (Masaüstü)", adEn: "RX 6800 XT (Desktop)", p: 160 },
+{ adTr: "RX 6800 (Masaüstü)", adEn: "RX 6800 (Desktop)", p: 120 },
+{ adTr: "RX 6700 XT (Masaüstü)", adEn: "RX 6700 XT (Desktop)", p: 125 },
+{ adTr: "RX 6700 (Masaüstü)", adEn: "RX 6700 (Desktop)", p: 110 },
+{ adTr: "RX 6600 XT (Masaüstü)", adEn: "RX 6600 XT (Desktop)", p: 95 },
+{ adTr: "RX 6600 (Masaüstü)", adEn: "RX 6600 (Desktop)", p: 80 },
+{ adTr: "RX 6500 XT (Masaüstü)", adEn: "RX 6500 XT (Desktop)", p: 70 },
+{ adTr: "RX 6500 (Masaüstü)", adEn: "RX 6500 (Desktop)", p: 65 },
+{ adTr: "RX 5700 XT (Masaüstü)", adEn: "RX 5700 XT (Desktop)", p: 115 },
+{ adTr: "RX 5700 (Masaüstü)", adEn: "RX 5700 (Desktop)", p: 105 },
+{ adTr: "RX 5600 XT (Masaüstü)", adEn: "RX 5600 XT (Desktop)", p: 65 },
+{ adTr: "RX 5500 XT (Masaüstü)", adEn: "RX 5500 XT (Desktop)", p: 55 },
+{ adTr: "RX 580 (Masaüstü)", adEn: "RX 580 (Desktop)", p: 43 },
+{ adTr: "RX 7900 (Laptop)", adEn: "RX 7900 (Laptop)", p: 140 },
+{ adTr: "RX 7800 (Laptop)", adEn: "RX 7800 (Laptop)", p: 135 },
+{ adTr: "RX 7700 (Laptop)", adEn: "RX 7700 (Laptop)", p: 130 },
+{ adTr: "RX 6950M (Laptop)", adEn: "RX 6950M (Laptop)", p: 120 },
+{ adTr: "RX 6900M (Laptop)", adEn: "RX 6900M (Laptop)", p: 115 },
+{ adTr: "RX 6800M (Laptop)", adEn: "RX 6800M (Laptop)", p: 105},
+{ adTr: "RX 6700M (Laptop)", adEn: "RX 6700M (Laptop)", p: 90 },
+{ adTr: "RX 6600M (Laptop)", adEn: "RX 6600M (Laptop)", p: 70 },
+{ adTr: "RX 6500M (Laptop)", adEn: "RX 6500M (Laptop)", p: 60 },
+{ adTr: "RX 5700M (Laptop)", adEn: "RX 5700M (Laptop)", p: 90 },
+{ adTr: "RX 5600M (Laptop)", adEn: "RX 5600M (Laptop)", p: 60 },
+{ adTr: "RX 5500M (Laptop)", adEn: "RX 5500M (Laptop)", p: 50 }
+],
+islemciler: [
+{ adTr: "i3-6300H (Laptop)", adEn: "i3-6300H (Laptop)", p: 12 },
+{ adTr: "i3-7300H (Laptop)", adEn: "i3-7300H (Laptop)", p: 20 },
+{ adTr: "i3-8300H (Laptop)", adEn: "i3-8300H (Laptop)", p: 26 },
+{ adTr: "i3-8300K (Masaüstü)", adEn: "i3-8300K (Desktop)", p: 36 },
+{ adTr: "i3-9300K (Masaüstü)", adEn: "i3-9300K (Desktop)", p: 40 },
+{ adTr: "i3-9300KF (Masaüstü)", adEn: "i3-9300KF (Desktop)", p: 40 },
+{ adTr: "i3-9300F (Masaüstü)", adEn: "i3-9300F (Desktop)", p: 34 },
+{ adTr: "i3-10300H (Laptop)", adEn: "i3-10300H (Laptop)", p: 38 },
+{ adTr: "i3-10300KF (Masaüstü)", adEn: "i3-10300KF (Desktop)", p: 42 },
+{ adTr: "i3-10300F (Masaüstü)", adEn: "i3-10300F (Desktop)", p: 36 },
+{ adTr: "i3-11300H (Laptop)", adEn: "i3-11300H (Laptop)", p: 40 },
+{ adTr: "i3-11300KF (Masaüstü)", adEn: "i3-11300KF (Desktop)", p: 44 },
+{ adTr: "i3-11300F (Masaüstü)", adEn: "i3-11300F (Desktop)", p: 38 },
+{ adTr: "i3-12300H (Laptop)", adEn: "i3-12300H (Laptop)", p: 42 },
+{ adTr: "i3-12300KF (Masaüstü)", adEn: "i3-12300KF (Desktop)", p: 48 },
+{ adTr: "i3-12300F (Masaüstü)", adEn: "i3-12300F (Desktop)", p: 40 },
+{ adTr: "i3-13300H (Laptop)", adEn: "i3-13300H (Laptop)", p: 44 },
+{ adTr: "i3-13300KF (Masaüstü)", adEn: "i3-13300KF (Desktop)", p: 50 },
+{ adTr: "i3-13300F (Masaüstü)", adEn: "i3-13300F (Desktop)", p: 42 },
+{ adTr: "i3-14300H (Laptop)", adEn: "i3-14300H (Laptop)", p: 46 },
+{ adTr: "i3-14300KF (Masaüstü)", adEn: "i3-14300KF (Desktop)", p: 52 },
+{ adTr: "i3-14300F (Masaüstü)", adEn: "i3-14300F (Desktop)", p: 44 },
+{ adTr: "i5-6600H (Laptop)", adEn: "i5-6600H (Laptop)", p: 40 },
+{ adTr: "i5-6600K (Masaüstü)", adEn: "i5-6600K (Desktop)", p: 55 },
+{ adTr: "i5-7600H (Laptop)", adEn: "i5-7600H (Laptop)", p: 52 },
+{ adTr: "i5-7600K (Masaüstü)", adEn: "i5-7600K (Desktop)", p: 61 },
+{ adTr: "i5-8600H (Laptop)", adEn: "i5-8600H (Laptop)", p: 56 },
+{ adTr: "i5-8600K (Masaüstü)", adEn: "i5-8600K (Desktop)", p: 65 },
+{ adTr: "i5-9600K (Masaüstü)", adEn: "i5-9600K (Desktop)", p: 72 },
+{ adTr: "i5-9600KF (Masaüstü)", adEn: "i5-9600KF (Desktop)", p: 72 },
+{ adTr: "i5-9600F (Masaüstü)", adEn: "i5-9600F (Desktop)", p: 64 },
+{ adTr: "i5-10600H (Laptop)", adEn: "i5-10600H (Laptop)", p: 61 },
+{ adTr: "i5-10600K (Masaüstü)", adEn: "i5-10600K (Desktop)", p: 74 },
+{ adTr: "i5-10600KF (Masaüstü)", adEn: "i5-10600KF (Desktop)", p: 74 },
+{ adTr: "i5-10600F (Masaüstü)", adEn: "i5-10600F (Desktop)", p: 64 },
+{ adTr: "i5-11600H (Laptop)", adEn: "i5-11600H (Laptop)", p: 72 },
+{ adTr: "i5-11600K (Masaüstü)", adEn: "i5-11600K (Desktop)", p: 81 },
+{ adTr: "i5-11600KF (Masaüstü)", adEn: "i5-11600KF (Desktop)", p: 81 },
+{ adTr: "i5-11600F (Masaüstü)", adEn: "i5-11600F (Desktop)", p: 74 },
+{ adTr: "i5-12600H (Laptop)", adEn: "i5-12600H (Laptop)", p: 72 },
+{ adTr: "i5-12600HX (Laptop)", adEn: "i5-12600HX (Laptop)", p: 78 },
+{ adTr: "i5-12600K (Masaüstü)", adEn: "i5-12600K (Desktop)", p: 85 },
+{ adTr: "i5-12600KF (Masaüstü)", adEn: "i5-12600KF (Desktop)", p: 85 },
+{ adTr: "i5-12600F (Masaüstü)", adEn: "i5-12600F (Desktop)", p: 75 },
+{ adTr: "i5-13600H (Laptop)", adEn: "i5-13600H (Laptop)", p: 80 },
+{ adTr: "i5-13600HX (Laptop)", adEn: "i5-13600HX (Laptop)", p: 85 },
+{ adTr: "i5-13600K (Masaüstü)", adEn: "i5-13600K (Desktop)", p: 90 },
+{ adTr: "i5-13600KF (Masaüstü)", adEn: "i5-13600KF (Desktop)", p: 90 },
+{ adTr: "i5-13600F (Masaüstü)", adEn: "i5-13600F (Desktop)", p: 82 },
+{ adTr: "i5-14600H (Laptop)", adEn: "i5-14600H (Laptop)", p: 87 },
+{ adTr: "i5-14600HX (Laptop)", adEn: "i5-14600HX (Laptop)", p: 95 },
+{ adTr: "i5-14600K (Masaüstü)", adEn: "i5-14600K (Desktop)", p: 100 },
+{ adTr: "i5-14600KF (Masaüstü)", adEn: "i5-14600KF (Desktop)", p: 100 },
+{ adTr: "i5-14600F (Masaüstü)", adEn: "i5-14600F (Desktop)", p: 90 },
+{ adTr: "i7-6700H (Laptop)", adEn: "i7-6700H (Laptop)", p: 37 },
+{ adTr: "i7-6700K (Masaüstü)", adEn: "i7-6700K (Desktop)", p: 46 },
+{ adTr: "i7-7700H (Laptop)", adEn: "i7-7700H (Laptop)", p: 41 },
+{ adTr: "i7-7700K (Masaüstü)", adEn: "i7-7700K (Desktop)", p: 50 },
+{ adTr: "i7-8700H (Laptop)", adEn: "i7-8700H (Laptop)", p: 45 },
+{ adTr: "i7-8700K (Masaüstü)", adEn: "i7-8700K (Desktop)", p: 54 },
+{ adTr: "i7-9700K (Masaüstü)", adEn: "i7-9700K (Desktop)", p: 59 },
+{ adTr: "i7-9700KF (Masaüstü)", adEn: "i7-9700KF (Desktop)", p: 59 },
+{ adTr: "i7-9700F (Masaüstü)", adEn: "i7-9700F (Desktop)", p: 52 },
+{ adTr: "i7-10700H (Laptop)", adEn: "i7-10700H (Laptop)", p: 51 },
+{ adTr: "i7-10700K (Masaüstü)", adEn: "i7-10700K (Desktop)", p: 63 },
+{ adTr: "i7-10700KF (Masaüstü)", adEn: "i7-10700KF (Desktop)", p: 63 },
+{ adTr: "i7-10700F (Masaüstü)", adEn: "i7-10700F (Desktop)", p: 54 },
+{ adTr: "i7-11700H (Laptop)", adEn: "i7-11700H (Laptop)", p: 68 },
+{ adTr: "i7-11700K (Masaüstü)", adEn: "i7-11700K (Desktop)", p: 87 },
+{ adTr: "i7-11700KF (Masaüstü)", adEn: "i7-11700KF (Desktop)", p: 87 },
+{ adTr: "i7-11700F (Masaüstü)", adEn: "i7-11700F (Desktop)", p: 74 },
+{ adTr: "i7-12700H (Laptop)", adEn: "i7-12700H (Laptop)", p: 76 },
+{ adTr: "i7-12700HX (Laptop)", adEn: "i7-12700HX (Laptop)", p: 90 },
+{ adTr: "i7-12700K (Masaüstü)", adEn: "i7-12700K (Desktop)", p: 96 },
+{ adTr: "i7-12700KF (Masaüstü)", adEn: "i7-12700KF (Desktop)", p: 96 },
+{ adTr: "i7-12700F (Masaüstü)", adEn: "i7-12700F (Desktop)", p: 80 },
+{ adTr: "i7-13700H (Laptop)", adEn: "i7-13700H (Laptop)", p: 87 },
+{ adTr: "i7-13700HX (Laptop)", adEn: "i7-13700HX (Laptop)", p: 103 },
+{ adTr: "i7-13700K (Masaüstü)", adEn: "i7-13700K (Desktop)", p: 106 },
+{ adTr: "i7-13650HX (Laptop)", adEn: "i7-13650HX (Laptop)", p: 102 },
+{ adTr: "i7-13700KF (Masaüstü)", adEn: "i7-13700KF (Desktop)", p: 106 },
+{ adTr: "i7-13700F (Masaüstü)", adEn: "i7-13700F (Desktop)", p: 93 },
+{ adTr: "i7-14700H (Laptop)", adEn: "i7-14700H (Laptop)", p: 98 },
+{ adTr: "i7-14650HX (Laptop)", adEn: "i7-14650HX (Laptop)", p: 107 },
+{ adTr: "i7-14700HX (Laptop)", adEn: "i7-14700HX (Laptop)", p: 109 },
+{ adTr: "i7-14700K (Masaüstü)", adEn: "i7-14700K (Desktop)", p: 114 },
+{ adTr: "i7-14700KF (Masaüstü)", adEn: "i7-14700KF (Desktop)", p: 114 },
+{ adTr: "i7-14700F (Masaüstü)", adEn: "i7-14700F (Desktop)", p: 101 },
+{ adTr: "i9-10900HK (Laptop)", adEn: "i9-10900HK (Laptop)", p: 99 },
+{ adTr: "i9-10900 (Masaüstü)", adEn: "i9-10900 (Desktop)", p: 98 },
+{ adTr: "i9-10900K (Masaüstü)", adEn: "i9-10900K (Desktop)", p: 110 },
+{ adTr: "i9-10900KF (Masaüstü)", adEn: "i9-10900KF (Desktop)", p: 110 },
+{ adTr: "i9-10900F (Masaüstü)", adEn: "i9-10900F (Desktop)", p: 100 },
+{ adTr: "i9-11900H (Laptop)", adEn: "i9-11900H (Laptop)", p: 97 },
+{ adTr: "i9-11900HK (Laptop)", adEn: "i9-11900HK (Laptop)", p: 100 },
+{ adTr: "i9-11900K (Masaüstü)", adEn: "i9-11900K (Desktop)", p: 118 },
+{ adTr: "i9-11900KF (Masaüstü)", adEn: "i9-11900KF (Desktop)", p: 118 },
+{ adTr: "i9-11900F (Masaüstü)", adEn: "i9-11900F (Desktop)", p: 107 },
+{ adTr: "i9-11900 (Masaüstü)", adEn: "i9-11900 (Desktop)", p: 105 },
+{ adTr: "i9-12900H (Laptop)", adEn: "i9-12900H (Laptop)", p: 121 },
+{ adTr: "i9-12900HX (Laptop)", adEn: "i9-12900HX (Laptop)", p: 126 },
+{ adTr: "i9-12900K (Masaüstü)", adEn: "i9-12900K (Desktop)", p: 130 },
+{ adTr: "i9-12900KF (Masaüstü)", adEn: "i9-12900KF (Desktop)", p: 132 },
+{ adTr: "i9-12900F (Masaüstü)", adEn: "i9-12900F (Desktop)", p: 115 },
+{ adTr: "i9-12900 (Masaüstü)", adEn: "i9-12900 (Desktop)", p: 110 },
+{ adTr: "i9-13900H (Laptop)", adEn: "i9-13900H (Laptop)", p: 131 },
+{ adTr: "i9-13900HX (Laptop)", adEn: "i9-13900HX (Laptop)", p: 136 },
+{ adTr: "i9-13900K (Masaüstü)", adEn: "i9-13900K (Desktop)", p: 141 },
+{ adTr: "i9-13900KF (Masaüstü)", adEn: "i9-13900KF (Desktop)", p: 143 },
+{ adTr: "i9-13900F (Masaüstü)", adEn: "i9-13900F (Desktop)", p: 126 },
+{ adTr: "i9-13900 (Masaüstü)", adEn: "i9-13900 (Desktop)", p: 121 },
+{ adTr: "i9-14900 (Masaüstü)", adEn: "i9-14900 (Desktop)", p: 136 },
+{ adTr: "i9-14900F (Masaüstü)", adEn: "i9-14900F (Desktop)", p: 144 },
+{ adTr: "i9-14900KF (Masaüstü)", adEn: "i9-14900KF (Desktop)", p: 153 },
+{ adTr: "i9-14900K (Masaüstü)", adEn: "i9-14900K (Desktop)", p: 153 },
+{ adTr: "i9-14900H (Laptop)", adEn: "i9-14900H (Laptop)", p: 141 },
+{ adTr: "i9-14900HX (Laptop)", adEn: "i9-14900HX (Laptop)", p: 149 },
+// AMD Ryzen
+{ adTr: "Ryzen 3 1200 (Masaüstü)", adEn: "Ryzen 3 1200 (Desktop)", p: 34 },
+{ adTr: "Ryzen 3 1200X (Masaüstü)", adEn: "Ryzen 3 1200X (Desktop)", p: 36 },
+{ adTr: "Ryzen 3 7345H (Laptop)", adEn: "Ryzen 3 7345H (Laptop)", p: 59 },
+{ adTr: "Ryzen 3 1300 (Masaüstü)", adEn: "Ryzen 3 1300 (Desktop)", p: 39 },
+{ adTr: "Ryzen 3 1300X (Masaüstü)", adEn: "Ryzen 3 1300X (Desktop)", p: 42 },
+{ adTr: "Ryzen 3 7340HX (Laptop)", adEn: "Ryzen 3 7340HX (Laptop)", p: 63 },
+{ adTr: "Ryzen 3 2200 (Masaüstü)", adEn: "Ryzen 3 2200 (Desktop)", p: 40 },
+{ adTr: "Ryzen 3 2200G (Masaüstü)", adEn: "Ryzen 3 2200G (Desktop)", p: 42 },
+{ adTr: "Ryzen 3 5300G (Masaüstü)", adEn: "Ryzen 3 5300G (Desktop)", p: 49 },
+{ adTr: "Ryzen 3 3100 (Masaüstü)", adEn: "Ryzen 3 3100 (Desktop)", p: 42 },
+{ adTr: "Ryzen 3 3100X (Masaüstü)", adEn: "Ryzen 3 3100X (Desktop)", p: 45 },
+{ adTr: "Ryzen 3 3300 (Masaüstü)", adEn: "Ryzen 3 3300 (Desktop)", p: 46 },
+{ adTr: "Ryzen 3 3300X (Masaüstü)", adEn: "Ryzen 3 3300X (Desktop)", p: 48 },
+{ adTr: "Ryzen 3 4100 (Masaüstü)", adEn: "Ryzen 3 4100 (Desktop)", p: 50 },
+{ adTr: "Ryzen 3 4300G (Masaüstü)", adEn: "Ryzen 3 4300G (Desktop)", p: 53 },
+{ adTr: "Ryzen 5 1600 (Masaüstü)", adEn: "Ryzen 5 1600 (Desktop)", p: 52 },
+{ adTr: "Ryzen 5 1600X (Masaüstü)", adEn: "Ryzen 5 1600X (Desktop)", p: 54 },
+{ adTr: "Ryzen 5 7640H (Laptop)", adEn: "Ryzen 5 7640H (Laptop)", p: 115 },
+{ adTr: "Ryzen 5 2600 (Masaüstü)", adEn: "Ryzen 5 2600 (Desktop)", p: 67 },
+{ adTr: "Ryzen 5 2600X (Masaüstü)", adEn: "Ryzen 5 2600X (Desktop)", p: 70 },
+{ adTr: "Ryzen 5 7645HX (Laptop)", adEn: "Ryzen 5 7645HX (Laptop)", p: 120 },
+{ adTr: "Ryzen 5 3600 (Masaüstü)", adEn: "Ryzen 5 3600 (Desktop)", p: 87 },
+{ adTr: "Ryzen 5 3600X (Masaüstü)", adEn: "Ryzen 5 3600X (Desktop)", p: 90 },
+{ adTr: "Ryzen 5 5600 (Masaüstü)", adEn: "Ryzen 5 5600 (Desktop)", p: 104 },
+{ adTr: "Ryzen 5 5600X (Masaüstü)", adEn: "Ryzen 5 5600X (Desktop)", p: 109 },
+{ adTr: "Ryzen 5 7600 (Masaüstü)", adEn: "Ryzen 5 7600 (Desktop)", p: 114 },
+{ adTr: "Ryzen 5 7600X (Masaüstü)", adEn: "Ryzen 5 7600X (Desktop)", p: 124 },
+{ adTr: "Ryzen 7 2700 (Masaüstü)", adEn: "Ryzen 7 2700 (Desktop)", p: 79 },
+{ adTr: "Ryzen 7 2700X (Masaüstü)", adEn: "Ryzen 7 2700X (Desktop)", p: 84 },
+{ adTr: "Ryzen 7 7845H (Laptop)", adEn: "Ryzen 7 7845H (Laptop)", p: 127 },
+{ adTr: "Ryzen 7 3700 (Masaüstü)", adEn: "Ryzen 7 3700 (Desktop)", p: 104 },
+{ adTr: "Ryzen 7 3700X (Masaüstü)", adEn: "Ryzen 7 3700X (Desktop)", p: 109 },
+{ adTr: "Ryzen 7 7845HX (Laptop)", adEn: "Ryzen 7 7845HX (Laptop)", p: 134 },
+{ adTr: "Ryzen 7 5800 (Masaüstü)", adEn: "Ryzen 7 5800 (Desktop)", p: 124 },
+{ adTr: "Ryzen 7 5800X (Masaüstü)", adEn: "Ryzen 7 5800X (Desktop)", p: 129 },
+{ adTr: "Ryzen 7 8840HX (Laptop)", adEn: "Ryzen 7 8840HX (Laptop)", p: 138 },
+{ adTr: "Ryzen 7 7700 (Masaüstü)", adEn: "Ryzen 7 7700 (Desktop)", p: 134 },
+{ adTr: "Ryzen 7 7700X (Masaüstü)", adEn: "Ryzen 7 7700X (Desktop)", p: 139 },
+{ adTr: "Ryzen 9 3900 (Masaüstü)", adEn: "Ryzen 9 3900 (Desktop)", p: 99 },
+{ adTr: "Ryzen 9 3900X (Masaüstü)", adEn: "Ryzen 9 3900X (Desktop)", p: 104 },
+{ adTr: "Ryzen 9 8945HX (Laptop)", adEn: "Ryzen 9 8945HX (Laptop)", p: 155 },
+{ adTr: "Ryzen 9 5900 (Masaüstü)", adEn: "Ryzen 9 5900 (Desktop)", p: 124 },
+{ adTr: "Ryzen 9 5900X (Masaüstü)", adEn: "Ryzen 9 5900X (Desktop)", p: 129 },
+{ adTr: "Ryzen 9 7945HX (Laptop)", adEn: "Ryzen 9 7945HX (Laptop)", p: 150 },
+{ adTr: "Ryzen 9 9955HX3D (Laptop)", adEn: "Ryzen 9 9955HX3D (Laptop)", p: 156 },
+{ adTr: "Ryzen 9 7950 (Masaüstü)", adEn: "Ryzen 9 7950 (Desktop)", p: 149 },
+{ adTr: "Ryzen 9 7950X (Masaüstü)", adEn: "Ryzen 9 7950X (Desktop)", p: 152 },
+{ adTr: "Ryzen 9 9955HX (Laptop)", adEn: "Ryzen 9 9955HX (Laptop)", p: 153 },
+{ adTr: "Ryzen 9 7945HX3D (Laptop)", adEn: "Ryzen 9 7945HX3D (Laptop)", p: 154 }
+],
+ramler: [
+{ adTr: "2 GB RAM", adEn: "2 GB RAM", c: 0.25 },
+{ adTr: "4 GB RAM", adEn: "4 GB RAM", c: 0.55 },
+{ adTr: "6 GB RAM", adEn: "6 GB RAM", c: 0.58 },
+{ adTr: "8 GB RAM", adEn: "8 GB RAM", c: 0.65 },
+{ adTr: "12 GB RAM", adEn: "12 GB RAM", c: 0.70 },
+{ adTr: "16 GB RAM", adEn: "16 GB RAM", c: 0.95 },
+{ adTr: "24 GB RAM", adEn: "24 GB RAM", c: 1.0 },
+{ adTr: "32 GB RAM", adEn: "32 GB RAM", c: 1.1 },
+{ adTr: "48 GB RAM", adEn: "48 GB RAM", c: 1.2 },
+{ adTr: "64 GB RAM", adEn: "64 GB RAM", c: 1.6 },
+{ adTr: "128 GB RAM", adEn: "128 GB RAM", c: 1.9 },
+],
+cozunurlukler : [
+  { adTr: "800x600 (SVGA)", adEn: "800x600 (SVGA)", p: 40 },
+  { adTr: "1024x768 (XGA)", adEn: "1024x768 (XGA)", p: 35 },
+  { adTr: "1152x864 (XGA+)", adEn: "1152x864 (XGA+)", p: 33 },
+  { adTr: "1280x720 (HD)", adEn: "1280x720 (HD)", p: 30 },
+  { adTr: "1366x768 (HD+)", adEn: "1366x768 (HD+)", p: 28 },
+  { adTr: "1440x900 (WXGA+)", adEn: "1440x900 (WXGA+)", p: 25 },
+  { adTr: "1600x900 (HD+ Geniş)", adEn: "1600x900 (HD+ Wide)", p: 23 },
+  { adTr: "1600x1200 (UXGA)", adEn: "1600x1200 (UXGA)", p: 20 },
+  { adTr: "1680x1050 (WSXGA+)", adEn: "1680x1050 (WSXGA+)", p: 18 },
+  { adTr: "1920x1080 (Full HD)", adEn: "1920x1080 (Full HD)", p: 15 },
+  { adTr: "1920x1200 (WUXGA)", adEn: "1920x1200 (WUXGA)", p: 13 },
+  { adTr: "2048x1080 (Full HD+)", adEn: "2048x1080 (Full HD+)", p: 12 },
+  { adTr: "2560x1080 (UltraWide FHD)", adEn: "2560x1080 (UltraWide FHD)", p: 10 },
+  { adTr: "2560x1440 (2K QHD)", adEn: "2560x1440 (2K QHD)", p: 8 },
+  { adTr: "3440x1440 (UltraWide QHD)", adEn: "3440x1440 (UltraWide QHD)", p: 7 },
+  { adTr: "3840x1600 (UltraWide 4K)", adEn: "3840x1600 (UltraWide 4K)", p: 6 },
+  { adTr: "3840x2160 (4K UHD)", adEn: "3840x2160 (4K UHD)", p: 5 },
+  { adTr: "5120x1440 (UltraWide 5K)", adEn: "5120x1440 (UltraWide 5K)", p: 4 },
+  { adTr: "5120x2880 (5K Retina)", adEn: "5120x2880 (5K Retina)", p: 3 },
+  { adTr: "7680x4320 (8K UHD)", adEn: "7680x4320 (8K UHD)", p: 1 }
+],
+oyunlar: [
+{ adTr: "Valorant (Düşük)", adEn: "Valorant (Low)", z: 2.2, d: 0.10 },
+{ adTr: "Valorant (Orta)", adEn: "Valorant (Medium)", z: 1.76, d: 0.10 },
+{ adTr: "Valorant (Yüksek)", adEn: "Valorant (High)", z: 1.6, d: 0.10 },
+{ adTr: "CS2 (Düşük)", adEn: "CS2 (Low)", z: 2.1, d: 0.12 },
+{ adTr: "CS2 (Orta)", adEn: "CS2 (Medium)", z: 1.68, d: 0.12 }, 
+{ adTr: "CS2 (Yüksek)", adEn: "CS2 (High)", z: 1.3, d: 0.12 },
+{ adTr: "CS:GO (Düşük)", adEn: "CS:GO (Low)", z: 2.8, d: 0.10 },
+{ adTr: "CS:GO (Yüksek)", adEn: "CS:GO (High)", z: 1.9, d: 0.10 },
+{ adTr: "Zula (Düşük)", adEn: "Zula (Low)", z: 3.1, d: 0.08 },
+{ adTr: "Zula (Yüksek)", adEn: "Zula (High)", z: 2.5, d: 0.08 },
+{ adTr: "Fortnite (Düşük)", adEn: "Fortnite (Low)", z: 1.9, d: 0.15 },
+{ adTr: "Fortnite (Yüksek)", adEn: "Fortnite (High)", z: 1.1, d: 0.15 },
+{ adTr: "PUBG (Düşük)", adEn: "PUBG (Low)", z: 1.2, d: 0.18 },
+{ adTr: "PUBG (Yüksek)", adEn: "PUBG (High)", z: 0.7, d: 0.18 },
+{ adTr: "Call of Duty: Warzone (Düşük)", adEn: "Call of Duty: Warzone (Low)", z: 0.9, d: 0.20 },
+{ adTr: "Call of Duty: Warzone (Yüksek)", adEn: "Call of Duty: Warzone (High)", z: 0.5, d: 0.20 },
+{ adTr: "Farming Simulator 17 (Düşük)", adEn: "Farming Simulator 17 (Low)", z: 1.9, d: 0.10 },
+{ adTr: "Farming Simulator 17 (Yüksek)", adEn: "Farming Simulator 17 (High)", z: 1.3, d: 0.10 },
+{ adTr: "Farming Simulator 19 (Düşük)", adEn: "Farming Simulator 19 (Low)", z: 1.7, d: 0.12 },
+{ adTr: "Farming Simulator 19 (Yüksek)", adEn: "Farming Simulator 19 (High)", z: 1.2, d: 0.12 },
+{ adTr: "Farming Simulator 22 (Düşük)", adEn: "Farming Simulator 22 (Low)", z: 1.4, d: 0.12 },
+{ adTr: "Farming Simulator 22 (Yüksek)", adEn: "Farming Simulator 22 (High)", z: 0.9, d: 0.12 },
+{ adTr: "Farming Simulator 25 (Düşük)", adEn: "Farming Simulator 25 (Low)", z: 1.1, d: 0.15 },
+{ adTr: "Farming Simulator 25 (Yüksek)", adEn: "Farming Simulator 25 (High)", z: 0.7, d: 0.15 },
+{ adTr: "Battlefield 3 (Düşük)", adEn: "Battlefield 3 (Low)", z: 1.8, d: 0.12 },
+{ adTr: "Battlefield 3 (Yüksek)", adEn: "Battlefield 3 (High)", z: 1.3, d: 0.12 },
+{ adTr: "Battlefield 4 (Düşük)", adEn: "Battlefield 4 (Low)", z: 1.7, d: 0.12 },
+{ adTr: "Battlefield 4 (Yüksek)", adEn: "Battlefield 4 (High)", z: 1.2, d: 0.12 },
+{ adTr: "Battlefield 1 (Düşük)", adEn: "Battlefield 1 (Low)", z: 1.2, d: 0.15 },
+{ adTr: "Battlefield 1 (Yüksek)", adEn: "Battlefield 1 (High)", z: 0.8, d: 0.15 },
+{ adTr: "Battlefield V (Düşük)", adEn: "Battlefield V (Low)", z: 1.0, d: 0.18 },
+{ adTr: "Battlefield V (Yüksek)", adEn: "Battlefield V (High)", z: 0.6, d: 0.18 },
+{ adTr: "Battlefield 2042 (Düşük)", adEn: "Battlefield 2042 (Low)", z: 0.70, d: 0.22 },
+{ adTr: "Battlefield 2042 (Orta)", adEn: "Battlefield 2042 (Medium)", z: 0.56, d: 0.22 },
+{ adTr: "Battlefield 2042 (Yüksek)", adEn: "Battlefield 2042 (High)", z: 0.42, d: 0.22 },
+{ adTr: "FC 23 (Düşük)", adEn: "FC 23 (Low)", z: 1.5, d: 0.12 },
+{ adTr: "FC 23 (Yüksek)", adEn: "FC 23 (High)", z: 1.1, d: 0.12 },
+{ adTr: "FC 24 (Düşük)", adEn: "FC 24 (Low)", z: 1.3, d: 0.12 },
+{ adTr: "FC 24 (Yüksek)", adEn: "FC 24 (High)", z: 0.9, d: 0.12 },
+{ adTr: "FC 25 (Düşük)", adEn: "FC 25 (Low)", z: 1.1, d: 0.15 },
+{ adTr: "FC 25 (Yüksek)", adEn: "FC 25 (High)", z: 0.7, d: 0.15 },
+{ adTr: "FC 26 (Düşük)", adEn: "FC 26 (Low)", z: 1.0, d: 0.15 },
+{ adTr: "FC 26 (Yüksek)", adEn: "FC 26 (High)", z: 0.6, d: 0.15 },
+{ adTr: "PES (Düşük)", adEn: "PES (Low)", z: 1.9, d: 0.10 },
+{ adTr: "PES (Yüksek)", adEn: "PES (High)", z: 1.3, d: 0.10 },
+{ adTr: "Spider-Man Remastered (Düşük)", adEn: "Spider-Man Remastered (Low)", z: 1.00, d: 0.20 },
+{ adTr: "Spider-Man Remastered (Orta)", adEn: "Spider-Man Remastered (Medium)", z: 0.80, d: 0.20 },
+{ adTr: "Spider-Man Remastered (Yüksek)", adEn: "Spider-Man Remastered (High)", z: 0.60, d: 0.20 },
+{ adTr: "Spider-Man Remastered (Ultra)", adEn: "Spider-Man Remastered (Ultra)", z: 0.45, d: 0.20 },
+{ adTr: "Spider-Man Miles Morales (Düşük)", adEn: "Spider-Man Miles Morales (Low)", z: 0.9, d: 0.22 },
+{ adTr: "Spider-Man Miles Morales (Yüksek)", adEn: "Spider-Man Miles Morales (High)", z: 0.55, d: 0.22 },
+{ adTr: "Spider-Man Miles Morales (Ultra)", adEn: "Spider-Man Miles Morales (Ultra)", z: 0.4, d: 0.22 },
+{ adTr: "Minecraft (Düşük Shaders)", adEn: "Minecraft (Low Shaders)", z: 1.5, d: 0.25 },
+{ adTr: "Minecraft (Yüksek Shaders)", adEn: "Minecraft (High Shaders)", z: 0.9, d: 0.25 },
+{ adTr: "Forza Horizon 5 (Düşük)", adEn: "Forza Horizon 5 (Low)", z: 1.4, d: 0.15 },
+{ adTr: "Forza Horizon 5 (Yüksek)", adEn: "Forza Horizon 5 (High)", z: 0.8, d: 0.15 },
+{ adTr: "Forza Horizon 5 (Ultra)", adEn: "Forza Horizon 5 (Ultra)", z: 0.55, d: 0.16 },
+{ adTr: "Forza Horizon 6 (Düşük)", adEn: "Forza Horizon 6 (Low)", z: 1.10, d: 0.16 },
+{ adTr: "Forza Horizon 6 (Yüksek)", adEn: "Forza Horizon 6 (High)", z: 0.65, d: 0.16 },
+{ adTr: "Forza Horizon 6 (Ultra)", adEn: "Forza Horizon 6 (Ultra)", z: 0.42, d: 0.18 },
+{ adTr: "ETS 2 (Düşük)", adEn: "ETS 2 (Low)", z: 1.7, d: 0.15 },
+{ adTr: "ETS 2 (Orta)", adEn: "ETS 2 (Medium)", z: 1.36, d: 0.15 },
+{ adTr: "ETS 2 (Yüksek)", adEn: "ETS 2 (High)", z: 1.1, d: 0.15 },
+{ adTr: "GTA IV (Düşük)", adEn: "GTA IV (Low)", z: 1.80, d: 0.28 },
+{ adTr: "GTA IV (Yüksek)", adEn: "GTA IV (High)", z: 1.30, d: 0.32 },
+{ adTr: "GTA IV (Ultra)", adEn: "GTA IV (Ultra)", z: 0.95, d: 0.38 },
+{ adTr: "GTA V (Düşük)", adEn: "GTA V (Low)", z: 1.5, d: 0.18 },
+{ adTr: "GTA V (Yüksek)", adEn: "GTA V (High)", z: 0.9, d: 0.18 },
+{ adTr: "GTA V (Ultra)", adEn: "GTA V (Ultra)", z: 0.65, d: 0.18 },
+{ adTr: "RDR 2 (Düşük)", adEn: "RDR 2 (Low)", z: 0.90, d: 0.22 },
+{ adTr: "RDR 2 (Orta)", adEn: "RDR 2 (Medium)", z: 0.72, d: 0.22 }, 
+{ adTr: "RDR 2 (Yüksek)", adEn: "RDR 2 (High)", z: 0.54, d: 0.22 }, 
+{ adTr: "RDR 2 (Ultra)", adEn: "RDR 2 (Ultra)", z: 0.41, d: 0.22 }, 
+{ adTr: "God of War Ragnarök (Düşük)", adEn: "God of War Ragnarok (Low)", z: 0.8, d: 0.18 },
+{ adTr: "God of War Ragnarök (Orta)", adEn: "God of War Ragnarok (Medium)", z: 0.64, d: 0.18 }, 
+{ adTr: "God of War Ragnarök (Yüksek)", adEn: "God of War Ragnarok (High)", z: 0.5, d: 0.18 },
+{ adTr: "God of War Ragnarök (Ultra)", adEn: "God of War Ragnarok (Ultra)", z: 0.38, d: 0.18 },
+{ adTr: "ARK Survival Evolved (Düşük)", adEn: "ARK Survival Evolved (Low)", z: 0.8, d: 0.22 },
+{ adTr: "ARK Survival Evolved (Yüksek)", adEn: "ARK Survival Evolved (High)", z: 0.4, d: 0.22 },
+{ adTr: "DayZ (Düşük)", adEn: "DayZ (Low)", z: 1.0, d: 0.20 },
+{ adTr: "DayZ (Yüksek)", adEn: "DayZ (High)", z: 0.6, d: 0.20 },
+{ adTr: "Assassin’s Creed Valhalla (Düşük)", adEn: "Assassin’s Creed Valhalla (Low)", z: 0.8, d: 0.20 },
+{ adTr: "Assassin’s Creed Valhalla (Yüksek)", adEn: "Assassin’s Creed Valhalla (High)", z: 0.5, d: 0.20 },
+{ adTr: "Assassin’s Creed Mirage (Düşük)", adEn: "Assassin’s Creed Mirage (Low)", z: 1.1, d: 0.18 },
+{ adTr: "Assassin’s Creed Mirage (Yüksek)", adEn: "Assassin’s Creed Mirage (High)", z: 0.7, d: 0.18 },
+{ adTr: "Watch Dogs Legion (Düşük)", adEn: "Watch Dogs Legion (Low)", z: 0.7, d: 0.22 },
+{ adTr: "Watch Dogs Legion (Yüksek)", adEn: "Watch Dogs Legion (High)", z: 0.4, d: 0.22 },
+{ adTr: "Hogwarts Legacy (Düşük)", adEn: "Hogwarts Legacy (Low)", z: 0.9, d: 0.22 },
+{ adTr: "Hogwarts Legacy (Orta)", adEn: "Hogwarts Legacy (Medium)", z: 0.72, d: 0.22 }, 
+{ adTr: "Hogwarts Legacy (Yüksek)", adEn: "Hogwarts Legacy (High)", z: 0.5, d: 0.22 },
+{ adTr: "Hogwarts Legacy (Ultra)", adEn: "Hogwarts Legacy (Ultra)", z: 0.35, d: 0.22 },
+{ adTr: "Assetto Corsa (Düşük)", adEn: "Assetto Corsa (Low)", z: 1.8, d: 0.15 },
+{ adTr: "Assetto Corsa (Yüksek)", adEn: "Assetto Corsa (High)", z: 1.3, d: 0.15 },
+{ adTr: "Assetto Corsa Competizione (Düşük)", adEn: "Assetto Corsa Competizione (Low)", z: 1.0, d: 0.20 },
+{ adTr: "Assetto Corsa Competizione (Yüksek)", adEn: "Assetto Corsa Competizione (High)", z: 0.6, d: 0.20 },
+{ adTr: "Need for Speed Unbound (Düşük)", adEn: "Need for Speed Unbound (Low)", z: 1.1, d: 0.18 },
+{ adTr: "Need for Speed Unbound (Yüksek)", adEn: "Need for Speed Unbound (High)", z: 0.7, d: 0.18 },
+{ adTr: "Apex Legends (Düşük)", adEn: "Apex Legends (Low)", z: 1.6, d: 0.15 },
+{ adTr: "Apex Legends (Yüksek)", adEn: "Apex Legends (High)", z: 1.1, d: 0.15 },
+{ adTr: "Rainbow Six Siege (Düşük)", adEn: "Rainbow Six Siege (Low)", z: 1.8, d: 0.12 },
+{ adTr: "Rainbow Six Siege (Yüksek)", adEn: "Rainbow Six Siege (High)", z: 1.3, d: 0.12 },
+{ adTr: "Overwatch 2 (Düşük)", adEn: "Overwatch 2 (Low)", z: 1.7, d: 0.12 },
+{ adTr: "Overwatch 2 (Yüksek)", adEn: "Overwatch 2 (High)", z: 1.2, d: 0.12 },
+{ adTr: "The Last of Us Part I (Düşük)", adEn: "The Last of Us Part I (Low)", z: 0.8, d: 0.24 },
+{ adTr: "The Last of Us Part I (Yüksek)", adEn: "The Last of Us Part I (High)", z: 0.5, d: 0.24 },
+{ adTr: "The Last of Us Part I (Ultra)", adEn: "The Last of Us Part I (Ultra)", z: 0.34, d: 0.24 },
+{ adTr: "The Last of Us Part II (Düşük)", adEn: "The Last of Us Part II (Low)", z: 0.7, d: 0.26 },
+{ adTr: "The Last of Us Part II (Yüksek)", adEn: "The Last of Us Part II (High)", z: 0.45, d: 0.26 },
+{ adTr: "The Last of Us Part II (Ultra)", adEn: "The Last of Us Part II (Ultra)", z: 0.3, d: 0.26 },
+{ adTr: "Cyberpunk 2077 (Düşük)", adEn: "Cyberpunk 2077 (Low)", z: 0.70, d: 0.25 },
+{ adTr: "Cyberpunk 2077 (Orta)", adEn: "Cyberpunk 2077 (Medium)", z: 0.56, d: 0.25 }, 
+{ adTr: "Cyberpunk 2077 (Ultra)", adEn: "Cyberpunk 2077 (Ultra)", z: 0.31, d: 0.25 }, 
+{ adTr: "Uncharted: Hırsızlar Mirası Koleksiyonu (Düşük)", adEn: "Uncharted: Legacy of Thieves Collection (Low)", z: 1.25, d: 0.16 },
+{ adTr: "Uncharted: Hırsızlar Mirası Koleksiyonu (Yüksek)", adEn: "Uncharted: Legacy of Thieves Collection (High)", z: 0.85, d: 0.16 },
+{ adTr: "Uncharted: Hırsızlar Mirası Koleksiyonu (Ultra)", adEn: "Uncharted: Legacy of Thieves Collection (Ultra)", z: 0.60, d: 0.18 },
+{ adTr: "Dying Light 1 (Düşük)", adEn: "Dying Light 1 (Low)", z: 1.90, d: 0.10 },
+{ adTr: "Dying Light 1 (Yüksek)", adEn: "Dying Light 1 (High)", z: 1.50, d: 0.12 },
+{ adTr: "Dying Light 1 (Ultra)", adEn: "Dying Light 1 (Ultra)", z: 1.20, d: 0.14 },
+{ adTr: "Dying Light 2 (Düşük)", adEn: "Dying Light 2 (Low)", z: 1.10, d: 0.18 },
+{ adTr: "Dying Light 2 (Yüksek)", adEn: "Dying Light 2 (High)", z: 0.75, d: 0.18 },
+{ adTr: "Dying Light 2 (Ultra)", adEn: "Dying Light 2 (Ultra)", z: 0.55, d: 0.20 },
+{ adTr: "The Forest (Düşük)", adEn: "The Forest (Low)", z: 1.80, d: 0.12 },
+{ adTr: "The Forest (Yüksek)", adEn: "The Forest (High)", z: 1.30, d: 0.12 },
+{ adTr: "Sons Of The Forest (Düşük)", adEn: "Sons Of The Forest (Low)", z: 1.10, d: 0.18 },
+{ adTr: "Sons Of The Forest (Yüksek)", adEn: "Sons Of The Forest (High)", z: 0.75, d: 0.18 },
+{ adTr: "Sons Of The Forest (Ultra)", adEn: "Sons Of The Forest (Ultra)", z: 0.52, d: 0.20 },
+{ adTr: "Outlast 1 (Yüksek)", adEn: "Outlast 1 (High)", z: 2.40, d: 0.10 },
+{ adTr: "Outlast 2 (Yüksek)", adEn: "Outlast 2 (High)", z: 1.80, d: 0.12 },
+{ adTr: "The Outlast Trials (Düşük)", adEn: "The Outlast Trials (Low)", z: 1.40, d: 0.15 },
+{ adTr: "The Outlast Trials (Yüksek)", adEn: "The Outlast Trials (High)", z: 0.95, d: 0.15 },
+{ adTr: "The Outlast Trials (Ultra)", adEn: "The Outlast Trials (Ultra)", z: 0.70, d: 0.16 },
+{ adTr: "NBA 2K23 (Düşük)", adEn: "NBA 2K23 (Low)", z: 1.60, d: 0.12 },
+{ adTr: "NBA 2K23 (Yüksek)", adEn: "NBA 2K23 (High)", z: 1.10, d: 0.12 },
+{ adTr: "NBA 2K24 (Düşük)", adEn: "NBA 2K24 (Low)", z: 1.40, d: 0.14 },
+{ adTr: "NBA 2K24 (Yüksek)", adEn: "NBA 2K24 (High)", z: 0.95, d: 0.14 },
+{ adTr: "NBA 2K25 (Düşük)", adEn: "NBA 2K25 (Low)", z: 1.10, d: 0.15 },
+{ adTr: "NBA 2K25 (Yüksek)", adEn: "NBA 2K25 (High)", z: 0.75, d: 0.15 },
+{ adTr: "NBA 2K25 (Ultra)", adEn: "NBA 2K25 (Ultra)", z: 0.55, d: 0.15 },
+{ adTr: "NBA 2K26 (Düşük)", adEn: "NBA 2K26 (Low)", z: 1.05, d: 0.16 },
+{ adTr: "NBA 2K26 (Yüksek)", adEn: "NBA 2K26 (High)", z: 0.70, d: 0.16 },
+{ adTr: "NBA 2K26 (Ultra)", adEn: "NBA 2K26 (Ultra)", z: 0.50, d: 0.18 },
+{ adTr: "Rust (Düşük)", adEn: "Rust (Low)", z: 1.25, d: 0.22 },
+{ adTr: "Rust (Yüksek)", adEn: "Rust (High)", z: 0.85, d: 0.25 },
+{ adTr: "Rust (Ultra)", adEn: "Rust (Ultra)", z: 0.60, d: 0.28 },
+{ adTr: "007 First Light (Düşük)", adEn: "007 First Light (Low)", z: 0.85, d: 0.18 },
+{ adTr: "007 First Light (Yüksek)", adEn: "007 First Light (High)", z: 0.55, d: 0.20 },
+{ adTr: "007 First Light (Ultra )", adEn: "007 First Light (Ultra)", z: 0.35, d: 0.24 },
+{ adTr: "Resident Evil 2 Remake (Düşük)", adEn: "Resident Evil 2 Remake (Low)", z: 1.50, d: 0.12 },
+{ adTr: "Resident Evil 2 Remake (Orta)", adEn: "Resident Evil 2 Remake (Medium)", z: 1.25, d: 0.12 },
+{ adTr: "Resident Evil 2 Remake (Yüksek)", adEn: "Resident Evil 2 Remake (High)", z: 1.05, d: 0.12 },
+{ adTr: "Resident Evil 3 Remake (Düşük)", adEn: "Resident Evil 3 Remake (Low)", z: 1.55, d: 0.12 },
+{ adTr: "Resident Evil 3 Remake (Orta)", adEn: "Resident Evil 3 Remake (Medium)", z: 1.30, d: 0.12 },
+{ adTr: "Resident Evil 3 Remake (Yüksek)", adEn: "Resident Evil 3 Remake (High)", z: 1.10, d: 0.12 },
+{ adTr: "Resident Evil 3 Remake (Ultra)", adEn: "Resident Evil 3 Remake (Ultra)", z: 0.80, d: 0.14 },
+{ adTr: "Resident Evil 4 Remake (Düşük)", adEn: "Resident Evil 4 Remake (Low)", z: 1.15, d: 0.16 },
+{ adTr: "Resident Evil 4 Remake (Orta)", adEn: "Resident Evil 4 Remake (Medium)", z: 0.95, d: 0.16 },
+{ adTr: "Resident Evil 4 Remake (Yüksek)", adEn: "Resident Evil 4 Remake (High)", z: 0.78, d: 0.16 },
+{ adTr: "Resident Evil 4 Remake (Ultra)", adEn: "Resident Evil 4 Remake (Ultra)", z: 0.55, d: 0.18 },
+{ adTr: "Resident Evil Requiem (Düşük)", adEn: "Resident Evil Requiem (Low)", z: 0.75, d: 0.20 },
+{ adTr: "Resident Evil Requiem (Orta)", adEn: "Resident Evil Requiem (Medium)", z: 0.60, d: 0.21 },
+{ adTr: "Resident Evil Requiem (Yüksek)", adEn: "Resident Evil Requiem (High)", z: 0.50, d: 0.22 },
+{ adTr: "Resident Evil Requiem (Ultra)", adEn: "Resident Evil Requiem (Ultra)", z: 0.32, d: 0.25 },
+],
 };
 
 function doldur() {
@@ -978,7 +1205,7 @@ function dilDegistir() {
     document.getElementById("txt-toc-4").innerText = metinler[aktifDil].toc4;
 
     document.getElementById("txt-sec1-title").innerText = metinler[aktifDil].sec1Title;
-    document.getElementById("txt-sec1-desc").innerText = metinler[aktifDil].sec1Desc;
+    document.getElementById("txt-sec1-desc").innerHTML = metinler[aktifDil].sec1Desc;
     document.getElementById("txt-th-fps").innerText = metinler[aktifDil].thFps;
     document.getElementById("txt-th-exp").innerText = metinler[aktifDil].thExp;
     document.getElementById("txt-t1").innerText = metinler[aktifDil].t1;
@@ -995,12 +1222,12 @@ function dilDegistir() {
 
     document.getElementById("txt-sec3-title").innerText = metinler[aktifDil].sec3Title;
     document.getElementById("txt-sec3-desc").innerText = metinler[aktifDil].sec3Desc;
-    document.getElementById("txt-txt-boost-1").innerText = metinler[aktifDil].boost1;
-    document.getElementById("txt-txt-boost-2").innerText = metinler[aktifDil].boost2;
-    document.getElementById("txt-txt-boost-3").innerText = metinler[aktifDil].boost3;
-    document.getElementById("txt-txt-boost-4").innerText = metinler[aktifDil].boost4;
-    document.getElementById("txt-txt-boost-5").innerText = metinler[aktifDil].boost5;
-    document.getElementById("txt-txt-boost-6").innerText = metinler[aktifDil].boost6;
+    document.getElementById("txt-boost-1").innerText = metinler[aktifDil].boost1;
+    document.getElementById("txt-boost-2").innerText = metinler[aktifDil].boost2;
+    document.getElementById("txt-boost-3").innerText = metinler[aktifDil].boost3;
+    document.getElementById("txt-boost-4").innerText = metinler[aktifDil].boost4;
+    document.getElementById("txt-boost-5").innerText = metinler[aktifDil].boost5;
+    document.getElementById("txt-boost-6").innerText = metinler[aktifDil].boost6;
 
     document.getElementById("txt-sec4-title").innerText = metinler[aktifDil].sec4Title;
     document.getElementById("txt-q1").innerText = metinler[aktifDil].q1;
@@ -1060,17 +1287,18 @@ function hesapla() {
 
     if (ust < 30) {
         fpsGosterge.innerText = metinler[aktifDil].kaldirmaz;
-        fpsGosterge.style.color = "var(--danger-color)";
+        fpsGosterge.style.color = "#ff4444";
         fpsGosterge.style.fontSize = "30px";
         etiket.innerText = metinler[aktifDil].yetersizEtiket;
     } else {
         fpsGosterge.innerText = alt + " - " + ust;
-        fpsGosterge.style.color = "var(--success-color)";
+        fpsGosterge.style.color = "#3fb950";
         fpsGosterge.style.fontSize = "40px";
         etiket.innerText = metinler[aktifDil].fpsEtiket;
     }
 }
 
+// Akordiyon Açma / Kapatma Fonksiyonu
 function toggleAccordion(button) {
     const section = button.parentElement;
     section.classList.toggle('active');
@@ -1082,6 +1310,7 @@ function toggleAccordion(button) {
     }
 }
 
+// İçindekilerden Tıklandığında İlgili Bölümü Açıp Oraya Kaydırma
 function tocGit(id) {
     const section = document.getElementById(id);
     if (section) {
@@ -1096,6 +1325,7 @@ function tocGit(id) {
     }
 }
 
+// SSS İçi Akordiyon Fonksiyonu
 function toggleFaq(event, button) {
     event.stopPropagation();
     const item = button.parentElement;
