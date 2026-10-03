@@ -1,526 +1,212 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" class="dark">
 <head>
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/png" href="favicon.png">
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> FPS Hesaplayıcı - FPS Hesaplama ve Oyun Performans Testi</title>
-    <meta name="description" content="WaqoFPS ile ekran kartı, işlemci ve RAM seçerek oyunlarda alacağınız tahmini FPS değerlerini hesaplayın.">
+    <title>WaqoFPS - FPS Analiz Merkezi</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            900: '#312e81',
+                        },
+                        gaming: {
+                            dark: '#0b0f19',
+                            card: '#131c31',
+                            accent: '#3b82f6',
+                            glow: 'rgba(59, 130, 246, 0.5)'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        html {
-            scroll-behavior: smooth;
-        }
         body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #050505;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            transition: background-color 0.3s, color 0.3s;
-            margin: 0;
+            font-family: 'Inter', sans-serif;
         }
-        .main-wrapper {
-            width: 100%;
-            max-width: 600px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .glass-nav {
+            background: rgba(11, 15, 25, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
-        .container {
-            background: #000000;
-            padding: 25px;
-            border-radius: 12px;
-            width: 100%;
-            max-width: 450px;
-            border: 1px solid #30363d;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-            transition: background-color 0.3s, border-color 0.3s;
-            box-sizing: border-box;
+        .glass-card {
+            background: rgba(19, 28, 49, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
-        h2 {
-            text-align: center;
-            color: #58a6ff;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-top: 12px;
-            font-size: 12px;
-            color: #8b949e;
-            font-weight: bold;
-        }
-        select {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            background: #0d1117;
-            border: 1px solid #30363d;
-            color: white;
-            border-radius: 6px;
-            box-sizing: border-box;
-        }
-        button.hesapla-btn {
-            width: 100%;
-            padding: 15px;
-            margin-top: 25px;
-            background: #238636;
-            border: none;
-            color: white;
-            font-weight: bold;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        button.hesapla-btn:hover {
-            background: #2ea043;
-        }
-        .result-box {
-            margin-top: 20px;
-            padding: 15px;
-            background: #000000;
-            border: 1px solid #30363d;
-            border-radius: 8px;
-            text-align: center;
-            min-height: 100px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: background-color 0.3s, border-color 0.3s;
-        }
-        #fps {
-            font-size: 40px;
-            color: #3fb950;
-            display: block;
-            font-weight: bold;
-        }
-
-        /* İçerik Bölümleri ve İçindekiler Kutusu (Ortak Akordiyon Stili) */
-        .content-section {
-            background: #000000;
-            border: 1px solid #30363d;
-            border-radius: 12px;
-            padding: 15px 20px;
-            margin-top: 25px;
-            width: 100%;
-            max-width: 450px;
-            box-sizing: border-box;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-            transition: background-color 0.3s, border-color 0.3s;
-        }
-        
-        /* Akordiyon Başlık Butonu */
-        .accordion-header {
-            width: 100%;
-            background: none;
-            border: none;
-            color: #58a6ff;
-            font-size: 18px;
-            font-weight: bold;
-            text-align: left;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 5px 0;
-        }
-        .accordion-header span {
-            font-size: 20px;
-        }
-
-        /* Akordiyon İçerik Alanı */
-        .accordion-body {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease, padding 0.4s ease;
-            padding: 0;
-        }
-        .content-section.active .accordion-body {
-            max-height: 1000px;
-            padding-top: 15px;
-        }
-
-        .content-section p, .content-section ul {
-            font-size: 14px;
-            color: #c9d1d9;
-            line-height: 1.5;
-        }
-        .content-section ul {
-            padding-left: 20px;
-            margin-bottom: 0;
-        }
-        .content-section li {
-            margin-bottom: 6px;
-        }
-        .content-section a {
-            color: #58a6ff;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .content-section a:hover {
-            text-decoration: underline;
-        }
-
-        /* Akordiyon İçi SSS Öğeleri */
-        .faq-item {
-            background: #0d1117;
-            border: 1px solid #30363d;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            overflow: hidden;
-            transition: background-color 0.3s, border-color 0.3s;
-        }
-        .faq-question {
-            width: 100%;
-            background: none;
-            border: none;
-            color: #ffffff;
-            padding: 15px;
-            text-align: left;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .faq-question:hover {
-            background: rgba(88, 166, 255, 0.05);
-        }
-        .faq-question span {
-            font-size: 16px;
-            color: #58a6ff;
-            font-weight: bold;
-        }
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-            padding: 0 15px;
-            color: #8b949e;
-            font-size: 13px;
-            line-height: 1.5;
-        }
-        .faq-item.active .faq-answer {
-            max-height: 150px;
-            padding: 0 15px 15px 15px;
-        }
-
-        /* Tablo Stili */
-        .fps-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-            font-size: 13px;
-        }
-        .fps-table th, .fps-table td {
-            border: 1px solid #30363d;
-            padding: 8px;
-            text-align: left;
-        }
-        .fps-table th {
-            background: #0d1117;
-            color: #58a6ff;
-        }
-
-        /* Sağ Üst Butonlar Konteyneri */
-        .top-controls {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            display: flex;
-            gap: 8px;
-            z-index: 9999;
-        }
-
-        /* Üst Butonların Ortak Stili */
-        .top-btn {
-            padding: 8px 14px;
-            font-size: 13px;
-            border: 1px solid #30363d;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            background: #ffffff;
-            color: #000000;
-            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-        }
-
-        /* Aydınlık Mod (Light Mode) Sınıfları */
-        body.light-mode {
-            background-color: #f0f0f0;
-            color: #000;
-        }
-        body.light-mode .container,
-        body.light-mode .content-section {
-            background-color: #ffffff;
-            border: 1px solid #d0d7de;
-        }
-        body.light-mode select {
-            background: #f6f8fa;
-            border: 1px solid #d0d7de;
-            color: #000;
-        }
-        body.light-mode label { 
-            color: #57606a; 
-        }
-        body.light-mode .result-box {
-            background-color: #f6f8fa !important;
-            border: 1px solid #d0d7de;
-        }
-        body.light-mode .top-btn {
-            background-color: #000000;
-            color: #ffffff;
-            border-color: #30363d;
-        }
-        body.light-mode .content-section p, 
-        body.light-mode .content-section li {
-            color: #24292f;
-        }
-        body.light-mode .accordion-header {
-            color: #0969da;
-        }
-        body.light-mode .faq-item {
-            background: #f6f8fa;
-            border-color: #d0d7de;
-        }
-        body.light-mode .faq-question {
-            color: #24292f;
-        }
-        body.light-mode .faq-answer {
-            color: #57606a;
-        }
-        body.light-mode .fps-table th {
-            background: #f6f8fa;
-        }
-        body.light-mode .fps-table th, 
-        body.light-mode .fps-table td {
-            border-color: #d0d7de;
+        .gaming-glow {
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.25);
         }
     </style>
 </head>
-<body>
-    <!-- Sağ üst köşe butonları (Dil ve Tema) -->
-    <div class="top-controls">
-        <button id="lang-toggle" class="top-btn" onclick="dilDegistir()">EN</button>
-        <button id="theme-toggle" class="top-btn" onclick="temaDegistir()">🌙</button>
-    </div>
+<body class="bg-gaming-dark text-slate-100 min-h-screen selection:bg-blue-500 selection:text-white">
 
-    <div class="main-wrapper">
-        <div class="container">
-            <h2 id="txt-baslik">FPS ANALİZ MERKEZİ</h2>
+    <!-- Header / Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-slate-800/80 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             
-            <label id="txt-lbl-gpu">EKRAN KARTI (GPU)</label>
-            <select id="gpu"></select>
-            
-            <label id="txt-lbl-cpu">İŞLEMCİ (CPU)</label>
-            <select id="cpu"></select>
-            
-            <label id="txt-lbl-ram">RAM (BELLEK)</label>
-            <select id="ram"></select>
-            
-            <label id="txt-lbl-coz">Ekran Çözünürlüğü (GÖRÜNTÜ KALİTESİ)</label>
-            <select id="cozunurluk"></select>
-            
-            <label id="txt-lbl-oyun">OYUN VE AYAR SEÇİMİ</label>
-            <select id="oyun"></select>
-            
-            <button type="button" class="hesapla-btn" id="txt-btn-hesapla" onclick="hesapla()">PERFORMANSI TEST ET</button>
-            
-            <div class="result-box">
-                <span id="fps">0 - 0</span>
-                <p id="fps-etiket" style="margin:0; font-size:14px; color:#8b949e;">
-                    Tahmini FPS Aralığı
-                </p>
+            <!-- Left: Logo & Title -->
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center gaming-glow font-black text-xl italic tracking-wider text-white">
+                    W
+                </div>
+                <div class="flex items-center space-x-2">
+                    <span class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-blue-400 bg-clip-text text-transparent">WAQOFPS</span>
+                    <span class="hidden sm:inline-block text-slate-500 font-light">|</span>
+                    <span class="hidden sm:inline-block text-xs font-medium uppercase tracking-wider text-blue-400 bg-blue-950/60 px-2.5 py-1 rounded-md border border-blue-800/40">FPS Analiz Merkezi</span>
+                </div>
             </div>
-        </div>
 
-        <!-- İçindekiler Kutusu (Artık Diğerleriyle Aynı Akordiyon Yapısında) -->
-        <div class="content-section">
-            <button class="accordion-header" onclick="toggleAccordion(this)">
-                <span id="txt-toc-title">İçindekiler</span> <span>+</span>
-            </button>
-            <div class="accordion-body">
-                <ul>
-                    <li><a onclick="tocGit('fps-nedir')" id="txt-toc-1">1. FPS Nedir?</a></li>
-                    <li><a onclick="tocGit('fps-hesaplama')" id="txt-toc-2">2. Oyun FPS Hesaplama Nasıl Yapılır?</a></li>
-                    <li><a onclick="tocGit('fps-arttirma')" id="txt-toc-3">3. FPS Arttırma Yöntemleri</a></li>
-                    <li><a onclick="tocGit('sik-sorulan-sorular')" id="txt-toc-4">4. Sık Sorulan Sorular</a></li>
-                </ul>
-            </div>
-        </div>
+            <!-- Center: Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-1 lg:space-x-2 bg-slate-900/50 p-1.5 rounded-full border border-slate-800">
+                <a href="#anasayfa" class="px-5 py-2 rounded-full text-sm font-semibold bg-blue-600 text-white shadow-lg shadow-blue-500/30 transition-all">Ana Sayfa</a>
+                <a href="#hakkinda" class="px-5 py-2 rounded-full text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/60 transition-all">Hakkında</a>
+                <a href="#sss" class="px-5 py-2 rounded-full text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/60 transition-all">SSS</a>
+                <a href="#iletisim" class="px-5 py-2 rounded-full text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/60 transition-all">İletişim</a>
+            </nav>
 
-        <!-- Bölüm 1: FPS Nedir? (Akordiyon) -->
-        <div id="fps-nedir" class="content-section">
-            <button class="accordion-header" onclick="toggleAccordion(this)">
-                <span id="txt-sec1-title">FPS Nedir?</span> <span>+</span>
-            </button>
-            <div class="accordion-body">
-                <p id="txt-sec1-desc">FPS, İngilizce <strong>Frames Per Second</strong> kelimesinin kısaltmasıdır. Türkçesi saniyedeki kare sayısıdır. Oyunlarda ne kadar yüksek FPS alırsanız görüntü o kadar akıcı olur.</p>
-                <table class="fps-table">
-                    <thead>
-                        <tr>
-                            <th id="txt-th-fps">FPS Değeri</th>
-                            <th id="txt-th-exp">Oyun Deneyimi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>30 FPS</td>
-                            <td id="txt-t1">Oynanabilir</td>
-                        </tr>
-                        <tr>
-                            <td>60 FPS</td>
-                            <td id="txt-t2">Akıcı</td>
-                        </tr>
-                        <tr>
-                            <td>120 FPS</td>
-                            <td id="txt-t3">Çok Akıcı</td>
-                        </tr>
-                        <tr>
-                            <td>144+ FPS</td>
-                            <td id="txt-t4">Rekabetçi Oyuncular İçin İdeal</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+            <!-- Right: Theme & Language Controls -->
+            <div class="flex items-center space-x-3">
+                <!-- Theme Toggle Button -->
+                <button id="themeToggle" onclick="toggleTheme()" class="flex items-center space-x-2 bg-slate-800/80 hover:bg-slate-700/80 px-3 py-2 rounded-xl text-xs font-medium text-slate-300 border border-slate-700/50 transition-all cursor-pointer">
+                    <i id="themeIcon" class="fa-solid fa-moon text-blue-400"></i>
+                    <span class="hidden sm:inline" id="themeText">Koyu Tema</span>
+                </button>
 
-        <!-- Bölüm 2: Oyun FPS Hesaplama Nasıl Yapılır? (Akordiyon) -->
-        <div id="fps-hesaplama" class="content-section">
-            <button class="accordion-header" onclick="toggleAccordion(this)">
-                <span id="txt-sec2-title">Oyun FPS Hesaplama Nasıl Yapılır?</span> <span>+</span>
-            </button>
-            <div class="accordion-body">
-                <p id="txt-sec2-desc">FPS değeri aşağıdaki donanımlara göre değişir:</p>
-                <ul>
-                    <li id="txt-li-gpu"><strong>Ekran Kartı (GPU):</strong> Grafik işlemlerini yürütür.</li>
-                    <li id="txt-li-cpu"><strong>İşlemci (CPU):</strong> Oyun içindeki hesaplamaları yapar.</li>
-                    <li id="txt-li-ram"><strong>RAM:</strong> Anlık verileri saklar.</li>
-                    <li id="txt-li-res"><strong>Çözünürlük:</strong> Görüntü kalitesi arttıkça yük biner.</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Bölüm 3: FPS Arttırma Yöntemleri (Akordiyon) -->
-        <div id="fps-arttirma" class="content-section">
-            <button class="accordion-header" onclick="toggleAccordion(this)">
-                <span id="txt-sec3-title">FPS Arttırma Yöntemleri</span> <span>+</span>
-            </button>
-            <div class="accordion-body">
-                <p id="txt-sec3-desc">Daha fazla FPS almak için şunları yapabilirsiniz:</p>
-                <ul>
-                    <li id="txt-boost-1">Grafik ayarlarını düşürün</li>
-                    <li id="txt-boost-2">Güncel ekran kartı sürücüsü kurun</li>
-                    <li id="txt-boost-3">Arka planda çalışan programları kapatın</li>
-                    <li id="txt-boost-4">SSD kullanın</li>
-                    <li id="txt-boost-5">RAM yükseltin</li>
-                    <li id="txt-boost-6">Performans modunu açın</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Bölüm 4: Sık Sorulan Sorular (Akordiyon) -->
-        <div id="sik-sorulan-sorular" class="content-section">
-            <button class="accordion-header" onclick="toggleAccordion(this)">
-                <span id="txt-sec4-title">Sık Sorulan Sorular</span> <span>+</span>
-            </button>
-            <div class="accordion-body" style="padding-top: 10px;">
-                <div class="faq-item">
-                    <button class="faq-question" onclick="toggleFaq(event, this)">
-                        <span id="txt-q1">FPS Hesaplama Aracı Gerçek Sonuç Verir mi?</span> <span>+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p id="txt-a1">Araç, donanım özelliklerinize ve oyun motoru çarpanlarına bağlı olarak gerçeğe oldukça yakın tahmini bir performans aralığı sunar.</p>
-                    </div>
+                <!-- Language Selector -->
+                <div class="relative">
+                    <select id="langSelect" class="bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 text-xs font-medium px-3 py-2 rounded-xl border border-slate-700/50 focus:outline-none cursor-pointer">
+                        <option value="tr" selected>TR 🇹🇷</option>
+                        <option value="en">EN 🇬🇧</option>
+                    </select>
                 </div>
 
-                <div class="faq-item">
-                    <button class="faq-question" onclick="toggleFaq(event, this)">
-                        <span id="txt-q2">60 FPS Yeterli mi?</span> <span>+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p id="txt-a2">Günlük oyun deneyimleri 60 FPS oldukça yeterli ve akıcıdır.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" onclick="toggleFaq(event, this)">
-                        <span id="txt-q3">144 FPS Gerekli mi?</span> <span>+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p id="txt-a3">Counter-Strike 2, Valorant gibi rekabetçi nişancı oyunlarında yüksek yenileme hızına sahip monitörler için önerilir.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" onclick="toggleFaq(event, this)">
-                        <span id="txt-q4">Laptop ve Masaüstü Performansı Neden Farklı?</span> <span>+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p id="txt-a4">Laptop bileşenleri ısınma ve güç (Watt) sınırlamaları nedeniyle masaüstü dengelerine göre biraz daha düşük performans verebilir.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" onclick="toggleFaq(event, this)">
-                        <span id="txt-q5">Çözünürlük FPS'i Nasıl Etkiler?</span> <span>+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p id="txt-a5">Çözünürlük arttıkça ekran kartına binen yük artar, bu da doğrudan FPS değerinin düşmesine neden olur.</p>
-                    </div>
-                </div>
-
+                <!-- Mobile menu button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
             </div>
         </div>
-    </div>
 
-<script>
-// Büyük Bölümler İçin Akordiyon Fonksiyonu
-function toggleAccordion(button) {
-    const section = button.parentElement;
-    section.classList.toggle('active');
-    const span = button.querySelector('span:last-child');
-    if (section.classList.contains('active')) {
-        span.innerText = '-';
-    } else {
-        span.innerText = '+';
-    }
-}
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden px-4 pt-2 pb-4 space-y-2 bg-gaming-dark/95 border-b border-slate-800 backdrop-blur-md">
+            <a href="#anasayfa" class="block px-4 py-2.5 rounded-lg text-sm font-semibold bg-blue-600 text-white">Ana Sayfa</a>
+            <a href="#hakkinda" class="block px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800">Hakkında</a>
+            <a href="#sss" class="block px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800">SSS</a>
+            <a href="#iletisim" class="block px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800">İletişim</a>
+        </div>
+    </header>
 
-// İçindekilerden Tıklandığında İlgili Bölümü Açıp Oraya Kaydırma Fonksiyonu
-function tocGit(id) {
-    const section = document.getElementById(id);
-    if (section) {
-        if (!section.classList.contains('active')) {
-            section.classList.add('active');
-            const span = section.querySelector('.accordion-header span:last-child');
-            if (span) span.innerText = '-';
+    <!-- Hero Section -->
+    <main class="pt-32 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center space-y-4 my-8">
+            <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold tracking-wide uppercase">
+                <span>Doğru Donanım</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+                <span>Doğru Ayarlar</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+                <span>En İyi FPS</span>
+            </div>
+            
+            <h1 class="text-4xl sm:text-6xl font-black tracking-tight text-white">
+                FPS Analiz <span class="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">Merkezi</span>
+            </h1>
+            
+            <p class="max-w-2xl mx-auto text-slate-400 text-base sm:text-lg">
+                Sisteminizi donanımlarını ve oyun ayarlarını seçin, tahmini FPS değerlerinizi hemen öğrenin.
+            </p>
+        </div>
+
+        <!-- Hardware Selection Cards Preview -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
+            <!-- Card 1: GPU -->
+            <div class="glass-card rounded-2xl p-4 hover:border-blue-500/50 transition-all duration-300 group cursor-pointer hover:gaming-glow">
+                <div class="h-32 rounded-xl bg-slate-900/80 mb-3 overflow-hidden flex items-center justify-center relative">
+                    <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=400&q=80" alt="GPU" class="w-full h-full object-cover opacity-75 group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/400x300/1e293b/94a3b8?text=Ekran+Karti'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
+                    <span class="absolute bottom-2 left-2 text-xs font-bold text-white bg-blue-600/80 px-2 py-0.5 rounded">GPU Seç</span>
+                </div>
+                <h3 class="font-bold text-sm text-white group-hover:text-blue-400 transition-colors">Ekran Kartı</h3>
+                <p class="text-xs text-slate-400 mt-0.5">NVIDIA / AMD Modelleri</p>
+            </div>
+
+            <!-- Card 2: CPU -->
+            <div class="glass-card rounded-2xl p-4 hover:border-blue-500/50 transition-all duration-300 group cursor-pointer hover:gaming-glow">
+                <div class="h-32 rounded-xl bg-slate-900/80 mb-3 overflow-hidden flex items-center justify-center relative">
+                    <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=400&q=80" alt="CPU" class="w-full h-full object-cover opacity-75 group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/400x300/1e293b/94a3b8?text=Islemci'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
+                    <span class="absolute bottom-2 left-2 text-xs font-bold text-white bg-blue-600/80 px-2 py-0.5 rounded">CPU Seç</span>
+                </div>
+                <h3 class="font-bold text-sm text-white group-hover:text-blue-400 transition-colors">İşlemci</h3>
+                <p class="text-xs text-slate-400 mt-0.5">Intel Core / AMD Ryzen</p>
+            </div>
+
+            <!-- Card 3: RAM -->
+            <div class="glass-card rounded-2xl p-4 hover:border-blue-500/50 transition-all duration-300 group cursor-pointer hover:gaming-glow">
+                <div class="h-32 rounded-xl bg-slate-900/80 mb-3 overflow-hidden flex items-center justify-center relative">
+                    <img src="https://images.unsplash.com/photo-1562976540-1e02c614cfa7?auto=format&fit=crop&w=400&q=80" alt="RAM" class="w-full h-full object-cover opacity-75 group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/400x300/1e293b/94a3b8?text=RAM'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
+                    <span class="absolute bottom-2 left-2 text-xs font-bold text-white bg-blue-600/80 px-2 py-0.5 rounded">RAM Seç</span>
+                </div>
+                <h3 class="font-bold text-sm text-white group-hover:text-blue-400 transition-colors">Bellek (RAM)</h3>
+                <p class="text-xs text-slate-400 mt-0.5">DDR4 / DDR5 Kapasiteleri</p>
+            </div>
+
+            <!-- Card 4: Monitor / Resolution -->
+            <div class="glass-card rounded-2xl p-4 hover:border-blue-500/50 transition-all duration-300 group cursor-pointer hover:gaming-glow">
+                <div class="h-32 rounded-xl bg-slate-900/80 mb-3 overflow-hidden flex items-center justify-center relative">
+                    <img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=400&q=80" alt="Monitor" class="w-full h-full object-cover opacity-75 group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/400x300/1e293b/94a3b8?text=Monitor'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
+                    <span class="absolute bottom-2 left-2 text-xs font-bold text-white bg-blue-600/80 px-2 py-0.5 rounded">Ekran Seç</span>
+                </div>
+                <h3 class="font-bold text-sm text-white group-hover:text-blue-400 transition-colors">Çözünürlük</h3>
+                <p class="text-xs text-slate-400 mt-0.5">1080p, 2K, 4K Ekranlar</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
         }
-        setTimeout(() => {
-            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 50);
-    }
-}
 
-// SSS İçi Akordiyon Fonksiyonu
-function toggleFaq(event, button) {
-    event.stopPropagation();
-    const item = button.parentElement;
-    item.classList.toggle('active');
-    const span = button.querySelector('span:last-child');
-    if (item.classList.contains('active')) {
-        span.innerText = '-';
-    } else {
-        span.innerText = '+';
-    }
-}
+        // Toggle Theme (Dark / Light)
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                themeIcon.className = "fa-solid fa-sun text-amber-500";
+                themeText.innerText = "Açık Tema";
+                // Light mode body adjustments if needed
+                document.body.className = "bg-slate-100 text-slate-900 min-h-screen selection:bg-blue-500 selection:text-white";
+            } else {
+                html.classList.add('dark');
+                themeIcon.className = "fa-solid fa-moon text-blue-400";
+                themeText.innerText = "Koyu Tema";
+                document.body.className = "bg-gaming-dark text-slate-100 min-h-screen selection:bg-blue-500 selection:text-white";
+            }
+        }
+    </script>
+</body>
+</html>
 
 // Dil Sözlüğü ve Çeviriler
 const metinler = {
