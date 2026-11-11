@@ -7,7 +7,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WaqoFPS - FPS Hesaplayıcı ve Oyun Performans Testi</title>
+    <title> FPS Hesaplayıcı - FPS Hesaplama ve Oyun Performans Testi</title>
     <meta name="description" content="WaqoFPS ile ekran kartı, işlemci ve RAM seçerek oyunlarda alacağınız tahmini FPS değerlerini hesaplayın.">
     <style>
         html {
@@ -64,10 +64,6 @@
             color: white;
             border-radius: 6px;
             box-sizing: border-box;
-        }
-        select:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
         }
         button.hesapla-btn {
             width: 100%;
@@ -310,7 +306,7 @@
     </style>
 </head>
 <body>
-     <!-- İçindekiler Kutusu -->
+     <!-- İçindekiler Kutusu (Artık Diğerleriyle Aynı Akordiyon Yapısında) -->
         <div class="content-section">
             <button class="accordion-header" onclick="toggleAccordion(this)">
                 <span id="txt-toc-title">İçindekiler</span> <span>+</span>
@@ -325,6 +321,7 @@
             </div>
         </div>
 
+    
     <!-- Sağ üst köşe butonları (Dil ve Tema) -->
     <div class="top-controls">
         <button id="lang-toggle" class="top-btn" onclick="dilDegistir()">EN</button>
@@ -336,7 +333,7 @@
             <h2 id="txt-baslik">FPS ANALİZ MERKEZİ</h2>
             
             <label id="txt-lbl-gpu">EKRAN KARTI (GPU)</label>
-            <select id="gpu" onchange="gpuKontrol()"></select>
+            <select id="gpu"></select>
             
             <label id="txt-lbl-cpu">İŞLEMCİ (CPU)</label>
             <select id="cpu"></select>
@@ -349,16 +346,6 @@
             
             <label id="txt-lbl-oyun">OYUN VE AYAR SEÇİMİ</label>
             <select id="oyun"></select>
-
-            <!-- Yeni Eklenen DLSS Seçim Alanı -->
-            <label id="txt-lbl-dlss">DLSS / UPSCALING MODU</label>
-            <select id="dlss">
-                <option value="1.0" id="txt-dlss-off">Kapalı (Off)</option>
-                <option value="1.35" id="txt-dlss-quality">Kalite (Quality)</option>
-                <option value="1.50" id="txt-dlss-balanced">Dengeli (Balanced)</option>
-                <option value="1.75" id="txt-dlss-performance">Performans (Performance)</option>
-                <option value="2.00" id="txt-dlss-ultra">Ultra Performans</option>
-            </select>
             
             <button type="button" class="hesapla-btn" id="txt-btn-hesapla" onclick="hesapla()">PERFORMANSI TEST ET</button>
             
@@ -368,7 +355,7 @@
             </div>
         </div>
 
-        <!-- Bölüm 1: FPS Nedir? -->
+        <!-- Bölüm 1: FPS Nedir? (Akordiyon) -->
         <div id="fps-nedir" class="content-section">
             <button class="accordion-header" onclick="toggleAccordion(this)">
                 <span id="txt-sec1-title">FPS Nedir?</span> <span>+</span>
@@ -404,7 +391,7 @@
             </div>
         </div>
 
-        <!-- Bölüm 2: Oyun FPS Hesaplama Nasıl Yapılır? -->
+        <!-- Bölüm 2: Oyun FPS Hesaplama Nasıl Yapılır? (Akordiyon) -->
         <div id="fps-hesaplama" class="content-section">
             <button class="accordion-header" onclick="toggleAccordion(this)">
                 <span id="txt-sec2-title">Oyun FPS Hesaplama Nasıl Yapılır?</span> <span>+</span>
@@ -420,7 +407,7 @@
             </div>
         </div>
 
-        <!-- Bölüm 3: FPS Arttırma Yöntemleri -->
+        <!-- Bölüm 3: FPS Arttırma Yöntemleri (Akordiyon) -->
         <div id="fps-arttirma" class="content-section">
             <button class="accordion-header" onclick="toggleAccordion(this)">
                 <span id="txt-sec3-title">FPS Arttırma Yöntemleri</span> <span>+</span>
@@ -438,7 +425,7 @@
             </div>
         </div>
 
-        <!-- Bölüm 4: Sık Sorulan Sorular -->
+        <!-- Bölüm 4: Sık Sorulan Sorular (Akordiyon) -->
         <div id="sik-sorulan-sorular" class="content-section">
             <button class="accordion-header" onclick="toggleAccordion(this)">
                 <span id="txt-sec4-title">Sık Sorulan Sorular</span> <span>+</span>
@@ -488,11 +475,52 @@
                         <p id="txt-a5">Çözünürlük arttıkça ekran kartına binen yük artar, bu da doğrudan FPS değerinin düşmesine neden olur.</p>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
 
 <script>
+// Büyük Bölümler İçin Akordiyon Fonksiyonu
+function toggleAccordion(button) {
+    const section = button.parentElement;
+    section.classList.toggle('active');
+    const span = button.querySelector('span:last-child');
+    if (section.classList.contains('active')) {
+        span.innerText = '-';
+    } else {
+        span.innerText = '+';
+    }
+}
+
+// İçindekilerden Tıklandığında İlgili Bölümü Açıp Oraya Kaydırma Fonksiyonu
+function tocGit(id) {
+    const section = document.getElementById(id);
+    if (section) {
+        if (!section.classList.contains('active')) {
+            section.classList.add('active');
+            const span = section.querySelector('.accordion-header span:last-child');
+            if (span) span.innerText = '-';
+        }
+        setTimeout(() => {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 50);
+    }
+}
+
+// SSS İçi Akordiyon Fonksiyonu
+function toggleFaq(event, button) {
+    event.stopPropagation();
+    const item = button.parentElement;
+    item.classList.toggle('active');
+    const span = button.querySelector('span:last-child');
+    if (item.classList.contains('active')) {
+        span.innerText = '-';
+    } else {
+        span.innerText = '+';
+    }
+}
+
 // Dil Sözlüğü ve Çeviriler
 const metinler = {
     tr: {
@@ -502,12 +530,6 @@ const metinler = {
         lblRam: "RAM (BELLEK)",
         lblCoz: "Ekran Çözünürlüğü (GÖRÜNTÜ KALİTESİ)",
         lblOyun: "OYUN VE AYAR SEÇİMİ",
-        lblDlss: "DLSS / UPSCALING MODU",
-        dlssOff: "Kapalı (Off)",
-        dlssQuality: "Kalite (Quality)",
-        dlssBalanced: "Dengeli (Balanced)",
-        dlssPerformance: "Performans (Performance)",
-        dlssUltra: "Ultra Performans",
         btnHesapla: "PERFORMANSI TEST ET",
         fpsEtiket: "Tahmini FPS Aralığı",
         yetersizEtiket: "Sistem Yetersiz",
@@ -549,7 +571,9 @@ const metinler = {
         q4: "Laptop ve Masaüstü Performansı Neden Farklı?",
         a4: "Laptop bileşenleri ısınma ve güç (Watt) sınırlamaları nedeniyle masaüstü dengelerine göre biraz daha düşük performans verebilir.",
         q5: "Çözünürlük FPS'i Nasıl Etkiler?",
-        a5: "Çözünürlük arttıkça ekran kartına binen yük artar, bu da doğrudan FPS değerinin düşmesine neden olur."
+        a5: "Çözünürlük arttıkça ekran kartına binen yük artar, bu da doğrudan FPS değerinin düşmesine neden olur.",
+        q6: "Bu Test Ücretsiz mi?",
+        a6: "Evet, WaqoFPS tamamen ücretsiz bir performans analiz aracıdır ve dilediğiniz kadar test yapabilirsiniz."
     },
     en: {
         baslik: "FPS ANALYSIS CENTER",
@@ -558,12 +582,6 @@ const metinler = {
         lblRam: "RAM (MEMORY)",
         lblCoz: "Screen Resolution (IMAGE QUALITY)",
         lblOyun: "GAME AND SETTING SELECTION",
-        lblDlss: "DLSS / UPSCALING MODE",
-        dlssOff: "Off",
-        dlssQuality: "Quality",
-        dlssBalanced: "Balanced",
-        dlssPerformance: "Performance",
-        dlssUltra: "Ultra Performance",
         btnHesapla: "TEST PERFORMANCE",
         fpsEtiket: "Estimated FPS Range",
         yetersizEtiket: "System Insufficient",
@@ -605,7 +623,9 @@ const metinler = {
         q4: "Why Do Laptop and Desktop Performance Differ?",
         a4: "Laptop components may perform slightly lower than desktops due to thermal and power (Watt) limitations.",
         q5: "How Does Resolution Affect FPS?",
-        a5: "As the resolution increases, the load on the graphics card rises, directly causing a drop in FPS."
+        a5: "As the resolution increases, the load on the graphics card rises, directly causing a drop in FPS.",
+        q6: "Is This Test Free?",
+        a6: "Yes, WaqoFPS is a completely free performance analysis tool and you can run as many tests as you like."
     }
 };
 
@@ -613,145 +633,144 @@ let aktifDil = "tr";
 
 const veri = {
 ekranKartlari: [
-{ adTr: "NVIDIA RTX 5090 (Masaüstü)", adEn: "NVIDIA RTX 5090 (Desktop)", p: 380, rtx: true },
-{ adTr: "NVIDIA RTX 5090 (Laptop 140W)", adEn: "NVIDIA RTX 5090 (Laptop 140W)", p: 354, rtx: true },
-{ adTr: "NVIDIA RTX 5090 (Laptop 115W)", adEn: "NVIDIA RTX 5090 (Laptop 115W)", p: 342, rtx: true },
-{ adTr: "NVIDIA RTX 5080 (Masaüstü)", adEn: "NVIDIA RTX 5080 (Desktop)", p: 357, rtx: true },
-{ adTr: "NVIDIA RTX 5080 (Laptop 140W)", adEn: "NVIDIA RTX 5080 (Laptop 140W)", p: 337, rtx: true },
-{ adTr: "NVIDIA RTX 5080 (Laptop 115W)", adEn: "NVIDIA RTX 5080 (Laptop 115W)", p: 327, rtx: true },
-{ adTr: "NVIDIA RTX 5070 Tİ (Masaüstü)", adEn: "NVIDIA RTX 5070 TI (Desktop)", p: 345, rtx: true },
-{ adTr: "NVIDIA RTX 5070 (Masaüstü)", adEn: "NVIDIA RTX 5070 (Desktop)", p: 320, rtx: true },
-{ adTr: "NVIDIA RTX 5070 (Laptop 140W)", adEn: "NVIDIA RTX 5070 (Laptop 140W)", p: 305, rtx: true },
-{ adTr: "NVIDIA RTX 5070 (Laptop 115W)", adEn: "NVIDIA RTX 5070 (Laptop 115W)", p: 290, rtx: true },
-{ adTr: "NVIDIA RTX 5060 (Masaüstü)", adEn: "NVIDIA RTX 5060 (Desktop)", p: 300, rtx: true },
-{ adTr: "NVIDIA RTX 5060 (Laptop 140W)", adEn: "NVIDIA RTX 5060 (Laptop 140W)", p: 290, rtx: true },
-{ adTr: "NVIDIA RTX 5060 (Laptop 115W)", adEn: "NVIDIA RTX 5060 (Laptop 115W)", p: 275, rtx: true },
-{ adTr: "NVIDIA RTX 5050 (Masaüstü)", adEn: "NVIDIA RTX 5050 (Desktop)", p: 220, rtx: true },
-{ adTr: "NVIDIA RTX 5050 (Laptop 140W)", adEn: "NVIDIA RTX 5050 (Laptop 140W)", p: 195, rtx: true },
-{ adTr: "NVIDIA RTX 5050 (Laptop 115W)", adEn: "NVIDIA RTX 5050 (Laptop 115W)", p: 170, rtx: true },
-{ adTr: "NVIDIA RTX 4090 (Masaüstü)", adEn: "NVIDIA RTX 4090 (Desktop)", p: 300, rtx: true },
-{ adTr: "NVIDIA RTX 4090 (Laptop 140W)", adEn: "NVIDIA RTX 4090 (Laptop 140W)", p: 280, rtx: true },
-{ adTr: "NVIDIA RTX 4090 (Laptop 115W)", adEn: "NVIDIA RTX 4090 (Laptop 115W)", p: 270, rtx: true },
-{ adTr: "NVIDIA RTX 4080 SUPER (Masaüstü)", adEn: "NVIDIA RTX 4080 SUPER (Desktop)", p: 275, rtx: true },
-{ adTr: "NVIDIA RTX 4080 (Masaüstü)", adEn: "NVIDIA RTX 4080 (Desktop)", p: 260, rtx: true },
-{ adTr: "NVIDIA RTX 4080 (Laptop 140W)", adEn: "NVIDIA RTX 4080 (Laptop 140W)", p: 240, rtx: true },
-{ adTr: "NVIDIA RTX 4080 (Laptop 115W)", adEn: "NVIDIA RTX 4080 (Laptop 115W)", p: 225, rtx: true },
-{ adTr: "NVIDIA RTX 4070 Tİ SUPER (Masaüstü)", adEn: "NVIDIA RTX 4070 TI SUPER (Desktop)", p: 230, rtx: true },
-{ adTr: "NVIDIA RTX 4070 Tİ (Masaüstü)", adEn: "NVIDIA RTX 4070 TI (Desktop)", p: 210, rtx: true },
-{ adTr: "NVIDIA RTX 4070 Tİ (Laptop 140W)", adEn: "NVIDIA RTX 4070 TI (Laptop 140W)", p: 190, rtx: true },
-{ adTr: "NVIDIA RTX 4070 Tİ (Laptop 115W)", adEn: "NVIDIA RTX 4070 TI (Laptop 115W)", p: 175, rtx: true },
-{ adTr: "NVIDIA RTX 4070 (Masaüstü)", adEn: "NVIDIA RTX 4070 (Desktop)", p: 190, rtx: true },
-{ adTr: "NVIDIA RTX 4070 (Laptop 140W)", adEn: "NVIDIA RTX 4070 (Laptop 140W)", p: 175, rtx: true },
-{ adTr: "NVIDIA RTX 4070 (Laptop 115W)", adEn: "NVIDIA RTX 4070 (Laptop 115W)", p: 160, rtx: true },
-{ adTr: "NVIDIA RTX 4060 Tİ (Masaüstü)", adEn: "NVIDIA RTX 4060 TI (Desktop)", p: 175, rtx: true },
-{ adTr: "NVIDIA RTX 4060 (Masaüstü)", adEn: "NVIDIA RTX 4060 (Desktop)", p: 150, rtx: true },
-{ adTr: "NVIDIA RTX 4060 (Laptop 140W)", adEn: "NVIDIA RTX 4060 (Laptop 140W)", p: 135, rtx: true },
-{ adTr: "NVIDIA RTX 4060 (Laptop 115W)", adEn: "NVIDIA RTX 4060 (Laptop 115W)", p: 120, rtx: true },
-{ adTr: "NVIDIA RTX 4050 (Masaüstü)", adEn: "NVIDIA RTX 4050 (Desktop)", p: 120, rtx: true },
-{ adTr: "NVIDIA RTX 4050 (Laptop 140W)", adEn: "NVIDIA RTX 4050 (Laptop 140W)", p: 100, rtx: true },
-{ adTr: "NVIDIA RTX 4050 (Laptop 115W)", adEn: "NVIDIA RTX 4050 (Laptop 115W)", p: 85, rtx: true },
-{ adTr: "NVIDIA RTX 3090 (Masaüstü)", adEn: "NVIDIA RTX 3090 (Desktop)", p: 140, rtx: true },
-{ adTr: "NVIDIA RTX 3080 Tİ (Masaüstü)", adEn: "NVIDIA RTX 3080 TI (Desktop)", p: 215, rtx: true },
-{ adTr: "NVIDIA RTX 3080 Tİ (Laptop 165W)", adEn: "NVIDIA RTX 3080 TI (Laptop 165W)", p: 190, rtx: true },
-{ adTr: "NVIDIA RTX 3080 Tİ (Laptop 115W)", adEn: "NVIDIA RTX 3080 TI (Laptop 115W)", p: 180, rtx: true },
-{ adTr: "NVIDIA RTX 3080 (Masaüstü)", adEn: "NVIDIA RTX 3080 (Desktop)", p: 200, rtx: true },
-{ adTr: "NVIDIA RTX 3080 (Laptop 165W)", adEn: "NVIDIA RTX 3080 (Laptop 165W)", p: 180, rtx: true },
-{ adTr: "NVIDIA RTX 3080 (Laptop 140W)", adEn: "NVIDIA RTX 3080 (Laptop 140W)", p: 170, rtx: true },
-{ adTr: "NVIDIA RTX 3080 (Laptop 115W)", adEn: "NVIDIA RTX 3080 (Laptop 115W)", p: 155, rtx: true },
-{ adTr: "NVIDIA RTX 3070 Tİ (Masaüstü)", adEn: "NVIDIA RTX 3070 TI (Desktop)", p: 160, rtx: true },
-{ adTr: "NVIDIA RTX 3070 Tİ (Laptop 140W)", adEn: "NVIDIA RTX 3070 TI (Laptop 140W)", p: 145, rtx: true },
-{ adTr: "NVIDIA RTX 3070 Tİ (Laptop 115W)", adEn: "NVIDIA RTX 3070 TI (Laptop 115W)", p: 130, rtx: true },
-{ adTr: "NVIDIA RTX 3070 Tİ (Laptop 100W)", adEn: "NVIDIA RTX 3070 TI (Laptop 100W)", p: 120, rtx: true },
-{ adTr: "NVIDIA RTX 3070 (Masaüstü)", adEn: "NVIDIA RTX 3070 (Desktop)", p: 150, rtx: true },
-{ adTr: "NVIDIA RTX 3070 (Laptop 140W)", adEn: "NVIDIA RTX 3070 (Laptop 140W)", p: 130, rtx: true },
-{ adTr: "NVIDIA RTX 3070 (Laptop 115W)", adEn: "NVIDIA RTX 3070 (Laptop 115W)", p: 115, rtx: true },
-{ adTr: "NVIDIA RTX 3070 (Laptop 100W)", adEn: "NVIDIA RTX 3070 (Laptop 100W)", p: 110, rtx: true },
-{ adTr: "NVIDIA RTX 3070 (Laptop 80W)", adEn: "NVIDIA RTX 3070 (Laptop 80W)", p: 95, rtx: true },
-{ adTr: "NVIDIA RTX 3060 Tİ (Masaüstü)", adEn: "NVIDIA RTX 3060 TI (Desktop)", p: 125, rtx: true },
-{ adTr: "NVIDIA RTX 3060 (Masaüstü)", adEn: "NVIDIA RTX 3060 (Desktop)", p: 95, rtx: true },
-{ adTr: "NVIDIA RTX 3060 (Laptop 115W)", adEn: "NVIDIA RTX 3060 (Laptop 115W)", p: 85, rtx: true },
-{ adTr: "NVIDIA RTX 3060 (Laptop 80W)", adEn: "NVIDIA RTX 3060 (Laptop 80W)", p: 75, rtx: true },
-{ adTr: "NVIDIA RTX 3060 (Laptop 95W)", adEn: "NVIDIA RTX 3060 (Laptop 95W)", p: 80, rtx: true },
-{ adTr: "NVIDIA RTX 3060 (Laptop 60W)", adEn: "NVIDIA RTX 3060 (Laptop 60W)", p: 65, rtx: true },
-{ adTr: "NVIDIA RTX 3050 (Masaüstü)", adEn: "NVIDIA RTX 3050 (Desktop)", p: 65, rtx: true },
-{ adTr: "NVIDIA RTX 3050 Tİ (Laptop 80W)", adEn: "NVIDIA RTX 3050 TI (Laptop 80W)", p: 75, rtx: true },
-{ adTr: "NVIDIA RTX 3050 Tİ (Laptop 60W)", adEn: "NVIDIA RTX 3050 TI (Laptop 60W)", p: 65, rtx: true },
-{ adTr: "NVIDIA RTX 3050 (Laptop 80W)", adEn: "NVIDIA RTX 3050 (Laptop 80W)", p: 55, rtx: true },
-{ adTr: "NVIDIA RTX 3050 (Laptop 60W)", adEn: "NVIDIA RTX 3050 (Laptop 60W)", p: 45, rtx: true },
-{ adTr: "RTX 2080 Tİ (Masaüstü)", adEn: "RTX 2080 TI (Desktop)", p: 145, rtx: true },
-{ adTr: "RTX 2080 SUPER (Masaüstü)", adEn: "RTX 2080 SUPER (Desktop)", p: 135, rtx: true },
-{ adTr: "RTX 2080 SUPER (Laptop)", adEn: "RTX 2080 SUPER (Laptop)", p: 100, rtx: true },
-{ adTr: "RTX 2080 (Masaüstü)", adEn: "RTX 2080 (Desktop)", p: 45, rtx: true },
-{ adTr: "RTX 2080 (Laptop)", adEn: "RTX 2080 (Laptop)", p: 35, rtx: true },
-{ adTr: "RTX 2070 SUPER (Masaüstü)", adEn: "RTX 2070 SUPER (Desktop)", p: 107, rtx: true },
-{ adTr: "RTX 2070 SUPER (Laptop)", adEn: "RTX 2070 SUPER (Laptop)", p: 97, rtx: true },
-{ adTr: "RTX 2070 (Masaüstü)", adEn: "RTX 2070 (Desktop)", p: 65, rtx: true },
-{ adTr: "RTX 2070 (Laptop)", adEn: "RTX 2070 (Laptop)", p: 55, rtx: true },
-{ adTr: "RTX 2060 SUPER (Masaüstü)", adEn: "RTX 2060 SUPER (Desktop)", p: 97, rtx: true },
-{ adTr: "RTX 2060 SUPER (Laptop)", adEn: "RTX 2060 SUPER (Laptop)", p: 87, rtx: true },
-{ adTr: "RTX 2060 (Masaüstü)", adEn: "RTX 2060 (Desktop)", p: 75, rtx: true },
-{ adTr: "RTX 2060 (Laptop)", adEn: "RTX 2060 (Laptop)", p: 64, rtx: true },
-{ adTr: "RTX 2050 (Masaüstü)", adEn: "RTX 2050 (Desktop)", p: 75, rtx: true },
-// Diğer Kartlar (DLSS Desteği Olmayanlar / Standart)
-{ adTr: "GTX 1660 Tİ (Masaüstü)", adEn: "GTX 1660 TI (Desktop)", p: 85, rtx: false },
-{ adTr: "GTX 1660 Tİ (Laptop)", adEn: "GTX 1660 TI (Laptop)", p: 70, rtx: false },
-{ adTr: "GTX 1660 SUPER (Masaüstü)", adEn: "GTX 1660 SUPER (Desktop)", p: 80, rtx: false },
-{ adTr: "GTX 1660 (Masaüstü)", adEn: "GTX 1660 (Desktop)", p: 70, rtx: false },
-{ adTr: "GTX 1660 (Laptop)", adEn: "GTX 1660 (Laptop)", p: 58, rtx: false },
-{ adTr: "GTX 1650 SUPER (Masaüstü)", adEn: "GTX 1650 SUPER (Desktop)", p: 63, rtx: false },
-{ adTr: "GTX 1650 (Masaüstü)", adEn: "GTX 1650 (Desktop)", p: 55, rtx: false },
-{ adTr: "GTX 1650 Tİ (Laptop)", adEn: "GTX 1650 TI (Laptop)", p: 57, rtx: false },
-{ adTr: "GTX 1650 (Laptop)", adEn: "GTX 1650 (Laptop)", p: 45, rtx: false },
-{ adTr: "GTX 1080 Tİ (Masaüstü)", adEn: "GTX 1080 TI (Desktop)", p: 135, rtx: false },
-{ adTr: "GTX 1080 (Masaüstü)", adEn: "GTX 1080 (Desktop)", p: 100, rtx: false },
-{ adTr: "GTX 1070 Tİ (Masaüstü)", adEn: "GTX 1070 TI (Desktop)", p: 103, rtx: false },
-{ adTr: "GTX 1070 (Masaüstü)", adEn: "GTX 1070 (Desktop)", p: 90, rtx: false },
-{ adTr: "GTX 1060 (Masaüstü)", adEn: "GTX 1060 (Desktop)", p: 59, rtx: false },
-{ adTr: "GTX 1050 Tİ (Masaüstü)", adEn: "GTX 1050 TI (Desktop)", p: 45, rtx: false },
-{ adTr: "GTX 1050 (Masaüstü)", adEn: "GTX 1050 (Desktop)", p: 40, rtx: false },
-{ adTr: "GTX 730 (Masaüstü)", adEn: "GTX 730 (Desktop)", p: 15, rtx: false },
-{ adTr: "GTX 580 (Masaüstü)", adEn: "GTX 580 (Desktop)", p: 25, rtx: false },
-{ adTr: "GTX 1070 Tİ (Laptop)", adEn: "GTX 1070 TI (Laptop)", p: 80, rtx: false },
-{ adTr: "GTX 1070 (Laptop)", adEn: "GTX 1070 (Laptop)", p: 60, rtx: false },
-{ adTr: "GTX 1060 (Laptop)", adEn: "GTX 1060 (Laptop)", p: 45, rtx: false },
-{ adTr: "GTX 1050 Tİ (Laptop)", adEn: "GTX 1050 TI (Laptop)", p: 35, rtx: false },
-{ adTr: "GTX 1050 (Laptop)", adEn: "GTX 1050 (Laptop)", p: 30, rtx: false },
-{ adTr: "RX 9070 XT (Masaüstü)", adEn: "RX 9070 XT (Desktop)", p: 210, rtx: false },
-{ adTr: "RX 9070 (Masaüstü)", adEn: "RX 9070 (Desktop)", p: 200, rtx: false },
-{ adTr: "RX 9060 XT (Masaüstü)", adEn: "RX 9060 XT (Desktop)", p: 200, rtx: false },
-{ adTr: "RX 9060 (Masaüstü)", adEn: "RX 9060 (Desktop)", p: 190, rtx: false },
-{ adTr: "RX 7900 XTX (Masaüstü)", adEn: "RX 7900 XTX (Desktop)", p: 190, rtx: false },
-{ adTr: "RX 7900 XT (Masaüstü)", adEn: "RX 7900 XT (Desktop)", p: 180, rtx: false },
-{ adTr: "RX 7800 XT (Masaüstü)", adEn: "RX 7800 XT (Desktop)", p: 175, rtx: false },
-{ adTr: "RX 7700 XT (Masaüstü)", adEn: "RX 7700 XT (Desktop)", p: 165, rtx: false },
-{ adTr: "RX 7600 XT (Masaüstü)", adEn: "RX 7600 XT (Desktop)", p: 115, rtx: false },
-{ adTr: "RX 6950 XT (Masaüstü)", adEn: "RX 6950 XT (Desktop)", p: 175, rtx: false },
-{ adTr: "RX 6900 XT (Masaüstü)", adEn: "RX 6900 XT (Desktop)", p: 170, rtx: false },
-{ adTr: "RX 6800 XT (Masaüstü)", adEn: "RX 6800 XT (Desktop)", p: 160, rtx: false },
-{ adTr: "RX 6800 (Masaüstü)", adEn: "RX 6800 (Desktop)", p: 120, rtx: false },
-{ adTr: "RX 6700 XT (Masaüstü)", adEn: "RX 6700 XT (Desktop)", p: 125, rtx: false },
-{ adTr: "RX 6700 (Masaüstü)", adEn: "RX 6700 (Desktop)", p: 110, rtx: false },
-{ adTr: "RX 6600 XT (Masaüstü)", adEn: "RX 6600 XT (Desktop)", p: 95, rtx: false },
-{ adTr: "RX 6600 (Masaüstü)", adEn: "RX 6600 (Desktop)", p: 80, rtx: false },
-{ adTr: "RX 6500 XT (Masaüstü)", adEn: "RX 6500 XT (Desktop)", p: 70, rtx: false },
-{ adTr: "RX 6500 (Masaüstü)", adEn: "RX 6500 (Desktop)", p: 65, rtx: false },
-{ adTr: "RX 5700 XT (Masaüstü)", adEn: "RX 5700 XT (Desktop)", p: 115, rtx: false },
-{ adTr: "RX 5700 (Masaüstü)", adEn: "RX 5700 (Desktop)", p: 105, rtx: false },
-{ adTr: "RX 5600 XT (Masaüstü)", adEn: "RX 5600 XT (Desktop)", p: 65, rtx: false },
-{ adTr: "RX 5500 XT (Masaüstü)", adEn: "RX 5500 XT (Desktop)", p: 55, rtx: false },
-{ adTr: "RX 580 (Masaüstü)", adEn: "RX 580 (Desktop)", p: 43, rtx: false },
-{ adTr: "RX 7900 (Laptop)", adEn: "RX 7900 (Laptop)", p: 140, rtx: false },
-{ adTr: "RX 7800 (Laptop)", adEn: "RX 7800 (Laptop)", p: 135, rtx: false },
-{ adTr: "RX 7700 (Laptop)", adEn: "RX 7700 (Laptop)", p: 130, rtx: false },
-{ adTr: "RX 6950M (Laptop)", adEn: "RX 6950M (Laptop)", p: 120, rtx: false },
-{ adTr: "RX 6900M (Laptop)", adEn: "RX 6900M (Laptop)", p: 115, rtx: false },
-{ adTr: "RX 6800M (Laptop)", adEn: "RX 6800M (Laptop)", p: 105, rtx: false},
-{ adTr: "RX 6700M (Laptop)", adEn: "RX 6700M (Laptop)", p: 90, rtx: false },
-{ adTr: "RX 6600M (Laptop)", adEn: "RX 6600M (Laptop)", p: 70, rtx: false },
-{ adTr: "RX 6500M (Laptop)", adEn: "RX 6500M (Laptop)", p: 60, rtx: false },
-{ adTr: "RX 5700M (Laptop)", adEn: "RX 5700M (Laptop)", p: 90, rtx: false },
-{ adTr: "RX 5600M (Laptop)", adEn: "RX 5600M (Laptop)", p: 60, rtx: false },
-{ adTr: "RX 5500M (Laptop)", adEn: "RX 5500M (Laptop)", p: 50, rtx: false }
+{ adTr: "NVIDIA RTX 5090 (Masaüstü)", adEn: "NVIDIA RTX 5090 (Desktop)", p: 380 },
+{ adTr: "NVIDIA RTX 5090 (Laptop 140W)", adEn: "NVIDIA RTX 5090 (Laptop 140W)", p: 354 },
+{ adTr: "NVIDIA RTX 5090 (Laptop 115W)", adEn: "NVIDIA RTX 5090 (Laptop 115W)", p: 342 },
+{ adTr: "NVIDIA RTX 5080 (Masaüstü)", adEn: "NVIDIA RTX 5080 (Desktop)", p: 357 },
+{ adTr: "NVIDIA RTX 5080 (Laptop 140W)", adEn: "NVIDIA RTX 5080 (Laptop 140W)", p: 337 },
+{ adTr: "NVIDIA RTX 5080 (Laptop 115W)", adEn: "NVIDIA RTX 5080 (Laptop 115W)", p: 327 },
+{ adTr: "NVIDIA RTX 5070 Tİ (Masaüstü)", adEn: "NVIDIA RTX 5070 TI (Desktop)", p: 345 },
+{ adTr: "NVIDIA RTX 5070 (Masaüstü)", adEn: "NVIDIA RTX 5070 (Desktop)", p: 320 },
+{ adTr: "NVIDIA RTX 5070 (Laptop 140W)", adEn: "NVIDIA RTX 5070 (Laptop 140W)", p: 305 },
+{ adTr: "NVIDIA RTX 5070 (Laptop 115W)", adEn: "NVIDIA RTX 5070 (Laptop 115W)", p: 290 },
+{ adTr: "NVIDIA RTX 5060 (Masaüstü)", adEn: "NVIDIA RTX 5060 (Desktop)", p: 300 },
+{ adTr: "NVIDIA RTX 5060 (Laptop 140W)", adEn: "NVIDIA RTX 5060 (Laptop 140W)", p: 290 },
+{ adTr: "NVIDIA RTX 5060 (Laptop 115W)", adEn: "NVIDIA RTX 5060 (Laptop 115W)", p: 275 },
+{ adTr: "NVIDIA RTX 5050 (Masaüstü)", adEn: "NVIDIA RTX 5050 (Desktop)", p: 220 },
+{ adTr: "NVIDIA RTX 5050 (Laptop 140W)", adEn: "NVIDIA RTX 5050 (Laptop 140W)", p: 195 },
+{ adTr: "NVIDIA RTX 5050 (Laptop 115W)", adEn: "NVIDIA RTX 5050 (Laptop 115W)", p: 170 },
+{ adTr: "NVIDIA RTX 4090 (Masaüstü)", adEn: "NVIDIA RTX 4090 (Desktop)", p: 300 },
+{ adTr: "NVIDIA RTX 4090 (Laptop 140W)", adEn: "NVIDIA RTX 4090 (Laptop 140W)", p: 280 },
+{ adTr: "NVIDIA RTX 4090 (Laptop 115W)", adEn: "NVIDIA RTX 4090 (Laptop 115W)", p: 270 },
+{ adTr: "NVIDIA RTX 4080 SUPER (Masaüstü)", adEn: "NVIDIA RTX 4080 SUPER (Desktop)", p: 275 },
+{ adTr: "NVIDIA RTX 4080 (Masaüstü)", adEn: "NVIDIA RTX 4080 (Desktop)", p: 260 },
+{ adTr: "NVIDIA RTX 4080 (Laptop 140W)", adEn: "NVIDIA RTX 4080 (Laptop 140W)", p: 240 },
+{ adTr: "NVIDIA RTX 4080 (Laptop 115W)", adEn: "NVIDIA RTX 4080 (Laptop 115W)", p: 225 },
+{ adTr: "NVIDIA RTX 4070 Tİ SUPER (Masaüstü)", adEn: "NVIDIA RTX 4070 TI SUPER (Desktop)", p: 230 },
+{ adTr: "NVIDIA RTX 4070 Tİ (Masaüstü)", adEn: "NVIDIA RTX 4070 TI (Desktop)", p: 210 },
+{ adTr: "NVIDIA RTX 4070 Tİ (Laptop 140W)", adEn: "NVIDIA RTX 4070 TI (Laptop 140W)", p: 190 },
+{ adTr: "NVIDIA RTX 4070 Tİ (Laptop 115W)", adEn: "NVIDIA RTX 4070 TI (Laptop 115W)", p: 175 },
+{ adTr: "NVIDIA RTX 4070 (Masaüstü)", adEn: "NVIDIA RTX 4070 (Desktop)", p: 190 },
+{ adTr: "NVIDIA RTX 4070 (Laptop 140W)", adEn: "NVIDIA RTX 4070 (Laptop 140W)", p: 175 },
+{ adTr: "NVIDIA RTX 4070 (Laptop 115W)", adEn: "NVIDIA RTX 4070 (Laptop 115W)", p: 160 },
+{ adTr: "NVIDIA RTX 4060 Tİ (Masaüstü)", adEn: "NVIDIA RTX 4060 TI (Desktop)", p: 175 },
+{ adTr: "NVIDIA RTX 4060 (Masaüstü)", adEn: "NVIDIA RTX 4060 (Desktop)", p: 150 },
+{ adTr: "NVIDIA RTX 4060 (Laptop 140W)", adEn: "NVIDIA RTX 4060 (Laptop 140W)", p: 135 },
+{ adTr: "NVIDIA RTX 4060 (Laptop 115W)", adEn: "NVIDIA RTX 4060 (Laptop 115W)", p: 120 },
+{ adTr: "NVIDIA RTX 4050 (Masaüstü)", adEn: "NVIDIA RTX 4050 (Desktop)", p: 120 },
+{ adTr: "NVIDIA RTX 4050 (Laptop 140W)", adEn: "NVIDIA RTX 4050 (Laptop 140W)", p: 100 },
+{ adTr: "NVIDIA RTX 4050 (Laptop 115W)", adEn: "NVIDIA RTX 4050 (Laptop 115W)", p: 85 },
+{ adTr: "NVIDIA RTX 3090 (Masaüstü)", adEn: "NVIDIA RTX 3090 (Desktop)", p: 140 },
+{ adTr: "NVIDIA RTX 3080 Tİ (Masaüstü)", adEn: "NVIDIA RTX 3080 TI (Desktop)", p: 215 },
+{ adTr: "NVIDIA RTX 3080 Tİ (Laptop 165W)", adEn: "NVIDIA RTX 3080 TI (Laptop 165W)", p: 190 },
+{ adTr: "NVIDIA RTX 3080 Tİ (Laptop 115W)", adEn: "NVIDIA RTX 3080 TI (Laptop 115W)", p: 180 },
+{ adTr: "NVIDIA RTX 3080 (Masaüstü)", adEn: "NVIDIA RTX 3080 (Desktop)", p: 200 },
+{ adTr: "NVIDIA RTX 3080 (Laptop 165W)", adEn: "NVIDIA RTX 3080 (Laptop 165W)", p: 180 },
+{ adTr: "NVIDIA RTX 3080 (Laptop 140W)", adEn: "NVIDIA RTX 3080 (Laptop 140W)", p: 170 },
+{ adTr: "NVIDIA RTX 3080 (Laptop 115W)", adEn: "NVIDIA RTX 3080 (Laptop 115W)", p: 155 },
+{ adTr: "NVIDIA RTX 3070 Tİ (Masaüstü)", adEn: "NVIDIA RTX 3070 TI (Desktop)", p: 160 },
+{ adTr: "NVIDIA RTX 3070 Tİ (Laptop 140W)", adEn: "NVIDIA RTX 3070 TI (Laptop 140W)", p: 145 },
+{ adTr: "NVIDIA RTX 3070 Tİ (Laptop 115W)", adEn: "NVIDIA RTX 3070 TI (Laptop 115W)", p: 130 },
+{ adTr: "NVIDIA RTX 3070 Tİ (Laptop 100W)", adEn: "NVIDIA RTX 3070 TI (Laptop 100W)", p: 120 },
+{ adTr: "NVIDIA RTX 3070 (Masaüstü)", adEn: "NVIDIA RTX 3070 (Desktop)", p: 150 },
+{ adTr: "NVIDIA RTX 3070 (Laptop 140W)", adEn: "NVIDIA RTX 3070 (Laptop 140W)", p: 130 },
+{ adTr: "NVIDIA RTX 3070 (Laptop 115W)", adEn: "NVIDIA RTX 3070 (Laptop 115W)", p: 115 },
+{ adTr: "NVIDIA RTX 3070 (Laptop 100W)", adEn: "NVIDIA RTX 3070 (Laptop 100W)", p: 110 },
+{ adTr: "NVIDIA RTX 3070 (Laptop 80W)", adEn: "NVIDIA RTX 3070 (Laptop 80W)", p: 95 },
+{ adTr: "NVIDIA RTX 3060 Tİ (Masaüstü)", adEn: "NVIDIA RTX 3060 TI (Desktop)", p: 125 },
+{ adTr: "NVIDIA RTX 3060 (Masaüstü)", adEn: "NVIDIA RTX 3060 (Desktop)", p: 95 },
+{ adTr: "NVIDIA RTX 3060 (Laptop 115W)", adEn: "NVIDIA RTX 3060 (Laptop 115W)", p: 85 },
+{ adTr: "NVIDIA RTX 3060 (Laptop 80W)", adEn: "NVIDIA RTX 3060 (Laptop 80W)", p: 75 },
+{ adTr: "NVIDIA RTX 3060 (Laptop 95W)", adEn: "NVIDIA RTX 3060 (Laptop 95W)", p: 80 },
+{ adTr: "NVIDIA RTX 3060 (Laptop 60W)", adEn: "NVIDIA RTX 3060 (Laptop 60W)", p: 65 },
+{ adTr: "NVIDIA RTX 3050 (Masaüstü)", adEn: "NVIDIA RTX 3050 (Desktop)", p: 65 },
+{ adTr: "NVIDIA RTX 3050 Tİ (Laptop 80W)", adEn: "NVIDIA RTX 3050 TI (Laptop 80W)", p: 75 },
+{ adTr: "NVIDIA RTX 3050 Tİ (Laptop 60W)", adEn: "NVIDIA RTX 3050 TI (Laptop 60W)", p: 65 },
+{ adTr: "NVIDIA RTX 3050 (Laptop 80W)", adEn: "NVIDIA RTX 3050 (Laptop 80W)", p: 55 },
+{ adTr: "NVIDIA RTX 3050 (Laptop 60W)", adEn: "NVIDIA RTX 3050 (Laptop 60W)", p: 45 },
+{ adTr: "RTX 2080 Tİ (Masaüstü)", adEn: "RTX 2080 TI (Desktop)", p: 145 },
+{ adTr: "RTX 2080 SUPER (Masaüstü)", adEn: "RTX 2080 SUPER (Desktop)", p: 135 },
+{ adTr: "RTX 2080 SUPER (Laptop)", adEn: "RTX 2080 SUPER (Laptop)", p: 100 },
+{ adTr: "RTX 2080 (Masaüstü)", adEn: "RTX 2080 (Desktop)", p: 45 },
+{ adTr: "RTX 2080 (Laptop)", adEn: "RTX 2080 (Laptop)", p: 35 },
+{ adTr: "RTX 2070 SUPER (Masaüstü)", adEn: "RTX 2070 SUPER (Desktop)", p: 107 },
+{ adTr: "RTX 2070 SUPER (Laptop)", adEn: "RTX 2070 SUPER (Laptop)", p: 97 },
+{ adTr: "RTX 2070 (Masaüstü)", adEn: "RTX 2070 (Desktop)", p: 65 },
+{ adTr: "RTX 2070 (Laptop)", adEn: "RTX 2070 (Laptop)", p: 55 },
+{ adTr: "RTX 2060 SUPER (Masaüstü)", adEn: "RTX 2060 SUPER (Desktop)", p: 97 },
+{ adTr: "RTX 2060 SUPER (Laptop)", adEn: "RTX 2060 SUPER (Laptop)", p: 87 },
+{ adTr: "RTX 2060 (Masaüstü)", adEn: "RTX 2060 (Desktop)", p: 75 },
+{ adTr: "RTX 2060 (Laptop)", adEn: "RTX 2060 (Laptop)", p: 64 },
+{ adTr: "RTX 2050 (Masaüstü)", adEn: "RTX 2050 (Desktop)", p: 75 },
+{ adTr: "GTX 1660 Tİ (Masaüstü)", adEn: "GTX 1660 TI (Desktop)", p: 85 },
+{ adTr: "GTX 1660 Tİ (Laptop)", adEn: "GTX 1660 TI (Laptop)", p: 70 },
+{ adTr: "GTX 1660 SUPER (Masaüstü)", adEn: "GTX 1660 SUPER (Desktop)", p: 80 },
+{ adTr: "GTX 1660 (Masaüstü)", adEn: "GTX 1660 (Desktop)", p: 70 },
+{ adTr: "GTX 1660 (Laptop)", adEn: "GTX 1660 (Laptop)", p: 58 },
+{ adTr: "GTX 1650 SUPER (Masaüstü)", adEn: "GTX 1650 SUPER (Desktop)", p: 63 },
+{ adTr: "GTX 1650 (Masaüstü)", adEn: "GTX 1650 (Desktop)", p: 55 },
+{ adTr: "GTX 1650 Tİ (Laptop)", adEn: "GTX 1650 TI (Laptop)", p: 57 },
+{ adTr: "GTX 1650 (Laptop)", adEn: "GTX 1650 (Laptop)", p: 45 },
+{ adTr: "GTX 1080 Tİ (Masaüstü)", adEn: "GTX 1080 TI (Desktop)", p: 135 },
+{ adTr: "GTX 1080 (Masaüstü)", adEn: "GTX 1080 (Desktop)", p: 100 },
+{ adTr: "GTX 1070 Tİ (Masaüstü)", adEn: "GTX 1070 TI (Desktop)", p: 103 },
+{ adTr: "GTX 1070 (Masaüstü)", adEn: "GTX 1070 (Desktop)", p: 90 },
+{ adTr: "GTX 1060 (Masaüstü)", adEn: "GTX 1060 (Desktop)", p: 59 },
+{ adTr: "GTX 1050 Tİ (Masaüstü)", adEn: "GTX 1050 TI (Desktop)", p: 45 },
+{ adTr: "GTX 1050 (Masaüstü)", adEn: "GTX 1050 (Desktop)", p: 40 },
+{ adTr: "GTX 730 (Masaüstü)", adEn: "GTX 730 (Desktop)", p: 15 },
+{ adTr: "GTX 580 (Masaüstü)", adEn: "GTX 580 (Desktop)", p: 25 },
+{ adTr: "GTX 1070 Tİ (Laptop)", adEn: "GTX 1070 TI (Laptop)", p: 80 },
+{ adTr: "GTX 1070 (Laptop)", adEn: "GTX 1070 (Laptop)", p: 60 },
+{ adTr: "GTX 1060 (Laptop)", adEn: "GTX 1060 (Laptop)", p: 45 },
+{ adTr: "GTX 1050 Tİ (Laptop)", adEn: "GTX 1050 TI (Laptop)", p: 35 },
+{ adTr: "GTX 1050 (Laptop)", adEn: "GTX 1050 (Laptop)", p: 30 },
+{ adTr: "RX 9070 XT (Masaüstü)", adEn: "RX 9070 XT (Desktop)", p: 210 },
+{ adTr: "RX 9070 (Masaüstü)", adEn: "RX 9070 (Desktop)", p: 200 },
+{ adTr: "RX 9060 XT (Masaüstü)", adEn: "RX 9060 XT (Desktop)", p: 200 },
+{ adTr: "RX 9060 (Masaüstü)", adEn: "RX 9060 (Desktop)", p: 190 },
+{ adTr: "RX 7900 XTX (Masaüstü)", adEn: "RX 7900 XTX (Desktop)", p: 190 },
+{ adTr: "RX 7900 XT (Masaüstü)", adEn: "RX 7900 XT (Desktop)", p: 180 },
+{ adTr: "RX 7800 XT (Masaüstü)", adEn: "RX 7800 XT (Desktop)", p: 175 },
+{ adTr: "RX 7700 XT (Masaüstü)", adEn: "RX 7700 XT (Desktop)", p: 165 },
+{ adTr: "RX 7600 XT (Masaüstü)", adEn: "RX 7600 XT (Desktop)", p: 115 },
+{ adTr: "RX 6950 XT (Masaüstü)", adEn: "RX 6950 XT (Desktop)", p: 175 },
+{ adTr: "RX 6900 XT (Masaüstü)", adEn: "RX 6900 XT (Desktop)", p: 170 },
+{ adTr: "RX 6800 XT (Masaüstü)", adEn: "RX 6800 XT (Desktop)", p: 160 },
+{ adTr: "RX 6800 (Masaüstü)", adEn: "RX 6800 (Desktop)", p: 120 },
+{ adTr: "RX 6700 XT (Masaüstü)", adEn: "RX 6700 XT (Desktop)", p: 125 },
+{ adTr: "RX 6700 (Masaüstü)", adEn: "RX 6700 (Desktop)", p: 110 },
+{ adTr: "RX 6600 XT (Masaüstü)", adEn: "RX 6600 XT (Desktop)", p: 95 },
+{ adTr: "RX 6600 (Masaüstü)", adEn: "RX 6600 (Desktop)", p: 80 },
+{ adTr: "RX 6500 XT (Masaüstü)", adEn: "RX 6500 XT (Desktop)", p: 70 },
+{ adTr: "RX 6500 (Masaüstü)", adEn: "RX 6500 (Desktop)", p: 65 },
+{ adTr: "RX 5700 XT (Masaüstü)", adEn: "RX 5700 XT (Desktop)", p: 115 },
+{ adTr: "RX 5700 (Masaüstü)", adEn: "RX 5700 (Desktop)", p: 105 },
+{ adTr: "RX 5600 XT (Masaüstü)", adEn: "RX 5600 XT (Desktop)", p: 65 },
+{ adTr: "RX 5500 XT (Masaüstü)", adEn: "RX 5500 XT (Desktop)", p: 55 },
+{ adTr: "RX 580 (Masaüstü)", adEn: "RX 580 (Desktop)", p: 43 },
+{ adTr: "RX 7900 (Laptop)", adEn: "RX 7900 (Laptop)", p: 140 },
+{ adTr: "RX 7800 (Laptop)", adEn: "RX 7800 (Laptop)", p: 135 },
+{ adTr: "RX 7700 (Laptop)", adEn: "RX 7700 (Laptop)", p: 130 },
+{ adTr: "RX 6950M (Laptop)", adEn: "RX 6950M (Laptop)", p: 120 },
+{ adTr: "RX 6900M (Laptop)", adEn: "RX 6900M (Laptop)", p: 115 },
+{ adTr: "RX 6800M (Laptop)", adEn: "RX 6800M (Laptop)", p: 105},
+{ adTr: "RX 6700M (Laptop)", adEn: "RX 6700M (Laptop)", p: 90 },
+{ adTr: "RX 6600M (Laptop)", adEn: "RX 6600M (Laptop)", p: 70 },
+{ adTr: "RX 6500M (Laptop)", adEn: "RX 6500M (Laptop)", p: 60 },
+{ adTr: "RX 5700M (Laptop)", adEn: "RX 5700M (Laptop)", p: 90 },
+{ adTr: "RX 5600M (Laptop)", adEn: "RX 5600M (Laptop)", p: 60 },
+{ adTr: "RX 5500M (Laptop)", adEn: "RX 5500M (Laptop)", p: 50 }
 ],
 islemciler: [
 { adTr: "i3-6300H (Laptop)", adEn: "i3-6300H (Laptop)", p: 12 },
@@ -956,192 +975,8 @@ cozunurlukler : [
   { adTr: "5120x1440 (UltraWide 5K)", adEn: "5120x1440 (UltraWide 5K)", p: 4 },
   { adTr: "5120x2880 (5K Retina)", adEn: "5120x2880 (5K Retina)", p: 3 },
   { adTr: "7680x4320 (8K UHD)", adEn: "7680x4320 (8K UHD)", p: 1 }
-oyunlar: [
-{ adTr: "Valorant (Düşük)", adEn: "Valorant (Low)", z: 2.2, d: 0.10 },
-{ adTr: "Valorant (Orta)", adEn: "Valorant (Medium)", z: 1.76, d: 0.10 },
-{ adTr: "Valorant (Yüksek)", adEn: "Valorant (High)", z: 1.6, d: 0.10 },
-{ adTr: "CS2 (Düşük)", adEn: "CS2 (Low)", z: 2.1, d: 0.12 },
-{ adTr: "CS2 (Orta)", adEn: "CS2 (Medium)", z: 1.68, d: 0.12 }, 
-{ adTr: "CS2 (Yüksek)", adEn: "CS2 (High)", z: 1.3, d: 0.12 },
-{ adTr: "CS:GO (Düşük)", adEn: "CS:GO (Low)", z: 2.8, d: 0.10 },
-{ adTr: "CS:GO (Yüksek)", adEn: "CS:GO (High)", z: 1.9, d: 0.10 },
-{ adTr: "Zula (Düşük)", adEn: "Zula (Low)", z: 3.1, d: 0.08 },
-{ adTr: "Zula (Yüksek)", adEn: "Zula (High)", z: 2.5, d: 0.08 },
-{ adTr: "Fortnite (Düşük)", adEn: "Fortnite (Low)", z: 1.9, d: 0.15 },
-{ adTr: "Fortnite (Yüksek)", adEn: "Fortnite (High)", z: 1.1, d: 0.15 },
-{ adTr: "PUBG (Düşük)", adEn: "PUBG (Low)", z: 1.2, d: 0.18 },
-{ adTr: "PUBG (Yüksek)", adEn: "PUBG (High)", z: 0.7, d: 0.18 },
-{ adTr: "Call of Duty: Warzone (Düşük)", adEn: "Call of Duty: Warzone (Low)", z: 0.9, d: 0.20 },
-{ adTr: "Call of Duty: Warzone (Yüksek)", adEn: "Call of Duty: Warzone (High)", z: 0.5, d: 0.20 },
-{ adTr: "Farming Simulator 17 (Düşük)", adEn: "Farming Simulator 17 (Low)", z: 1.9, d: 0.10 },
-{ adTr: "Farming Simulator 17 (Yüksek)", adEn: "Farming Simulator 17 (High)", z: 1.3, d: 0.10 },
-{ adTr: "Farming Simulator 19 (Düşük)", adEn: "Farming Simulator 19 (Low)", z: 1.7, d: 0.12 },
-{ adTr: "Farming Simulator 19 (Yüksek)", adEn: "Farming Simulator 19 (High)", z: 1.2, d: 0.12 },
-{ adTr: "Farming Simulator 22 (Düşük)", adEn: "Farming Simulator 22 (Low)", z: 1.4, d: 0.12 },
-{ adTr: "Farming Simulator 22 (Yüksek)", adEn: "Farming Simulator 22 (High)", z: 0.9, d: 0.12 },
-{ adTr: "Farming Simulator 25 (Düşük)", adEn: "Farming Simulator 25 (Low)", z: 1.1, d: 0.15 },
-{ adTr: "Farming Simulator 25 (Yüksek)", adEn: "Farming Simulator 25 (High)", z: 0.7, d: 0.15 },
-{ adTr: "Battlefield 3 (Düşük)", adEn: "Battlefield 3 (Low)", z: 1.8, d: 0.12 },
-{ adTr: "Battlefield 3 (Yüksek)", adEn: "Battlefield 3 (High)", z: 1.3, d: 0.12 },
-{ adTr: "Battlefield 4 (Düşük)", adEn: "Battlefield 4 (Low)", z: 1.7, d: 0.12 },
-{ adTr: "Battlefield 4 (Yüksek)", adEn: "Battlefield 4 (High)", z: 1.2, d: 0.12 },
-{ adTr: "Battlefield 1 (Düşük)", adEn: "Battlefield 1 (Low)", z: 1.2, d: 0.15 },
-{ adTr: "Battlefield 1 (Yüksek)", adEn: "Battlefield 1 (High)", z: 0.8, d: 0.15 },
-{ adTr: "Battlefield V (Düşük)", adEn: "Battlefield V (Low)", z: 1.0, d: 0.18 },
-{ adTr: "Battlefield V (Yüksek)", adEn: "Battlefield V (High)", z: 0.6, d: 0.18 },
-{ adTr: "Battlefield 2042 (Düşük)", adEn: "Battlefield 2042 (Low)", z: 0.70, d: 0.22 },
-{ adTr: "Battlefield 2042 (Orta)", adEn: "Battlefield 2042 (Medium)", z: 0.56, d: 0.22 },
-{ adTr: "Battlefield 2042 (Yüksek)", adEn: "Battlefield 2042 (High)", z: 0.42, d: 0.22 },
-{ adTr: "FC 23 (Düşük)", adEn: "FC 23 (Low)", z: 1.5, d: 0.12 },
-{ adTr: "FC 23 (Yüksek)", adEn: "FC 23 (High)", z: 1.1, d: 0.12 },
-{ adTr: "FC 24 (Düşük)", adEn: "FC 24 (Low)", z: 1.3, d: 0.12 },
-{ adTr: "FC 24 (Yüksek)", adEn: "FC 24 (High)", z: 0.9, d: 0.12 },
-{ adTr: "FC 25 (Düşük)", adEn: "FC 25 (Low)", z: 1.1, d: 0.15 },
-{ adTr: "FC 25 (Yüksek)", adEn: "FC 25 (High)", z: 0.7, d: 0.15 },
-{ adTr: "FC 26 (Düşük)", adEn: "FC 26 (Low)", z: 1.0, d: 0.15 },
-{ adTr: "FC 26 (Yüksek)", adEn: "FC 26 (High)", z: 0.6, d: 0.15 },
-{ adTr: "FC 27 (Düşük)", adEn: "FC 27 (Low)", z: 0.95, d: 0.15 },
-{ adTr: "FC 27 (Yüksek)", adEn: "FC 27 (High)", z: 0.55, d: 0.18 },
-{ adTr: "PES (Düşük)", adEn: "PES (Low)", z: 1.9, d: 0.10 },
-{ adTr: "PES (Yüksek)", adEn: "PES (High)", z: 1.3, d: 0.10 },
-{ adTr: "Spider-Man Remastered (Düşük)", adEn: "Spider-Man Remastered (Low)", z: 1.00, d: 0.20 },
-{ adTr: "Spider-Man Remastered (Orta)", adEn: "Spider-Man Remastered (Medium)", z: 0.80, d: 0.20 },
-{ adTr: "Spider-Man Remastered (Yüksek)", adEn: "Spider-Man Remastered (High)", z: 0.60, d: 0.20 },
-{ adTr: "Spider-Man Remastered (Ultra)", adEn: "Spider-Man Remastered (Ultra)", z: 0.45, d: 0.20 },
-{ adTr: "Spider-Man Miles Morales (Düşük)", adEn: "Spider-Man Miles Morales (Low)", z: 0.9, d: 0.22 },
-{ adTr: "Spider-Man Miles Morales (Yüksek)", adEn: "Spider-Man Miles Morales (High)", z: 0.55, d: 0.22 },
-{ adTr: "Spider-Man Miles Morales (Ultra)", adEn: "Spider-Man Miles Morales (Ultra)", z: 0.4, d: 0.22 },
-{ adTr: "Minecraft (Düşük Shaders)", adEn: "Minecraft (Low Shaders)", z: 1.5, d: 0.25 },
-{ adTr: "Minecraft (Yüksek Shaders)", adEn: "Minecraft (High Shaders)", z: 0.9, d: 0.25 },
-{ adTr: "Forza Horizon 5 (Düşük)", adEn: "Forza Horizon 5 (Low)", z: 1.4, d: 0.15 },
-{ adTr: "Forza Horizon 5 (Yüksek)", adEn: "Forza Horizon 5 (High)", z: 0.8, d: 0.15 },
-{ adTr: "Forza Horizon 5 (Ultra)", adEn: "Forza Horizon 5 (Ultra)", z: 0.55, d: 0.16 },
-{ adTr: "Forza Horizon 6 (Düşük)", adEn: "Forza Horizon 6 (Low)", z: 1.10, d: 0.16 },
-{ adTr: "Forza Horizon 6 (Yüksek)", adEn: "Forza Horizon 6 (High)", z: 0.65, d: 0.16 },
-{ adTr: "Forza Horizon 6 (Ultra)", adEn: "Forza Horizon 6 (Ultra)", z: 0.42, d: 0.18 },
-{ adTr: "ETS 2 (Düşük)", adEn: "ETS 2 (Low)", z: 1.7, d: 0.15 },
-{ adTr: "ETS 2 (Orta)", adEn: "ETS 2 (Medium)", z: 1.36, d: 0.15 },
-{ adTr: "ETS 2 (Yüksek)", adEn: "ETS 2 (High)", z: 1.1, d: 0.15 },
-{ adTr: "Grand Theft Auto: San Andreas - Definitive Edition (Düşük)", adEn: "Grand Theft Auto: San Andreas - Definitive Edition (Low)", z: 1.60, d: 0.15 },
-{ adTr: "Grand Theft Auto: San Andreas - Definitive Edition (Yüksek)", adEn: "Grand Theft Auto: San Andreas - Definitive Edition (High)", z: 1.05, d: 0.18 },
-{ adTr: "Grand Theft Auto IV (Düşük)", adEn: "Grand Theft Auto IV (Low)", z: 1.40, d: 0.28 },
-{ adTr: "Grand Theft Auto IV (Yüksek)", adEn: "Grand Theft Auto IV (High)", z: 1.20, d: 0.32 },
-{ adTr: "Grand Theft Auto IV (Ultra)", adEn: "Grand Theft Auto IV (Ultra)", z: 0.95, d: 0.38 },
-{ adTr: "Grand Theft Auto V (Düşük)", adEn: "Grand Theft Auto V (Low)", z: 1.2, d: 0.18 },
-{ adTr: "Grand Theft Auto V (Yüksek)", adEn: "Grand Theft Auto V (High)", z: 0.7, d: 0.18 },
-{ adTr: "Grand Theft Auto V (Ultra)", adEn: "Grand Theft Auto V (Ultra)", z: 0.5, d: 0.18 },
-{ adTr: "FiveM", adEn: "FiveM", z: 0.39, d: 0.28 },
-{ adTr: "Red Dead Redemption 2 (Düşük)", adEn: "Red Dead Redemption 2 (Low)", z: 0.90, d: 0.22 },
-{ adTr: "Red Dead Redemption 2 (Orta)", adEn: "Red Dead Redemption 2 (Medium)", z: 0.72, d: 0.22 }, 
-{ adTr: "Red Dead Redemption 2 (Yüksek)", adEn: "Red Dead Redemption 2 (High)", z: 0.54, d: 0.22 }, 
-{ adTr: "Red Dead Redemption 2 (Ultra)", adEn: "Red Dead Redemption 2 (Ultra)", z: 0.41, d: 0.22 }, 
-{ adTr: "God of War Ragnarök (Düşük)", adEn: "God of War Ragnarok (Low)", z: 0.8, d: 0.18 },
-{ adTr: "God of War Ragnarök (Orta)", adEn: "God of War Ragnarok (Medium)", z: 0.64, d: 0.18 }, 
-{ adTr: "God of War Ragnarök (Yüksek)", adEn: "God of War Ragnarok (High)", z: 0.5, d: 0.18 },
-{ adTr: "God of War Ragnarök (Ultra)", adEn: "God of War Ragnarok (Ultra)", z: 0.38, d: 0.18 },
-{ adTr: "ARK Survival Evolved (Düşük)", adEn: "ARK Survival Evolved (Low)", z: 0.8, d: 0.22 },
-{ adTr: "ARK Survival Evolved (Yüksek)", adEn: "ARK Survival Evolved (High)", z: 0.4, d: 0.22 },
-{ adTr: "DayZ (Düşük)", adEn: "DayZ (Low)", z: 1.0, d: 0.20 },
-{ adTr: "DayZ (Yüksek)", adEn: "DayZ (High)", z: 0.6, d: 0.20 },
-{ adTr: "Assassin’s Creed Valhalla (Düşük)", adEn: "Assassin’s Creed Valhalla (Low)", z: 0.8, d: 0.20 },
-{ adTr: "Assassin’s Creed Valhalla (Yüksek)", adEn: "Assassin’s Creed Valhalla (High)", z: 0.5, d: 0.20 },
-{ adTr: "Assassin’s Creed Mirage (Düşük)", adEn: "Assassin’s Creed Mirage (Low)", z: 1.1, d: 0.18 },
-{ adTr: "Assassin’s Creed Mirage (Yüksek)", adEn: "Assassin’s Creed Mirage (High)", z: 0.7, d: 0.18 },
-{ adTr: "Watch Dogs Legion (Düşük)", adEn: "Watch Dogs Legion (Low)", z: 0.7, d: 0.22 },
-{ adTr: "Watch Dogs Legion (Yüksek)", adEn: "Watch Dogs Legion (High)", z: 0.4, d: 0.22 },
-{ adTr: "Hogwarts Legacy (Düşük)", adEn: "Hogwarts Legacy (Low)", z: 0.9, d: 0.22 },
-{ adTr: "Hogwarts Legacy (Orta)", adEn: "Hogwarts Legacy (Medium)", z: 0.72, d: 0.22 }, 
-{ adTr: "Hogwarts Legacy (Yüksek)", adEn: "Hogwarts Legacy (High)", z: 0.5, d: 0.22 },
-{ adTr: "Hogwarts Legacy (Ultra)", adEn: "Hogwarts Legacy (Ultra)", z: 0.35, d: 0.22 },
-{ adTr: "Assetto Corsa (Düşük)", adEn: "Assetto Corsa (Low)", z: 1.8, d: 0.15 },
-{ adTr: "Assetto Corsa (Yüksek)", adEn: "Assetto Corsa (High)", z: 1.3, d: 0.15 },
-{ adTr: "Assetto Corsa Competizione (Düşük)", adEn: "Assetto Corsa Competizione (Low)", z: 1.0, d: 0.20 },
-{ adTr: "Assetto Corsa Competizione (Yüksek)", adEn: "Assetto Corsa Competizione (High)", z: 0.6, d: 0.20 },
-{ adTr: "Need for Speed Unbound (Düşük)", adEn: "Need for Speed Unbound (Low)", z: 1.1, d: 0.18 },
-{ adTr: "Need for Speed Unbound (Yüksek)", adEn: "Need for Speed Unbound (High)", z: 0.7, d: 0.18 },
-{ adTr: "Apex Legends (Düşük)", adEn: "Apex Legends (Low)", z: 1.6, d: 0.15 },
-{ adTr: "Apex Legends (Yüksek)", adEn: "Apex Legends (High)", z: 1.1, d: 0.15 },
-{ adTr: "Rainbow Six Siege (Düşük)", adEn: "Rainbow Six Siege (Low)", z: 1.8, d: 0.12 },
-{ adTr: "Rainbow Six Siege (Yüksek)", adEn: "Rainbow Six Siege (High)", z: 1.3, d: 0.12 },
-{ adTr: "Overwatch 2 (Düşük)", adEn: "Overwatch 2 (Low)", z: 1.7, d: 0.12 },
-{ adTr: "Overwatch 2 (Yüksek)", adEn: "Overwatch 2 (High)", z: 1.2, d: 0.12 },
-{ adTr: "The Last of Us Part I (Düşük)", adEn: "The Last of Us Part I (Low)", z: 0.8, d: 0.24 },
-{ adTr: "The Last of Us Part I (Yüksek)", adEn: "The Last of Us Part I (High)", z: 0.5, d: 0.24 },
-{ adTr: "The Last of Us Part I (Ultra)", adEn: "The Last of Us Part I (Ultra)", z: 0.34, d: 0.24 },
-{ adTr: "The Last of Us Part II (Düşük)", adEn: "The Last of Us Part II (Low)", z: 0.7, d: 0.26 },
-{ adTr: "The Last of Us Part II (Yüksek)", adEn: "The Last of Us Part II (High)", z: 0.45, d: 0.26 },
-{ adTr: "The Last of Us Part II (Ultra)", adEn: "The Last of Us Part II (Ultra)", z: 0.3, d: 0.26 },
-{ adTr: "The Witcher 3: Wild Hunt (Düşük)", adEn: "The Witcher 3: Wild Hunt (Low)", z: 1.40, d: 0.15 },
-{ adTr: "The Witcher 3: Wild Hunt (Yüksek)", adEn: "The Witcher 3: Wild Hunt (High)", z: 0.90, d: 0.15 },
-{ adTr: "The Witcher 3: Wild Hunt (Next-Gen Ultra)", adEn: "The Witcher 3: Wild Hunt (Next-Gen Ultra)", z: 0.50, d: 0.20 },
-{ adTr: "Cyberpunk 2077 (Düşük)", adEn: "Cyberpunk 2077 (Low)", z: 0.70, d: 0.25 },
-{ adTr: "Cyberpunk 2077 (Orta)", adEn: "Cyberpunk 2077 (Medium)", z: 0.56, d: 0.25 }, 
-{ adTr: "Cyberpunk 2077 (Ultra)", adEn: "Cyberpunk 2077 (Ultra)", z: 0.31, d: 0.25 }, 
-{ adTr: "Uncharted: Hırsızlar Mirası Koleksiyonu (Düşük)", adEn: "Uncharted: Legacy of Thieves Collection (Low)", z: 1.25, d: 0.16 },
-{ adTr: "Uncharted: Hırsızlar Mirası Koleksiyonu (Yüksek)", adEn: "Uncharted: Legacy of Thieves Collection (High)", z: 0.85, d: 0.16 },
-{ adTr: "Uncharted: Hırsızlar Mirası Koleksiyonu (Ultra)", adEn: "Uncharted: Legacy of Thieves Collection (Ultra)", z: 0.60, d: 0.18 },
-{ adTr: "Dying Light 1 (Düşük)", adEn: "Dying Light 1 (Low)", z: 1.90, d: 0.10 },
-{ adTr: "Dying Light 1 (Yüksek)", adEn: "Dying Light 1 (High)", z: 1.50, d: 0.12 },
-{ adTr: "Dying Light 1 (Ultra)", adEn: "Dying Light 1 (Ultra)", z: 1.20, d: 0.14 },
-{ adTr: "Dying Light 2 (Düşük)", adEn: "Dying Light 2 (Low)", z: 1.10, d: 0.18 },
-{ adTr: "Dying Light 2 (Yüksek)", adEn: "Dying Light 2 (High)", z: 0.75, d: 0.18 },
-{ adTr: "Dying Light 2 (Ultra)", adEn: "Dying Light 2 (Ultra)", z: 0.55, d: 0.20 },
-{ adTr: "The Forest (Düşük)", adEn: "The Forest (Low)", z: 1.80, d: 0.12 },
-{ adTr: "The Forest (Yüksek)", adEn: "The Forest (High)", z: 1.30, d: 0.12 },
-{ adTr: "Sons Of The Forest (Düşük)", adEn: "Sons Of The Forest (Low)", z: 1.10, d: 0.18 },
-{ adTr: "Sons Of The Forest (Yüksek)", adEn: "Sons Of The Forest (High)", z: 0.75, d: 0.18 },
-{ adTr: "Sons Of The Forest (Ultra)", adEn: "Sons Of The Forest (Ultra)", z: 0.52, d: 0.20 },
-{ adTr: "Outlast 1 (Yüksek)", adEn: "Outlast 1 (High)", z: 2.40, d: 0.10 },
-{ adTr: "Outlast 2 (Yüksek)", adEn: "Outlast 2 (High)", z: 1.80, d: 0.12 },
-{ adTr: "The Outlast Trials (Düşük)", adEn: "The Outlast Trials (Low)", z: 1.40, d: 0.15 },
-{ adTr: "The Outlast Trials (Yüksek)", adEn: "The Outlast Trials (High)", z: 0.95, d: 0.15 },
-{ adTr: "The Outlast Trials (Ultra)", adEn: "The Outlast Trials (Ultra)", z: 0.70, d: 0.16 },
-{ adTr: "NBA 2K23 (Düşük)", adEn: "NBA 2K23 (Low)", z: 1.60, d: 0.12 },
-{ adTr: "NBA 2K23 (Yüksek)", adEn: "NBA 2K23 (High)", z: 1.10, d: 0.12 },
-{ adTr: "NBA 2K24 (Düşük)", adEn: "NBA 2K24 (Low)", z: 1.40, d: 0.14 },
-{ adTr: "NBA 2K24 (Yüksek)", adEn: "NBA 2K24 (High)", z: 0.95, d: 0.14 },
-{ adTr: "NBA 2K25 (Düşük)", adEn: "NBA 2K25 (Low)", z: 1.10, d: 0.15 },
-{ adTr: "NBA 2K25 (Yüksek)", adEn: "NBA 2K25 (High)", z: 0.75, d: 0.15 },
-{ adTr: "NBA 2K25 (Ultra)", adEn: "NBA 2K25 (Ultra)", z: 0.55, d: 0.15 },
-{ adTr: "NBA 2K26 (Düşük)", adEn: "NBA 2K26 (Low)", z: 1.05, d: 0.16 },
-{ adTr: "NBA 2K26 (Yüksek)", adEn: "NBA 2K26 (High)", z: 0.70, d: 0.16 },
-{ adTr: "NBA 2K26 (Ultra)", adEn: "NBA 2K26 (Ultra)", z: 0.50, d: 0.18 },
-{ adTr: "Rust (Düşük)", adEn: "Rust (Low)", z: 1.25, d: 0.22 },
-{ adTr: "Rust (Yüksek)", adEn: "Rust (High)", z: 0.85, d: 0.25 },
-{ adTr: "Rust (Ultra)", adEn: "Rust (Ultra)", z: 0.60, d: 0.28 },
-{ adTr: "007 First Light (Düşük)", adEn: "007 First Light (Low)", z: 0.85, d: 0.18 },
-{ adTr: "007 First Light (Yüksek)", adEn: "007 First Light (High)", z: 0.55, d: 0.20 },
-{ adTr: "007 First Light (Ultra )", adEn: "007 First Light (Ultra)", z: 0.35, d: 0.24 },
-{ adTr: "Resident Evil 2 Remake (Düşük)", adEn: "Resident Evil 2 Remake (Low)", z: 1.50, d: 0.12 },
-{ adTr: "Resident Evil 2 Remake (Orta)", adEn: "Resident Evil 2 Remake (Medium)", z: 1.25, d: 0.12 },
-{ adTr: "Resident Evil 2 Remake (Yüksek)", adEn: "Resident Evil 2 Remake (High)", z: 1.05, d: 0.12 },
-{ adTr: "Resident Evil 3 Remake (Düşük)", adEn: "Resident Evil 3 Remake (Low)", z: 1.55, d: 0.12 },
-{ adTr: "Resident Evil 3 Remake (Orta)", adEn: "Resident Evil 3 Remake (Medium)", z: 1.30, d: 0.12 },
-{ adTr: "Resident Evil 3 Remake (Yüksek)", adEn: "Resident Evil 3 Remake (High)", z: 1.10, d: 0.12 },
-{ adTr: "Resident Evil 3 Remake (Ultra)", adEn: "Resident Evil 3 Remake (Ultra)", z: 0.80, d: 0.14 },
-{ adTr: "Resident Evil 4 Remake (Düşük)", adEn: "Resident Evil 4 Remake (Low)", z: 1.15, d: 0.16 },
-{ adTr: "Resident Evil 4 Remake (Orta)", adEn: "Resident Evil 4 Remake (Medium)", z: 0.95, d: 0.16 },
-{ adTr: "Resident Evil 4 Remake (Yüksek)", adEn: "Resident Evil 4 Remake (High)", z: 0.78, d: 0.16 },
-{ adTr: "Resident Evil 4 Remake (Ultra)", adEn: "Resident Evil 4 Remake (Ultra)", z: 0.55, d: 0.18 },
-{ adTr: "Resident Evil Requiem (Düşük)", adEn: "Resident Evil Requiem (Low)", z: 0.75, d: 0.20 },
-{ adTr: "Resident Evil Requiem (Orta)", adEn: "Resident Evil Requiem (Medium)", z: 0.60, d: 0.21 },
-{ adTr: "Resident Evil Requiem (Yüksek)", adEn: "Resident Evil Requiem (High)", z: 0.50, d: 0.22 },
-{ adTr: "Resident Evil Requiem (Ultra)", adEn: "Resident Evil Requiem (Ultra)", z: 0.32, d: 0.25 },
-{ adTr: "Mafia: Definitive Edition (Düşük)", adEn: "Mafia Definitive Edition (Low)", z: 1.35, d: 0.15 },
-{ adTr: "Mafia: Definitive Edition (Orta)", adEn: "Mafia Definitive Edition (Medium)", z: 1.05, d: 0.16 },
-{ adTr: "Mafia: Definitive Edition (Yüksek)", adEn: "Mafia Definitive Edition (High)", z: 0.85, d: 0.16 },
-{ adTr: "Mafia: Definitive Edition (Ultra)", adEn: "Mafia Definitive Edition (Ultra)", z: 0.55, d: 0.18 },
-{ adTr: "Mafia II (Orijinal / Düşük)", adEn: "Mafia 2 Classic (Low)", z: 2.50, d: 0.10 },
-{ adTr: "Mafia II (Orijinal / Yüksek)", adEn: "Mafia 2 Classic (High)", z: 1.80, d: 0.10 },
-{ adTr: "Mafia II: Definitive Edition (Düşük)", adEn: "Mafia II Definitive Edition  (Low)", z: 1.80, d: 0.12 },
-{ adTr: "Mafia II: Definitive Edition (Yüksek)", adEn: "Mafia II Definitive Edition  (High)", z: 1.20, d: 0.14 },
-{ adTr: "Mafia II: Definitive Edition (Ultra)", adEn: "Mafia II Definitive Edition  (Ultra)", z: 0.80, d: 0.16 },
-{ adTr: "Mafia III (Düşük)", adEn: "Mafia III (Low)", z: 1.10, d: 0.18 },
-{ adTr: "Mafia III (Orta)", adEn: "Mafia III (Medium)", z: 0.85, d: 0.20 },
-{ adTr: "Mafia III (Yüksek)", adEn: "Mafia III (High)", z: 0.60, d: 0.22 },
-{ adTr: "Mafia III (Ultra)", adEn: "Mafia III (Ultra)", z: 0.40, d: 0.25 }
 ],
-};
+
 
 function doldur() {
     const g = document.getElementById("gpu"),
@@ -1158,8 +993,7 @@ function doldur() {
     
     veri.ekranKartlari.forEach(x => {
         let isim = (aktifDil === "tr") ? x.adTr : x.adEn;
-        let rtxAttr = x.rtx ? 'data-rtx="true"' : 'data-rtx="false"';
-        g.innerHTML += `<option value="${x.p}" ${rtxAttr}>${isim}</option>`;
+        g.innerHTML += `<option value="${x.p}">${isim}</option>`;
     });
     veri.islemciler.forEach(x => {
         let isim = (aktifDil === "tr") ? x.adTr : x.adEn;
@@ -1177,22 +1011,6 @@ function doldur() {
         let isim = (aktifDil === "tr") ? x.adTr : x.adEn;
         o.innerHTML += `<option value="${index}">${isim}</option>`;
     });
-
-    gpuKontrol();
-}
-
-// Seçilen ekran kartı RTX değilse DLSS'i kapat ve pasif yap
-function gpuKontrol() {
-    const gpuSelect = document.getElementById("gpu");
-    const dlssSelect = document.getElementById("dlss");
-    const selectedOption = gpuSelect.options[gpuSelect.selectedIndex];
-    
-    if (selectedOption && selectedOption.getAttribute("data-rtx") === "true") {
-        dlssSelect.disabled = false;
-    } else {
-        dlssSelect.value = "1.0";
-        dlssSelect.disabled = true;
-    }
 }
 
 function dilDegistir() {
@@ -1205,14 +1023,6 @@ function dilDegistir() {
     document.getElementById("txt-lbl-ram").innerText = metinler[aktifDil].lblRam;
     document.getElementById("txt-lbl-coz").innerText = metinler[aktifDil].lblCoz;
     document.getElementById("txt-lbl-oyun").innerText = metinler[aktifDil].lblOyun;
-    document.getElementById("txt-lbl-dlss").innerText = metinler[aktifDil].lblDlss;
-    
-    document.getElementById("txt-dlss-off").innerText = metinler[aktifDil].dlssOff;
-    document.getElementById("txt-dlss-quality").innerText = metinler[aktifDil].dlssQuality;
-    document.getElementById("txt-dlss-balanced").innerText = metinler[aktifDil].dlssBalanced;
-    document.getElementById("txt-dlss-performance").innerText = metinler[aktifDil].dlssPerformance;
-    document.getElementById("txt-dlss-ultra").innerText = metinler[aktifDil].dlssUltra;
-
     document.getElementById("txt-btn-hesapla").innerText = metinler[aktifDil].btnHesapla;
     document.getElementById("txt-fps-etiket").innerText = metinler[aktifDil].fpsEtiket;
 
@@ -1258,6 +1068,8 @@ function dilDegistir() {
     document.getElementById("txt-a4").innerText = metinler[aktifDil].a4;
     document.getElementById("txt-q5").innerText = metinler[aktifDil].q5;
     document.getElementById("txt-a5").innerText = metinler[aktifDil].a5;
+    document.getElementById("txt-q6").innerText = metinler[aktifDil].q6;
+    document.getElementById("txt-a6").innerText = metinler[aktifDil].a6;
     
     doldur();
 
@@ -1287,15 +1099,13 @@ function hesapla() {
     let rm = parseFloat(document.getElementById("ram").value);
     let cz = parseFloat(document.getElementById("cozunurluk").value);
     let oyunIndex = document.getElementById("oyun").value;
-    let dlssMultiplier = parseFloat(document.getElementById("dlss").value);
     
     let oyunVerisi = veri.oyunlar[oyunIndex];
     let oy = oyunVerisi.z;
     let dalgalanma = oyunVerisi.d;
 
     let czCarpani = Math.pow(cz / 15, 0.75); 
-    // Temel FPS hesaplamasına DLSS çarpanı da dahil edildi
-    let temelFps = ((gp * 0.70) + (cp * 0.60)) * rm * oy * czCarpani * dlssMultiplier;
+    let temelFps = ((gp * 0.70) + (cp * 0.60)) * rm * oy * czCarpani;
 
     let alt = Math.floor(temelFps * (1 - dalgalanma));
     let ust = Math.floor(temelFps * (1 + dalgalanma));
